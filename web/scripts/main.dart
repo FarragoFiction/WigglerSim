@@ -1,20 +1,17 @@
 import 'dart:html';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
+import 'Player/Player.dart';
 
-Doll doll;
+Player player;
 void main() {
   querySelector('#output').text = 'Your Dart app is running.';
-  doll = new HomestuckGrubDoll();
+  player = new Player(new HomestuckTrollDoll());
   drawDoll();
 }
 
-Future<bool>  drawDoll() async{
-  Element innerDiv   = new DivElement();
-  CanvasElement finishedProduct = new CanvasElement(width: doll.width, height: doll.height);
-  innerDiv.className = "cardWithForm";
-  await Renderer.drawDoll(finishedProduct, doll);
-  finishedProduct.className = "cardCanvas";
-  innerDiv.append(finishedProduct);
-  querySelector('#output').append(innerDiv);
+Future<Null>  drawDoll() async{
+  CanvasElement canvas = await player.draw();
+  print("going to append canvas $canvas");
+  querySelector('#output').append(canvas);
 }
