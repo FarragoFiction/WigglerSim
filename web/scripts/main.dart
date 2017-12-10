@@ -8,6 +8,7 @@ void main() {
   querySelector('#output').text = 'Your Dart app is running.';
   //pass false once i'm loading from local storage.
   player = new Player(new HomestuckTrollDoll());
+  if(!player.load())  player.save();
   drawDoll();
 }
 

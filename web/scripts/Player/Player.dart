@@ -31,8 +31,12 @@ class Player {
         window.localStorage[dollSaveID] = doll.toDataBytesX();
     }
 
-    void load() {
-        doll = Doll.loadSpecificDoll(window.localStorage[dollSaveID]);
+    bool load() {
+        if(!window.localStorage.containsKey(dollSaveID)) return false;
+        String s = window.localStorage[dollSaveID];
+        print("loaded $s from storage");
+        doll = Doll.loadSpecificDoll(s);
+        return true;
     }
 
     //TODO probably need to spend time thining of what needs to happen here. should i cache canvas?
