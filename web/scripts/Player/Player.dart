@@ -11,6 +11,8 @@ class Player {
     int width = 400;
     int height = 300;
 
+    String dollSaveID = "WigglerCaretakerDoll";
+
     int minJadeSign = 121;
     int maxJadeSign = 144;
 
@@ -23,6 +25,14 @@ class Player {
             troll.randomize(false);
             print("canon symbol set to ${troll.canonSymbol.imgNumber} which should be jade");
         }
+    }
+
+    void save() {
+        window.localStorage[dollSaveID] = doll.toDataBytesX();
+    }
+
+    void load() {
+        doll = Doll.loadSpecificDoll(window.localStorage[dollSaveID]);
     }
 
     //TODO probably need to spend time thining of what needs to happen here. should i cache canvas?
