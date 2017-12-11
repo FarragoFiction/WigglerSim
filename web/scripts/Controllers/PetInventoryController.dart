@@ -6,8 +6,7 @@ import '../Player/Player.dart';
 Player player;
 void main() {
   //pass false once i'm loading from local storage.
-  player = new Player(new HomestuckTrollDoll());
-  if(!player.load())  player.save();
+
 }
 
 

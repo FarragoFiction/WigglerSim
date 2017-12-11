@@ -68,6 +68,7 @@ class Player {
     }
 
 
+    //TODO convert self to json (including pet inventory) to save in this localStorage
     void save() {
         window.localStorage[dollSaveID] = doll.toDataBytesX();
     }
