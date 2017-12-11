@@ -44,6 +44,8 @@ import 'dart:html';
 import 'dart:async';
 abstract class Pet {
 
+    //TODO procedural description of personality based on stats.
+
     int health;
     int boredom;
     String name = "ZOOSMELL POOPLORD";
@@ -51,10 +53,38 @@ abstract class Pet {
     int width = 400;
     int height = 300;
     Doll doll;
+    DateTime hatchDate;
+    DateTime lastFed;
+    DateTime lastPlayed;
     //when make a new pet, give it an id that isn't currently in the player's inventory. just increment numbers till you find one.
     int id;
 
-    Pet(this.doll, {this.health: 100, this.boredom: 0});
+    Pet(this.doll, {this.health: 100, this.boredom: 0}) {
+        hatchDate = new DateTime.now();
+        lastFed = new DateTime.now();
+        lastPlayed = new DateTime.now();
+        name = randomAsFuckName();
+    }
+
+    String get daysSinceHatch {
+
+    }
+
+    String randomAsFuckName() {
+        Random rand = new Random();
+        List<String> titles = <String> ["Captain","Baron","The Esteemed","Mr.","Mrs.","Mdms.","Count","Countess","Clerk","President","Pounceler","Counciler","Minister","Ambassador","Admiral", "Rear Admiral","Commander","Dr.","Sir"];
+        List<String> firstNames = <String>["Wiggly","Wiggler","Grubby","Zoosmell","Farmstink","Bubbles","Nic","Lil","Liv","Charles","Meowsers","Casey","Fred","Kid","Meowgon","Fluffy","Meredith","Bill","Ted","Frank","Flan","Squeezykins","Spot","Squeakems","Hissy","Scaley","Glubglub","Mutie","Clattersworth","Bonebone","Nibbles","Fossilbee","Skulligan","Jack","Nigel","Dazzle","Fancy","Pounce"];
+        List<String> lastNames = <String>["Grub","Dumbface","Buttlass","Pooplord","Cage","Sebastion","Taylor","Dutton","von Wigglebottom","von Salamancer","Savage","Rock","Spangler","Fluffybutton","the Third, esquire.","S Preston","Logan","the Shippest","Clowder","Squeezykins","Boi","Oldington the Third","Malone","Ribs","Noir","Sandwich"];
+        double randNum = rand.nextDouble();
+        if(randNum > .6) {
+            return "${rand.pickFrom(titles)} ${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
+
+        }else if (randNum > .3) {
+            return "${rand.pickFrom(titles)} ${rand.pickFrom(lastNames)}";
+        }else {
+            return "${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
+        }
+    }
 
 
     Future<CanvasElement> draw() async {
