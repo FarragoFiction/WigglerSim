@@ -38,6 +38,17 @@
     if stats above certain threshold, adult form has wings?
 
 
+
+    Time/Space  Impatient/Patient
+    Doom/Life Pessimistic/Optimistic
+    Rage/Hope Realism/Idealism
+    Void/Light Accepting/Curious
+    Breath/Blood Free/Committed
+    Heart/Mind Introversion/Extroversion
+
+    TODO need to brainstorm wiggler actions that pair with all 12 things.
+
+
  */
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';

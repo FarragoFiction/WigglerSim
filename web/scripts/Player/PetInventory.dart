@@ -19,7 +19,7 @@ class PetInventory {
             subContainer.classes.add("petInventorySlot");
 
             container.append(subContainer);
-            drawPet(subContainer, p, false);
+            drawPet(subContainer, p);
         }
     }
 
@@ -34,11 +34,18 @@ class PetInventory {
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");
             container.append(subContainer);
-            drawPet(subContainer, p, true);
+            drawPet(subContainer, p);
+            ButtonElement button = new ButtonElement();
+            button.text = "Choose";
+            subContainer.append(button);
+            button.onClick.listen((e) {
+                window.alert("TODO");
+            });
         }
+
     }
 
-    Future<Null> drawPet(Element container, Pet p, bool adoptable) async {
+    Future<Null> drawPet(Element container, Pet p) async {
         DivElement canvasContainer = new DivElement();
         CanvasElement canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);
         canvasContainer.append(canvas);
