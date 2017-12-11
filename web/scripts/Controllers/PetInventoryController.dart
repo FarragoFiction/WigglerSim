@@ -1,19 +1,19 @@
 import 'dart:html';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
-import '../Player/Player.dart';
+import '../GameShit/GameObject.dart';
 
-Player player;
+GameObject game;
 void main() {
-  //pass false once i'm loading from local storage.
-
+  game = new GameObject();
+  start();
 }
 
+Future<Null> start() async {
 
-
-Future<Null>  drawDoll() async{
-  CanvasElement canvas = await player.draw();
-  print("going to append canvas $canvas");
-  querySelector('#output').append(canvas);
-  player.displayloadBoxAndText(querySelector('#output'));
+  Element container = new DivElement();
+  querySelector('#output').append(container);
+  //TODO this is for testing, remove later.
+  game.player.petInventory.addRandomGrub();
+  game.drawPetInventory(container);
 }

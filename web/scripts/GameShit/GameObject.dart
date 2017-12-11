@@ -18,6 +18,10 @@ class GameObject {
         container.append(canvas);
     }
 
+    void drawPetInventory(Element container) {
+        player.petInventory.drawInventory(container);
+    }
+
     Future<Null> drawPlayerIntroShit(Element container) async {
         player.displayloadBoxAndText(container);
     }

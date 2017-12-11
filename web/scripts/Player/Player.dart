@@ -2,6 +2,7 @@
 // a player has a doll.
 //a player has a graduatesList.
 import 'package:DollLibCorrect/DollRenderer.dart';
+import "PetInventory.dart";
 import 'dart:html';
 import 'dart:async';
 
@@ -10,6 +11,7 @@ class Player {
     CanvasElement canvas;
     int width = 400;
     int height = 300;
+    PetInventory petInventory;
 
     String dollSaveID = "WigglerCaretakerDoll";
 
@@ -25,6 +27,8 @@ class Player {
             troll.randomize(false);
             print("canon symbol set to ${troll.canonSymbol.imgNumber} which should be jade");
         }
+        //TODO create the pet inventory from json. have a .fromJSON constructor for player
+        petInventory = new PetInventory();
     }
 
     void displayloadBoxAndText(Element div)
