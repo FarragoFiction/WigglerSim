@@ -15,5 +15,8 @@ Future<Null> start() async {
   querySelector('#output').append(container);
   //TODO this is for testing, remove later.
   game.player.petInventory.addRandomGrub();
+  game.player.petInventory.addRandomGrub();
+  game.player.petInventory.addRandomGrub();
+
   game.drawPetInventory(container);
 }
