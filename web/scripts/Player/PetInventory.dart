@@ -32,12 +32,9 @@ class PetInventory {
         Element textContainer = new DivElement();
         textContainer.classes.add("textContainer");
         textContainer.style.width = "${p.width}px";
-
-        Element name = new DivElement();
-        name.text = "${p.name}";
-        name.style.fontSize = "18px";
-        textContainer.append(name);
         container.append(textContainer);
+        p.displayStats(textContainer);
+
 
         //this is the thing we'll hang on. so do it last.
         CanvasElement canvas = await p.draw();

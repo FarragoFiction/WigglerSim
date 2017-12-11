@@ -67,7 +67,17 @@ abstract class Pet {
     }
 
     String get daysSinceHatch {
-
+        DateTime now = new DateTime.now();
+        Duration diff = now.difference(hatchDate);
+        if(diff.inDays > 0) {
+            return "Hatched: ${diff.inDays} days ago.";
+        }else if (diff.inHours > 0) {
+            return "Hatched: ${diff.inHours} hours ago.";
+        }else if (diff.inMinutes > 0) {
+            return "Hatched: ${diff.inMinutes} minutes ago.";
+        }else if (diff.inSeconds > 0) {
+            return "Hatched: ${diff.inSeconds} seconds ago.";
+        }
     }
 
     String randomAsFuckName() {
@@ -84,6 +94,13 @@ abstract class Pet {
         }else {
             return "${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
         }
+    }
+
+    void displayStats(Element container) {
+        Element nameDiv = new DivElement();
+        nameDiv.text = "${name}";
+        nameDiv.style.fontSize = "18px";
+        container.append(nameDiv);
     }
 
 
