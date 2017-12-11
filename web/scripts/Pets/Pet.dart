@@ -72,6 +72,7 @@ abstract class Pet {
     String get daysSinceHatch {
         DateTime now = new DateTime.now();
         Duration diff = now.difference(hatchDate);
+        //print("hatch date is $hatchDate and diff is $diff");
         if(diff.inDays > 0) {
             return "Hatched: ${diff.inDays} days ago.";
         }else if (diff.inHours > 0) {
@@ -81,6 +82,7 @@ abstract class Pet {
         }else if (diff.inSeconds > 0) {
             return "Hatched: ${diff.inSeconds} seconds ago.";
         }
+        return "Just Hatched!";
     }
 
     String randomAsFuckName() {
@@ -121,9 +123,15 @@ abstract class Pet {
 
         int fontSize = 20;
         textCanvas.context2D.font = "${fontSize}px Strife";
-        int startY = 330;
-        int startX = 10;
-        Renderer.wrap_text(textCanvas.context2D,name,startX,startY,fontSize,400,"left");
+        int y = 330;
+        int x = 10;
+        Renderer.wrap_text(textCanvas.context2D,name,x,y,fontSize,400,"center");
+
+        y = y + fontSize*2;
+        fontSize = 12;
+        Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize,400,"left");
+
+
         return textCanvas;
     }
 

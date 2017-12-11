@@ -11,6 +11,17 @@ html, body {
   font-family: 'strife', sans-serif;
 }
 
+#pkmnProf{
+    display: none;
+}
+
+#pkmnProfSpiel{
+    float: right;
+    display: inline-block;
+    width: 200px;
+
+}
+
 .petInventorySlot{
      color: #2c1900;
      display: inline-block;

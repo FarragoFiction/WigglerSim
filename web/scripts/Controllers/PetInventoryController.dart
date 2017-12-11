@@ -14,10 +14,13 @@ Future<Null> start() async {
   Element container = new DivElement();
   container.style.display = "inline-block";
   querySelector('#output').append(container);
-  //TODO this is for testing, remove later.
-  game.player.petInventory.addRandomGrub();
-  game.player.petInventory.addRandomGrub();
-  game.player.petInventory.addRandomGrub();
+  if(game.player.petInventory.pets.isEmpty) {
+    print("Starting your Wiggler Adventure");
+    game.drawStarters(container);
+    querySelector('#pkmnProf').style.display = "inline-block";
+  }else {
+    game.drawPetInventory(container);
+    querySelector('#pkmnProf').style.display = "none";
 
-  game.drawPetInventory(container);
+  }
 }

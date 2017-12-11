@@ -19,11 +19,26 @@ class PetInventory {
             subContainer.classes.add("petInventorySlot");
 
             container.append(subContainer);
-            drawPet(subContainer, p);
+            drawPet(subContainer, p, false);
         }
     }
 
-    Future<Null> drawPet(Element container, Pet p) async {
+    Future<Null> drawStarters(Element container) async{
+        List<Pet> starters = new List<Pet>();
+        starters.add(new Grub(new HomestuckGrubDoll()));
+        starters.add(new Grub(new HomestuckGrubDoll()));
+        starters.add(new Grub(new HomestuckGrubDoll()));
+
+        for(Pet p in starters) {
+            SpanElement subContainer = new SpanElement();
+            subContainer.style.width = "${p.width}px";
+            subContainer.classes.add("petInventorySlot");
+            container.append(subContainer);
+            drawPet(subContainer, p, true);
+        }
+    }
+
+    Future<Null> drawPet(Element container, Pet p, bool adoptable) async {
         DivElement canvasContainer = new DivElement();
         CanvasElement canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);
         canvasContainer.append(canvas);

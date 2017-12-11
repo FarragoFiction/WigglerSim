@@ -22,6 +22,10 @@ class GameObject {
         player.petInventory.drawInventory(container);
     }
 
+    void drawStarters(Element container) {
+        player.petInventory.drawStarters(container);
+    }
+
     Future<Null> drawPlayerIntroShit(Element container) async {
         player.displayloadBoxAndText(container);
     }
