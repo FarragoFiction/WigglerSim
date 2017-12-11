@@ -12,6 +12,7 @@ void main() {
 Future<Null> start() async {
 
   Element container = new DivElement();
+  container.style.display = "inline-block";
   querySelector('#output').append(container);
   //TODO this is for testing, remove later.
   game.player.petInventory.addRandomGrub();

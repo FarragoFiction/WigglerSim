@@ -14,15 +14,33 @@ class PetInventory {
 
     Future<Null> drawInventory(Element container) async{
         for(Pet p in pets) {
-            SpanElement subContainer = new SpanElement();
+            DivElement subContainer = new DivElement();
+            subContainer.style.width = "${p.width}px";
             container.append(subContainer);
             drawPet(subContainer, p);
         }
     }
 
     Future<Null> drawPet(Element container, Pet p) async {
+        DivElement canvasContainer = new DivElement();
+        canvasContainer.style.width = "${p.width}px";
+        canvasContainer.classes.add("canvasContainer");
+        container.append(canvasContainer);
+
+        Element textContainer = new DivElement();
+        textContainer.classes.add("textContainer");
+        textContainer.style.width = "${p.width}px";
+
+        Element name = new DivElement();
+        name.text = "${p.name}";
+        name.style.fontSize = "18px";
+        textContainer.append(name);
+        container.append(textContainer);
+
+        //this is the thing we'll hang on. so do it last.
         CanvasElement canvas = await p.draw();
-        container.append(canvas);
+        canvasContainer.append(canvas);
+
     }
 
 
