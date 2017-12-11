@@ -1,14 +1,13 @@
 import 'dart:html';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
-import 'Player/Player.dart';
+import '../Player/Player.dart';
 
 Player player;
 void main() {
   //pass false once i'm loading from local storage.
   player = new Player(new HomestuckTrollDoll());
   if(!player.load())  player.save();
-  drawDoll();
 }
 
 
