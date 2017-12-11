@@ -14,8 +14,10 @@ class PetInventory {
 
     Future<Null> drawInventory(Element container) async{
         for(Pet p in pets) {
-            DivElement subContainer = new DivElement();
+            SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
+            subContainer.classes.add("petInventorySlot");
+
             container.append(subContainer);
             drawPet(subContainer, p);
         }
