@@ -45,10 +45,13 @@ import 'dart:async';
 abstract class Pet {
 
     //TODO procedural description of personality based on stats.
+    int textHeight = 800;
+    int textWidth = 420;
 
     int health;
     int boredom;
     String name = "ZOOSMELL POOPLORD";
+    //TODO have arrays of cached canvases for animations.
     CanvasElement canvas;
     int width = 400;
     int height = 300;
@@ -103,16 +106,40 @@ abstract class Pet {
         container.append(nameDiv);
     }
 
+    Future<CanvasElement> drawStats() async {
+        //never cache
+        CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
+        textCanvas.context2D.fillStyle = "#d2ac7c";
+        textCanvas.context2D.strokeStyle = "#2c1900";
+        textCanvas.context2D.lineWidth = 3;
+
+
+        textCanvas.context2D.fillRect(0, 0, width, textHeight);
+        textCanvas.context2D.strokeRect(0, 0, width, textHeight);
+
+        textCanvas.context2D.fillStyle = "#2c1900";
+
+        int fontSize = 20;
+        textCanvas.context2D.font = "${fontSize}px Strife";
+        int startY = 330;
+        int startX = 10;
+        Renderer.wrap_text(textCanvas.context2D,name,startX,startY,fontSize,400,"left");
+        return textCanvas;
+    }
+
 
     Future<CanvasElement> draw() async {
-        if(canvas == null) canvas = new CanvasElement(width: width, height: height);
-        canvas.context2D.clearRect(0,0,width,height);
-        CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
-        await Renderer.drawDoll(dollCanvas, doll);
+        //caches by default. if you want it to redraw, set canvas to null.
+        if(canvas == null) {
+            canvas = new CanvasElement(width: width, height: height);
+            canvas.context2D.clearRect(0, 0, width, height);
+            CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
+            await Renderer.drawDoll(dollCanvas, doll);
 
-        dollCanvas = Renderer.cropToVisible(dollCanvas);
+            dollCanvas = Renderer.cropToVisible(dollCanvas);
 
-        Renderer.drawToFitCentered(canvas, dollCanvas);
+            Renderer.drawToFitCentered(canvas, dollCanvas);
+        }
         return canvas;
     }
 

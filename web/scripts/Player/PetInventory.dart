@@ -25,20 +25,19 @@ class PetInventory {
 
     Future<Null> drawPet(Element container, Pet p) async {
         DivElement canvasContainer = new DivElement();
+        CanvasElement canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);
+        canvasContainer.append(canvas);
+
         canvasContainer.style.width = "${p.width}px";
         canvasContainer.classes.add("canvasContainer");
         container.append(canvasContainer);
 
-        Element textContainer = new DivElement();
-        textContainer.classes.add("textContainer");
-        textContainer.style.width = "${p.width}px";
-        container.append(textContainer);
-        p.displayStats(textContainer);
-
+        CanvasElement textCanvas = await p.drawStats();
+        canvas.context2D.drawImage(textCanvas,0,0);
 
         //this is the thing we'll hang on. so do it last.
-        CanvasElement canvas = await p.draw();
-        canvasContainer.append(canvas);
+        CanvasElement grubCanvas = await p.draw();
+        canvas.context2D.drawImage(grubCanvas,10,10);
 
     }
 
