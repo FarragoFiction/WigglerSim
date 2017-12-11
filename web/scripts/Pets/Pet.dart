@@ -48,6 +48,23 @@
 
     TODO need to brainstorm wiggler actions that pair with all 12 things.
 
+    So, use cases:  You are in the wiggler playpen. The are three wigglers total.
+
+    Use Case 1: Caretaker puts down a thing.
+
+    Extroversion: Do you even notice the thing in the first place, or were you lost in thoughts?
+    Curiosity: Do you investigate the thing if it's not already near you?
+    Commited: Once you are near it, is it something you already like? If commited and no, attack.
+    Patientce: Do you immediately figure out how to use it? If impatient and no, attack.
+    Idealism:  Is it as cool as you thought? If not. Attack.
+
+    ((current thoughts: too many look the same from the outside. Also, idealism/realism is too close to optimism/pessimism for actions))
+
+    start out communicating only with emoticons
+    once eyes yellow out, can use simple words. baby talk. hewwo. webewwion.
+
+
+
 
  */
 import 'package:DollLibCorrect/DollRenderer.dart';

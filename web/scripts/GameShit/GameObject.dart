@@ -9,8 +9,13 @@ class GameObject {
     Player player;
 
     GameObject() {
-        player = new Player(new HomestuckTrollDoll());
-        if(!player.load())  player.save();
+        if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
+            player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
+            player.save();
+        }else {
+            player = new Player(new HomestuckTrollDoll());
+            player.save();
+        }
     }
 
     Future<Null> drawPlayer(Element container) async {
