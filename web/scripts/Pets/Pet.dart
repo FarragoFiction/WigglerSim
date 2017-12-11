@@ -14,6 +14,18 @@
     A pet has a birthday.
     A pet has a "time last fed".
     A pet has a "time last played with".
+    Pet should have a personality based on their stats. changes over time as their stats change?
+        health
+        boredom
+
+    Pet has a symbol you can assign it at a certain life stage.
+
+
+    How can you effect stats? Items you give wigglers to play with. Use items from fryamotifs.
+    Each item has plus and minus.  Could go aspect route and have mobility/free will, min/max luck, etc.
+    Or just straight up the aspect names.
+    Assign symbol based on what aspect it is closest too at maturity?
+
 
  */
 abstract class Pet {
