@@ -50,6 +50,7 @@ class Player {
         button.text = "Load Doll";
         button.onClick.listen((Event e) {
             doll = Doll.loadSpecificDoll(dollLoader.value);
+            save();
             draw();
         });
 
