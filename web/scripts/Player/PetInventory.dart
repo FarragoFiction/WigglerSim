@@ -5,6 +5,8 @@ import 'dart:html';
 import 'dart:async';
 import 'package:json_object/json_object.dart';
 import "../GameShit/GameObject.dart";
+import 'dart:convert';
+
 
 
 //TODO have a "from JSON" constructor
@@ -22,6 +24,15 @@ class PetInventory {
     void loadFromJSON(String json) {
         print("In pet inventory, json is $json");
         JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        String idontevenKnow = jsonObj[PETSLIST];
+        List<dynamic> what = JSON.decode(idontevenKnow);
+        print("what json is $what");
+        for(dynamic d in what) {
+            print("dynamic json thing is  $d");
+            pets.add(Pet.loadPetFromJSON(json));
+        }
+        print(jsonObj);
+        //throw "TODO";
         //okay. this SHOULD be an array or some shit. But JSON Arrays aren't things. bluh.
     }
 

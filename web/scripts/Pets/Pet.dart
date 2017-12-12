@@ -71,6 +71,7 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'package:json_object/json_object.dart';
 import 'dart:async';
+import 'Grub.dart';
 abstract class Pet {
 
     //TODO procedural description of personality based on stats.
@@ -84,9 +85,12 @@ abstract class Pet {
     static String LASTFED = "lastFed";
     static String HATCHDATE = "hatchDate";
     static String NAMEJSON = "nameJSON";
+    static String TYPE = "TYPE";
+    static String GRUB = "GRUB";
 
 
     int health;
+    String type;
     //some stats make it easier to get bored than others.
     int boredom;
     String name = "ZOOSMELL POOPLORD";
@@ -110,6 +114,13 @@ abstract class Pet {
 
     Pet.fromJSON(String json){
         loadFromJSON(json);
+    }
+
+    static Pet loadPetFromJSON(String json) {
+        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        if(jsonObj[TYPE] == GRUB) {
+            return new Grub.fromJSON(json);
+        }
     }
 
     void loadFromJSON(String json) {
