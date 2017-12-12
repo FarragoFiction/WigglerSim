@@ -4,12 +4,25 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';
 import 'package:json_object/json_object.dart';
+import "../GameShit/GameObject.dart";
 
 
 //TODO have a "from JSON" constructor
 class PetInventory {
     static String PETSLIST = "petsList";
     List<Pet> pets = new List<Pet>();
+
+    PetInventory();
+
+    PetInventory.fromJSON(String json){
+        loadFromJSON(json);
+    }
+
+    void loadFromJSON(String json) {
+        print("In pet inventory, json is $json");
+        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        //okay. this SHOULD be an array or some shit. But JSON Arrays aren't things. bluh.
+    }
 
     void addRandomGrub() {
         pets.add(new Grub(new HomestuckGrubDoll()));
@@ -42,7 +55,12 @@ class PetInventory {
             button.text = "Choose";
             subContainer.append(button);
             button.onClick.listen((e) {
+                //add wiggler to inventory. save. refresh.
                 window.alert("TODO");
+                pets.add(p);
+                GameObject.instance.save();
+                window.location.reload();
+
             });
         }
 

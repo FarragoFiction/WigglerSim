@@ -37,9 +37,7 @@ class Player {
         String lastPlayedString = jsonObj[LASTPLAYED];
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
-        //TODO load pet inventory from json too
-        petInventory = new PetInventory();
-
+        petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
      }
 
     String get daysSincePlayed {

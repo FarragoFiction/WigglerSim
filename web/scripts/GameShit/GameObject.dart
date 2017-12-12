@@ -8,7 +8,10 @@ import 'dart:html';
 class GameObject {
     Player player;
 
+    static GameObject instance;
+
     GameObject() {
+        instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
             player.save();
@@ -18,6 +21,14 @@ class GameObject {
             player.save();
             print("creating new player");
         }
+    }
+
+    void save() {
+        player.save();
+    }
+
+    void load() {
+        player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
     }
 
     Future<Null> drawPlayer(Element container) async {

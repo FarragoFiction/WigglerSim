@@ -107,6 +107,25 @@ abstract class Pet {
         name = randomAsFuckName();
     }
 
+    Pet.fromJSON(String json){
+        loadFromJSON(json);
+    }
+
+    void loadFromJSON(String json) {
+        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        String dataString = jsonObj[DOLLDATAURL];
+        String lastPlayedString = jsonObj[LASTPLAYED];
+        String hatchString = jsonObj[HATCHDATE];
+        String fedString = jsonObj[LASTFED];
+
+        lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
+        hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
+        lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
+        boredom = int.parse(jsonObj[BOREDOMEJSON]);
+
+        doll = Doll.loadSpecificDoll(dataString);
+    }
+
 
     JsonObject toJson() {
         JsonObject json = new JsonObject();
