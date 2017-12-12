@@ -161,14 +161,19 @@ abstract class Pet {
         DateTime now = new DateTime.now();
         Duration diff = now.difference(date);
         //print("hatch date is $hatchDate and diff is $diff");
+        String s = "";
         if(diff.inDays > 0) {
-            return "$label: ${diff.inDays} days ago.";
+            if(diff.inDays >1) s = "s";
+            return "$label: ${diff.inDays} day$s ago.";
         }else if (diff.inHours > 0) {
-            return "$label: ${diff.inHours} hours ago.";
+            if(diff.inHours >1) s = "s";
+            return "$label: ${diff.inHours} hour$s ago.";
         }else if (diff.inMinutes > 0) {
-            return "$label: ${diff.inMinutes} minutes ago.";
+            if(diff.inMinutes >1) s = "s";
+            return "$label: ${diff.inMinutes} minute$s ago.";
         }else if (diff.inSeconds > 0) {
-            return "$label: ${diff.inSeconds} seconds ago.";
+            if(diff.inSeconds >1) s = "s";
+            return "$label: ${diff.inSeconds} second$s ago.";
         }
         return "Just $label!";
     }
