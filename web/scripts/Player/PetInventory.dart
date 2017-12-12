@@ -15,6 +15,7 @@ class PetInventory {
     PetInventory();
 
     PetInventory.fromJSON(String json){
+        print("loading pet inventory with json $json");
         loadFromJSON(json);
     }
 
@@ -59,7 +60,7 @@ class PetInventory {
                 window.alert("TODO");
                 pets.add(p);
                 GameObject.instance.save();
-                window.location.reload();
+                //window.location.reload();
 
             });
         }
@@ -70,9 +71,11 @@ class PetInventory {
         JsonObject json = new JsonObject();
         List<JsonObject> jsonArray = new List<JsonObject>();
         for(Pet p in pets) {
+            print("Saving ${p.name}");
             jsonArray.add(p.toJson());
         }
-        json[PETSLIST] = jsonArray; //will this work?
+        json[PETSLIST] = jsonArray.toString(); //will this work?
+        print("pet inventory json is: ${json} and pets are ${pets.length}");
         return json;
     }
 

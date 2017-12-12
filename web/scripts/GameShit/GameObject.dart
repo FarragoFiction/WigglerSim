@@ -24,6 +24,7 @@ class GameObject {
     }
 
     void save() {
+        print("saving game");
         player.save();
     }
 

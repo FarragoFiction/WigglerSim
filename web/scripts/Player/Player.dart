@@ -32,12 +32,15 @@ class Player {
     }
 
      void loadFromJSON(String json) {
+        print("loading player from json");
         JsonObject jsonObj = new JsonObject.fromJsonString(json);
         String dataString = jsonObj[DATASTRING];
         String lastPlayedString = jsonObj[LASTPLAYED];
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
-        petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
+        print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
+        //petInventory = new PetInventory();
+        petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY].toString());
      }
 
     String get daysSincePlayed {
@@ -94,7 +97,6 @@ class Player {
             print("current doll is $doll");
             doll = Doll.loadSpecificDoll(dollLoader.value);
             print("new doll is $doll");
-
             save();
             draw();
         });
@@ -116,7 +118,7 @@ class Player {
     //TODO convert self to json (including pet inventory) to save in this localStorage
     void save() {
         String json = toJson().toString();
-        print("storing ${json}");
+        print("saving player ${json}. Pet inventory has ${petInventory.pets.length} in it.");
         window.localStorage[DOLLSAVEID] = json;
     }
 

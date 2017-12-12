@@ -83,6 +83,7 @@ abstract class Pet {
     static String LASTPLAYED = "lastPlayed";
     static String LASTFED = "lastFed";
     static String HATCHDATE = "hatchDate";
+    static String NAMEJSON = "nameJSON";
 
 
     int health;
@@ -117,6 +118,7 @@ abstract class Pet {
         String lastPlayedString = jsonObj[LASTPLAYED];
         String hatchString = jsonObj[HATCHDATE];
         String fedString = jsonObj[LASTFED];
+        name = jsonObj[NAMEJSON];
 
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
@@ -134,6 +136,7 @@ abstract class Pet {
         json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";
         json[DOLLDATAURL] = doll.toDataBytesX();
         json[BOREDOMEJSON] =  "${boredom}";
+        json[NAMEJSON] =  "${name}";
         json[HEALTHJSON] =  "${health}";
         return json;
     }
