@@ -29,7 +29,7 @@ class PetInventory {
         print("what json is $what");
         for(dynamic d in what) {
             print("dynamic json thing is  $d");
-            pets.add(Pet.loadPetFromJSON(json));
+            pets.add(Pet.loadPetFromJSON(null,d));
         }
         print(jsonObj);
         //throw "TODO";

@@ -116,14 +116,18 @@ abstract class Pet {
         loadFromJSON(json);
     }
 
-    static Pet loadPetFromJSON(String json) {
-        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+    //it doesn't like treating the json object i got as a string for whatever reason.
+    static Pet loadPetFromJSON(String json, [JsonObject jsonObj]) {
+        if(jsonObj == null) jsonObj = new JsonObject.fromJsonString(json);
+        print("Loading abstract pet from json, obj is ${jsonObj}");
         if(jsonObj[TYPE] == GRUB) {
-            return new Grub.fromJSON(json);
+            return new Grub.fromJSON(null,jsonObj);
         }
+        print("UNKNOWN PET TYPE ${jsonObj[TYPE]}");
+        throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
     }
 
-    void loadFromJSON(String json) {
+    void loadFromJSON(String json, [JsonObject jsonObj]) {
         JsonObject jsonObj = new JsonObject.fromJsonString(json);
         String dataString = jsonObj[DOLLDATAURL];
         String lastPlayedString = jsonObj[LASTPLAYED];
@@ -149,6 +153,7 @@ abstract class Pet {
         json[BOREDOMEJSON] =  "${boredom}";
         json[NAMEJSON] =  "${name}";
         json[HEALTHJSON] =  "${health}";
+        json[TYPE] = type;
         return json;
     }
 
