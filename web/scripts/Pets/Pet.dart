@@ -86,6 +86,7 @@ abstract class Pet {
 
 
     int health;
+    //some stats make it easier to get bored than others.
     int boredom;
     String name = "ZOOSMELL POOPLORD";
     //TODO have arrays of cached canvases for animations.
@@ -191,6 +192,19 @@ abstract class Pet {
         y = y + fontSize*2;
         fontSize = 12;
         Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize,400,"left");
+
+        int buffer = 10;
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize,400,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,daysSincePlayed,x,y,fontSize,400,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize,400,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize,400,"left");
 
 
         return textCanvas;
