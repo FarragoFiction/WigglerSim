@@ -138,6 +138,7 @@ class Player {
         JsonObject json = new JsonObject();
         json[DATASTRING] = doll.toDataBytesX();
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
+        //TODO also add json array of all pets
         return json;
     }
 }
