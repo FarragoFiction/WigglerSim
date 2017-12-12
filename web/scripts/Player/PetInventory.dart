@@ -3,9 +3,12 @@ import "../Pets/PetLib.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';
+import 'package:json_object/json_object.dart';
+
 
 //TODO have a "from JSON" constructor
 class PetInventory {
+    static String PETSLIST = "petsList";
     List<Pet> pets = new List<Pet>();
 
     void addRandomGrub() {
@@ -43,6 +46,16 @@ class PetInventory {
             });
         }
 
+    }
+
+    JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        List<JsonObject> jsonArray = new List<JsonObject>();
+        for(Pet p in pets) {
+            jsonArray.add(p.toJson());
+        }
+        json[PETSLIST] = jsonArray; //will this work?
+        return json;
     }
 
     Future<Null> drawPet(Element container, Pet p) async {

@@ -69,12 +69,21 @@
  */
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
+import 'package:json_object/json_object.dart';
 import 'dart:async';
 abstract class Pet {
 
     //TODO procedural description of personality based on stats.
     int textHeight = 800;
     int textWidth = 420;
+
+    static String HEALTHJSON = "healthJson";
+    static String BOREDOMEJSON = "boredomJson";
+    static String DOLLDATAURL = "dollDATAURL";
+    static String LASTPLAYED = "lastPlayed";
+    static String LASTFED = "lastFed";
+    static String HATCHDATE = "hatchDate";
+
 
     int health;
     int boredom;
@@ -97,20 +106,44 @@ abstract class Pet {
         name = randomAsFuckName();
     }
 
-    String get daysSinceHatch {
+
+    JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
+        json[HATCHDATE] =  "${hatchDate.millisecondsSinceEpoch}";
+        json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";
+        json[DOLLDATAURL] = doll.toDataBytesX();
+        json[BOREDOMEJSON] =  "${boredom}";
+        json[HEALTHJSON] =  "${health}";
+        return json;
+    }
+
+    String daysSinceDate(DateTime date, String label) {
         DateTime now = new DateTime.now();
-        Duration diff = now.difference(hatchDate);
+        Duration diff = now.difference(date);
         //print("hatch date is $hatchDate and diff is $diff");
         if(diff.inDays > 0) {
-            return "Hatched: ${diff.inDays} days ago.";
+            return "$label: ${diff.inDays} days ago.";
         }else if (diff.inHours > 0) {
-            return "Hatched: ${diff.inHours} hours ago.";
+            return "$label: ${diff.inHours} hours ago.";
         }else if (diff.inMinutes > 0) {
-            return "Hatched: ${diff.inMinutes} minutes ago.";
+            return "$label: ${diff.inMinutes} minutes ago.";
         }else if (diff.inSeconds > 0) {
-            return "Hatched: ${diff.inSeconds} seconds ago.";
+            return "$label: ${diff.inSeconds} seconds ago.";
         }
-        return "Just Hatched!";
+        return "Just $label!";
+    }
+
+    String get daysSinceHatch {
+        return daysSinceDate(hatchDate, "Hatched");
+    }
+
+    String get daysSinceFed {
+        return daysSinceDate(lastFed, "Fed");
+    }
+
+    String get daysSincePlayed {
+        return daysSinceDate(lastPlayed,"Played With");
     }
 
     String randomAsFuckName() {

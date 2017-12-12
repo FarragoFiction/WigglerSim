@@ -12,6 +12,7 @@ class Player {
     static String DATASTRING = "dataString";
     static String LASTPLAYED = "lastPlayed";
     static String DOLLSAVEID = "WigglerCaretaker";
+    static String PETINVENTORY = "PetInventory";
 
     Doll doll;
     CanvasElement canvas;
@@ -140,7 +141,7 @@ class Player {
         JsonObject json = new JsonObject();
         json[DATASTRING] = doll.toDataBytesX();
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
-        //TODO also add json array of all pets
+        json[PETINVENTORY] = petInventory.toJson();
         return json;
     }
 }
