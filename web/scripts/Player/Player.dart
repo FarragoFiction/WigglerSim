@@ -36,7 +36,10 @@ class Player {
         String lastPlayedString = jsonObj[LASTPLAYED];
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
-    }
+        //TODO load pet inventory from json too
+        petInventory = new PetInventory();
+
+     }
 
     String get daysSincePlayed {
         DateTime now = new DateTime.now();
@@ -64,7 +67,6 @@ class Player {
             troll.randomize(false);
             print("canon symbol set to ${troll.canonSymbol.imgNumber} which should be jade");
         }
-        //TODO create the pet inventory from json. have a .fromJSON constructor for player
         petInventory = new PetInventory();
     }
 

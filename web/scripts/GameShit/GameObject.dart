@@ -12,9 +12,11 @@ class GameObject {
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
             player.save();
+            print("loading player ${player} from local storage");
         }else {
             player = new Player(new HomestuckTrollDoll());
             player.save();
+            print("creating new player");
         }
     }
 
