@@ -128,7 +128,7 @@ abstract class Pet {
     }
 
     void loadFromJSON(String json, [JsonObject jsonObj]) {
-        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        if(jsonObj == null)  jsonObj = new JsonObject.fromJsonString(json);
         String dataString = jsonObj[DOLLDATAURL];
         String lastPlayedString = jsonObj[LASTPLAYED];
         String hatchString = jsonObj[HATCHDATE];
