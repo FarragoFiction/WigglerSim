@@ -113,7 +113,7 @@ class PetInventory {
                 //add wiggler to inventory. save. refresh.
                 pets.add(p);
                 GameObject.instance.save();
-                window.location.reload();
+                window.location.href= "petInventory.html";
 
             });
         }
