@@ -47,7 +47,20 @@ class PetInventory {
             subContainer.classes.add("petInventorySlot");
 
             container.append(subContainer);
-            drawPet(subContainer, p);
+
+            ButtonElement button = new ButtonElement();
+            button.text = "Rename";
+            subContainer.append(button);
+            CanvasElement canvas = await drawPet(subContainer, p);
+
+            button.onClick.listen((e) {
+                //add wiggler to inventory. save. refresh.
+                p.name = p.randomAsFuckName();
+                GameObject.instance.save();
+                drawPet(subContainer,p, canvas);
+                //window.location.reload();
+
+            });
         }
     }
 
@@ -68,10 +81,9 @@ class PetInventory {
             subContainer.append(button);
             button.onClick.listen((e) {
                 //add wiggler to inventory. save. refresh.
-                window.alert("TODO");
                 pets.add(p);
                 GameObject.instance.save();
-                //window.location.reload();
+                window.location.reload();
 
             });
         }
@@ -90,10 +102,12 @@ class PetInventory {
         return json;
     }
 
-    Future<Null> drawPet(Element container, Pet p) async {
+    Future<CanvasElement> drawPet(Element container, Pet p, [CanvasElement canvas]) async {
         DivElement canvasContainer = new DivElement();
-        CanvasElement canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);
-        canvasContainer.append(canvas);
+        if(canvas == null) {
+            canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);
+            canvasContainer.append(canvas);
+        }
 
         canvasContainer.style.width = "${p.width}px";
         canvasContainer.classes.add("canvasContainer");
@@ -105,6 +119,8 @@ class PetInventory {
         //this is the thing we'll hang on. so do it last.
         CanvasElement grubCanvas = await p.draw();
         canvas.context2D.drawImage(grubCanvas,10,10);
+
+        return canvas;
 
     }
 
