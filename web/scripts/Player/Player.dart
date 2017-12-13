@@ -21,9 +21,6 @@ class Player {
 
     PetInventory petInventory;
 
-
-    static int minJadeSign = 121;
-    static int maxJadeSign = 144;
     DateTime lastPlayed;
     DateTime oldLastPlayed;
 
@@ -64,7 +61,7 @@ class Player {
         if(makeJade && doll is HomestuckTrollDoll) {
             HomestuckTrollDoll troll = doll as HomestuckTrollDoll;
             Random rand = new Random();
-            int signNumber = rand.nextInt(maxJadeSign - minJadeSign) + minJadeSign;
+            int signNumber = HomestuckTrollDoll.randomJadeSign;
             troll.canonSymbol.imgNumber = signNumber;
             troll.randomize(false);
             print("canon symbol set to ${troll.canonSymbol.imgNumber} which should be jade");
