@@ -21,6 +21,14 @@ class PetInventory {
         loadFromJSON(json);
     }
 
+    //for hatching eggs and shit
+    void replacePet(Pet original, Pet replacement) {
+        if(!pets.contains(original)) return;
+        print("replacing ${original.name} with ${replacement.name}");
+        int index = pets.indexOf(original);
+        pets[index] = replacement;
+    }
+
     void loadFromJSON(String json) {
         print("In pet inventory, json is $json");
         JsonObject jsonObj = new JsonObject.fromJsonString(json);
@@ -61,15 +69,38 @@ class PetInventory {
             randomButton.text = "Random Name";
             subContainer.append(randomButton);
 
+            //only gets appended if it's a hatchable egg.
+            ButtonElement hatchButton = new ButtonElement();
+            hatchButton.text = "Hatch";
+
+            if(p is Egg) {
+                Egg e = p as Egg;
+                if(e.percentToHatched >= 1.0) {
+                    subContainer.append(hatchButton);
+                }
+            }
+
             CanvasElement canvas = await drawPet(subContainer, p);
 
+
             button.onClick.listen((e) {
-                //add wiggler to inventory. save. refresh.
                 p.name = customName.value;
                 GameObject.instance.save();
                 drawPet(subContainer,p, canvas);
-                //window.location.reload();
+            });
 
+            hatchButton.onClick.listen((e) {
+                print("3,2,1, POOF! Hatching an egg!");
+                //replace egg with hatched grub
+                //TODO test that you can rename the grub right after it hatches.
+                p.name = customName.value;
+                GameObject.instance.save();
+                Pet tmp = new Grub(p.doll);
+                replacePet(p, tmp);
+                p = tmp;
+                drawPet(subContainer,tmp, canvas);
+                hatchButton.style.display = "none";
+                GameObject.instance.save();
             });
 
 
@@ -82,6 +113,7 @@ class PetInventory {
                 //window.location.reload();
 
             });
+
         }
     }
 

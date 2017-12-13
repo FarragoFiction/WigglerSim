@@ -12,10 +12,15 @@ import 'dart:async';
 
     Eventually, egg hatches, which removes it from the inventory and replaces it with a new grub with same doll.
     maybe pet inventory handles this?
+
  */
 class Egg extends Pet{
 
-    static int millisecondsToHatch = 60* 1000;
+    static int millisecondsToHatch = 24*60*60* 1000;
+
+    String get daysSinceLaid {
+        return daysSinceDate(hatchDate, "Laid");
+    }
 
     String folder = "images/Pets";
     String imageName = "GrubEgg";
@@ -66,9 +71,13 @@ class Egg extends Pet{
         return canvas;
     }
 
-    @override
-    Future<CanvasElement> drawStats([bool shouldDrawTime = true] ) async {
-        return super.drawStats(false);
+
+    //returns where next thing should be
+    int drawTimeStats(CanvasElement textCanvas, int x, int y, int fontSize,buffer) {
+        Renderer.wrap_text(textCanvas.context2D,daysSinceLaid,x,y,fontSize,400,"left");
+
+        y = y + fontSize+buffer;
+        return y;
     }
 
     }

@@ -231,7 +231,7 @@ abstract class Pet {
         return y;
     }
 
-    Future<CanvasElement> drawStats([bool shouldDrawTime = true] ) async {
+    Future<CanvasElement> drawStats() async {
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
         textCanvas.context2D.fillStyle = "#d2ac7c";
@@ -255,7 +255,7 @@ abstract class Pet {
 
         int buffer = 10;
 
-        if (shouldDrawTime) y = drawTimeStats(textCanvas,x,y,fontSize,buffer);
+        y = drawTimeStats(textCanvas,x,y,fontSize,buffer);
 
         y = y + fontSize+buffer;
         Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize,400,"left");
