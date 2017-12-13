@@ -48,12 +48,33 @@ class PetInventory {
 
             container.append(subContainer);
 
+            TextInputElement customName = new TextInputElement();
+            customName.value = p.name;
+            customName.size = 40;
+            subContainer.append(customName);
+
             ButtonElement button = new ButtonElement();
             button.text = "Rename";
             subContainer.append(button);
+
+            ButtonElement randomButton = new ButtonElement();
+            randomButton.text = "Random Name";
+            subContainer.append(randomButton);
+
             CanvasElement canvas = await drawPet(subContainer, p);
 
             button.onClick.listen((e) {
+                //add wiggler to inventory. save. refresh.
+                p.name = customName.value;
+                GameObject.instance.save();
+                drawPet(subContainer,p, canvas);
+                //window.location.reload();
+
+            });
+
+
+
+            randomButton.onClick.listen((e) {
                 //add wiggler to inventory. save. refresh.
                 p.name = p.randomAsFuckName();
                 GameObject.instance.save();
