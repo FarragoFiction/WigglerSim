@@ -10,6 +10,7 @@ void main() {
 }
 
 Future<Null> start() async {
+  await game.preloadManifest();
   Element container = new DivElement();
   querySelector('#output').append(container);
 

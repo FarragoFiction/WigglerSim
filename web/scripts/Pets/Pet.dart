@@ -72,6 +72,8 @@ import 'dart:html';
 import 'package:json_object/json_object.dart';
 import 'dart:async';
 import 'Grub.dart';
+import 'Egg.dart';
+
 abstract class Pet {
 
     //TODO procedural description of personality based on stats.
@@ -87,6 +89,7 @@ abstract class Pet {
     static String NAMEJSON = "nameJSON";
     static String TYPE = "TYPE";
     static String GRUB = "GRUB";
+    static String EGG = "EGG";
 
 
     int health;
@@ -122,6 +125,8 @@ abstract class Pet {
         print("Loading abstract pet from json, obj is ${jsonObj}");
         if(jsonObj[TYPE] == GRUB) {
             return new Grub.fromJSON(null,jsonObj);
+        }else if(jsonObj[TYPE] == EGG) {
+            return new Egg.fromJSON(null,jsonObj);
         }
         print("UNKNOWN PET TYPE ${jsonObj[TYPE]}");
         throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
@@ -192,9 +197,9 @@ abstract class Pet {
 
     String randomAsFuckName() {
         Random rand = new Random();
-        List<String> titles = <String> ["Captain","Baron","The Esteemed","Mr.","Mrs.","Mdms.","Count","Countess","Clerk","President","Pounceler","Counciler","Minister","Ambassador","Admiral", "Rear Admiral","Commander","Dr.","Sir","Senator","Contessa"];
-        List<String> firstNames = <String>["Bibbles","Jiggy","Jibbly","Wiggly","Wiggler","Grubby","Zoosmell","Farmstink","Bubbles","Nic","Lil","Liv","Charles","Meowsers","Casey","Fred","Kid","Meowgon","Fluffy","Meredith","Bill","Ted","Frank","Flan","Squeezykins","Spot","Squeakems","Hissy","Scaley","Glubglub","Mutie","Clattersworth","Bonebone","Nibbles","Fossilbee","Skulligan","Jack","Nigel","Dazzle","Fancy","Pounce"];
-        List<String> lastNames = <String>["von Horn","Grub","Dumbface","Buttlass","Pooplord","Cage","Sebastion","Taylor","Dutton","von Wigglebottom","von Salamancer","Savage","Rock","Spangler","Fluffybutton","the Third, esquire.","S Preston","Logan","the Shippest","Clowder","Squeezykins","Boi","Oldington the Third","Malone","Ribs","Noir","Sandwich"];
+        List<String> titles = <String> ["Psychicboi","Hotboi","Lord","Shogun","Captain","Baron","The Esteemed","Mr.","Mrs.","Mdms.","Count","Countess","Clerk","President","Pounceler","Counciler","Minister","Ambassador","Admiral", "Rear Admiral","Commander","Dr.","Sir","Senator","Contessa"];
+        List<String> firstNames = <String>["Capybara","Bibbles","Jiggy","Jibbly","Wiggly","Wiggler","Grubby","Zoosmell","Farmstink","Bubbles","Nic","Lil","Liv","Charles","Meowsers","Casey","Fred","Kid","Meowgon","Fluffy","Meredith","Bill","Ted","Frank","Flan","Squeezykins","Spot","Squeakems","Hissy","Scaley","Glubglub","Mutie","Clattersworth","Bonebone","Nibbles","Fossilbee","Skulligan","Jack","Nigel","Dazzle","Fancy","Pounce"];
+        List<String> lastNames = <String>["Pooper","von Wigglesmith","von Horn","Grub","Dumbface","Buttlass","Pooplord","Cage","Sebastion","Taylor","Dutton","von Wigglebottom","von Salamancer","Savage","Rock","Spangler","Fluffybutton","the Third, esquire.","S Preston","Logan","the Shippest","Clowder","Squeezykins","Boi","Oldington the Third","Malone","Ribs","Noir","Sandwich"];
         double randNum = rand.nextDouble();
         if(randNum > .6) {
             return "${rand.pickFrom(titles)} ${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
@@ -213,7 +218,20 @@ abstract class Pet {
         container.append(nameDiv);
     }
 
-    Future<CanvasElement> drawStats() async {
+    //returns where next thing should be
+    int drawTimeStats(CanvasElement textCanvas, int x, int y, int fontSize,buffer) {
+        Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize,400,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize,400,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,daysSincePlayed,x,y,fontSize,400,"left");
+
+        return y;
+    }
+
+    Future<CanvasElement> drawStats([bool shouldDrawTime = true] ) async {
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
         textCanvas.context2D.fillStyle = "#d2ac7c";
@@ -234,14 +252,10 @@ abstract class Pet {
 
         y = y + fontSize*2;
         fontSize = 12;
-        Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize,400,"left");
 
         int buffer = 10;
-        y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize,400,"left");
 
-        y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,daysSincePlayed,x,y,fontSize,400,"left");
+        if (shouldDrawTime) y = drawTimeStats(textCanvas,x,y,fontSize,buffer);
 
         y = y + fontSize+buffer;
         Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize,400,"left");

@@ -15,6 +15,7 @@ class GameObject {
             window.alert("Shit. There's been an error.");
         });
 
+
         instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
@@ -25,6 +26,12 @@ class GameObject {
             player.save();
             print("creating new player");
         }
+    }
+
+    Future<Null> preloadManifest() async {
+        await Loader.preloadManifest();
+        print ("loader returned");
+        return;
     }
 
     void save() {
@@ -44,6 +51,10 @@ class GameObject {
 
     void drawPetInventory(Element container) {
         player.petInventory.drawInventory(container);
+    }
+
+    void drawAdoptables(Element container) {
+        player.petInventory.drawAdoptables(container);
     }
 
     void drawStarters(Element container) {

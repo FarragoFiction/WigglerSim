@@ -85,6 +85,33 @@ class PetInventory {
         }
     }
 
+    //todo can adopt a troll grub directly via importing string.
+    Future<Null> drawAdoptables(Element container) async{
+        List<Pet> starters = new List<Pet>();
+        starters.add(new Egg(new HomestuckGrubDoll()));
+        starters.add(new Egg(new HomestuckGrubDoll()));
+        starters.add(new Egg(new HomestuckGrubDoll()));
+
+        for(Pet p in starters) {
+            SpanElement subContainer = new SpanElement();
+            subContainer.style.width = "${p.width}px";
+            subContainer.classes.add("petInventorySlot");
+            container.append(subContainer);
+            drawPet(subContainer, p);
+            ButtonElement button = new ButtonElement();
+            button.text = "Choose";
+            subContainer.append(button);
+            button.onClick.listen((e) {
+                //add wiggler to inventory. save. refresh.
+                pets.add(p);
+                GameObject.instance.save();
+                window.location.reload();
+
+            });
+        }
+
+    }
+
     Future<Null> drawStarters(Element container) async{
         List<Pet> starters = new List<Pet>();
         starters.add(new Grub(new HomestuckGrubDoll()));
