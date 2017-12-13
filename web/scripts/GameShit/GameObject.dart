@@ -58,6 +58,7 @@ class GameObject {
         //if it's not in the format I expect, error out. window.alert.
         player.loadFromJSON(loadData);
         save();
+        window.location.reload();
     }
 
     void drawSaveLink(Element container) {
