@@ -19,5 +19,6 @@ Future<Null> start() async {
   container.append(introContainer);
   game.drawPlayer(canvasContainer);
   game.drawPlayerIntroShit(introContainer);
+  game.drawSaveLink(introContainer);
 }
 

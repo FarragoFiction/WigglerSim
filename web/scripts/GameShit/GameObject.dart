@@ -25,6 +25,7 @@ class GameObject {
 
     void save() {
         print("saving game");
+        //TODO if this gets too big, compress with LZString or equivalent.
         player.save();
     }
 
@@ -47,6 +48,17 @@ class GameObject {
 
     Future<Null> drawPlayerIntroShit(Element container) async {
         player.displayloadBoxAndText(container);
+    }
+
+    void drawSaveLink(Element container) {
+        String saveData =  player.toJson().toString();
+        print("save data is: $saveData");
+        AnchorElement saveLink = new AnchorElement();
+        saveLink.href = new UriData.fromString(saveData, mimeType: "text/plain").toString();
+        saveLink.target = "_blank";
+        saveLink.download = "wigglerSimData.txt";
+        saveLink.setInnerHtml("Download Save Backup?");
+        container.append(saveLink);
     }
 
 }
