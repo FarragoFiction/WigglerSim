@@ -15,6 +15,8 @@ import 'dart:async';
  */
 class Egg extends Pet{
 
+    static int millisecondsToHatch = 3* 1000;
+
     String folder = "images/Pets";
     String imageName = "GrubEgg";
     @override
@@ -28,6 +30,15 @@ class Egg extends Pet{
         print ("loaded $name");
     }
 
+    //can't go over 100%, how close to hatching are you?
+    double get percentToHatched {
+        DateTime now = new DateTime.now();
+        Duration diff = now.difference(hatchDate);
+        double ret = diff.inMilliseconds/millisecondsToHatch;
+        if(ret > 1.0) ret = 1.0;
+        return ret;
+    }
+
     @override
     Future<CanvasElement> draw() async {
         print ("trying to draw egg.");
@@ -38,6 +49,11 @@ class Egg extends Pet{
             canvas.context2D.clearRect(0, 0, width, height);
             CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
             await Renderer.drawWhateverFuture(dollCanvas, "$folder/$imageName.png");
+            HomestuckPalette p = doll.palette as HomestuckPalette;
+            Colour c = new Colour.from(p.aspect_light);
+            c.setHSV(p.aspect_light.hue, percentToHatched, p.aspect_light.value);
+            Renderer.swapColors(dollCanvas, c);
+
 
             dollCanvas = Renderer.cropToVisible(dollCanvas);
 
