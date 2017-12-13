@@ -15,14 +15,16 @@ import 'dart:async';
  */
 class Egg extends Pet{
 
-    static int millisecondsToHatch = 3* 1000;
+    static int millisecondsToHatch = 60* 1000;
 
     String folder = "images/Pets";
     String imageName = "GrubEgg";
     @override
     String type = Pet.EGG;
     Egg(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
-        name = "Egg";
+        HomestuckGrubDoll g = doll as HomestuckGrubDoll;
+        HomestuckPalette p = g.palette as HomestuckPalette;
+        name = " ${g.bloodColorToWord(p.aspect_light)} Egg";
     }
 
     Egg.fromJSON(String json, [JsonObject jsonObj]) : super(null){
@@ -51,7 +53,9 @@ class Egg extends Pet{
             await Renderer.drawWhateverFuture(dollCanvas, "$folder/$imageName.png");
             HomestuckPalette p = doll.palette as HomestuckPalette;
             Colour c = new Colour.from(p.aspect_light);
-            c.setHSV(p.aspect_light.hue, percentToHatched, p.aspect_light.value);
+            double percent = percentToHatched;
+            if(percent <.05) percent = .05;
+            c.setHSV(p.aspect_light.hue, percent, p.aspect_light.value);
             Renderer.swapColors(dollCanvas, c);
 
 
