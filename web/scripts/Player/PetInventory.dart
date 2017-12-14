@@ -73,9 +73,14 @@ class PetInventory {
             ButtonElement hatchButton = new ButtonElement();
             hatchButton.text = "Hatch";
 
-            if(p is Egg) {
-                Egg e = p as Egg;
-                if(e.percentToChange >= 1.0) {
+            if(p.percentToChange >= 1.0) {
+                if(p is Egg) {
+                    subContainer.append(hatchButton);
+                }else if(p is Grub) {
+                    hatchButton.text = "Spin Cocoon";
+                    subContainer.append(hatchButton);
+                }else if(p is Cocoon) {
+                    hatchButton.text = "Pupate";
                     subContainer.append(hatchButton);
                 }
             }
@@ -90,17 +95,17 @@ class PetInventory {
             });
 
             hatchButton.onClick.listen((e) {
-                print("3,2,1, POOF! Hatching an egg!");
-                //replace egg with hatched grub
-                //TODO test that you can rename the grub right after it hatches.
-                p.name = customName.value;
-                GameObject.instance.save();
-                Pet tmp = new Grub(p.doll);
-                replacePet(p, tmp);
-                p = tmp;
-                drawPet(subContainer,tmp, canvas);
-                hatchButton.style.display = "none";
-                GameObject.instance.save();
+                if(p is Egg) {
+                    print("3,2,1, POOF! Hatching an egg!");
+                    Pet tmp = new Grub(p.doll);
+                    changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
+                }else if(p is Grub) {
+                    print("3,2,1, POOF! Spinning a cocoon");
+                    Pet tmp = new Cocoon(p.doll);
+                    changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
+                }else if(p is Cocoon) {
+                    window.alert("TODO: Troll 'pets'. ");
+                }
             });
 
 
@@ -115,6 +120,16 @@ class PetInventory {
             });
 
         }
+    }
+
+    void changePetIntoOtherPet(Pet p, Pet tmp, Element subContainer, CanvasElement canvas, ButtonElement hatchButton) {
+        //replace egg with hatched grub
+        GameObject.instance.save();
+        replacePet(p, tmp);
+        p = tmp;
+        drawPet(subContainer,tmp, canvas);
+        hatchButton.style.display = "none";
+        GameObject.instance.save();
     }
 
     //todo can adopt a troll grub directly via importing string.
