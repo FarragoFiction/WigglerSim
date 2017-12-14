@@ -25,6 +25,7 @@ class PetInventory {
     void replacePet(Pet original, Pet replacement) {
         if(!pets.contains(original)) return;
         print("replacing ${original.name} with ${replacement.name}");
+        if(!original.name.contains("Egg")) replacement.name = original.name;
         int index = pets.indexOf(original);
         pets[index] = replacement;
     }
@@ -74,6 +75,7 @@ class PetInventory {
             hatchButton.text = "Hatch";
 
             if(p.percentToChange >= 1.0) {
+                print("Pet is $p, percent is ${p.percentToChange}, time to change is ${p.millisecondsToChange/1000/60/60} hours,");
                 if(p is Egg) {
                     subContainer.append(hatchButton);
                 }else if(p is Grub) {

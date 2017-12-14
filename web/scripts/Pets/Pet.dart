@@ -73,10 +73,12 @@ import 'package:json_object/json_object.dart';
 import 'dart:async';
 import 'Grub.dart';
 import 'Egg.dart';
+import 'Cocoon.dart';
+
 
 abstract class Pet {
 
-    static int millisecondsToChange = 10*60*60* 1000;
+    int millisecondsToChange = 10*60*60* 1000;
 
     //TODO procedural description of personality based on stats.
     int textHeight = 800;
@@ -140,6 +142,8 @@ abstract class Pet {
             return new Grub.fromJSON(null,jsonObj);
         }else if(jsonObj[TYPE] == EGG) {
             return new Egg.fromJSON(null,jsonObj);
+        }else if(jsonObj[TYPE] == COCOON) {
+            return new Cocoon.fromJSON(null,jsonObj);
         }
         print("UNKNOWN PET TYPE ${jsonObj[TYPE]}");
         throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
