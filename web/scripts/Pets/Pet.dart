@@ -117,13 +117,6 @@ abstract class Pet {
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();
         name = randomAsFuckName();
-
-        //at half way mark, eyes turn yellow like a trolls.
-        if(percentToChange > 0.5) {
-            HomestuckPalette p = doll.palette as HomestuckPalette;
-            p.add(HomestuckPalette.EYE_WHITE_LEFT, ReferenceColours.TROLL_PALETTE.eye_white_left,true);
-            p.add(HomestuckPalette.EYE_WHITE_RIGHT, ReferenceColours.TROLL_PALETTE.eye_white_right,true);
-        }
     }
 
     //can't go over 100%, how close to hatching are you?
