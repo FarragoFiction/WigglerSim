@@ -109,6 +109,7 @@ class PetInventory {
                     print("3,2,1, POOF! Holy Fuck it's a Troll!");
                     Pet tmp = new Troll(p.doll);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
+                    window.location.href= "goodbye.html";
                 }
             });
 
