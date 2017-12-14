@@ -76,6 +76,8 @@ import 'Egg.dart';
 
 abstract class Pet {
 
+    static int millisecondsToChange = 10*60*60* 1000;
+
     //TODO procedural description of personality based on stats.
     int textHeight = 800;
     int textWidth = 420;
@@ -90,6 +92,8 @@ abstract class Pet {
     static String TYPE = "TYPE";
     static String GRUB = "GRUB";
     static String EGG = "EGG";
+    static String COCOON = "COCOON";
+    static String TROLL = "TROLL";
 
 
     int health;
@@ -113,6 +117,22 @@ abstract class Pet {
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();
         name = randomAsFuckName();
+
+        //at half way mark, eyes turn yellow like a trolls.
+        if(percentToChange > 0.5) {
+            HomestuckPalette p = doll.palette as HomestuckPalette;
+            p.add(HomestuckPalette.EYE_WHITE_LEFT, ReferenceColours.TROLL_PALETTE.eye_white_left,true);
+            p.add(HomestuckPalette.EYE_WHITE_RIGHT, ReferenceColours.TROLL_PALETTE.eye_white_right,true);
+        }
+    }
+
+    //can't go over 100%, how close to hatching are you?
+    double get percentToChange {
+        DateTime now = new DateTime.now();
+        Duration diff = now.difference(hatchDate);
+        double ret = diff.inMilliseconds/millisecondsToChange;
+        if(ret > 1.0) ret = 1.0;
+        return ret;
     }
 
     Pet.fromJSON(String json){

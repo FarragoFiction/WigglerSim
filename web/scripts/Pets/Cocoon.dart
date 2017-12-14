@@ -5,39 +5,32 @@ import 'dart:html';
 import 'dart:async';
 
 /*
-    Eggs don't render their associated doll (which is a grub).
-    Instead they render a troll egg tinted their blood color.
-
-    Older the egg is, the more saturated the tint gets.
-
-    Eventually, egg hatches, which removes it from the inventory and replaces it with a new grub with same doll.
-    maybe pet inventory handles this?
+   Cocoons are basically eggs that turn into trolls, not grubs.
 
  */
-class Egg extends Pet{
+class Cocoon extends Pet{
 
     @override
-    static int millisecondsToChange = 24*60*60* 1000;
+    static int millisecondsToChange = 10*60*60* 1000;
 
-    String get daysSinceLaid {
-        return daysSinceDate(hatchDate, "Laid");
+    String get daysSinceSpun {
+        return daysSinceDate(hatchDate, "Cocooned");
     }
 
     String folder = "images/Pets";
-    String imageName = "GrubEgg";
+    String imageName = "Cocoon";
     @override
-    String type = Pet.EGG;
-    Egg(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
-        HomestuckGrubDoll g = doll as HomestuckGrubDoll;
-        HomestuckPalette p = g.palette as HomestuckPalette;
-        name = " ${g.bloodColorToWord(p.aspect_light)} Egg";
+    String type = Pet.COCOON;
+    Cocoon(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
+        /*
+                TODO: makes a new troll doll out of the grub doll, matches all existing features.
+         */
     }
 
-    Egg.fromJSON(String json, [JsonObject jsonObj]) : super(null){
+    Cocoon.fromJSON(String json, [JsonObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
         print ("loaded $name");
     }
-
 
 
     @override
@@ -68,7 +61,7 @@ class Egg extends Pet{
 
     //returns where next thing should be
     int drawTimeStats(CanvasElement textCanvas, int x, int y, int fontSize,buffer) {
-        Renderer.wrap_text(textCanvas.context2D,daysSinceLaid,x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,daysSinceSpun,x,y,fontSize,400,"left");
 
         y = y + fontSize+buffer;
         return y;

@@ -75,7 +75,7 @@ class PetInventory {
 
             if(p is Egg) {
                 Egg e = p as Egg;
-                if(e.percentToHatched >= 1.0) {
+                if(e.percentToChange >= 1.0) {
                     subContainer.append(hatchButton);
                 }
             }
