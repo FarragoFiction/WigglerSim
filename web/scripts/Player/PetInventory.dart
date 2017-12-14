@@ -210,6 +210,7 @@ class PetInventory {
     }
 
     Future<CanvasElement> drawPet(Element container, Pet p, [CanvasElement canvas]) async {
+        print("drawing pet $p");
         DivElement canvasContainer = new DivElement();
         if(canvas == null) {
             canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);
