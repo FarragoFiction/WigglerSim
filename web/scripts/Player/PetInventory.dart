@@ -102,11 +102,13 @@ class PetInventory {
                     Pet tmp = new Grub(p.doll);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
                 }else if(p is Grub) {
-                    print("3,2,1, POOF! Spinning a cocoon");
+                    print("3,2,1, POOF! Spinning a cocoon!");
                     Pet tmp = new Cocoon(p.doll);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
                 }else if(p is Cocoon) {
-                    window.alert("TODO: Troll 'pets'. ");
+                    print("3,2,1, POOF! Holy Fuck it's a Troll!");
+                    Pet tmp = new Troll(p.doll);
+                    changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
                 }
             });
 

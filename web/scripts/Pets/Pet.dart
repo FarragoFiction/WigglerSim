@@ -74,6 +74,8 @@ import 'dart:async';
 import 'Grub.dart';
 import 'Egg.dart';
 import 'Cocoon.dart';
+import 'Troll.dart';
+
 
 
 abstract class Pet {
@@ -144,6 +146,8 @@ abstract class Pet {
             return new Egg.fromJSON(null,jsonObj);
         }else if(jsonObj[TYPE] == COCOON) {
             return new Cocoon.fromJSON(null,jsonObj);
+        }else if(jsonObj[TYPE] == TROLL) {
+            return new Troll.fromJSON(null,jsonObj);
         }
         print("UNKNOWN PET TYPE ${jsonObj[TYPE]}");
         throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
