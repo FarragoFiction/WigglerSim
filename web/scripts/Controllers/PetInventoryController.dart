@@ -21,8 +21,16 @@ Future<Null> start() async {
     game.drawStarters(container);
     querySelector('#pkmnProf').style.display = "inline-block";
   }else {
-    game.drawPetInventory(container);
     querySelector('#pkmnProf').style.display = "none";
+    Element canvasContainer = new DivElement();
+    querySelector('#you').append(canvasContainer);
+    SpanElement playerSpield = new SpanElement();
+    playerSpield.text = "...";
+    playerSpield.classes.add("playerSpiel");
+    querySelector('#you').append(playerSpield);
+    game.drawPlayer(canvasContainer);
+
+    game.drawPetInventory(container);
 
   }
 }

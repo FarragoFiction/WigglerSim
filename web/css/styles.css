@@ -32,6 +32,13 @@ html, body {
 
 }
 
+#playerSpiel{
+    float: right;
+    display: inline-block;
+    width: 200px;
+
+}
+
 .petInventorySlot{
      color: #2c1900;
      display: inline-block;
