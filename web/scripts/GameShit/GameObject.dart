@@ -2,6 +2,7 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import '../Player/Player.dart';
 import 'dart:async';
 import 'dart:html';
+import "../Pets/PetLib.dart";
 
 
 //handles shit that my instincts want to put on a page controller.
@@ -47,6 +48,15 @@ class GameObject {
     Future<Null> drawPlayer(Element container) async {
         CanvasElement canvas = await player.draw();
         container.append(canvas);
+    }
+
+    void drawAGraduatingTroll(Element container) {
+        Troll t = player.petInventory.getGraduatingTroll();
+        if(t != null) {
+            player.petInventory.drawPet(container, t);
+        }else {
+            container.setInnerHtml("No Trolls Found!");
+        }
     }
 
     void drawPetInventory(Element container) {

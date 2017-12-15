@@ -10,7 +10,12 @@ void main() {
 }
 
 Future<Null> start() async {
-  //TODO
+  await game.preloadManifest();
+  Element container = new DivElement();
+  container.style.display = "inline-block";
+  querySelector('#output').append(container);
+  game.drawAGraduatingTroll(container);
+  //game.drawPetInventory(container);
 
 }
 

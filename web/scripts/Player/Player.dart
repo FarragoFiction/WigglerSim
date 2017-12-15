@@ -28,6 +28,7 @@ class Player {
         loadFromJSON(json);
     }
 
+
      void loadFromJSON(String json) {
         print("loading player from json");
         JsonObject jsonObj = new JsonObject.fromJsonString(json);
@@ -68,6 +69,8 @@ class Player {
         }
         petInventory = new PetInventory();
     }
+
+
 
     void displayloadBoxAndText(Element div)
     {

@@ -11,8 +11,12 @@ import 'dart:convert';
 
 //TODO have a "from JSON" constructor
 class PetInventory {
+    static int MAXPETS = 6;
     static String PETSLIST = "petsList";
+    static String ALUMNI = "alumni";
+
     List<Pet> pets = new List<Pet>();
+    List<Troll> alumni = new List<Troll>();
 
     PetInventory();
 
@@ -20,6 +24,9 @@ class PetInventory {
         print("loading pet inventory with json $json");
         loadFromJSON(json);
     }
+
+    bool get hasRoom => (pets.length <= MAXPETS);
+
 
     //for hatching eggs and shit
     void replacePet(Pet original, Pet replacement) {
@@ -34,15 +41,30 @@ class PetInventory {
         print("In pet inventory, json is $json");
         JsonObject jsonObj = new JsonObject.fromJsonString(json);
         String idontevenKnow = jsonObj[PETSLIST];
+        loadPetsFromJSON(idontevenKnow);
+        idontevenKnow = jsonObj[ALUMNI];
+        loadAlumniFromJSON(idontevenKnow);
+
+    }
+
+    void loadPetsFromJSON(String idontevenKnow) {
+        if(idontevenKnow == null) return;
         List<dynamic> what = JSON.decode(idontevenKnow);
         print("what json is $what");
         for(dynamic d in what) {
             print("dynamic json thing is  $d");
             pets.add(Pet.loadPetFromJSON(null,d));
         }
-        print(jsonObj);
-        //throw "TODO";
-        //okay. this SHOULD be an array or some shit. But JSON Arrays aren't things. bluh.
+    }
+
+    void loadAlumniFromJSON(String idontevenKnow) {
+        if(idontevenKnow == null) return;
+        List<dynamic> what = JSON.decode(idontevenKnow);
+        print("what json is $what");
+        for(dynamic d in what) {
+            print("dynamic json thing is  $d");
+            alumni.add(Pet.loadPetFromJSON(null,d) as Troll);
+        }
     }
 
     void addRandomGrub() {
@@ -127,6 +149,14 @@ class PetInventory {
         }
     }
 
+
+    //gets first troll i find.  returns null if none.
+    Troll getGraduatingTroll() {
+        for(Pet p in pets) {
+            if(p is Troll) return p;
+        }
+    }
+
     void changePetIntoOtherPet(Pet p, Pet tmp, Element subContainer, CanvasElement canvas, ButtonElement hatchButton) {
         //replace egg with hatched grub
         GameObject.instance.save();
@@ -206,6 +236,14 @@ class PetInventory {
             jsonArray.add(p.toJson());
         }
         json[PETSLIST] = jsonArray.toString(); //will this work?
+
+        jsonArray = new List<JsonObject>();
+        for(Troll p in alumni) {
+            print("Saving ${p.name}");
+            jsonArray.add(p.toJson());
+        }
+        json[ALUMNI] = jsonArray.toString(); //will this work?
+
         print("pet inventory json is: ${json} and pets are ${pets.length}");
         return json;
     }

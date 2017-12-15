@@ -19,6 +19,11 @@ html, body {
     padding: 10px;
 }
 
+#npc{
+    background-color: white;
+    padding: 10px;
+}
+
 #pkmnProfSpiel{
     float: right;
     display: inline-block;

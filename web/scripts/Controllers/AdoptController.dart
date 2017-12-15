@@ -15,5 +15,9 @@ Future<Null> start() async {
     Element container = new DivElement();
     container.style.display = "inline-block";
     querySelector('#output').append(container);
-    game.drawAdoptables(container);
+    if(game.player.petInventory.hasRoom) {
+        game.drawAdoptables(container);
+    }else {
+        container.appendHtml("You have no more room for wigglers! Let the ones you have already grow up first!");
+    }
 }
