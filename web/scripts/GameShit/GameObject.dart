@@ -54,6 +54,7 @@ class GameObject {
         Troll t = player.petInventory.getGraduatingTroll();
         if(t != null) {
             player.petInventory.drawPet(container, t);
+            player.petInventory.graduate(t);
         }else {
             container.setInnerHtml("No Trolls Found!");
         }

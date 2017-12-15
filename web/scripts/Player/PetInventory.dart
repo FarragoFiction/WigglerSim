@@ -57,6 +57,12 @@ class PetInventory {
         }
     }
 
+    void graduate(Troll troll) {
+        pets.remove(troll);
+        alumni.add(troll);
+        GameObject.instance.save();
+    }
+
     void loadAlumniFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
         List<dynamic> what = JSON.decode(idontevenKnow);

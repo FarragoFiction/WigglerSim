@@ -29,6 +29,8 @@ class Player {
     }
 
 
+
+
      void loadFromJSON(String json) {
         print("loading player from json");
         JsonObject jsonObj = new JsonObject.fromJsonString(json);

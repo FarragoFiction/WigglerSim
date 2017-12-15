@@ -15,7 +15,6 @@ Future<Null> start() async {
   container.style.display = "inline-block";
   querySelector('#output').append(container);
   await game.drawAGraduatingTroll(container);
-  //game.drawPetInventory(container);
 
 }
 
