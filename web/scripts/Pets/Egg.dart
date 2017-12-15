@@ -68,7 +68,7 @@ class Egg extends Pet{
 
     //returns where next thing should be
     int drawTimeStats(CanvasElement textCanvas, int x, int y, int fontSize,buffer) {
-        Renderer.wrap_text(textCanvas.context2D,daysSinceLaid,x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,daysSinceLaid,x,y,fontSize,275,"left");
 
         y = y + fontSize+buffer;
         return y;

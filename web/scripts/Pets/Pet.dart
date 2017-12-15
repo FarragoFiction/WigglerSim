@@ -241,13 +241,13 @@ abstract class Pet {
 
     //returns where next thing should be
     int drawTimeStats(CanvasElement textCanvas, int x, int y, int fontSize,buffer) {
-        Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize+buffer,400,"left");
 
         y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize+buffer,400,"left");
 
         y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,daysSincePlayed,x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,daysSincePlayed,x,y,fontSize+buffer,400,"left");
 
         return y;
     }
@@ -279,10 +279,10 @@ abstract class Pet {
         y = drawTimeStats(textCanvas,x,y,fontSize,buffer);
 
         y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize+buffer,275,"left");
 
         y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize+buffer,275,"left");
 
 
         return textCanvas;

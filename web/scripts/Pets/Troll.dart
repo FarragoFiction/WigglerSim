@@ -3,11 +3,14 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'package:json_object/json_object.dart';
 import 'dart:async';
 import 'dart:html';
+import "../GameShit/GameObject.dart";
+
 
 
 
 class Troll extends Pet{
-    
+
+    static String EPILOGUE = "epilogue";
     
     @override
     int millisecondsToChange = 1*10*60* 1000;
@@ -30,15 +33,22 @@ class Troll extends Pet{
         print ("loaded $name");
     }
 
-    String getLusus() {
+    @override
+    void loadFromJSON(String json, [JsonObject jsonObj]) {
+        super.loadFromJSON(json, jsonObj);
+        if(jsonObj == null)  jsonObj = new JsonObject.fromJsonString(json);
+        epilogue = jsonObj[EPILOGUE];
+    }
+
+        String getLusus() {
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         Random rand = new Random();
         //purple bloods have 50% chance of seadweller lusi
         if(t.bloodColorToWord(p.aspect_light) == HomestuckTrollDoll.VIOLET || t.bloodColorToWord(p.aspect_light) == HomestuckTrollDoll.FUCHSIA || (t.bloodColorToWord(p.aspect_light) == HomestuckTrollDoll.PURPLE && rand.nextBool())) {
-            return trollLusus();
-        }else {
             return seaTrollLusus();
+        }else {
+            return trollLusus();
         }
     }
 
@@ -46,12 +56,12 @@ class Troll extends Pet{
         Random rand = new Random();
         List<String> badThing = <String>["threats","danger","enemies","predators","drones","other trolls","other lusii"];
         List<String> goodThing = <String>["vegetables","food","safety","water","shelter","meat","friends","self-esteem"];
-        List<String> lifeSkill = <String>["fight","scavenge","hide","forage","collect","hoard resources","share","cooperate","hunt"];
+        List<String> lifeSkill = <String>["fight","scavenge","hide","forage","collect food","hoard resources","share","cooperate","hunt"];
         List<String> violentLifeSkill = <String>["fight","strife","kill","murder","hunt","assasinate"];
 
 
         List<String> actions1 = <String>["protected them from ${rand.pickFrom(badThing)}","made sure they got enough ${rand.pickFrom(goodThing)}","taught them how to ${rand.pickFrom(lifeSkill)}","made sure they knew how to ${rand.pickFrom(violentLifeSkill)}"];
-        List<String> actions2 = <String>["trained them to ${rand.pickFrom(violentLifeSkill)} ${rand.pickFrom(badThing)}","supplied them with enough ${rand.pickFrom(goodThing)}","showed them how to avoid ${rand.pickFrom(badThing)} and find ${goodThing}"];
+        List<String> actions2 = <String>["trained them to ${rand.pickFrom(violentLifeSkill)} ${rand.pickFrom(badThing)}","supplied them with enough ${rand.pickFrom(goodThing)}","showed them how to avoid ${rand.pickFrom(badThing)} and find ${rand.pickFrom(goodThing)}"];
 
         if(rand.nextBool()) {
             return "${rand.pickFrom(actions2)} and ${rand.pickFrom(actions1)}";
@@ -75,7 +85,6 @@ class Troll extends Pet{
         List<String> lastNames = <String>["Creature","Beast","Bug","Terror"];
         if(rand.nextBool()) {
             return "${rand.pickFrom(firstNames)} ${rand.pickFrom(optionalSecondNames)} ${rand.pickFrom(lastNames)}";
-
         }else {
             return "${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
         }
@@ -137,7 +146,7 @@ class Troll extends Pet{
     }
 
     void createEpilogue() {
-        epilogue = "You have a vision of the future: \n\n";
+        epilogue = "";
 
         String begining = getBegining();
         String middle = "Their life was uneventful"; //populate later from stats
@@ -150,10 +159,18 @@ class Troll extends Pet{
             Their life was uneventful. (no stat shit yet)
             They died after living (number of sweeps in range for caste, less if they have violent stats) sweeps.
          */
-        epilogue  += "${begining}\n\n${middle}\n\n${end}";
+        epilogue  += "${begining} \n\n${middle}\n\n ${end}";
+        GameObject.instance.save();
     }
 
     @override
+    JsonObject toJson() {
+        JsonObject json = super.toJson();
+        json[EPILOGUE] = epilogue;
+        return json;
+    }
+
+        @override
     Future<CanvasElement> drawStats() async {
         if(epilogue == null) createEpilogue();
         //never cache
@@ -179,7 +196,7 @@ class Troll extends Pet{
 
         int buffer = 10;
         y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,epilogue,x,y,fontSize,400,"left");
+        Renderer.wrap_text(textCanvas.context2D,epilogue,x,y,fontSize+buffer,275,"left");
 
         return textCanvas;
     }
