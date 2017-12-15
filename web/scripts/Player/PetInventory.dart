@@ -156,6 +156,25 @@ class PetInventory {
     }
 
 
+    Future<Null> drawAlumni(Element container) async{
+        for(Pet p in alumni) {
+            SpanElement subContainer = new SpanElement();
+            subContainer.style.width = "${p.width}px";
+            subContainer.classes.add("petInventorySlot");
+
+            container.append(subContainer);
+
+            TextInputElement customName = new TextInputElement();
+            customName.value = p.name;
+            customName.size = 40;
+            subContainer.append(customName);
+
+
+            CanvasElement canvas = await drawPet(subContainer, p);
+
+        }
+    }
+
     //gets first troll i find.  returns null if none.
     Troll getGraduatingTroll() {
         for(Pet p in pets) {

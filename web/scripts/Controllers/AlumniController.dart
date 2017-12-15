@@ -4,7 +4,6 @@ import 'dart:async';
 import '../GameShit/GameObject.dart';
 import "navbar.dart";
 
-
 GameObject game;
 void main() {
   loadNavbar();
@@ -17,7 +16,9 @@ Future<Null> start() async {
   Element container = new DivElement();
   container.style.display = "inline-block";
   querySelector('#output').append(container);
-  await game.drawAGraduatingTroll(container);
-
+  if(game.player.petInventory.alumni.isEmpty) {
+    container.setInnerHtml("You haven't raised any grubs, yet!");
+  }else {
+    game.drawAlumni(container);
+  }
 }
-
