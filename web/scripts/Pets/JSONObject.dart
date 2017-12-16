@@ -3,12 +3,14 @@
     new JsonObject.fromJsonString(json); should be implemented.
  */
 import 'dart:collection';
+import 'dart:convert';
 
 class JSONObject extends Object with MapMixin<String,String>{
     Map<String, String> json = new Map<String,String>();
     JSONObject();
+
     JSONObject.fromJSONString(String json){
-        throw ("TODO implement making a hash from a JSON string");
+        json  = JSON.decode(json);
     }
 
   @override
