@@ -25,7 +25,7 @@ class PetInventory {
         loadFromJSON(json);
     }
 
-    bool get hasRoom => (pets.length <= MAXPETS);
+    bool get hasRoom => (pets.length < MAXPETS);
 
 
     //for hatching eggs and shit

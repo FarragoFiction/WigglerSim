@@ -7,6 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages" />
       <excludeFolder url="file://$MODULE_DIR$/web/Fonts/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/web/css/packages" />
       <excludeFolder url="file://$MODULE_DIR$/web/images/Homestuck/Baby/packages" />
       <excludeFolder url="file://$MODULE_DIR$/web/images/Homestuck/Body/packages" />
       <excludeFolder url="file://$MODULE_DIR$/web/images/Homestuck/Bro/Base/packages" />

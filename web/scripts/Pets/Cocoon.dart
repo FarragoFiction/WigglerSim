@@ -11,7 +11,7 @@ import 'dart:async';
 class Cocoon extends Pet{
 
     @override
-    int millisecondsToChange = 1*10*60* 1000;
+    int millisecondsToChange =   30*60* 1000;
 
     String get daysSinceSpun {
         return daysSinceDate(hatchDate, "Cocooned");

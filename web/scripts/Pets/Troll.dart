@@ -44,6 +44,7 @@ class Troll extends Pet{
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         Random rand = new Random();
+        rand.nextInt(); //needed for next bool to work.
         //purple bloods have 50% chance of seadweller lusi
         if(t.bloodColorToWord(p.aspect_light) == HomestuckTrollDoll.VIOLET || t.bloodColorToWord(p.aspect_light) == HomestuckTrollDoll.FUCHSIA || (t.bloodColorToWord(p.aspect_light) == HomestuckTrollDoll.PURPLE && rand.nextBool())) {
             return seaTrollLusus();
@@ -63,10 +64,12 @@ class Troll extends Pet{
         List<String> actions1 = <String>["protected them from ${rand.pickFrom(badThing)}","made sure they got enough ${rand.pickFrom(goodThing)}","taught them how to ${rand.pickFrom(lifeSkill)}","made sure they knew how to ${rand.pickFrom(violentLifeSkill)}"];
         List<String> actions2 = <String>["trained them to ${rand.pickFrom(violentLifeSkill)} ${rand.pickFrom(badThing)}","supplied them with enough ${rand.pickFrom(goodThing)}","showed them how to avoid ${rand.pickFrom(badThing)} and find ${rand.pickFrom(goodThing)}"];
 
+        String action1 = rand.pickFrom(actions1); //needed so that rand. next bool works
+        String action2 = rand.pickFrom(actions2);
         if(rand.nextBool()) {
-            return "${rand.pickFrom(actions2)} and ${rand.pickFrom(actions1)}";
+            return "${action2} and ${action1}";
         }else {
-            return "${rand.pickFrom(actions1)} and ${rand.pickFrom(actions2)}";
+            return "${action1} and ${action2}";
         }
     }
 
@@ -83,10 +86,11 @@ class Troll extends Pet{
         List<String> optionalSecondNames = <String>["Scale","Ram","Nut","Thief","March","Feather","Slither","Claw","Tooth","Meow","Woof","Sand","Mud","Water","Hoof","Muscle","Rage","Dig","Waddle","Run"];
 
         List<String> lastNames = <String>["Creature","Beast","Bug","Terror"];
+        String first = rand.pickFrom(firstNames); //needed for next bool to work
         if(rand.nextBool()) {
-            return "${rand.pickFrom(firstNames)} ${rand.pickFrom(optionalSecondNames)} ${rand.pickFrom(lastNames)}";
+            return "${first} ${rand.pickFrom(optionalSecondNames)} ${rand.pickFrom(lastNames)}";
         }else {
-            return "${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
+            return "${first} ${rand.pickFrom(lastNames)}";
         }
     }
 
