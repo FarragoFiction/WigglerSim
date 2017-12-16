@@ -1,6 +1,6 @@
 import "Pet.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
-import 'package:json_object/json_object.dart';
+import "JSONObject.dart";
 import 'dart:async';
 import 'dart:html';
 
@@ -27,7 +27,7 @@ class Grub extends Pet{
     }
   }
 
-  Grub.fromJSON(String json, [JsonObject jsonObj]) : super(null){
+  Grub.fromJSON(String json, [JSONObject jsonObj]) : super(null){
     loadFromJSON(json, jsonObj);
     print ("loaded $name");
     //at half way mark, eyes turn yellow like a trolls.

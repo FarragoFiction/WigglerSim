@@ -69,7 +69,7 @@
  */
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
-import 'package:json_object/json_object.dart';
+import "JSONObject.dart";
 import 'dart:async';
 import 'Grub.dart';
 import 'Egg.dart';
@@ -137,8 +137,8 @@ abstract class Pet {
     }
 
     //it doesn't like treating the json object i got as a string for whatever reason.
-    static Pet loadPetFromJSON(String json, [JsonObject jsonObj]) {
-        if(jsonObj == null) jsonObj = new JsonObject.fromJsonString(json);
+    static Pet loadPetFromJSON(String json, [JSONObject jsonObj]) {
+        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         print("Loading abstract pet from json, obj is ${jsonObj}");
         if(jsonObj[TYPE] == GRUB) {
             return new Grub.fromJSON(null,jsonObj);
@@ -153,8 +153,8 @@ abstract class Pet {
         throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
     }
 
-    void loadFromJSON(String json, [JsonObject jsonObj]) {
-        if(jsonObj == null)  jsonObj = new JsonObject.fromJsonString(json);
+    void loadFromJSON(String json, [JSONObject jsonObj]) {
+        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         String dataString = jsonObj[DOLLDATAURL];
         String lastPlayedString = jsonObj[LASTPLAYED];
         String hatchString = jsonObj[HATCHDATE];
@@ -170,8 +170,8 @@ abstract class Pet {
     }
 
 
-    JsonObject toJson() {
-        JsonObject json = new JsonObject();
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
         json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
         json[HATCHDATE] =  "${hatchDate.millisecondsSinceEpoch}";
         json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";

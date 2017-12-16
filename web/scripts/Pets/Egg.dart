@@ -1,6 +1,6 @@
 import "Pet.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
-import 'package:json_object/json_object.dart';
+import "JSONObject.dart";
 import 'dart:html';
 import 'dart:async';
 
@@ -33,7 +33,7 @@ class Egg extends Pet{
         name = " ${g.bloodColorToWord(p.aspect_light)} Egg";
     }
 
-    Egg.fromJSON(String json, [JsonObject jsonObj]) : super(null){
+    Egg.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
         print ("loaded $name");
     }

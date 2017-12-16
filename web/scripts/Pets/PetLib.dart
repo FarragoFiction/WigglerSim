@@ -5,6 +5,7 @@ export "Grub.dart";
 export "Egg.dart";
 export "Cocoon.dart";
 export "Troll.dart";
+export "JSONObject.dart";
 
 
 

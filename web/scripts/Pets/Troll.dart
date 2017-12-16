@@ -1,6 +1,6 @@
 import "Pet.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
-import 'package:json_object/json_object.dart';
+import "JSONObject.dart";
 import 'dart:async';
 import 'dart:html';
 import "../GameShit/GameObject.dart";
@@ -26,7 +26,7 @@ class Troll extends Pet{
         print("doll for troll is $doll");
     }
 
-    Troll.fromJSON(String json, [JsonObject jsonObj]) : super(null){
+    Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
         print("doll for troll is $doll");
@@ -34,9 +34,9 @@ class Troll extends Pet{
     }
 
     @override
-    void loadFromJSON(String json, [JsonObject jsonObj]) {
+    void loadFromJSON(String json, [JSONObject jsonObj]) {
         super.loadFromJSON(json, jsonObj);
-        if(jsonObj == null)  jsonObj = new JsonObject.fromJsonString(json);
+        if(jsonObj == null)  jsonObj = new JSONObject.fromJSONString(json);
         epilogue = jsonObj[EPILOGUE];
     }
 
@@ -168,8 +168,8 @@ class Troll extends Pet{
     }
 
     @override
-    JsonObject toJson() {
-        JsonObject json = super.toJson();
+    JSONObject toJson() {
+        JSONObject json = super.toJson();
         json[EPILOGUE] = epilogue;
         return json;
     }

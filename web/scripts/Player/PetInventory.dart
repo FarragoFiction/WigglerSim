@@ -3,7 +3,7 @@ import "../Pets/PetLib.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';
-import 'package:json_object/json_object.dart';
+
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
 
@@ -39,7 +39,7 @@ class PetInventory {
 
     void loadFromJSON(String json) {
         print("In pet inventory, json is $json");
-        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        JSONObject jsonObj = new JSONObject.fromJSONString(json);
         String idontevenKnow = jsonObj[PETSLIST];
         loadPetsFromJSON(idontevenKnow);
         idontevenKnow = jsonObj[ALUMNI];
@@ -253,16 +253,16 @@ class PetInventory {
 
     }
 
-    JsonObject toJson() {
-        JsonObject json = new JsonObject();
-        List<JsonObject> jsonArray = new List<JsonObject>();
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        List<JSONObject> jsonArray = new List<JSONObject>();
         for(Pet p in pets) {
             print("Saving ${p.name}");
             jsonArray.add(p.toJson());
         }
         json[PETSLIST] = jsonArray.toString(); //will this work?
 
-        jsonArray = new List<JsonObject>();
+        jsonArray = new List<JSONObject>();
         for(Troll p in alumni) {
             print("Saving ${p.name}");
             jsonArray.add(p.toJson());

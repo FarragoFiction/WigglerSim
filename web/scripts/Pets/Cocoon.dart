@@ -1,6 +1,6 @@
 import "Pet.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
-import 'package:json_object/json_object.dart';
+import "JSONObject.dart";
 import 'dart:html';
 import 'dart:async';
 
@@ -27,7 +27,7 @@ class Cocoon extends Pet{
          */
     }
 
-    Cocoon.fromJSON(String json, [JsonObject jsonObj]) : super(null){
+    Cocoon.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
         print ("loaded $name");
     }

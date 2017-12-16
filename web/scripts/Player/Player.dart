@@ -4,7 +4,7 @@
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "PetInventory.dart";
 import 'dart:html';
-import 'package:json_object/json_object.dart';
+import "../Pets/JSONObject.dart";
 import 'dart:async';
 import 'dart:convert';
 
@@ -33,7 +33,7 @@ class Player {
 
      void loadFromJSON(String json) {
         print("loading player from json");
-        JsonObject jsonObj = new JsonObject.fromJsonString(json);
+        JSONObject jsonObj = new JSONObject.fromJSONString(json);
         String dataString = jsonObj[DATASTRING];
         String lastPlayedString = jsonObj[LASTPLAYED];
         doll = Doll.loadSpecificDoll(dataString);
@@ -138,12 +138,12 @@ class Player {
         return canvas;
     }
 
-    JsonObject toJson() {
+    JSONObject toJson() {
         lastPlayed = new DateTime.now();
-        JsonObject json = new JsonObject();
+        JSONObject json = new JSONObject();
         json[DATASTRING] = doll.toDataBytesX();
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
-        json[PETINVENTORY] = petInventory.toJson();
+        json[PETINVENTORY] = petInventory.toJson().toString();
         return json;
     }
 }
