@@ -31,14 +31,14 @@ class PetInventory {
     //for hatching eggs and shit
     void replacePet(Pet original, Pet replacement) {
         if(!pets.contains(original)) return;
-        print("replacing ${original.name} with ${replacement.name}");
+        //print("replacing ${original.name} with ${replacement.name}");
         if(!original.name.contains("Egg")) replacement.name = original.name;
         int index = pets.indexOf(original);
         pets[index] = replacement;
     }
 
     void loadFromJSON(String json) {
-        print("In pet inventory, json is $json");
+       // print("In pet inventory, json is $json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
         String idontevenKnow = jsonObj[PETSLIST];
         loadPetsFromJSON(idontevenKnow);
@@ -50,9 +50,9 @@ class PetInventory {
     void loadPetsFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
         List<dynamic> what = JSON.decode(idontevenKnow);
-        print("what json is $what");
+        //print("what json is $what");
         for(dynamic d in what) {
-            print("dynamic json thing is  $d");
+            //print("dynamic json thing is  $d");
             pets.add(Pet.loadPetFromJSON(null,d));
         }
     }
@@ -66,9 +66,9 @@ class PetInventory {
     void loadAlumniFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
         List<dynamic> what = JSON.decode(idontevenKnow);
-        print("what json is $what");
+        //print("what json is $what");
         for(dynamic d in what) {
-            print("dynamic json thing is  $d");
+            //print("dynamic json thing is  $d");
             alumni.add(Pet.loadPetFromJSON(null,d) as Troll);
         }
     }
@@ -103,7 +103,7 @@ class PetInventory {
             hatchButton.text = "Hatch";
 
             if(p.percentToChange >= 1.0) {
-                print("Pet is $p, percent is ${p.percentToChange}, time to change is ${p.millisecondsToChange/1000/60/60} hours,");
+                //print("Pet is $p, percent is ${p.percentToChange}, time to change is ${p.millisecondsToChange/1000/60/60} hours,");
                 if(p is Egg) {
                     subContainer.append(hatchButton);
                 }else if(p is Grub) {
@@ -274,7 +274,7 @@ class PetInventory {
     }
 
     Future<CanvasElement> drawPet(Element container, Pet p, [CanvasElement canvas]) async {
-        print("drawing pet $p");
+        //print("drawing pet $p");
         DivElement canvasContainer = new DivElement();
         if(canvas == null) {
             canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);

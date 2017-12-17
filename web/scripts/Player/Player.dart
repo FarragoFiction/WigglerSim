@@ -34,13 +34,15 @@ class Player {
      void loadFromJSON(String json) {
         print("loading player from json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
+        //print("json object is ${jsonObj}");
+
         String dataString = jsonObj[DATASTRING];
         String lastPlayedString = jsonObj[LASTPLAYED];
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
-        print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
+        //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
         //petInventory = new PetInventory();
-        petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY].toString());
+        petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
      }
 
     String get daysSincePlayed {

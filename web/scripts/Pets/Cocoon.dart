@@ -22,9 +22,7 @@ class Cocoon extends Pet{
     @override
     String type = Pet.COCOON;
     Cocoon(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
-        /*
-                TODO: makes a new troll doll out of the grub doll, matches all existing features.
-         */
+
     }
 
     Cocoon.fromJSON(String json, [JSONObject jsonObj]) : super(null){
@@ -35,7 +33,7 @@ class Cocoon extends Pet{
 
     @override
     Future<CanvasElement> draw() async {
-        print ("trying to draw egg.");
+        //print ("trying to draw egg.");
         //caches by default. if you want it to redraw, set canvas to null.
         if(canvas == null) {
 

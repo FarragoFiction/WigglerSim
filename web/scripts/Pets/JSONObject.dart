@@ -9,8 +9,21 @@ class JSONObject extends Object with MapMixin<String,String>{
     Map<String, String> json = new Map<String,String>();
     JSONObject();
 
-    JSONObject.fromJSONString(String json){
-        json  = JSON.decode(json);
+    JSONObject.fromJSONString(String j){
+        //print("trying to make a json object from $j ");
+        //okay. that's not working. what if i do it opposite to see what a encoded object looks like
+        JSONObject test = new JSONObject();
+        test["HELLO"] = "WORLD ";
+        test["GOODBYE"] = "WORLD BUT A SECOND TIME ";
+        print("Encoded: ${JSON.encode(test)}");
+        print("String: ${test}");
+
+        json  = JSON.decode(j);
+    }
+
+    @override
+    String toString() {
+        return JSON.encode(json);
     }
 
   @override

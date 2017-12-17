@@ -23,13 +23,13 @@ class Troll extends Pet{
     Troll(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
         //turns grub into troll., later will calc sign
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
-        print("doll for troll is $doll");
+        //print("doll for troll is $doll");
     }
 
     Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
-        print("doll for troll is $doll");
+        //print("doll for troll is $doll");
         print ("loaded $name");
     }
 
