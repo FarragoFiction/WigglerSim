@@ -19,6 +19,7 @@ class GameObject {
 
         instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
+            //window.localStorage.remove(Player.DOLLSAVEID);
             player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
             player.save();
             print("loading player ${player} from local storage");

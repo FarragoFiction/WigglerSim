@@ -53,7 +53,9 @@ class PetInventory {
         //print("what json is $what");
         for(dynamic d in what) {
             //print("dynamic json thing is  $d");
-            pets.add(Pet.loadPetFromJSON(null,d));
+            JSONObject j = new JSONObject();
+            j.json = d;
+            pets.add(Pet.loadPetFromJSON(null,j));
         }
     }
 
@@ -69,7 +71,10 @@ class PetInventory {
         //print("what json is $what");
         for(dynamic d in what) {
             //print("dynamic json thing is  $d");
-            alumni.add(Pet.loadPetFromJSON(null,d) as Troll);
+            JSONObject j = new JSONObject();
+            j.json = d;
+            pets.add(Pet.loadPetFromJSON(null,j));
+            alumni.add(Pet.loadPetFromJSON(null,j) as Troll);
         }
     }
 
