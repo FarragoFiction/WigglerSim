@@ -1,0 +1,89 @@
+Alright.
+
+I know what I want to do.
+
+And there are a LOT of ways to do it.
+
+Which one is right for my needs?
+
+Time/Space  Impatient/Patient
+Doom/Life Calm/Energetic
+Rage/Hope Realism/Idealism
+Void/Light Accepting/Curious
+Breath/Blood Free/Committed
+Heart/Mind Introversion/Extroversion
+
+~~~~~~~~~~~
+
+Summary of Problem: (Five minutes on the Clock).
+
+I want to take 6 stats, each of which could be positive or negative, and convert
+that into a Begining, Middle, and End for the trolls.
+
+If at all possible, I want to avoid randomness.
+
+If at all possible, I want there to be a satisfying connection between Epilogue and stats.
+
+SubProblems: I think it will be more complex than flags, because 12 possible stats.
+
+((future jr, look into land theme stuff possibly for this, but no solution now).
+
+What other parts of this problem exist?
+
+I need to keep the text BRIEF, no risk of it going off screen.
+
+Do I want lusii selection to be based on stats? Lusii actions?
+
+Case of death. Yes. If they die younger than lifespan, it was a violent or sickly one.
+
+I think each part of the problem needs to turn into sub problems, Begining, Middle, End.
+
+I don't want to drill down too much into details right if I'm on the clock.
+
+Think.
+
+I anticipate that it will still LOOK somewhat random, unless I focus hard on making things work.
+
+What about stat interactions? (the land idea from earlier???)?   An impatient, energetic wiggler vs a patient energetic wiggler?
+
+I don't want this to be TOO involved, but I do want there to be a satisfying correlation.
+
+There's that word again: satisfying. I want stats to mean something because the epilogue is the
+last permanent thing you get for the wiggler. It has to be THEM, frozen in time.
+
+Also: will raw stats matter or only pos vs neg? Thresholds?
+
+Alright. Only 20 seconds left. That's good enough for time.
+
+~~~~~~~~~~~
+
+So, before I started summarizing the problem, I was tempted to try to roll a solution right now, with only
+my single test stat added. I realize now that it will make me too dependant on independant stat values, which I don't want.
+
+So:
+
+Action Items:
+
+*  Add 5 more stats.
+* Stats have thresholds for low, medium, high, and VERY HIGH values. Don't print raw numbers any more.
+    * Grubs are born with low/medium stats. High and VERY HIGH will be from raising.
+*  Make a Begining Use case for how lusii and lusii actions will matter (maybe only actions?).
+
+Possible thought: Pick two things for middle and begining based on highest and second highest abs value stats?
+
+But then it would be too consistent.
+
+Weight each stat based on comparison to VERY_HIGH, pick from array?
+have begining, middle and end stored in stat itself. Remove stat from array if you pick it for a section, so you can't
+spam it?
+
+Would make creating the stat a bit more ponderous, but I don't mind. It's like the land thing wihtout
+being as involved as the half-thought I had during problem definition.
+
+Yes. This is my plan.  Stat has the thing that goes in the template when it says lusii did x and y and troll did x and y.
+template itself is random.
+b,m,e arrays, and copies for jade, fuscia, and purple
+
+((Also, I'm realizing that by doing it this way (game play coded last, endings coded first),
+I'm sort of giving people goals to work towards. First they see the endings, then they get
+the tools to raise their wiggler towards desired endings and find new ones.

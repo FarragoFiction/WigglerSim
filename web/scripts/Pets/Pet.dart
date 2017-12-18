@@ -105,8 +105,20 @@ abstract class Pet {
     static String COCOON = "COCOON";
     static String TROLL = "TROLL";
     static String PATIENCE = "patience";
+    static String ENERGETIC = "energetic";
+    static String IDEALISTIC = "idealistic";
+    static String CURIOUS = "curious";
+    static String LOYAL = "loyal";
+    static String EXTERNAL = "external";
 
     Stat patience;
+    Stat energetic;
+    Stat idealistic;
+    Stat curious;
+    Stat loyal;
+    Stat external;
+
+
     int health;
     String type;
     //some stats make it easier to get bored than others.
@@ -122,6 +134,7 @@ abstract class Pet {
     DateTime lastPlayed;
     //when make a new pet, give it an id that isn't currently in the player's inventory. just increment numbers till you find one.
     int id;
+    List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         hatchDate = new DateTime.now();
@@ -132,12 +145,31 @@ abstract class Pet {
     }
 
     void randomizeStats() {
-        Random rand = new Random();
         makePatience(null);
+        makeEnergetic(null);
+        makeIdealistic(null);
+        makeCurious(null);
+        makeLoyal(null);
     }
 
     void makePatience(int value) {
         patience = new Stat(value, "Patient","Impatient");
+    }
+
+    void makeEnergetic(int value) {
+        energetic = new Stat(value, "Calm","Energetic");
+    }
+    void makeIdealistic(int value) {
+        idealistic = new Stat(value, "Realistic","Idealistic");
+    }
+    void makeCurious(int value) {
+        curious = new Stat(value, "Accepting","Curious");
+    }
+    void makeLoyal(int value) {
+        loyal = new Stat(value, "Free-Spirited","Loyal");
+    }
+    void makeExternal(int value) {
+        external = new Stat(value, "Internal","External");
     }
 
     //can't go over 100%, how close to hatching are you?
@@ -173,11 +205,43 @@ abstract class Pet {
 
     //individual pet types don't have to
     void loadStatsFromJSON(JSONObject jsonObj) {
+        int p = null;
+        int cur = null;
+        int lo = null;
+        int ener = null;
+        int idea = null;
+        int ext = null;
+
         if(jsonObj.containsKey(PATIENCE)){
-            makePatience(int.parse(jsonObj[PATIENCE]));
-        }else{
-            makePatience(null); //random
+            p = int.parse(jsonObj[PATIENCE]);
         }
+
+        if(jsonObj.containsKey(CURIOUS)){
+            cur = int.parse(jsonObj[CURIOUS]);
+        }
+
+        if(jsonObj.containsKey(LOYAL)){
+            lo = int.parse(jsonObj[LOYAL]);
+        }
+
+        if(jsonObj.containsKey(EXTERNAL)){
+            ext = int.parse(jsonObj[EXTERNAL]);
+        }
+
+        if(jsonObj.containsKey(ENERGETIC)){
+            ener = int.parse(jsonObj[ENERGETIC]);
+        }
+
+        if(jsonObj.containsKey(IDEALISTIC)){
+            idea = int.parse(jsonObj[IDEALISTIC]);
+        }
+
+        makePatience(p);
+        makeCurious(cur);
+        makeLoyal(lo);
+        makeEnergetic(ener);
+        makeIdealistic(idea);
+        makeExternal(ext);
     }
 
     void loadFromJSON(String json, [JSONObject jsonObj]) {
@@ -209,6 +273,12 @@ abstract class Pet {
         json[HEALTHJSON] =  "${health}";
         json[TYPE] = type;
         json[PATIENCE] = "${patience.value}";
+        json[IDEALISTIC] = "${idealistic.value}";
+        json[CURIOUS] = "${curious.value}";
+        json[LOYAL] = "${loyal.value}";
+        json[ENERGETIC] = "${energetic.value}";
+        json[EXTERNAL] = "${external.value}";
+
         return json;
     }
 
@@ -313,8 +383,10 @@ abstract class Pet {
         y = y + fontSize+buffer;
         Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize+buffer,275,"left");
 
-        y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,patience.toString(),x,y,fontSize+buffer,275,"left");
+        for(Stat s in stats) {
+            y = y + fontSize+buffer;
+            Renderer.wrap_text(textCanvas.context2D,s.toString(),x,y,fontSize+buffer,275,"left");
+        }
 
 
         return textCanvas;
