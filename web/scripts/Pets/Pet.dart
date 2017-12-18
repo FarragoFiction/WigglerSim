@@ -75,6 +75,7 @@ import 'Grub.dart';
 import 'Egg.dart';
 import 'Cocoon.dart';
 import 'Troll.dart';
+import "Stat.dart";
 
 
 
@@ -103,8 +104,9 @@ abstract class Pet {
     static String EGG = "EGG";
     static String COCOON = "COCOON";
     static String TROLL = "TROLL";
+    static String PATIENCE = "patience";
 
-
+    Stat patience;
     int health;
     String type;
     //some stats make it easier to get bored than others.
@@ -126,6 +128,12 @@ abstract class Pet {
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();
         name = randomAsFuckName();
+        randomizeStats();
+    }
+
+    void randomizeStats() {
+        Random rand = new Random();
+        patience = new Stat(null, "Patient","Impatient");
     }
 
     //can't go over 100%, how close to hatching are you?
@@ -289,6 +297,9 @@ abstract class Pet {
 
         y = y + fontSize+buffer;
         Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize+buffer,275,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,patience.toString(),x,y,fontSize+buffer,275,"left");
 
 
         return textCanvas;
