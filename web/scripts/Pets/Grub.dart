@@ -9,7 +9,7 @@ import 'dart:html';
 class Grub extends Pet{
 
   @override
-  int millisecondsToChange =  60*60* 1000;
+  int millisecondsToChange = 2 * Pet.timeUnit;
 
   @override
   String type = Pet.GRUB;

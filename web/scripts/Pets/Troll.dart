@@ -13,7 +13,7 @@ class Troll extends Pet{
     static String EPILOGUE = "epilogue";
     
     @override
-    int millisecondsToChange = 1*10*60* 1000;
+    int millisecondsToChange = Pet.timeUnit;
 
     //what happened to the troll now that they go off on their own?
     String epilogue;
@@ -169,13 +169,16 @@ class Troll extends Pet{
     //todo instead of being random, base on stats.
     String jadeMiddle() {
         Random rand = new Random();
-        List<String> possibilities = <String>["They spent their life caring for wigglers in the Caverns.","They flourished in their role as a wiggler caregiver.","They resented their role as a wiggler caregiver."];
+        List<String> possibilities = <String>["They spent their life caring for wigglers in the Caverns.","They flourished in their role as a wiggler caregiver.","They resented their role as a wiggler caregiver.","A tragic accident lead to them discovering they were a Rainbow Drinker."];
+        return rand.pickFrom(possibilities);
+
     }
 
     //todo instead of being random, base on stats.
     String purpleMiddle() {
         Random rand = new Random();
         List<String> possibilities = <String>["They were a devout member of the Dark Carnival.","They refused to participate in the wicked noise.","They were a clown.", "They were not a clown."];
+        return rand.pickFrom(possibilities);
     }
 
     String createMiddle() {

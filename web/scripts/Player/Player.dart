@@ -75,11 +75,30 @@ class Player {
     }
 
 
+    String get intro {
+        String text = "Your name is UNIMPORTANT. What IS important is that you are a JADE BLOOD assigned to the BROODING CAVERNS. You are new to your duties, but are SUDDENLY CERTAIN that you will be simply the best there is at RAISING WIGGLERS. ${daysSincePlayed}";
+        if(!(doll is HomestuckTrollDoll)) text = "Your name is UNIMPORTANT. What IS important is that you are a JA-. Huh. What ARE you, exactly? I guess they let aliens or whatever into the Caverns these days??? ${daysSincePlayed}";
+
+        if((doll is HomestuckTrollDoll)) {
+            HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+            HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
+            String colorWord = t.bloodColorToWord(p.aspect_light);
+            if(colorWord != HomestuckTrollDoll.JADE) {
+                text = "Your name is UNIMPORTANT. What IS important is that you are a JA-. Huh. You're NOT a Jade blood? Well. I GUESS there's no law saying a non Jade CAN'T raise grubs? ${daysSincePlayed}";
+            }
+        }
+        if(petInventory.alumni.length > 1) text = "Your name is UNIMPORTANT. What IS important is that you are starting to get the hang of these BROODING CAVERNS.  ${daysSincePlayed}";
+        if(petInventory.alumni.length > 10) text = "Your name is INCREASINGLY IMPORTANT. Your skill as an AUXILIATRIX is getting you noticed by those in power. ${daysSincePlayed}";
+
+        return text;
+
+    }
+
 
     void displayloadBoxAndText(Element div)
     {
         Element container = new DivElement();
-        String text = "Your name is UNIMPORTANT. What IS important is that you are a JADE BLOOD assigned to the BROODING CAVERNS. You are new to your duties, but are SUDDENLY CERTAIN that you will be simply the best there is at RAISING WIGGLERS. ${daysSincePlayed} ((TODO: change text based on stage))";
+        String text = intro;
         Element container2 = new DivElement();
         String text2 = "<br><Br>Or are you? Maybe you are someone else? ";
         AnchorElement link = new AnchorElement();

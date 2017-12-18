@@ -73,7 +73,6 @@ class PetInventory {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
             j.json = d;
-            pets.add(Pet.loadPetFromJSON(null,j));
             alumni.add(Pet.loadPetFromJSON(null,j) as Troll);
         }
     }

@@ -80,7 +80,12 @@ import 'Troll.dart';
 
 abstract class Pet {
 
-    int millisecondsToChange = 10*60*60* 1000;
+    //all life stages should be centered around this.
+    static int timeUnit = 30*60*60* 1000; //30 minutes
+    //static int timeUnit = 3* 1000;
+
+
+    int millisecondsToChange = Pet.timeUnit;
 
     //TODO procedural description of personality based on stats.
     int textHeight = 800;

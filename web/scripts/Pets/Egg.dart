@@ -17,7 +17,7 @@ import 'dart:async';
 class Egg extends Pet{
 
     @override
-    int millisecondsToChange = 30*60* 1000;
+    int millisecondsToChange = Pet.timeUnit;
 
     String get daysSinceLaid {
         return daysSinceDate(hatchDate, "Laid");
