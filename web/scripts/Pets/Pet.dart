@@ -133,7 +133,11 @@ abstract class Pet {
 
     void randomizeStats() {
         Random rand = new Random();
-        patience = new Stat(null, "Patient","Impatient");
+        makePatience(null);
+    }
+
+    void makePatience(int value) {
+        patience = new Stat(value, "Patient","Impatient");
     }
 
     //can't go over 100%, how close to hatching are you?
@@ -167,6 +171,15 @@ abstract class Pet {
         throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
     }
 
+    //individual pet types don't have to
+    void loadStatsFromJSON(JSONObject jsonObj) {
+        if(jsonObj.containsKey(PATIENCE)){
+            makePatience(int.parse(jsonObj[PATIENCE]));
+        }else{
+            makePatience(null); //random
+        }
+    }
+
     void loadFromJSON(String json, [JSONObject jsonObj]) {
         if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         String dataString = jsonObj[DOLLDATAURL];
@@ -174,6 +187,7 @@ abstract class Pet {
         String hatchString = jsonObj[HATCHDATE];
         String fedString = jsonObj[LASTFED];
         name = jsonObj[NAMEJSON];
+        loadStatsFromJSON(jsonObj);
 
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
@@ -194,6 +208,7 @@ abstract class Pet {
         json[NAMEJSON] =  "${name}";
         json[HEALTHJSON] =  "${health}";
         json[TYPE] = type;
+        json[PATIENCE] = "${patience.value}";
         return json;
     }
 
