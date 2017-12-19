@@ -10,6 +10,11 @@ class Stat {
     String positiveName;
     String negativeName;
 
+    //all flavor arrays will have default so doesn't sum to zero
+    static StatFlavor defaultFlavor;
+
+
+
     //flavor will keep high, low, mediumm, very high, and caste shit
     StatFlavor positiveFlavor;
     StatFlavor negativeFlavor;
@@ -52,6 +57,7 @@ class Stat {
 
  */
 class StatFlavor {
+    //any of these can be empty. it's okay. don't worry about it.
     List<String> high = new List<String>();
     List<String> medium = new List<String>();
     List<String> low = new List<String>();
@@ -59,6 +65,7 @@ class StatFlavor {
     List<String> jade = new List<String>();
     List<String> fuchsia = new List<String>();
     List<String> purple = new List<String>();
+    List<String> mutant = new List<String>();
 
 
 }

@@ -150,6 +150,7 @@ abstract class Pet {
         makeIdealistic(null);
         makeCurious(null);
         makeLoyal(null);
+        makeExternal(null);
     }
 
     void makePatience(int value) {
