@@ -19,10 +19,26 @@ class Stat {
     StatFlavor positiveFlavor;
     StatFlavor negativeFlavor;
 
+    static void makeDefaultFlavor() {
+        defaultFlavor = new StatFlavor()
+            ..jade = <String>[]
+            ..fuchsia = <String>[]
+            ..purple = <String>[]
+            ..mutant = <String>[]
+            ..veryHigh = <String>[]
+            ..high = <String>[]
+            ..medium = <String>[]
+            ..low = <String>[];
+    }
+
     Stat(this.value, this.positiveName, this.negativeName) {
         if(value == null) {
             Random rand = new Random();
             value = rand.nextIntRange(-1* HIGH, HIGH); //won't go above medium normally except rarely
+        }
+
+        if(Stat.defaultFlavor == null) {
+            makeDefaultFlavor();
         }
     }
 
