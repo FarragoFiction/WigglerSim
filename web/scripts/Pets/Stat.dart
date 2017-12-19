@@ -10,6 +10,10 @@ class Stat {
     String positiveName;
     String negativeName;
 
+    //flavor will keep high, low, mediumm, very high, and caste shit
+    StatFlavor positiveFlavor;
+    StatFlavor negativeFlavor;
+
     Stat(this.value, this.positiveName, this.negativeName) {
         if(value == null) {
             Random rand = new Random();
@@ -35,5 +39,26 @@ class Stat {
             return "$negativeName: $stringValue";
         }
     }
+
+}
+
+/*
+    Jumbled thoughts:
+
+    Make some static premade vars of this for each stat type to have, one for pos, one for neg.
+
+    when it's time to get middle, have a method that takes all stats and figures out
+    which arrays to pick from.
+
+ */
+class StatFlavor {
+    List<String> high = new List<String>();
+    List<String> medium = new List<String>();
+    List<String> low = new List<String>();
+    List<String> veryHigh = new List<String>();
+    List<String> jade = new List<String>();
+    List<String> fuchsia = new List<String>();
+    List<String> purple = new List<String>();
+
 
 }
