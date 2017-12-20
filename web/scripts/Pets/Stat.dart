@@ -40,23 +40,35 @@ class Stat {
             ..mutant = <String>["dodged culling drones","hid their blood color at all costs","were terrified and miserable"]
             ..veryHigh = <String>["revolutionized the entire field of politics","changed the way trolls view romance for generations","mastered the art of slam poetry "]
             ..high = <String>["were a Archeradicator commander","pursued interesting cases as a Legislacerator","lead a team of Doctorerrorists","published breakthrough SCIENCE as a Researchafer"]
-            ..medium = <String>["learned to be a flexgrappler","playing arena stickball professionally","were a prestegious Ruffiannihilator","made a name for themselves as a Cavalreaper"]
+            ..medium = <String>["learned to be a flexgrappler","played arena stickball professionally","were a prestegious Ruffiannihilator","made a name for themselves as a Cavalreaper"]
             ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
 
         //these only have the fields that would be interesting to have
         //TODO give them more than empty lists
-        patienceFlavor = new StatFlavor();
-        energeticFlavor = new StatFlavor();
-        idealisticFlavor = new StatFlavor();
-        curiousFlavor = new StatFlavor();
-        loyalFlavor = new StatFlavor();
-        externalFlavor = new StatFlavor();
-        impatienceFlavor = new StatFlavor();
-        calmFlavor = new StatFlavor();
-        realisticFlavor = new StatFlavor();
-        acceptingFlavor = new StatFlavor();
-        freeFlavor = new StatFlavor();
-        internalFlavor = new StatFlavor();
+        patienceFlavor = new StatFlavor()
+            ..medium = <String>["gained a reputation for slow and steady excellence"];
+        energeticFlavor = new StatFlavor()
+            ..medium = <String>["brought a vibrant energy to everything they did"];
+        idealisticFlavor = new StatFlavor()
+             ..medium = <String>["inspired the trolls around them with their ideals"];
+        curiousFlavor = new StatFlavor()
+            ..medium = <String>["never stopped asking questions"];
+        loyalFlavor = new StatFlavor()
+            ..medium = <String>["were a staunch supporter of the Empire"];
+        externalFlavor = new StatFlavor()
+            ..medium = <String>["investigated the world around them constantly"];
+        impatienceFlavor = new StatFlavor()
+            ..medium = <String>["always rushed ahead to the next big thing"];
+        calmFlavor = new StatFlavor()
+            ..medium = <String>["made sure not to get too excited about unlikely possibilities"];
+        realisticFlavor = new StatFlavor()
+            ..medium = <String>["always strove to see the world for how it truly was"];
+        acceptingFlavor = new StatFlavor()
+            ..medium = <String>["collected unsolved mysteries"];
+        freeFlavor = new StatFlavor()
+            ..medium = <String>["never stayed in any one place long"];
+        internalFlavor = new StatFlavor()
+            ..medium = <String>["learned to be their true self"];
     }
 
     Stat(this.value, this.positiveName, this.negativeName, this.positiveFlavor, this.negativeFlavor) {
