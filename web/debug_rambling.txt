@@ -136,3 +136,13 @@ Now, since the DEFAULT flavor thing isn't attached to a stat, the stat itself ca
 The stat will pass a number to it and the "am I higher or equal to X" logic happens on the passed number.
 
 If it's default, the number you pass in is the average abs value of all stats.
+
+~~~
+
+Alright, I think I have the infrastructure.
+
+Now what needs to call it?
+
+I guess I'll approach it from the opposite angle? I need to unhook old middle text and use this one instead.
+
+Different templates.

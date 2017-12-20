@@ -149,53 +149,15 @@ class Troll extends Pet{
         return 10;
     }
 
-    //todo instead of being random, base on stats.
-    String fuschsiaMiddle() {
-        Random rand = new Random();
-        List<String> innovations1 = <String>["expanding the empire","genetic research","clown religion","hedonism","baking cake","inventing new ${rand.pickFrom(<String>["culling policies","recipes","cakes","fashions"])}","universal ${rand.pickFrom(<String>["pupation","education","warfare"])}"];
-        List<String> innovations2 = <String>["reforming ${rand.pickFrom(<String>["culling policies","education","warfare"])}","caring for the ${rand.pickFrom(<String>["sick","elderly","mutants"])}","total warfare","moral correctness","supporting ${rand.pickFrom(<String>["culture","low bloods","soldiers"])}","starring in movies"];
 
-        String innovation1 = rand.pickFrom(innovations1);
-        String innovation2 = rand.pickFrom(innovations2);
-        if(rand.nextBool()) { //swap
-            innovation2 = rand.pickFrom(innovations1);
-             innovation1 = rand.pickFrom(innovations2);
-        }
-        List<String> possibilities = <String>["They dedicated their reign to $innovation1 and $innovation2.","As Empress, they made sure to focus on $innovation2 and $innovation1.","They ruled the Empire with an Iron Fist, subjugating any who dared oppose their ${innovation1}.","They were a benign Empress who encouraged all subjects to support ${innovation2}. "];
-
-        return rand.pickFrom(possibilities);
-
-    }
-    //todo instead of being random, base on stats.
-    String jadeMiddle() {
-        Random rand = new Random();
-        List<String> possibilities = <String>["They spent their life caring for wigglers in the Caverns.","They flourished in their role as a wiggler caregiver.","They resented their role as a wiggler caregiver.","A tragic accident lead to them discovering they were a Rainbow Drinker."];
-        return rand.pickFrom(possibilities);
-
-    }
-
-    //todo instead of being random, base on stats.
-    String purpleMiddle() {
-        Random rand = new Random();
-        List<String> possibilities = <String>["They were a devout member of the Dark Carnival.","They refused to participate in the wicked noise.","They were a clown.", "They were not a clown."];
-        return rand.pickFrom(possibilities);
-    }
 
     String createMiddle() {
-        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
-        HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
-        String colorWord = t.bloodColorToWord(p.aspect_light);
-        Random rand = new Random();
-        //not guaranteed to get caste specific middle unless empress
-        if(colorWord == HomestuckTrollDoll.FUCHSIA) {
-            return fuschsiaMiddle();
-        }else if(colorWord == HomestuckTrollDoll.JADE && rand.nextDouble() < .75) {
-            return jadeMiddle();
-        }else if(colorWord == HomestuckTrollDoll.PURPLE && rand.nextDouble() < .75) {
-            return purpleMiddle();
-        }else {
-            return "Their life was uneventful"; //populate later from stats
-        }
+        throw("TODO");
+        //need to ask all my stats to populate a list of weighted strings
+        //need to pick 1 string, keep a reference to it, remove it from list.
+        //need to pick a second string.
+        //need to have a simple  template that puts 1 and 2 in it.
+        //need to return one template.
     }
 
     void createEpilogue() {
