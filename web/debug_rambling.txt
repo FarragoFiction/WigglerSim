@@ -227,3 +227,25 @@ So. What?
 assume max lifespan is "100*2". If it's 100 or bigger, they win their challenge?
 
 
+
+~~~~~
+
+Okay, time for the last thing I need to hook up, otherwise known as the biggest thing.
+
+//based on stats
+String getCauseOfDeath() {
+    return "FIGURE THIS OUT ASSHOLE";
+}
+
+
+Alright so, loop on stats, for each stat, add the stat's flavor (it auto gets positive vs negative).
+
+To add the flavor, loop on the stat's flavors death flavor, the weight you add it at is your stats percent thingy.
+
+then, add default at .01 or whatever.
+
+OR would it be better to try to add the weight at the stat flavor's weight?
+
+how did I do regular middle text flavor anyways? i already fogotet
+
+

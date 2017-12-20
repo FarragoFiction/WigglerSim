@@ -91,11 +91,19 @@ class Stat {
     }
 
     WeightedList<String> getPossibleFlavors(WeightedList<String> output, String colorWorld) {
-        print("~~~~positive flavor is ${positiveFlavor} for ${positiveName} and negative is ${negativeFlavor} for ${negativeName}");
+       // print("~~~~positive flavor is ${positiveFlavor} for ${positiveName} and negative is ${negativeFlavor} for ${negativeName}");
         if(value >=0) {
             return positiveFlavor.addWeightedFlavor(output, value, colorWorld);
         }else {
             return negativeFlavor.addWeightedFlavor(output, value, colorWorld);
+        }
+    }
+
+    WeightedList<String> getPossibleDeathFlavors(WeightedList<String> output) {
+        if(value >=0) {
+            return positiveFlavor.addDeathFlavor(output, value);
+        }else {
+            return negativeFlavor.addDeathFlavor(output, value);
         }
     }
 
@@ -161,6 +169,21 @@ class StatFlavor {
     }
 
 
+    WeightedList<String> addDeathFlavor(WeightedList<String> output, int value,[bool isDefault = false]) {
+        double multiplier = 1.0;
+        if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
+        double weight = 0.0;
+        //start low, end high
+        if(value >= Stat.LOW) weight = LOWWEIGHT;
+        if(value >= Stat.MEDIUM) weight = MEDIUMWEIGHT;
+        if(value >= Stat.HIGH) weight = HIGHWEIGHT;
+        if(value >= Stat.VERYFUCKINGHIGH) weight = VERYFUCKINGHIGHWEIGHT;
+
+        //will always add any death at the correct weight, with a possible default multiplier
+        output = processTier(output, value, 0, death, weight,multiplier);
+
+        return output;
+    }
 
     WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false]) {
         double multiplier = 1.0;

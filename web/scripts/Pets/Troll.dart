@@ -156,14 +156,23 @@ class Troll extends Pet{
     String violentDeathString(int numberOfSweeps) {
         Random rand = new Random();
         //TODO figure out how to use my stats to get valid causes of deaths
-        String cod = "FIGURE THIS OUT ASSHOLE";
+        String cod = getCauseOfDeath();
         List<String> templates = <String>["They died of $cod after $numberOfSweeps solar sweeps.","They died $cod after $numberOfSweeps sweeps.","They died $cod after $numberOfSweeps sweeps."];
         return rand.pickFrom(templates);
     }
 
     //based on stats
     String getCauseOfDeath() {
-
+        Random rand = new Random();
+        WeightedList<String> possibilities = new WeightedList<String>();
+        int averageStat = 0;
+        for(Stat s in stats) {
+            averageStat += s.normalizedValue;
+            possibilities = s.getPossibleDeathFlavors(possibilities);
+        }
+        possibilities = Stat.defaultFlavor.addDeathFlavor(possibilities, (averageStat/stats.length).round(),true);
+        //addDeathFlavor
+        return rand.pickFrom(possibilities);
     }
 
     String regularEnding(int maxLife) {
@@ -243,14 +252,6 @@ class Troll extends Pet{
         String begining = getBegining();
         String middle = createMiddle();
         String end = getEnding();
-        /*
-            Brainstorming epilogue format. 
-            Begining, middle, end. 
-            You have a vision of the future: 
-            NAME was taken in by a LUSUSTYPE Lusus, who <lusus caregiving thing>. 
-            Their life was uneventful. (no stat shit yet)
-            They died after living (number of sweeps in range for caste, less if they have violent stats) sweeps.
-         */
         epilogue  += "${begining} \n\n${middle}\n\n ${end}";
         GameObject.instance.save();
     }
