@@ -45,6 +45,7 @@ class Stat {
 
         //these only have the fields that would be interesting to have
         //TODO give them more than empty lists
+        patienceFlavor = new StatFlavor();
         energeticFlavor = new StatFlavor();
         idealisticFlavor = new StatFlavor();
         curiousFlavor = new StatFlavor();
@@ -70,6 +71,7 @@ class Stat {
     }
 
     WeightedList<String> getPossibleFlavors(WeightedList<String> output, String colorWorld) {
+        print("~~~~positive flavor is ${positiveFlavor} for ${positiveName} and negative is ${negativeFlavor} for ${negativeName}");
         if(value >=0) {
             return positiveFlavor.addWeightedFlavor(output, value, colorWorld);
         }else {
@@ -127,7 +129,7 @@ class StatFlavor {
 
 
 
-    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault]) {
+    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false]) {
         double multiplier = 1.0;
         if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
         output = processTier(output, value, Stat.LOW, low, LOWWEIGHT,multiplier);
