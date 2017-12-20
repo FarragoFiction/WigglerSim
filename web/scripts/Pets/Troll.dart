@@ -4,6 +4,7 @@ import "JSONObject.dart";
 import 'dart:async';
 import 'dart:html';
 import "../GameShit/GameObject.dart";
+import "Stat.dart";
 
 
 
@@ -152,12 +153,32 @@ class Troll extends Pet{
 
 
     String createMiddle() {
-        throw("TODO");
         //need to ask all my stats to populate a list of weighted strings
+        //i need to do the same with the average of my stats abs given to default
         //need to pick 1 string, keep a reference to it, remove it from list.
         //need to pick a second string.
         //need to have a simple  template that puts 1 and 2 in it.
         //need to return one template.
+
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
+        String colorWord = t.bloodColorToWord(p.aspect_light);
+        Random rand = new Random();
+
+        WeightedList<String> possibilities = new WeightedList<String>();
+        int averageStat = 0;
+        for(Stat s in stats) {
+            averageStat += s.normalizedValue;
+            possibilities = s.getPossibleFlavors(possibilities, colorWord);
+        }
+        possibilities = Stat.defaultFlavor.addWeightedFlavor(possibilities, (averageStat/stats.length).round(), colorWord,true);
+
+        String first = rand.pickFrom(possibilities);
+        possibilities.remove(first);
+        String second = rand.pickFrom(possibilities);
+
+        return "They $first and $second.";
+
     }
 
     void createEpilogue() {

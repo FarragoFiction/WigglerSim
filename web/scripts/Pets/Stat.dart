@@ -69,6 +69,16 @@ class Stat {
         }
     }
 
+    WeightedList<String> getPossibleFlavors(WeightedList<String> output, String colorWorld) {
+        if(value >=0) {
+            return positiveFlavor.addWeightedFlavor(output, value, colorWorld);
+        }else {
+            return negativeFlavor.addWeightedFlavor(output, value, colorWorld);
+        }
+    }
+
+
+
     int get normalizedValue => value.abs();
 
     String get stringValue {
@@ -117,24 +127,24 @@ class StatFlavor {
 
 
 
-    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int threshold, String colorWorld, [bool isDefault]) {
+    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault]) {
         double multiplier = 1.0;
         if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
-        output = processTier(output, threshold, Stat.LOW, low, LOWWEIGHT,multiplier);
-        output = processTier(output, threshold, Stat.MEDIUM, medium, MEDIUMWEIGHT,multiplier);
-        output = processTier(output, threshold, Stat.HIGH, high, HIGHWEIGHT,multiplier);
-        output = processTier(output, threshold, Stat.VERYFUCKINGHIGH, veryHigh, VERYFUCKINGHIGHWEIGHT,multiplier);
+        output = processTier(output, value, Stat.LOW, low, LOWWEIGHT,multiplier);
+        output = processTier(output, value, Stat.MEDIUM, medium, MEDIUMWEIGHT,multiplier);
+        output = processTier(output, value, Stat.HIGH, high, HIGHWEIGHT,multiplier);
+        output = processTier(output, value, Stat.VERYFUCKINGHIGH, veryHigh, VERYFUCKINGHIGHWEIGHT,multiplier);
 
-        output =  processColor(output, colorWorld, HomestuckTrollDoll.JADE, jade, multiplier);
-        output = processColor(output, colorWorld, HomestuckTrollDoll.PURPLE, purple, multiplier);
-        output = processColor(output, colorWorld, HomestuckTrollDoll.FUCHSIA, fuchsia, multiplier);
+        output =  processColor(output, colorWord, HomestuckTrollDoll.JADE, jade, multiplier);
+        output = processColor(output, colorWord, HomestuckTrollDoll.PURPLE, purple, multiplier);
+        output = processColor(output, colorWord, HomestuckTrollDoll.FUCHSIA, fuchsia, multiplier);
         return output;
     }
 
     //if you are bigger or equal to the threshold, add yourself at the right weight.
     //so if you have high skills, you might only get a low tier event, don't always live up to potential. but mostly you will.
-    WeightedList<String> processTier(WeightedList<String> output, int threshold, int thresholdComparator, List<String> results, double weight, double multiplier) {
-        if(threshold >= thresholdComparator) {
+    WeightedList<String> processTier(WeightedList<String> output, int value, int thresholdComparator, List<String> results, double weight, double multiplier) {
+        if(value >= thresholdComparator) {
             for(String s in results) {
                 output.add(s, weight*multiplier);
             }
