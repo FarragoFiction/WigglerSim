@@ -200,3 +200,30 @@ What stats would that be?
 
 also special death text for Fuchsias (no others). Fuchsias are special cases in general, likely to die very early
 violently.
+
+~~~
+
+alright, what do I need to do next?
+
+I guess go at it from the other end, what is currently happening on death?
+
+int lifeSpan =  rand.nextInt(max - min) + min;
+        int numberOfSweeps = lifeSpan;
+
+
+So, once I get the lifeSpan i should calculate if i die early
+(dif alg for heiresses). If I do, pick a stat randomly from my list of
+stats, weighted by comparison of that stat to high (and default is in there, too)
+
+~~~
+Now, how to do fuchsia?
+
+Normally it will be "generate a number between 0 and 2x lifepsan, if it's lifepsan or longer, assume natural death"
+
+but the heiresses have this HUGE chance of dying early, then less likely later on.
+
+So. What?
+
+assume max lifespan is "100*2". If it's 100 or bigger, they win their challenge?
+
+

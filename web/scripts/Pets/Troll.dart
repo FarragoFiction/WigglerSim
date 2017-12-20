@@ -109,11 +109,67 @@ class Troll extends Pet{
         int min = getMinNumberOfSweepsExpected(colorWord);
         int max = getMaxNumberOfSweepsExpected(colorWord);
         int lifeSpan =  rand.nextInt(max - min) + min;
-        int numberOfSweeps = lifeSpan;
-        //TODO use stats to decide if they die early.
+        if(colorWord == HomestuckTrollDoll.FUCHSIA) {
+            fuchsiaEnding(lifeSpan);
+        }else {
+            regularEnding(lifeSpan);
+        }
+    }
+
+    //different because of how likely they are to die young of very specic causes
+    String fuchsiaEnding(int maxLife) {
+        Random rand = new Random();
+        int maxAgeOfChallenge = 100;
+        int numberOfSweeps = rand.nextIntRange(5, maxAgeOfChallenge*2);
+
+        if(numberOfSweeps >= maxAgeOfChallenge) {
+            return heiressBecameEmpress(maxLife);
+        }else {
+            return heiressDiedChallenging(numberOfSweeps);
+        }
+    }
+
+    String heiressDiedChallenging(int deathAge) {
+        Random rand = new Random();
+        //just random, not stat based?
+        List<String> templates = <String>["They died challenging the Empress at ${deathAge} sweeps old.","They challenged the Empress when they were $deathAge sweeps old. They lost, and were forgotten by history."];
+        if(deathAge > 20) templates.add("They managed to put off challenging the Empress until they were $deathAge old, but still died despite the extra preparation.");
+        return rand.pickFrom(templates);
+    }
+
+    String heiressBecameEmpress(int maxLifespan) {
+        Random rand = new Random();
+        int numberOfSweeps = rand.nextIntRange(5, maxLifespan*2);
+        if(numberOfSweeps >= maxLifespan) {
+            List<String> templates = <String>["They died of old age after $maxLifespan sweeps.","They managed to reach the end of even an Empress' lifespan after $maxLifespan sweeps.","They died of natural causes after $maxLifespan sweeps."];
+            return rand.pickFrom(templates);
+        }else {
+            if(rand.nextDouble() > .3) {
+                List<String> templates = <String>["They died after ${numberOfSweeps} sweeps when an Heiress was too good for them to defeat.","They finally met an Heiress they couldn't defeat after ${numberOfSweeps} sweeps.","The circle of life continued when they were killed by an Heiress at ${numberOfSweeps} sweeps."];
+                return rand.pickFrom(templates);
+            }else {
+                return violentDeathString(numberOfSweeps);
+            }
+        }
+    }
+
+    String violentDeathString(int numberOfSweeps) {
+        Random rand = new Random();
+        //TODO figure out how to use my stats to get valid causes of deaths
+        String cod = "FIGURE THIS OUT ASSHOLE";
+        List<String> templates = <String>["They died of $cod after $numberOfSweeps solar sweeps.","They died $cod after $numberOfSweeps sweeps.","They died $cod after $numberOfSweeps sweeps."];
+        return rand.pickFrom(templates);
+    }
+
+    //based on stats
+    String getCauseOfDeath() {
+
+    }
+
+    String regularEnding(int maxLife) {
+        int numberOfSweeps = maxLife;
         String causeOfDeath = "It was a natural death.";
         return "They died after living ${numberOfSweeps} sweeps. ${causeOfDeath}";
-
     }
 
     //http://zetasession.proboards.com/thread/270/blood-caste-lifespans
