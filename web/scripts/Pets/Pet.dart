@@ -154,23 +154,23 @@ abstract class Pet {
     }
 
     void makePatience(int value) {
-        patience = new Stat(value, "Patient","Impatient");
+        patience = new Stat(value, "Patient","Impatient", Stat.patienceFlavor, Stat.impatienceFlavor);
     }
 
     void makeEnergetic(int value) {
-        energetic = new Stat(value, "Calm","Energetic");
+        energetic = new Stat(value, "Calm","Energetic", Stat.calmFlavor, Stat.energeticFlavor);
     }
     void makeIdealistic(int value) {
-        idealistic = new Stat(value, "Realistic","Idealistic");
+        idealistic = new Stat(value, "Idealistic","Realistic", Stat.idealisticFlavor, Stat.realisticFlavor);
     }
     void makeCurious(int value) {
-        curious = new Stat(value, "Accepting","Curious");
+        curious = new Stat(value, "Curious","Accepting", Stat.curiousFlavor, Stat.acceptingFlavor);
     }
     void makeLoyal(int value) {
-        loyal = new Stat(value, "Free-Spirited","Loyal");
+        loyal = new Stat(value, "Loyal","Free-Spirited", Stat.loyalFlavor, Stat.freeFlavor);
     }
     void makeExternal(int value) {
-        external = new Stat(value, "Internal","External");
+        external = new Stat(value, "External","Interal",Stat.externalFlavor, Stat.internalFlavor);
     }
 
     //can't go over 100%, how close to hatching are you?

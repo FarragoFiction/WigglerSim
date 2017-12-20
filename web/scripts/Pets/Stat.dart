@@ -58,7 +58,7 @@ class Stat {
         internalFlavor = new StatFlavor();
     }
 
-    Stat(this.value, this.positiveName, this.negativeName) {
+    Stat(this.value, this.positiveName, this.negativeName, this.positiveFlavor, this.negativeFlavor) {
         if(value == null) {
             Random rand = new Random();
             value = rand.nextIntRange(-1* HIGH, HIGH); //won't go above medium normally except rarely
@@ -100,6 +100,11 @@ class Stat {
 
  */
 class StatFlavor {
+
+    static double HIGHWEIGHT = 2.0;
+    static double LOWWEIGHT = 0.5;
+    static double MEDIUMWEIGHT = 1.0;
+    static double VERYFUCKINGHIGHWEIGHT = 10.0;
     //any of these can be empty. it's okay. don't worry about it.
     List<String> high = new List<String>();
     List<String> medium = new List<String>();
@@ -109,6 +114,46 @@ class StatFlavor {
     List<String> fuchsia = new List<String>();
     List<String> purple = new List<String>();
     List<String> mutant = new List<String>();
+
+
+
+    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int threshold, String colorWorld, [bool isDefault]) {
+        double multiplier = 1.0;
+        if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
+        output = processTier(output, threshold, Stat.LOW, low, LOWWEIGHT,multiplier);
+        output = processTier(output, threshold, Stat.MEDIUM, medium, MEDIUMWEIGHT,multiplier);
+        output = processTier(output, threshold, Stat.HIGH, high, HIGHWEIGHT,multiplier);
+        output = processTier(output, threshold, Stat.VERYFUCKINGHIGH, veryHigh, VERYFUCKINGHIGHWEIGHT,multiplier);
+
+        output =  processColor(output, colorWorld, HomestuckTrollDoll.JADE, jade, multiplier);
+        output = processColor(output, colorWorld, HomestuckTrollDoll.PURPLE, purple, multiplier);
+        output = processColor(output, colorWorld, HomestuckTrollDoll.FUCHSIA, fuchsia, multiplier);
+        return output;
+    }
+
+    //if you are bigger or equal to the threshold, add yourself at the right weight.
+    //so if you have high skills, you might only get a low tier event, don't always live up to potential. but mostly you will.
+    WeightedList<String> processTier(WeightedList<String> output, int threshold, int thresholdComparator, List<String> results, double weight, double multiplier) {
+        if(threshold >= thresholdComparator) {
+            for(String s in results) {
+                output.add(s, weight*multiplier);
+            }
+        }
+        return output;
+    }
+
+    //if you are the right color, add the color shit.
+    WeightedList<String> processColor(WeightedList<String> output, String colorWord, String targetWord, List<String> results,double multiplier) {
+        double weight = HIGHWEIGHT; //your blood color matters as much as any skills you have up to medium.
+        if(colorWord == targetWord) {
+            for (String s in results) {
+                output.add(s, weight * multiplier);
+            }
+        }
+        return output;
+    }
+
+
 
 
 }

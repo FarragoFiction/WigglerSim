@@ -87,3 +87,52 @@ b,m,e arrays, and copies for jade, fuscia, and purple
 ((Also, I'm realizing that by doing it this way (game play coded last, endings coded first),
 I'm sort of giving people goals to work towards. First they see the endings, then they get
 the tools to raise their wiggler towards desired endings and find new ones.
+
+
+~~~~~~~~
+
+Okay, I have some infrastructure in place.
+
+I might not be able to think straight enough (shit is stressful irl) to do anything with teh infrastucture.
+
+What needs to happen?
+
+When I create a Stat, i should pass a positive and negative flavor.
+
+That's first . I don't have to think more than that many steps ahead.
+
+~~~~~~
+
+Alright that's done.
+
+What's the next step?
+
+For each stat in the stats array, ask it to add whatever flavor is appropriate at the right weight to
+a weighted array.
+
+Then, add the default values at a low weight. .1 or whatever.
+
+So. What is the right weight?
+
+I want some things to essentially be zero weight, right?
+
+Maybe not.
+
+So, Use Case:
+
+I have HIGH PATIENCE.
+
+I ask the stat to add itself to my existing array of flavor text.
+
+It says "my value is positive", so it uses positiveFlavor and not negativeFlavor
+
+Then, it says "am I higher or equal to low?", the answer is "yes", so it adds all "low" values.
+Then it says the same for medium, which is YES, high, which is YES and VERY HIGH which is "no".
+
+So the only one it doesn't add is VERY HIGH. Weights it adds it at is based on which tier it is.
+
+Now, since the DEFAULT flavor thing isn't attached to a stat, the stat itself can't have the logic.
+
+The stat will pass a number to it and the "am I higher or equal to X" logic happens on the passed number.
+
+If it's default, the number you pass in is the average abs value of all stats.
