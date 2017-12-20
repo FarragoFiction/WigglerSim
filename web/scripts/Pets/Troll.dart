@@ -155,7 +155,7 @@ class Troll extends Pet{
 
     String deathString(int numberOfSweeps, String cod) {
         Random rand = new Random();
-        List<String> templates = <String>["They died of $cod after $numberOfSweeps solar sweeps.","They died $cod after $numberOfSweeps sweeps.","They died $cod after $numberOfSweeps sweeps."];
+        List<String> templates = <String>["They died $cod after $numberOfSweeps solar sweeps.","They died $cod after $numberOfSweeps sweeps.","They died $cod after $numberOfSweeps sweeps."];
         return rand.pickFrom(templates);
     }
 

@@ -34,7 +34,7 @@ class Stat {
     //expect the template to look like "They "resented their role as a wiggler caretaker" and "stayed under the radar".
     static void makeFlavors() {
         Random rand = new Random();
-
+        //if a stat is VERY high, easter egg where it claims they played sburb?
         defaultFlavor = new StatFlavor(0)
             ..death = <String>["of a mysterious illness","suddenly and with no warning"]
             ..jade = <String>["resented their role as a wiggler caregiver","cared for wigglers in the Caverns","flourished in their role as a wiggler caregiver","discovered they were a Rainbow Drinker after a tragic accident"]
