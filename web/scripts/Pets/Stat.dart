@@ -19,16 +19,19 @@ class Stat {
     StatFlavor positiveFlavor;
     StatFlavor negativeFlavor;
 
+    //expect the template to look like "They x and y".
     static void makeDefaultFlavor() {
+        Random rand = new Random();
+
         defaultFlavor = new StatFlavor()
-            ..jade = <String>[]
-            ..fuchsia = <String>[]
-            ..purple = <String>[]
-            ..mutant = <String>[]
-            ..veryHigh = <String>[]
-            ..high = <String>[]
-            ..medium = <String>[]
-            ..low = <String>[];
+            ..jade = <String>["resented their role as a wiggler caregiver","cared for wigglers in the Caverns","flourished in their role as a wiggler caregiver","discovered they were a Rainbow Drinker after a tragic accident"]
+            ..fuchsia = <String>["lived a life of hedonistic ${rand.pickFrom(<String>["cake baking","movie stardom","hilarious culling"])} ","reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","helped the citizens of the empire as best they can","planned their rebellion against the Empress"]
+            ..purple = <String>["learned how to be a devout member of the Dark Carnival","memorized scripture on the Mirthful Messiahs","ignored the Juggalo Church entirely", "subjuggulated the lower bloods", "excelled as a Laughsassin"]
+            ..mutant = <String>["dodged culling drones","hid their blood color at all costs","were terrified and miserable"]
+            ..veryHigh = <String>["revolutionized the entire field of politics","changed the way trolls view romance for generations","mastered the art of slam poetry "]
+            ..high = <String>["were a Archeradicator commander","pursued interesting cases as a Legislacerator","lead a team of Doctorerrorists","published breakthrough SCIENCE as a Researchafer"]
+            ..medium = <String>["learned to be a flexgrappler","playing arena stickball professionally","were a prestegious Ruffiannihilator","made a name for themselves as a Cavalreaper"]
+            ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
     }
 
     Stat(this.value, this.positiveName, this.negativeName) {
