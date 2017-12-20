@@ -38,7 +38,7 @@ class Stat {
         defaultFlavor = new StatFlavor(0)
             ..death = <String>["of a mysterious illness","suddenly and with no warning"]
             ..jade = <String>["resented their role as a wiggler caregiver","cared for wigglers in the Caverns","flourished in their role as a wiggler caregiver","discovered they were a Rainbow Drinker after a tragic accident"]
-            ..fuchsia = <String>["lived a life of hedonistic ${rand.pickFrom(<String>["cake baking","movie stardom","hilarious culling"])} ","reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","helped the citizens of the empire as best they can","planned their rebellion against the Empress"]
+            ..fuchsia = <String>["lived a life of hedonistic ${rand.pickFrom(<String>["cake baking","movie stardom","hilarious culling"])} ","reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","helped the citizens of the empire as best they could","planned their rebellion against the Empress"]
             ..purple = <String>["learned how to be a devout member of the Dark Carnival","memorized scripture on the Mirthful Messiahs","ignored the Juggalo Church entirely", "subjuggulated the lower bloods", "excelled as a Laughsassin"]
             ..mutant = <String>["dodged culling drones","hid their blood color at all costs","were terrified and miserable"]
             ..veryHigh = <String>["revolutionized the entire field of politics","changed the way trolls view romance for generations","mastered the art of slam poetry "]
