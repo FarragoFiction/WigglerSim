@@ -55,7 +55,7 @@ class Stat {
             ..death  = <String>["fighting for what they believed in","trying to change the world","trying to change the empire"]
              ..medium = <String>["inspired the trolls around them with their ideals"];
         curiousFlavor = new StatFlavor(1)
-            ..death  = <String>["asking the wrong questions","probing into things better left alone","exposing the wrong highBlood's secrets"]
+            ..death  = <String>["asking the wrong questions","probing into things better left alone","exposing the wrong Highblood's secrets"]
             ..medium = <String>["never stopped asking questions"];
         loyalFlavor = new StatFlavor(1)
             ..death  = <String>["fighting the Empire's enemies","protecting their friends","putting down rebels and traitors"]
@@ -170,10 +170,10 @@ class StatFlavor {
 
     static double getWeightByValue(int value) {
         if(value >= Stat.VERYFUCKINGHIGH) return VERYFUCKINGHIGHWEIGHT;
-        if(value > Stat.HIGH) return HIGHWEIGHT;
-        if(value > Stat.MEDIUM) return MEDIUMWEIGHT;
-        if(value > Stat.LOW) return LOWWEIGHT;
-
+        if(value >= Stat.HIGH) return HIGHWEIGHT;
+        if(value >= Stat.MEDIUM) return MEDIUMWEIGHT;
+        if(value >= Stat.LOW) return LOWWEIGHT;
+        return 0.01;
     }
 
 
