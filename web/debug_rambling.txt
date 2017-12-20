@@ -146,3 +146,57 @@ Now what needs to call it?
 I guess I'll approach it from the opposite angle? I need to unhook old middle text and use this one instead.
 
 Different templates.
+
+~~~~~
+
+Alright. It's not time for bed yet. So what's left?  Non-Natural causes of death of course.
+
+What I need to do is have some stats marked as "increase chance of violent death". And some be neutral, and some case it.
+
+Then add up stats and use that as a random roll for if they die early or not.
+
+THEN pick a random number between 1 and their expected lifespand and that's their new lifespan.
+
+THEN ask a stat what hte cause of death is. (random list???)
+
+~~~~
+
+Morning: Any stat? No only stats that increase chance of violent death..
+
+What stats would that be?
+
+
+    static StatFlavor defaultFlavor;
+    static StatFlavor patienceFlavor;
+    static StatFlavor energeticFlavor;
+    static StatFlavor idealisticFlavor;
+    static StatFlavor curiousFlavor;
+    static StatFlavor loyalFlavor;
+    static StatFlavor externalFlavor;
+    static StatFlavor impatienceFlavor;
+    static StatFlavor calmFlavor;
+    static StatFlavor realisticFlavor;
+    static StatFlavor acceptingFlavor;
+    static StatFlavor freeFlavor;
+    static StatFlavor internalFlavor;
+
+
+    Things that reduce risk of early death:
+
+    patient, calm, accepting  ((less because alternia was dangerous))
+
+    things that increase rick of early death:
+
+    , curious, impatient, idealistic,loyal,curious
+
+    internal/external , energetic,realistic don't effect it either way?
+
+    So what kind of endings do   curious, impatient, idealistic,loyal, free ,
+
+    cause?
+
+    "asking the wrong questions","trying to rise in the ranks too quickly", "fighting for their ideals","defending the Empire from rebels", "rebelling against the empire"
+
+
+also special death text for Fuchsias (no others). Fuchsias are special cases in general, likely to die very early
+violently.
