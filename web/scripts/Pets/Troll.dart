@@ -189,7 +189,7 @@ class Troll extends Pet{
             //violent death
             return deathString(rand.nextIntRange(5, maxLife), getViolentCauseOfDeath());
         }else {
-            return deathString(maxLife, rand.pickFrom(<String>["natural causes","old age"]));
+            return deathString(maxLife, rand.pickFrom(<String>["of natural causes","of old age"]));
 
         }
     }
