@@ -110,9 +110,9 @@ class Troll extends Pet{
         int max = getMaxNumberOfSweepsExpected(colorWord);
         int lifeSpan =  rand.nextInt(max - min) + min;
         if(colorWord == HomestuckTrollDoll.FUCHSIA) {
-            fuchsiaEnding(lifeSpan);
+            return fuchsiaEnding(lifeSpan);
         }else {
-            regularEnding(lifeSpan);
+            return regularEnding(lifeSpan);
         }
     }
 
