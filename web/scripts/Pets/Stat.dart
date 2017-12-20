@@ -12,15 +12,25 @@ class Stat {
 
     //all flavor arrays will have default so doesn't sum to zero
     static StatFlavor defaultFlavor;
-
-
+    static StatFlavor patienceFlavor;
+    static StatFlavor energeticFlavor;
+    static StatFlavor idealisticFlavor;
+    static StatFlavor curiousFlavor;
+    static StatFlavor loyalFlavor;
+    static StatFlavor externalFlavor;
+    static StatFlavor impatienceFlavor;
+    static StatFlavor calmFlavor;
+    static StatFlavor realisticFlavor;
+    static StatFlavor acceptingFlavor;
+    static StatFlavor freeFlavor;
+    static StatFlavor internalFlavor;
 
     //flavor will keep high, low, mediumm, very high, and caste shit
     StatFlavor positiveFlavor;
     StatFlavor negativeFlavor;
 
-    //expect the template to look like "They x and y".
-    static void makeDefaultFlavor() {
+    //expect the template to look like "They "resented their role as a wiggler caretaker" and "stayed under the radar".
+    static void makeFlavors() {
         Random rand = new Random();
 
         defaultFlavor = new StatFlavor()
@@ -32,6 +42,20 @@ class Stat {
             ..high = <String>["were a Archeradicator commander","pursued interesting cases as a Legislacerator","lead a team of Doctorerrorists","published breakthrough SCIENCE as a Researchafer"]
             ..medium = <String>["learned to be a flexgrappler","playing arena stickball professionally","were a prestegious Ruffiannihilator","made a name for themselves as a Cavalreaper"]
             ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
+
+        //these only have the fields that would be interesting to have
+        //TODO give them more than empty lists
+        energeticFlavor = new StatFlavor();
+        idealisticFlavor = new StatFlavor();
+        curiousFlavor = new StatFlavor();
+        loyalFlavor = new StatFlavor();
+        externalFlavor = new StatFlavor();
+        impatienceFlavor = new StatFlavor();
+        calmFlavor = new StatFlavor();
+        realisticFlavor = new StatFlavor();
+        acceptingFlavor = new StatFlavor();
+        freeFlavor = new StatFlavor();
+        internalFlavor = new StatFlavor();
     }
 
     Stat(this.value, this.positiveName, this.negativeName) {
@@ -41,7 +65,7 @@ class Stat {
         }
 
         if(Stat.defaultFlavor == null) {
-            makeDefaultFlavor();
+            makeFlavors();
         }
     }
 
