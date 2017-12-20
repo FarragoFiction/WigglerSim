@@ -248,4 +248,73 @@ OR would it be better to try to add the weight at the stat flavor's weight?
 
 how did I do regular middle text flavor anyways? i already fogotet
 
+~~~~~~
+
+oh shit, oh fuck, i forgot to weight shith by liklihood of violent death, like an asshole, it's just random
+
+Also everything is a natural death righ tnow.
+
+
+Alright.
+
+So I have a method violentDeathString that takes in how long they lived and uses their stats to get "cause of death";
+
+but i forgot to have the method that needs to call that.
+
+It's just
+String regularEnding(int maxLife) {
+        //TODO
+        throw("todo");
+    }
+
+For heiresses i just generated a random number between 5 and maxlifespan * 2 and that's
+all well and good, they are special.
+
+BUT, for regular trolls....what to do?
+
+I know i have some infrastructure set up:
+
+each statflavor takes in a poistive, negative or neutral number.
+
+Do I still want it to work that way?
+
+So let's get a usecase out:
+
+Impatient: Low, so 1.0
+Energetic: Medium
+Idealistic: Medium, so 1.0
+Accepting: Low so -3.0
+Free-Spirited: Low, so 1.0
+Internal: Low
+
+
+I should probably multiply by weight in StatFlavor, so:
+
+LOWWEIGHT = 0.5, MediumWeight = 1.0
+
+1.0* 0.5 + 1.0 * 1.0 + -3.0*0.5 + 1.0 * 0.5
+
+Total odds of a violent death = 0.5 + 1.0 - 1.5 + 0.5 = 0.5
+
+So what do I do with this number?
+
+generate random number between -1 and violent death chance (if negative death chance skip).
+
+if number is positive, violent death?
+
+OR, could separate it out a bit, cuz -1 was arbitrary.
+
+instead of:
+1.0* 0.5 + 1.0 * 1.0 + -3.0*0.5 + 1.0 * 0.5
+
+arguments for = : 1.0* 0.5 + 1.0 * 1.0  + 1.0 * 0.5
+arguments against = : -3.0*0.5
+
+generate a number between -1.5 and 2.5.   If it's positive, violent death.
+
+Yes, I like this.
+
+
+
+
 

@@ -35,7 +35,7 @@ class Stat {
     static void makeFlavors() {
         Random rand = new Random();
 
-        defaultFlavor = new StatFlavor(0.0)
+        defaultFlavor = new StatFlavor(0)
             ..death = <String>["of a mysterious illness","suddenly and with no warning"]
             ..jade = <String>["resented their role as a wiggler caregiver","cared for wigglers in the Caverns","flourished in their role as a wiggler caregiver","discovered they were a Rainbow Drinker after a tragic accident"]
             ..fuchsia = <String>["lived a life of hedonistic ${rand.pickFrom(<String>["cake baking","movie stardom","hilarious culling"])} ","reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","helped the citizens of the empire as best they can","planned their rebellion against the Empress"]
@@ -47,35 +47,35 @@ class Stat {
             ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
 
         //these only have the fields that would be interesting to have
-        patienceFlavor = new StatFlavor(-3.0)
+        patienceFlavor = new StatFlavor(-3)
             ..medium = <String>["gained a reputation for slow and steady excellence"];
-        energeticFlavor = new StatFlavor(0.0)
+        energeticFlavor = new StatFlavor(0)
             ..medium = <String>["brought a vibrant energy to everything they did"];
-        idealisticFlavor = new StatFlavor(1.0)
+        idealisticFlavor = new StatFlavor(1)
             ..death  = <String>["fighting for what they believed in","trying to change the world","trying to change the empire"]
              ..medium = <String>["inspired the trolls around them with their ideals"];
-        curiousFlavor = new StatFlavor(1.0)
+        curiousFlavor = new StatFlavor(1)
             ..death  = <String>["asking the wrong questions","probing into things better left alone","exposing the wrong highBlood's secrets"]
             ..medium = <String>["never stopped asking questions"];
-        loyalFlavor = new StatFlavor(1.0)
+        loyalFlavor = new StatFlavor(1)
             ..death  = <String>["fighting the Empire's enemies","protecting their friends","putting down rebels and traitors"]
             ..medium = <String>["were a staunch supporter of the Empire"];
-        externalFlavor = new StatFlavor(1.0)
+        externalFlavor = new StatFlavor(1)
             ..death  = <String>["getting into other troll's business too much","trying to manipulate the wrong Highblood","bugging and fussing and meddling with the wrong Highblood"]
             ..medium = <String>["investigated the world around them constantly"];
-        impatienceFlavor = new StatFlavor(1.0)
+        impatienceFlavor = new StatFlavor(1)
             ..death  = <String>["skipping critical steps in a dangerous procedure","failing to read the instructions","trying to gain power too quickly"]
             ..medium = <String>["always rushed ahead to the next big thing"];
-        calmFlavor = new StatFlavor(-3.0)
+        calmFlavor = new StatFlavor(-3)
             ..medium = <String>["made sure not to get too excited about unlikely possibilities"];
-        realisticFlavor = new StatFlavor(0.0)
+        realisticFlavor = new StatFlavor(0)
             ..medium = <String>["always strove to see the world for how it truly was"];
-        acceptingFlavor = new StatFlavor(-3.0)
+        acceptingFlavor = new StatFlavor(-3)
             ..medium = <String>["collected unsolved mysteries"];
-        freeFlavor = new StatFlavor(1.0)
+        freeFlavor = new StatFlavor(1)
             ..death  = <String>["rebelling against the empire","without any friends beside them","betraying the wrong Highblood"]
             ..medium = <String>["never stayed in any one place long"];
-        internalFlavor = new StatFlavor(0.0)
+        internalFlavor = new StatFlavor(0)
             ..medium = <String>["learned to be their true self"];
     }
 
@@ -90,21 +90,21 @@ class Stat {
         }
     }
 
-    WeightedList<String> getPossibleFlavors(WeightedList<String> output, String colorWorld) {
-       // print("~~~~positive flavor is ${positiveFlavor} for ${positiveName} and negative is ${negativeFlavor} for ${negativeName}");
+    StatFlavor get flavor {
         if(value >=0) {
-            return positiveFlavor.addWeightedFlavor(output, value, colorWorld);
+            return positiveFlavor;
         }else {
-            return negativeFlavor.addWeightedFlavor(output, value, colorWorld);
+            return negativeFlavor;
         }
     }
 
+    WeightedList<String> getPossibleFlavors(WeightedList<String> output, String colorWorld) {
+       // print("~~~~positive flavor is ${positiveFlavor} for ${positiveName} and negative is ${negativeFlavor} for ${negativeName}");
+        return flavor.addWeightedFlavor(output, value, colorWorld);
+    }
+
     WeightedList<String> getPossibleDeathFlavors(WeightedList<String> output) {
-        if(value >=0) {
-            return positiveFlavor.addDeathFlavor(output, value);
-        }else {
-            return negativeFlavor.addDeathFlavor(output, value);
-        }
+        return flavor.addDeathFlavor(output, value);
     }
 
 
@@ -162,9 +162,17 @@ class StatFlavor {
     List<String> death = new List<String>();
 
     //if you're patient, reduces, if you're impatient,increases, etc
-    double oddsOfViolentDeath = 0.0;
+    int oddsOfViolentDeath = 0;
 
     StatFlavor(this.oddsOfViolentDeath) {
+
+    }
+
+    static double getWeightByValue(int value) {
+        if(value >= Stat.VERYFUCKINGHIGH) return VERYFUCKINGHIGHWEIGHT;
+        if(value > Stat.HIGH) return HIGHWEIGHT;
+        if(value > Stat.MEDIUM) return MEDIUMWEIGHT;
+        if(value > Stat.LOW) return LOWWEIGHT;
 
     }
 

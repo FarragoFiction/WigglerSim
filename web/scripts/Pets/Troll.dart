@@ -148,21 +148,19 @@ class Troll extends Pet{
                 List<String> templates = <String>["They died after ${numberOfSweeps} sweeps when an Heiress was too good for them to defeat.","They finally met an Heiress they couldn't defeat after ${numberOfSweeps} sweeps.","The circle of life continued when they were killed by an Heiress at ${numberOfSweeps} sweeps."];
                 return rand.pickFrom(templates);
             }else {
-                return violentDeathString(numberOfSweeps);
+                return deathString(numberOfSweeps,getViolentCauseOfDeath());
             }
         }
     }
 
-    String violentDeathString(int numberOfSweeps) {
+    String deathString(int numberOfSweeps, String cod) {
         Random rand = new Random();
-        //TODO figure out how to use my stats to get valid causes of deaths
-        String cod = getCauseOfDeath();
         List<String> templates = <String>["They died of $cod after $numberOfSweeps solar sweeps.","They died $cod after $numberOfSweeps sweeps.","They died $cod after $numberOfSweeps sweeps."];
         return rand.pickFrom(templates);
     }
 
     //based on stats
-    String getCauseOfDeath() {
+    String getViolentCauseOfDeath() {
         Random rand = new Random();
         WeightedList<String> possibilities = new WeightedList<String>();
         int averageStat = 0;
@@ -176,9 +174,24 @@ class Troll extends Pet{
     }
 
     String regularEnding(int maxLife) {
-        int numberOfSweeps = maxLife;
-        String causeOfDeath = "It was a natural death.";
-        return "They died after living ${numberOfSweeps} sweeps. ${causeOfDeath}";
+        int argumentsFor = 0;
+        int argumentsAgainst = 0;
+        for(Stat s in stats) {
+            int odds = s.flavor.oddsOfViolentDeath;
+            if(odds > 0.0) {
+                argumentsFor += (odds * StatFlavor.getWeightByValue(s.normalizedValue)).ceil();
+            }else {
+                argumentsAgainst += odds;
+            }
+        }
+        Random rand = new Random();
+        if(rand.nextIntRange(argumentsAgainst, argumentsFor) > 0) {
+            //violent death
+            return deathString(rand.nextIntRange(5, maxLife), getViolentCauseOfDeath());
+        }else {
+            return deathString(maxLife, rand.pickFrom(<String>["natural causes","old age"]));
+
+        }
     }
 
     //http://zetasession.proboards.com/thread/270/blood-caste-lifespans
