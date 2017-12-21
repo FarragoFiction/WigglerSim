@@ -369,6 +369,19 @@ THERE we go.
 It will be a fucking chore setting them up. But. I can do it.
 
 
+~~~~~~
+
+Okay, I have 100% of burgundy set up. Before I get any further, it's time to experiment:
+
+can i filter all signs by caste, aspect, moon?
+
+And once I do, can i assign it to the troll and have it be rendered?
+
+Just hard code the troll to be burgundy even if they aren't.
+
+THEN, once I know it's hooked up, can procede to fill in other castes.
+
+nvm, found  a helper. thanks 'I am cat.As yet, I am firerachet' -
 
 
 
