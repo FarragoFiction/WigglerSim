@@ -133,7 +133,7 @@ class Troll extends Pet{
         Random rand = new Random();
         //just random, not stat based?
         List<String> templates = <String>["They died challenging the Empress at ${deathAge} sweeps old.","They challenged the Empress when they were $deathAge sweeps old. They lost, and were forgotten by history."];
-        if(deathAge > 20) templates.add("They managed to put off challenging the Empress until they were $deathAge old, but still died despite the extra preparation.");
+        if(deathAge > 20) templates.add("They managed to put off challenging the Empress until they were $deathAge sweeps old, but still died despite the extra preparation.");
         return rand.pickFrom(templates);
     }
 
