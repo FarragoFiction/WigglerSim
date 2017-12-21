@@ -45,6 +45,13 @@ class Sign {
     //each time i make a sign just blindly add it here
     static List<Sign> allSigns = new List<Sign>();
 
+
+    static int getSignByCriteria(String caste, String aspect, String lunarSway) {
+        if(allSigns.isEmpty) Sign.initAllSigns();
+        return allSigns.where((Sign c) => c.caste == caste).where((Sign c) => c.aspect == aspect).where((Sign c) => c.lunarSway == lunarSway).first.imgNum;
+    }
+
+
     String caste;
     String lunarSway;
     String aspect;
