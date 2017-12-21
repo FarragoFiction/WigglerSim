@@ -1,4 +1,5 @@
 import 'package:DollLibCorrect/DollRenderer.dart';
+import "Sign.dart";
 
 class Stat {
     static int HIGH = 20;
@@ -35,7 +36,7 @@ class Stat {
     static void makeFlavors() {
         Random rand = new Random();
         //if a stat is VERY high, easter egg where it claims they played sburb?
-        defaultFlavor = new StatFlavor(0)
+        defaultFlavor = new StatFlavor(0,"NULL")
             ..death = <String>["of a mysterious illness","suddenly and with no warning"]
             ..jade = <String>["resented their role as a wiggler caregiver","cared for wigglers in the Caverns","flourished in their role as a wiggler caregiver","discovered they were a Rainbow Drinker after a tragic accident"]
             ..fuchsia = <String>["lived a life of hedonistic ${rand.pickFrom(<String>["cake baking","movie stardom","hilarious culling"])} ","reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","helped the citizens of the empire as best they could","planned their rebellion against the Empress"]
@@ -47,35 +48,35 @@ class Stat {
             ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
 
         //these only have the fields that would be interesting to have
-        patienceFlavor = new StatFlavor(-3)
+        patienceFlavor = new StatFlavor(-3, Sign.SPACE)
             ..medium = <String>["gained a reputation for slow and steady excellence"];
-        energeticFlavor = new StatFlavor(0)
+        energeticFlavor = new StatFlavor(0, Sign.LIFE)
             ..medium = <String>["brought a vibrant energy to everything they did"];
-        idealisticFlavor = new StatFlavor(1)
+        idealisticFlavor = new StatFlavor(1,Sign.HOPE)
             ..death  = <String>["fighting for what they believed in","trying to change the world","trying to change the empire"]
              ..medium = <String>["inspired the trolls around them with their ideals"];
-        curiousFlavor = new StatFlavor(1)
+        curiousFlavor = new StatFlavor(1, Sign.LIGHT)
             ..death  = <String>["asking the wrong questions","probing into things better left alone","exposing the wrong Highblood's secrets"]
             ..medium = <String>["never stopped asking questions"];
-        loyalFlavor = new StatFlavor(1)
+        loyalFlavor = new StatFlavor(1,Sign.BLOOD)
             ..death  = <String>["fighting the Empire's enemies","protecting their friends","putting down rebels and traitors"]
             ..medium = <String>["were a staunch supporter of the Empire"];
-        externalFlavor = new StatFlavor(1)
+        externalFlavor = new StatFlavor(1,Sign.MIND)
             ..death  = <String>["getting into other troll's business too much","trying to manipulate the wrong Highblood","bugging and fussing and meddling with the wrong Highblood"]
             ..medium = <String>["investigated the world around them constantly"];
-        impatienceFlavor = new StatFlavor(1)
+        impatienceFlavor = new StatFlavor(1,Sign.TIME)
             ..death  = <String>["skipping critical steps in a dangerous procedure","failing to read the instructions","trying to gain power too quickly"]
             ..medium = <String>["always rushed ahead to the next big thing"];
-        calmFlavor = new StatFlavor(-3)
+        calmFlavor = new StatFlavor(-3,Sign.DOOM)
             ..medium = <String>["made sure not to get too excited about unlikely possibilities"];
-        realisticFlavor = new StatFlavor(0)
+        realisticFlavor = new StatFlavor(0,Sign.RAGE)
             ..medium = <String>["always strove to see the world for how it truly was"];
-        acceptingFlavor = new StatFlavor(-3)
+        acceptingFlavor = new StatFlavor(-3,Sign.VOID)
             ..medium = <String>["collected unsolved mysteries"];
-        freeFlavor = new StatFlavor(1)
+        freeFlavor = new StatFlavor(1,Sign.BREATH)
             ..death  = <String>["rebelling against the empire","without any friends beside them","betraying the wrong Highblood"]
             ..medium = <String>["never stayed in any one place long"];
-        internalFlavor = new StatFlavor(0)
+        internalFlavor = new StatFlavor(0,Sign.HEART)
             ..medium = <String>["learned to be their true self"];
     }
 
@@ -163,8 +164,9 @@ class StatFlavor {
 
     //if you're patient, reduces, if you're impatient,increases, etc
     int oddsOfViolentDeath = 0;
+    String aspect; //this should match up to a Sign.ASPECT thingy
 
-    StatFlavor(this.oddsOfViolentDeath) {
+    StatFlavor(this.oddsOfViolentDeath, this.aspect) {
 
     }
 
@@ -175,7 +177,6 @@ class StatFlavor {
         if(value >= Stat.LOW) return LOWWEIGHT;
         return 0.01;
     }
-
 
     WeightedList<String> addDeathFlavor(WeightedList<String> output, int value,[bool isDefault = false]) {
         double multiplier = 1.0;

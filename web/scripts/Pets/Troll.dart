@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:html';
 import "../GameShit/GameObject.dart";
 import "Stat.dart";
+import "Sign.dart";
 
 
 
@@ -24,7 +25,7 @@ class Troll extends Pet{
     Troll(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
         //turns grub into troll., later will calc sign
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
-        //print("doll for troll is $doll");
+         assignSign();
     }
 
     Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
@@ -32,6 +33,44 @@ class Troll extends Pet{
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
         //print("doll for troll is $doll");
         print ("loaded $name");
+    }
+
+    //troll signgs are based on stats (which are low key the aspects)
+    //and lunar sway (which is random for now)
+    //and, obviously, caste.
+    void assignSign() {
+        /*
+        TODO: convert statFlavor to Aspect in Sign, maybe have the statFlavor itself take in an Aspect
+
+        TODO: randomly pick a moon.
+
+         */
+
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
+        String colorWord = t.bloodColorToWord(p.aspect_light);
+        String aspect = highestStatToAspectWord();
+        Random rand = new Random();
+        //TODO pick moon via some sane metric, not random
+        String lunarSway = rand.pickFrom(<String>[Sign.PROSPIT, Sign.DERSE]);
+
+        t.canonSymbol.imgNumber = Sign.getSignByCriteria(colorWord, aspect, lunarSway);
+
+    }
+
+    String highestStatToAspectWord() {
+        //don't prefer either early OR late stats that are equal, allow it to be random if you fucking must
+        List<Stat> validChoices = new List<Stat>();
+        for(Stat s in stats) {
+            if(s.normalizedValue > validChoices.first.normalizedValue) {
+                validChoices.clear();
+                validChoices.add(s);
+            }else if(s.normalizedValue == validChoices.first.normalizedValue) {
+                validChoices.add(s);
+            }
+        }
+        Random rand = new Random();
+        return rand.pickFrom(validChoices).flavor.aspect;
     }
 
     @override
