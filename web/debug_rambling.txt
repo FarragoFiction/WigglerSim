@@ -366,6 +366,10 @@ Static variables that let me filter by caste, lunarsway and aspect.
 
 THERE we go.
 
+It will be a fucking chore setting them up. But. I can do it.
+
+
+
 
 
 
