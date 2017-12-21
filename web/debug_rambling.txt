@@ -314,6 +314,61 @@ generate a number between -1.5 and 2.5.   If it's positive, violent death.
 
 Yes, I like this.
 
+~~~~~~~
+Okay. Next thing that happens is me assigning signs.
+
+Several things will need to happen.
+
+ONE, I need to figure out what their highest normalizedStat is. (pick it at random between ties).
+
+Then (for now) pick a lunar sway at random. LATER it will be based on the care you give them, maybe.
+
+THEN I need to know how to associate all 288 signs.
+
+Might wanna flat out make it an object system.
+
+Like, have a caste object, and each caste has a owned lunar sway object and THAT has only 12 signs.
+
+So, first I say "I am a bronze blood" and pass a random fucking lunar sway.
+
+The bronze object goes to the chosen lunar sway and then asks the passed in troll
+what it's highest stat is.   From there, it returns the img_num needed to render the right sign.
+
+OR.....
+
+Could approach this based on the object I already have.
+
+Go through the stat directly.
+
+Ask the troll "what's your highest stat, if more than one, pick one at random"
+then, go to the stat itself and pass in lunar sway (random) and blood color word
+and it knows how to turn that into a number.
+
+that requires no new objects, but IS a bit less intuitive for distributing img numbers
+
+With the other system I can just be store min and max numbers for castes,
+with the stat based system it would be more:
+
+huh. what WOULD it be?
+
+on the extended zodiac grid it's diagonal.....
+
+Actually...this is a good point.
+
+
+I don't need to store just signs associated with a caste, i need to know
+which is time+derse vs time + prospit.
+
+
+Okay.   288 signs as specific objects?
+
+Static variables that let me filter by caste, lunarsway and aspect.
+
+THERE we go.
+
+
+
+
 
 
 
