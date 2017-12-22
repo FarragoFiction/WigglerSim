@@ -31,6 +31,7 @@ class Troll extends Pet{
     Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
+        assignSign();
         //print("doll for troll is $doll");
         print ("loaded $name");
     }
@@ -39,15 +40,9 @@ class Troll extends Pet{
     //and lunar sway (which is random for now)
     //and, obviously, caste.
     void assignSign() {
-        /*
-        TODO: convert statFlavor to Aspect in Sign, maybe have the statFlavor itself take in an Aspect
-
-        TODO: randomly pick a moon.
-
-         */
 
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
-        if(t.canonSymbol != 0) return; //don't fucking re decide this.
+        if(t.canonSymbol.imgNumber != 0) return; //don't fucking re decide this.
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         String colorWord = t.bloodColorToWord(p.aspect_light);
         String aspect = highestStatToAspectWord();
@@ -62,7 +57,7 @@ class Troll extends Pet{
 
     String highestStatToAspectWord() {
         //don't prefer either early OR late stats that are equal, allow it to be random if you fucking must
-        List<Stat> validChoices = new List<Stat>();
+        List<Stat> validChoices =<Stat>[stats.first];
         for(Stat s in stats) {
             if(s.normalizedValue > validChoices.first.normalizedValue) {
                 validChoices.clear();
