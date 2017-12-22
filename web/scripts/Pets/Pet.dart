@@ -82,8 +82,8 @@ import "Stat.dart";
 abstract class Pet {
 
     //all life stages should be centered around this.
-    //static int timeUnit = 30*60* 1000; //30 minutes
-    static int timeUnit = 3* 1000;
+    static int timeUnit = 30*60* 1000; //30 minutes
+    //static int timeUnit = 3* 1000;
 
 
     int millisecondsToChange = Pet.timeUnit;
@@ -319,8 +319,13 @@ abstract class Pet {
     String randomAsFuckName() {
         Random rand = new Random();
         List<String> titles = <String> ["Citizen","Engineer","Captain","Commodore","Private","Sergeant","Lieutenant","Senior","Senpai","Psychicboi","Hotboi","Lord","Shogun","Captain","Baron","The Esteemed","Mr.","Mrs.","Mdms.","Count","Countess","Clerk","President","Pounceler","Counciler","Minister","Ambassador","Admiral", "Rear Admiral","Commander","Dr.","Sir","Senator","Contessa"];
+        //thanks to duckking
+        titles.addAll(<String>["Duke","Earl","Duchess","Marquess","Marchioness","Viscount","Viscountess","Baroness","Chief","Chieftain","Saint","Bishop","Archbishop","Cardinal","Chorbishop","Dean","Vice","Pope","Supreme","Bishop","Assistant","Researcher","Vice President","Archdeacon","Sensei","Archpriest","Abbot","Abbess","Monk","Novice","Sister","Brother","Father","Mother","Elder","Judge","Executioner","Patriarch","Reverend","Pastor","Rabbi","Cleric","Master","King","Queen","Druid","Knight","Seer","Bard","Heir","Maid","Rogue","Thief","Page","Sylph","Witch","Prince","Princess","Mage","Monsignor","TV's","Sherrif","Professor","Vice-Chancellor"]);
         List<String> firstNames = <String>["Jerry","Capybara","Bibbles","Jiggy","Jibbly","Wiggly","Wiggler","Grubby","Zoosmell","Farmstink","Bubbles","Nic","Lil","Liv","Charles","Meowsers","Casey","Fred","Kid","Meowgon","Fluffy","Meredith","Bill","Ted","Frank","Flan","Squeezykins","Spot","Squeakems","Hissy","Scaley","Glubglub","Mutie","Clattersworth","Bonebone","Nibbles","Fossilbee","Skulligan","Jack","Nigel","Dazzle","Fancy","Pounce"];
+        firstNames.addAll(<String>["Lobster","Snookems","Squeezy Face","Cutie","Sugar","Sweetie","Squishy","John","Rose","Dave","Jade","Dirk","Roxy","Jane","Jake","Sneezy","Bubbly","Bubbles","Licky","Fido","Spot","Grub","Elizabeth","Malory","Elenora","Vic"]);
         List<String> lastNames = <String>["Lickface","McProblems","Pooper","von Wigglesmith","von Horn","Grub","Dumbface","Buttlass","Pooplord","Cage","Sebastion","Taylor","Dutton","von Wigglebottom","von Salamancer","Savage","Rock","Spangler","Fluffybutton","the Third, esquire.","S Preston","Logan","the Shippest","Clowder","Squeezykins","Boi","Oldington the Third","Malone","Ribs","Noir","Sandwich"];
+        lastNames.addAll(<String>["Butter","Pie","Poofykins","Snugglepuff","Diabetes","Face","Puffers","Dorkbutt","Butt","Legs","Stubblies","Licker","Puker","Grub","Edington","Rockerfeller","Archer","Addington","Ainsworth","Gladestone","Valentine","Heart","Love","Sniffles"]);
+
         double randNum = rand.nextDouble();
         if(randNum > .6) {
             return "${rand.pickFrom(titles)} ${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}";
