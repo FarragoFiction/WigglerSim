@@ -36,7 +36,7 @@ class PlayPen {
                 await aip.setUpIdleAnimation();
 
                 pets.add(aip);
-                x += 100;
+                x += 200;
                 //return; // this keeps it at one pet at a time.
             }
         }

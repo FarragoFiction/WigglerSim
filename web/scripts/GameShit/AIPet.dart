@@ -39,13 +39,25 @@ class AIPet {
     //grub body 0 and grub body 1
     Future<Null> setUpIdleAnimation() async {
         HomestuckGrubDoll g = grub.doll;
-        g.body.imgNumber = 0;
-        await grub.draw();
-        idleAnimation.addAnimationFrame(grub.canvas);
-        grub.canvas = null; //means it will make a new one, so old reference is free
-        g.body.imgNumber = 1;
-        await grub.draw();
-        idleAnimation.addAnimationFrame(grub.canvas);
+        Random rand = new Random();
+        rand.nextInt(10); //init
+        if(rand.nextBool()) {
+            g.body.imgNumber = 0;
+            await grub.draw();
+            idleAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.body.imgNumber = 1;
+            await grub.draw();
+            idleAnimation.addAnimationFrame(grub.canvas);
+        }else { //so they don't all look the same
+            g.body.imgNumber = 1;
+            await grub.draw();
+            idleAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.body.imgNumber = 0;
+            await grub.draw();
+            idleAnimation.addAnimationFrame(grub.canvas);
+        }
     }
 
     Future<Null> draw(CanvasElement canvas) async {
