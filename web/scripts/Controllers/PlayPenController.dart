@@ -11,13 +11,17 @@ PlayPen playPen;
 void main() {
     //loadNavbar();
     game = new GameObject();
-    DivElement container = new DivElement();
-    querySelector("#output").append(container);
-    playPen = new PlayPen(container, game.player.petInventory.pets);
+
     start();
 }
 
 Future<Null> start() async {
+    await game.preloadManifest();
+    DivElement container = new DivElement();
+    querySelector("#output").append(container);
+    playPen = new PlayPen(container, game.player.petInventory.pets);
+
+
     //button is just for testing, will be animation later
     ButtonElement b = new ButtonElement();
     b.text = "Draw";

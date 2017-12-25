@@ -33,8 +33,7 @@ class AIPet {
     Grub grub;
     AnimationObject idleAnimation = new AnimationObject();
 
-    AIPet(Grub this.grub, {int this.x: 0, int this.y: 0}) {
-        setUpIdleAnimation();
+    AIPet(Grub this.grub, {int this.x: 0, int this.y: 100}) {
     }
 
     //grub body 0 and grub body 1
