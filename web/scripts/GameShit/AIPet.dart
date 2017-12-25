@@ -48,7 +48,7 @@ class AIPet {
         grub.draw();
         idleAnimation.addAnimationFrame(grub.canvas);
     }
-    
+
     Future<Null> draw(CanvasElement canvas) async {
         //TODO figure out more complex things than standing in one spot and twitching later.
         //TODO figure out how i want to do text, emoticons, scale and rotation.

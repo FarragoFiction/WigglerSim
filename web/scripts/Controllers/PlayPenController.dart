@@ -18,5 +18,13 @@ void main() {
 }
 
 Future<Null> start() async {
+    //button is just for testing, will be animation later
+    ButtonElement b = new ButtonElement();
+    b.text = "Draw";
+    b.onClick.listen((e)
+    {
+        playPen.draw();
+    });
+    querySelector("#output").append(b);
 
 }
