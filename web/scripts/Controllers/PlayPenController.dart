@@ -13,7 +13,7 @@ void main() {
     game = new GameObject();
     DivElement container = new DivElement();
     querySelector("#output").append(container);
-    playPen = new PlayPen(container);
+    playPen = new PlayPen(container, game.player.petInventory.pets);
     start();
 }
 
