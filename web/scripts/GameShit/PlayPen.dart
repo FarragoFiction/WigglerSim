@@ -34,4 +34,11 @@ class PlayPen {
 
     }
 
+    Future<Null> draw() async {
+        Renderer.clearCanvas(canvas);
+        for(AIPet pet in pets) {
+            pet.draw(canvas); //async
+        }
+    }
+
 }

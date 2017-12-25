@@ -25,11 +25,42 @@ import 'dart:async';
 class AIPet {
     int x;
     int y;
+    double _scaleX = 1.0;
+    double _scaleY = 1.0;
+    double rotation = 0.0;
     Grub grub;
-    List<CanvasElement> idleanimations;
+    AnimationObject idleAnimation = new AnimationObject();
 
     AIPet(Grub this.grub, {x: 0, y: 0}) {
         //TODO i need to give the grub 0 and render to a canvas, then give it 1 and render to a canvas.
-        //add both to idle animations.
+        //add both to idle animation.
     }
+
+    Future<Null> draw(CanvasElement canvas) async {
+        /*
+            TODO:
+                Need to draw one of my idle animations at x,y scale and rotation
+
+                also need to figure out how to add text or emoticon
+         */
+    }
+
+
+}
+
+
+class AnimationObject {
+    List<CanvasElement> animations = new List<CanvasElement>();
+    int index;
+
+    void addAnimationFrame(CanvasElement canvas, [int index = -13]) {
+        if(index >= 0) {
+            animations[index] = canvas;
+        }else {
+            animations.add(canvas);
+        }
+    }
+
+
+
 }
