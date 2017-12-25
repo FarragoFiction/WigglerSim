@@ -17,5 +17,7 @@
 
 
  */
+import 'dart:async';
+
 class AIPet {
 }

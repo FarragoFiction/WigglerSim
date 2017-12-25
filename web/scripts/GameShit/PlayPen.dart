@@ -1,4 +1,7 @@
-
+import "AIPet.dart";
+import 'dart:html';
+import 'dart:async';
+import "package:DollLibCorrect/DollRenderer.dart";
 /*
 TODO:
 
@@ -13,5 +16,20 @@ I think I'll make a wrapper object that has the grub itself, and an array of ani
 so the playpen doesn't have a list of wigglers, but a list of AnimatedWigglers???
  */
 class PlayPen {
+    List<AIPet> pets = new List<AIPet>();
+    CanvasElement canvas = new CanvasElement(width: 1000, height: 400);
+    String backgroundImage = "images/BroodingCaverns.png";
+
+    PlayPen(Element divForCanvas) {
+        setBackground(divForCanvas);
+        divForCanvas.append(canvas);
+    }
+
+    Future<Null> setBackground(divForCanvas) async{
+        ImageElement image = await Loader.getResource((backgroundImage));
+        print("background image is $backgroundImage");
+        divForCanvas.style.backgroundImage = "url(${image.src})";
+
+    }
 
 }
