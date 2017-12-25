@@ -28,10 +28,11 @@ class PlayPen {
         loadPets(potentialGrubs);
     }
 
-    void loadPets(List<Pet> potentialGrubs) {
+    Future<Null> loadPets(List<Pet> potentialGrubs) async {
         for(Pet p in potentialGrubs) {
             if(p is Grub) {
-                pets.add(new AIPet(p));
+                await pets.add(new AIPet(p));
+                return; //TODO this keeps it at one pet at a time.
             }
         }
     }

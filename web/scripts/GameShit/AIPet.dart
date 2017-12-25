@@ -33,7 +33,7 @@ class AIPet {
     Grub grub;
     AnimationObject idleAnimation = new AnimationObject();
 
-    AIPet(Grub this.grub, {x: 0, y: 0}) {
+    AIPet(Grub this.grub, {int this.x: 0, int this.y: 0}) {
         setUpIdleAnimation();
     }
 
@@ -41,18 +41,20 @@ class AIPet {
     Future<Null> setUpIdleAnimation() async {
         HomestuckGrubDoll g = grub.doll;
         g.body.imgNumber = 0;
-        grub.draw();
+        await grub.draw();
         idleAnimation.addAnimationFrame(grub.canvas);
         grub.canvas = null; //means it will make a new one, so old reference is free
         g.body.imgNumber = 1;
-        grub.draw();
+        await grub.draw();
         idleAnimation.addAnimationFrame(grub.canvas);
     }
 
     Future<Null> draw(CanvasElement canvas) async {
         //TODO figure out more complex things than standing in one spot and twitching later.
         //TODO figure out how i want to do text, emoticons, scale and rotation.
-        canvas.context2D.drawImage(idleAnimation.getNextFrame(),x,y);
+        CanvasElement frame = idleAnimation.getNextFrame();
+        print("frame is $frame and canvas is $canvas");
+        canvas.context2D.drawImage(frame,x,y);
     }
 
 
@@ -61,9 +63,10 @@ class AIPet {
 
 class AnimationObject {
     List<CanvasElement> animations = new List<CanvasElement>();
-    int index;
+    int index = 0;
 
     void addAnimationFrame(CanvasElement canvas, [int index = -13]) {
+        print("adding animation frame");
         if(index >= 0) {
             animations[index] = canvas;
         }else {
@@ -76,6 +79,7 @@ class AnimationObject {
         if(index >= animations.length) {
             index = 0;
         }
+        print("next frame is $index, so that's ${animations[index]}");
         return animations[index];
     }
 
