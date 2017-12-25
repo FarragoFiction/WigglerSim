@@ -33,6 +33,13 @@ class PetInventory {
         if(!pets.contains(original)) return;
         //print("replacing ${original.name} with ${replacement.name}");
         if(!original.name.contains("Egg")) replacement.name = original.name;
+        replacement.external = original.external;
+        replacement.curious = original.curious;
+        replacement.loyal = original.loyal;
+        replacement.energetic = original.energetic;
+        replacement.idealistic = original.idealistic;
+        replacement.patience = original.patience;
+
         int index = pets.indexOf(original);
         pets[index] = replacement;
     }
