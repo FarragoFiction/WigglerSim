@@ -82,8 +82,8 @@ import "Stat.dart";
 abstract class Pet {
 
     //all life stages should be centered around this.
-    //static int timeUnit = 30*60* 1000; //30 minutes
-    static int timeUnit = 3* 1000;
+    static int timeUnit = 30*60* 1000; //30 minutes
+    //static int timeUnit = 3* 1000;
 
 
     int millisecondsToChange = Pet.timeUnit;
