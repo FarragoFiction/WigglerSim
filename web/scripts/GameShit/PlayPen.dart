@@ -23,8 +23,10 @@ class PlayPen {
     PlayPen(Element divForCanvas) {
         setBackground(divForCanvas);
         divForCanvas.append(canvas);
+        //TODO need to havea  draw method that clears the canvas then loops on all AIPets and asks them to draw themselves
     }
 
+    //set the bg to the div so that the canvas can just clear itself instead of redrawing pixels
     Future<Null> setBackground(divForCanvas) async{
         ImageElement image = await Loader.getResource((backgroundImage));
         print("background image is $backgroundImage");

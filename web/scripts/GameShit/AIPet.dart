@@ -1,6 +1,6 @@
 /*
     An ai pet has a pet inside of it, as well as a list of animations it can play. and an idea of when to play them.
-
+    also has x/y rotation and scale
     Use cases:
         Trigger: Pet has nothing better to do
             Action: idle animation (flip between two similar bodies)
@@ -18,6 +18,18 @@
 
  */
 import 'dart:async';
+import "../Pets/PetLib.dart";
+import 'dart:html';
+import 'dart:async';
 
 class AIPet {
+    int x;
+    int y;
+    Grub grub;
+    List<CanvasElement> idleanimations;
+
+    AIPet(Grub this.grub, {x: 0, y: 0}) {
+        //TODO i need to give the grub 0 and render to a canvas, then give it 1 and render to a canvas.
+        //add both to idle animations.
+    }
 }
