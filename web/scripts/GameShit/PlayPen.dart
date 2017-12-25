@@ -31,12 +31,12 @@ class PlayPen {
     Future<Null> loadPets(List<Pet> potentialGrubs) async {
         int x = 0;
         for(Pet p in potentialGrubs) {
-            if(p is Grub) {
+            if(p is Grub && pets.length < 2) {
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
                 await aip.setUpIdleAnimation();
 
                 pets.add(aip);
-                x += 200;
+                x += 400;
                 //return; // this keeps it at one pet at a time.
             }
         }
