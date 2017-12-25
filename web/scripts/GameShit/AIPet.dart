@@ -21,6 +21,8 @@ import 'dart:async';
 import "../Pets/PetLib.dart";
 import 'dart:html';
 import 'dart:async';
+import 'package:DollLibCorrect/DollRenderer.dart';
+
 
 class AIPet {
     int x;
@@ -32,17 +34,25 @@ class AIPet {
     AnimationObject idleAnimation = new AnimationObject();
 
     AIPet(Grub this.grub, {x: 0, y: 0}) {
-        //TODO i need to give the grub 0 and render to a canvas, then give it 1 and render to a canvas.
-        //add both to idle animation.
+        setUpIdleAnimation();
     }
 
+    //grub body 0 and grub body 1
+    Future<Null> setUpIdleAnimation() async {
+        HomestuckGrubDoll g = grub.doll;
+        g.body.imgNumber = 0;
+        grub.draw();
+        idleAnimation.addAnimationFrame(grub.canvas);
+        grub.canvas = null; //means it will make a new one, so old reference is free
+        g.body.imgNumber = 1;
+        grub.draw();
+        idleAnimation.addAnimationFrame(grub.canvas);
+    }
+    
     Future<Null> draw(CanvasElement canvas) async {
-        /*
-            TODO:
-                Need to draw one of my idle animations at x,y scale and rotation
-
-                also need to figure out how to add text or emoticon
-         */
+        //TODO figure out more complex things than standing in one spot and twitching later.
+        //TODO figure out how i want to do text, emoticons, scale and rotation.
+        canvas.context2D.drawImage(idleAnimation.getNextFrame(),x,y);
     }
 
 
@@ -59,6 +69,14 @@ class AnimationObject {
         }else {
             animations.add(canvas);
         }
+    }
+
+    CanvasElement getNextFrame() {
+        index ++;
+        if(index >= animations.length) {
+            index = 0;
+        }
+        return animations[index];
     }
 
 
