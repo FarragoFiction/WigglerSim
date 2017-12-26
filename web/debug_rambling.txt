@@ -385,6 +385,57 @@ nvm, found  a helper. thanks 'I am cat.As yet, I am firerachet' -
 
 
 
+~~~~~~~
+
+Alright here we fucking go: time to brainstorm the actual AI.
+
+    Stat patience;
+    Stat energetic;
+    Stat idealistic;
+    Stat curious;
+    Stat loyal;
+    Stat external;
+
+So, I want to come up with actions the wigglers can do,
+and how the decision to take an action is mediated by their stats.
+
+What do I have to work with?
+
+I want there to be AI Pets and AIObjects? So that no matter what I'm interacting with
+I can have the same code.
+
+So Use Case.
+
+A grub interacts with an AIObject.  The grub changes it's own state, and the
+AIObject changes it's state (possibly not at all if it's inanimate).
+
+Without trying to get too far into the code, let's try to imagine general things that the stats could be
+related to.
+
+
+Stat external;
+    If it's high, they investigate their surroundings, if low, they space out.
+Stat curious;
+    This feels kind of similar to external/internal? Maybe it's how far they are willing to go to find new things?
+    How likely they are to just walk around for no reason?
+Stat energetic;
+    How fast they move?
+Stat patience;
+    How long they interact with the same thing? (but how diff is this gonna be from loyal)
+
+I'm noticing that plenty of stats seem similar when it comes to actions (but maybe not reactions).
+
+So maybe...
+
+Loyal/Patient = how long you interact with the same object
+External/Curious = how far you're willing to walk to get to an object
+Energetic/Idealistic = how fast you move (wide eyed wonder makes you fast?)
+
+
+So what about reactions? Or maybe it'd be more accurate to call them interaction styles?
+No, because loyal/patient invovle inveractions hrrrm....
+
+
 
 
 
