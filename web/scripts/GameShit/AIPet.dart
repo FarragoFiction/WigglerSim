@@ -69,6 +69,42 @@ class AIPet {
     }
 
 
+    void getPositiveEmotion() {
+        //TODO
+    }
+
+    //some grubs get scared, others get angry
+    void getNegativeEmotion() {
+        //TODO
+    }
+
+    //given my stats, do i like things i've seen before?
+    bool likesFamiliar() {
+        throw "TODO";
+    }
+
+    //given my stats, do i like things similar to me?
+    bool likesSimilar() {
+        throw "TODO";
+    }
+
+    //can be positive or negative about an object
+    bool judgeObject() {
+        /*
+            TODO: Take in an AIObject
+            First it judges how similar the object is to me.
+    Then it decides whether similarity is a good or bad thing.
+
+    THEN it checks the grubs memory to see if it's seen that object before
+        (item name or stat match, both work, so it means you like familiar things even if you
+        haven't seen that exact thing before)
+
+    Then it decides whether familiarity is a good or bad thing.
+
+        */
+    }
+
+
 }
 
 

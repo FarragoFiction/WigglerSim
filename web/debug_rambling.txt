@@ -433,11 +433,123 @@ Energetic/Idealistic = how fast you move (wide eyed wonder makes you fast?)
 
 
 So what about reactions? Or maybe it'd be more accurate to call them interaction styles?
-No, because loyal/patient invovle inveractions hrrrm....
+No, because loyal/patient involve inveractions hrrrm....
+
+Could come up with something else for them?
+
+
+But let's think about reaction.
+
+Use Case:
+
+Player tosses a Smuppet into the playpen.
+
+Curious grub goes up to investigate it. Once it's there....what happens and why?
+
+Well, obviously objects should have stats.
+
+But what does that mean?
+
+Hrrrrm.
+
+I want to say "loyal" grubs like items that match their stats the best, but that's putting the cart ahead of the four wheel device.
+
+Alright.
+
+Boil this shit down to it's base component. Grubs face expresions aren't going to change because
+barring some weird jarring swaps, there's too much variability.
+
+So.
+
+A grub investigates a smuppet. A HEART appears over their head.
+An OLDER GRUB with gold eyes investigates the smuppet. They say "Wike this!" over their head. Or "Good!".
+
+So this means I'll need an "EMOTION" object which has an icon, and a list of random associated phases.
+All grubs have baby talk quirks, but not necessarily the same one?
+
+An emotion should take in a grub and decide whether to use ICON or WORDS.
+
+So what emotions are there?
+
+heart
+spade
+club
+diamond
+
+happy
+surprised
+calm
+sad
+angry
+scared
+
+
+What will trigger each emotion?
+
+Well. What exists?
+
+Should I give the grubs memory? (may as well, i have as much save data as I need).
+
+So:
+
+I have:
+
+Grub
+    stats
+    list of items seen before (includes grubs)
+
+Other Object (which could be a grub)
+    stats
+
+
+So, I need to have a  method that decides if I am positive or negative about an object,
+and another method to decide what positive or negative means for that grub in particular
+(will it be scared, angry, etc).
+
+judgeObject takes in an object, and is a method on AIPet.
+    First it judges how similar the object is to me.
+    Then it decides whether similarity is a good or bad thing.
+
+    THEN it checks the grubs memory to see if it's seen that object before
+        (item name or stat match, both work, so it means you like familiar things even if you
+        haven't seen that exact thing before)
+
+    Then it decides whether familiarity is a good or bad thing.
 
 
 
 
+Alright now, let's talk about emotions.
 
+heart
+spade
+club
+diamond
+happy
+surprised
+calm
+sad
+angry
+scared
 
+I need to figure out what the bare minimum emotions I need are and how they relate to stats.
+Obvs quadrant symbols are only going to be for other grubs.
+
+But let's see if the existing stats have a particular lens for their emotions.
+
+Time/Space  Impatient/Patient
+Doom/Life Calm/Energetic
+Rage/Hope Realism/Idealism
+Void/Light Accepting/Curious
+Breath/Blood Free-Spirited/Loyal
+Heart/Mind Internal/External
+
+Patient/Calm/Realistic: + CALM
+Energetic/Idealistc/Impatient: +EXCITED
+Curious/Free/Internal: - SCARED
+Idealistic/Energetic/Impatient: - ANGRY
+Curious/Free/Internal: + SURPRISED
+CALM/Patient/Accepting -SAD
+
+Happy and Bored can be defaults if you aren't leaning in a particular direction?
 
