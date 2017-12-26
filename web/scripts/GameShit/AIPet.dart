@@ -32,6 +32,8 @@ class AIPet {
     double rotation = 0.0;
     Grub grub;
     AnimationObject idleAnimation = new AnimationObject();
+    //will usually be null
+    Emotion currentEmotion;
 
     AIPet(Grub this.grub, {int this.x: 0, int this.y: 100}) {
     }
@@ -58,6 +60,14 @@ class AIPet {
             await grub.draw();
             idleAnimation.addAnimationFrame(grub.canvas);
         }
+    }
+
+    //can set to null, too.
+    void setEmotion(Emotion e) {
+        if(Emotion.HEART == null) {
+            Emotion.initEmotions();
+        }
+        currentEmotion  = e;
     }
 
     Future<Null> draw(CanvasElement canvas) async {
@@ -132,4 +142,39 @@ class AnimationObject {
 
 
 
+}
+
+//an emotion has an icon and a list of text equivalents (to go in a text bubble?)
+//kept as instances
+class Emotion {
+
+    static Emotion HEART;
+    static Emotion DIAMOND;
+    static Emotion CLUBS;
+    static Emotion SPADE;
+
+    static String folder = "images/Emoticons";
+    String iconLocation;
+    List<String> textChoices;
+    CanvasElement cachedIconCanvas;
+    Emotion(String this.iconLocation, List<String> this.textChoices);
+
+    //this is such a dope robot thing to call.
+    static void initEmotions() {
+        HEART = new Emotion("heart.png",<String>["wuv you","wuv","luv you","luv"]);
+        DIAMOND = new Emotion("diamond.png",<String>["u gud","pap u","sleep now","soft thing"]);
+        CLUBS = new Emotion("clubs.png",<String>["bad!","why do?","stop!","no!"]);
+        SPADE = new Emotion("spade.png",<String>["hate","u bad","i bite!","bite u"]);
+    }
+
+    Future<Null> draw(CanvasElement canvas, Grub grub) async {
+        //grub decides if i pick text or if i pick icon 89 x 108
+        if(cachedIconCanvas == null) {
+            CanvasElement dollCanvas = new CanvasElement(width: 89, height: 98);
+            await Renderer.drawWhateverFuture(dollCanvas, "$folder/$iconLocation.png");
+        }
+        return cachedIconCanvas;
+
+
+    }
 }

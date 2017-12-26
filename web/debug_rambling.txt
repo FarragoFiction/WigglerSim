@@ -550,6 +550,11 @@ Curious/Free/Internal: - SCARED
 Idealistic/Energetic/Impatient: - ANGRY
 Curious/Free/Internal: + SURPRISED
 CALM/Patient/Accepting -SAD
+Curious/External/Free-Spirited - BORED
 
 Happy and Bored can be defaults if you aren't leaning in a particular direction?
+
+Okay well, I already have the quadrant symbols, so let's test with those first.
+
+
 
