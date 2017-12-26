@@ -47,6 +47,7 @@ class Sign {
 
 
     static int getSignByCriteria(String caste, String aspect, String lunarSway) {
+        if(caste == HomestuckTrollDoll.MUTANT) caste = HomestuckTrollDoll.LIME; //all mutants given a lime sign
         if(allSigns.isEmpty) Sign.initAllSigns();
         return allSigns.where((Sign c) => c.caste == caste).where((Sign c) => c.aspect == aspect).where((Sign c) => c.lunarSway == lunarSway).first.imgNum;
     }

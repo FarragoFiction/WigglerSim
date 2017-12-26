@@ -173,7 +173,7 @@ class Emotion {
             CanvasElement dollCanvas = new CanvasElement(width: 89, height: 98);
             await Renderer.drawWhateverFuture(dollCanvas, "$folder/$iconLocation.png");
         }
-        return cachedIconCanvas;
+
 
 
     }
