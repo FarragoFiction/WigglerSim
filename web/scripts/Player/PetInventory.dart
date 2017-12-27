@@ -206,6 +206,7 @@ class PetInventory {
     //todo can adopt a troll grub directly via importing string.
     Future<Null> drawAdoptables(Element container) async{
         List<Pet> starters = new List<Pet>();
+
         starters.add(new Egg(new HomestuckGrubDoll(HomestuckTrollDoll.randomBurgundySign)));
         starters.add(new Egg(new HomestuckGrubDoll(HomestuckTrollDoll.randomBronzeSign)));
         starters.add(new Egg(new HomestuckGrubDoll(HomestuckTrollDoll.randomGoldSign)));
