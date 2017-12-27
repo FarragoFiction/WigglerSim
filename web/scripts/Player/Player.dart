@@ -102,7 +102,7 @@ class Player {
         Element container2 = new DivElement();
         String text2 = "<br><Br>Or are you? Maybe you are someone else? ";
         AnchorElement link = new AnchorElement();
-        link.href = "http://www.farragofiction.com/DollSim/troll_index.html";
+        link.href = "http://www.farragofiction.com/DollSim/index.html?type=2";
         link.text = " Anybody in mind?";
         link.style.padding = "padding:10px";
 
