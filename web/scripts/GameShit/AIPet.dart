@@ -63,6 +63,7 @@ class AIPet {
     }
 
     //can set to null, too.
+    //IMPORTANT. WHEN RENDERING IT SHOULD BOB, AND THEN AFTER A SECOND OR TWO VANISH WITH NEXT STATE CHANGE
     void setEmotion(Emotion e) {
         if(Emotion.HEART == null) {
             Emotion.initEmotions();
@@ -75,7 +76,13 @@ class AIPet {
         //TODO figure out how i want to do text, emoticons, scale and rotation.
         CanvasElement frame = idleAnimation.getNextFrame();
         print("frame is $frame and canvas is $canvas");
+        CanvasElement emotionCanvas = null;
+        if(currentEmotion != null) {
+            emotionCanvas = await currentEmotion.draw(grub);
+        }
         canvas.context2D.drawImage(frame,x,y);
+        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x,y);
+
     }
 
 
@@ -167,12 +174,14 @@ class Emotion {
         SPADE = new Emotion("spade.png",<String>["hate","u bad","i bite!","bite u"]);
     }
 
-    Future<Null> draw(CanvasElement canvas, Grub grub) async {
+    Future<CanvasElement> draw(Grub grub) async {
         //grub decides if i pick text or if i pick icon 89 x 108
         if(cachedIconCanvas == null) {
             CanvasElement dollCanvas = new CanvasElement(width: 89, height: 98);
             await Renderer.drawWhateverFuture(dollCanvas, "$folder/$iconLocation.png");
+            cachedIconCanvas = dollCanvas;
         }
+        return cachedIconCanvas;
 
 
 

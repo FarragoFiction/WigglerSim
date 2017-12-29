@@ -3,6 +3,8 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
 import '../GameShit/PlayPen.dart';
+import '../GameShit/AIPet.dart';
+
 
 import "navbar.dart";
 
@@ -29,6 +31,19 @@ Future<Null> start() async {
     {
         playPen.draw();
     });
+
+    ButtonElement b2 = new ButtonElement();
+    b2.text = "Emote";
+    b2.onClick.listen((e)
+    {
+        //setEmotion
+        List<Emotion> emotions = <Emotion>[Emotion.HEART, Emotion.SPADE, Emotion.DIAMOND, Emotion.CLUBS];
+        Random rand = new Random();
+        playPen.pets.first.setEmotion(rand.pickFrom(emotions));
+        playPen.draw();
+    });
     querySelector("#output").append(b);
+    querySelector("#output").append(b2);
+
 
 }

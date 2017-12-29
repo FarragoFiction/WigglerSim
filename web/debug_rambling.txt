@@ -557,4 +557,30 @@ Happy and Bored can be defaults if you aren't leaning in a particular direction?
 Okay well, I already have the quadrant symbols, so let's test with those first.
 
 
+~~~~~~
+Alright, between a lot of bullshit I had to abandon the playpen for several days in a row.
+
+Now I need to come back to and figure out where I left off.
+
+....Bluh I hate getting interupted. It's like I have to manually kick start the obsession back up.
+
+Looks like I was just testing being able to render an emote at all.
+
+I know I have some quadrant symbols set up, where are they?
+
+The important thing is getting all the foundation layers set up. Once I do that I can REALLY make progress
+as I come up with ways to remix it and shit.
+
+Alright, looks like AIPet already has some emoticons set up.
+
+Do they know how to render themselves?  Should be relative to their grub.
+
+I need to setEmotion before I do anything else though... should do that in controller.
+
+In my head, I want the emotion popups to bob a bit before being dismissed. I'm not sure how willing I
+am to do this right vs fast though.
+
+
+
+
 

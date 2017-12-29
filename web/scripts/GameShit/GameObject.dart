@@ -56,6 +56,13 @@ class GameObject {
         if(t != null) {
             player.petInventory.drawPet(container, t);
             player.petInventory.graduate(t);
+            //ppl occasionally have glitches where it fails to graduate
+            //and they dont' relize you can refresh the page here.
+            //so do all.
+            if(player.petInventory.getGraduatingTroll() != null) {
+                drawAGraduatingTroll(container);
+            }
+
         }else {
             container.setInnerHtml("No Trolls Found!");
         }
