@@ -147,6 +147,8 @@ class Troll extends Pet{
         int lifeSpan =  rand.nextInt(max - min) + min;
         if(colorWord == HomestuckTrollDoll.FUCHSIA) {
             return fuchsiaEnding(lifeSpan);
+        }else if(colorWord == HomestuckTrollDoll.MUTANT) {
+            return mutantEnding(lifeSpan);
         }else {
             return regularEnding(lifeSpan);
         }
@@ -163,6 +165,32 @@ class Troll extends Pet{
         }else {
             return heiressDiedChallenging(numberOfSweeps);
         }
+    }
+
+    //mutants are likely to be culled.
+    String mutantEnding(int maxLife) {
+        int argumentsFor = 10; //mutants are REALLY likely to be culled.
+        int argumentsAgainst = 0;
+        for(Stat s in stats) {
+            int odds = s.flavor.oddsOfViolentDeath;
+            if(odds > 0.0) {
+                argumentsFor += (odds * StatFlavor.getWeightByValue(s.normalizedValue)).ceil();
+            }else {
+                argumentsAgainst += odds;
+            }
+        }
+        Random rand = new Random();
+        if(rand.nextIntRange(argumentsAgainst, argumentsFor) > 0) {
+            int lifespan = rand.nextIntRange(0, maxLife);
+            if(lifespan <= 1) return deathString(rand.nextIntRange(0, maxLife), "being found by culling drones while still in the caverns");
+
+            List<String> culling = <String>["fleeing the culling drones","for the crime of being a mutant","for the good of the species",getViolentCauseOfDeath()];
+            return deathString(rand.nextIntRange(0, maxLife), rand.pickFrom(culling));
+        }else {
+            return deathString(maxLife, rand.pickFrom(<String>["of natural causes","of old age","after spending their entire life managing to avoid the culling drones", "of a mutant related illness","after beating the odds and surviving as a mutant"]));
+
+        }
+
     }
 
     String heiressDiedChallenging(int deathAge) {
@@ -261,7 +289,7 @@ class Troll extends Pet{
         if(colorWord == HomestuckTrollDoll.PURPLE) return 900;
         if(colorWord == HomestuckTrollDoll.VIOLET) return 5000;
         if(colorWord == HomestuckTrollDoll.FUCHSIA) return 8000;
-        return 10;
+        return 60;
     }
 
 
