@@ -173,15 +173,12 @@ class PetInventory {
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");
 
+            subContainer.append(p.makeDollLoader());
+
             container.append(subContainer);
 
-            TextInputElement customName = new TextInputElement();
-            customName.value = p.name;
-            customName.size = 40;
-            subContainer.append(customName);
 
-
-            CanvasElement canvas = await drawPet(subContainer, p);
+            await drawPet(subContainer, p);
 
         }
     }

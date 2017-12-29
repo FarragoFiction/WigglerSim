@@ -81,7 +81,7 @@ class AIPet {
             emotionCanvas = await currentEmotion.draw(grub);
         }
         canvas.context2D.drawImage(frame,x,y);
-        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x,y);
+        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x+3*frame.width/4,y);
 
     }
 
@@ -168,10 +168,10 @@ class Emotion {
 
     //this is such a dope robot thing to call.
     static void initEmotions() {
-        HEART = new Emotion("heart.png",<String>["wuv you","wuv","luv you","luv"]);
-        DIAMOND = new Emotion("diamond.png",<String>["u gud","pap u","sleep now","soft thing"]);
-        CLUBS = new Emotion("clubs.png",<String>["bad!","why do?","stop!","no!"]);
-        SPADE = new Emotion("spade.png",<String>["hate","u bad","i bite!","bite u"]);
+        HEART = new Emotion("heart",<String>["wuv you","wuv","luv you","luv"]);
+        DIAMOND = new Emotion("diamond",<String>["u gud","pap u","sleep now","soft thing"]);
+        CLUBS = new Emotion("clubs",<String>["bad!","why do?","stop!","no!"]);
+        SPADE = new Emotion("spade",<String>["hate","u bad","i bite!","bite u"]);
     }
 
     Future<CanvasElement> draw(Grub grub) async {

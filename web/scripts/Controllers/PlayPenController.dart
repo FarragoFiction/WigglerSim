@@ -39,7 +39,9 @@ Future<Null> start() async {
         //setEmotion
         List<Emotion> emotions = <Emotion>[Emotion.HEART, Emotion.SPADE, Emotion.DIAMOND, Emotion.CLUBS];
         Random rand = new Random();
-        playPen.pets.first.setEmotion(rand.pickFrom(emotions));
+        for(AIPet p in playPen.pets) {
+            p.setEmotion(rand.pickFrom(emotions));
+        }
         playPen.draw();
     });
     querySelector("#output").append(b);

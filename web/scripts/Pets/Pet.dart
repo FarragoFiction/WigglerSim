@@ -283,6 +283,31 @@ abstract class Pet {
         return json;
     }
 
+    Element makeDollLoader() {
+        Element ret = new DivElement();
+        ret.setInnerHtml("Doll URL: ");
+        TextAreaElement dollArea = new TextAreaElement();
+        dollArea.value = doll.toDataBytesX();
+        ret.append(dollArea);
+
+        ButtonElement copyButton = new ButtonElement();
+        copyButton.text = "Copy";
+        ret.append(copyButton);
+        copyButton.onClick.listen((Event e) {
+            dollArea.select();
+            document.execCommand('copy');
+        });
+
+        DivElement anchorContainer = new DivElement();
+        ret.append(anchorContainer);
+        AnchorElement a = new AnchorElement();
+        a.href = "http://farragofiction.com/DollSim/index.html?${doll.toDataBytesX()}";
+        a.target = "_blank";
+        a.text = "Edit Doll Link";
+        anchorContainer.append(a);
+        return ret;
+    }
+
     String daysSinceDate(DateTime date, String label) {
         DateTime now = new DateTime.now();
         Duration diff = now.difference(date);
