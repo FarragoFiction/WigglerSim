@@ -94,6 +94,7 @@ class PetInventory {
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");
 
+
             container.append(subContainer);
 
             TextInputElement customName = new TextInputElement();
@@ -127,6 +128,8 @@ class PetInventory {
             }
 
             CanvasElement canvas = await drawPet(subContainer, p);
+            subContainer.append(p.makeDollLoader());
+
 
 
             button.onClick.listen((e) {
