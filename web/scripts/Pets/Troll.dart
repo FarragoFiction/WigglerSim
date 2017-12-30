@@ -182,10 +182,10 @@ class Troll extends Pet{
         Random rand = new Random();
         if(rand.nextIntRange(argumentsAgainst, argumentsFor) > 0) {
             int lifespan = rand.nextIntRange(0, maxLife);
-            if(lifespan <= 1) return deathString(rand.nextIntRange(0, maxLife), "being found by culling drones while still in the caverns");
+            if(lifespan <= 1) return deathString(lifespan, "being found by culling drones while still in the caverns");
 
             List<String> culling = <String>["fleeing the culling drones","for the crime of being a mutant","for the good of the species",getViolentCauseOfDeath()];
-            return deathString(rand.nextIntRange(0, maxLife), rand.pickFrom(culling));
+            return deathString(lifespan, rand.pickFrom(culling));
         }else {
             return deathString(maxLife, rand.pickFrom(<String>["of natural causes","of old age","after spending their entire life managing to avoid the culling drones", "of a mutant related illness","after beating the odds and surviving as a mutant"]));
 

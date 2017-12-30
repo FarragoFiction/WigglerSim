@@ -285,6 +285,8 @@ abstract class Pet {
 
     Element makeDollLoader() {
         Element ret = new DivElement();
+        //no spoilers!
+        if(this is Cocoon || this is Egg) return ret;
         ret.setInnerHtml("Doll URL: ");
         TextAreaElement dollArea = new TextAreaElement();
         dollArea.value = doll.toDataBytesX();
