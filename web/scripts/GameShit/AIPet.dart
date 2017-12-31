@@ -177,7 +177,7 @@ class Emotion {
 
     Future<CanvasElement> draw(Grub grub) async {
         //grub decides if i pick text or if i pick icon 89 x 108
-        bool iconmode = false; //TODO once done testing, check grub's age
+        bool iconmode = grub.percentToChange < 0.5; //if eyes done, talk.
         if(iconmode) {
             if (cachedIconCanvas == null) {
                 CanvasElement iconCanvas = new CanvasElement(width: 89, height: 98);
@@ -209,7 +209,7 @@ class Emotion {
             HomestuckTrollDoll t = grub.doll as HomestuckTrollDoll;
             HomestuckPalette p = t.palette as HomestuckPalette;
             textCanvas.context2D.fillStyle = p.aspect_light.toStyleString();
-            textCanvas.context2D.fillText(text, 0, fontSize);
+            textCanvas.context2D.fillText(text, buffer/2, fontSize);
             return textCanvas;
         }
 
