@@ -202,6 +202,7 @@ class Troll extends Pet{
     }
 
     String heiressBecameEmpress(int maxLifespan) {
+        GameObject.instance.player.petInventory.rulingEmpress = this;
         Random rand = new Random();
         int numberOfSweeps = rand.nextIntRange(5, maxLifespan*2);
         if(numberOfSweeps >= maxLifespan) {

@@ -14,8 +14,12 @@ class PetInventory {
     static int MAXPETS = 6;
     static String PETSLIST = "petsList";
     static String ALUMNI = "alumni";
+    static String EMPRESS = "empress";
+
 
     List<Pet> pets = new List<Pet>();
+    //for now just for fun but later could be used for interesting things
+    Pet rulingEmpress;
     List<Troll> alumni = new List<Troll>();
 
     PetInventory();
@@ -51,6 +55,8 @@ class PetInventory {
         loadPetsFromJSON(idontevenKnow);
         idontevenKnow = jsonObj[ALUMNI];
         loadAlumniFromJSON(idontevenKnow);
+        String empressJson = jsonObj[EMPRESS];
+        if(empressJson != null) rulingEmpress = Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson));
 
     }
 
@@ -273,6 +279,7 @@ class PetInventory {
             jsonArray.add(p.toJson());
         }
         json[PETSLIST] = jsonArray.toString(); //will this work?
+        if(rulingEmpress != null) json[EMPRESS] = rulingEmpress.toJson().toString();
 
         jsonArray = new List<JSONObject>();
         for(Troll p in alumni) {
