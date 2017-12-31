@@ -189,14 +189,15 @@ class Emotion {
             Random rand = new Random();
             String text = rand.pickFrom(textChoices);
             int txtWidth = 400;
-            int txtHeight = 98;
-            int buffer = 10;
-            CanvasElement textCanvas = new CanvasElement(width: txtWidth, height: txtHeight);
             int fontSize = 20;
+            int buffer = 10;
+            int txtHeight = fontSize + buffer;
+            CanvasElement textCanvas = new CanvasElement(width: txtWidth, height: txtHeight);
             textCanvas.context2D.font = "${fontSize}px Strife";
+
             //no wider than it needs to be.
             txtWidth = textCanvas.context2D.measureText(text).width.ceil() + buffer;
-            textCanvas.width = txtWidth;
+            //textCanvas.width = txtWidth;
 
             print ('going to display text $text');
             textCanvas.context2D.fillStyle = "#ffffff";
@@ -205,8 +206,10 @@ class Emotion {
             textCanvas.context2D.strokeRect(0, 0, txtWidth, txtHeight);
            // Renderer.wrap_text(textCanvas.context2D,"HELLO WORLD",10,10,fontSize,400,"center");
             //TODO why is color wrong? it's black
-            textCanvas.context2D.strokeStyle = "#00ff00";
-            textCanvas.context2D.fillText(text, 100, fontSize*2);
+            HomestuckTrollDoll t = grub.doll as HomestuckTrollDoll;
+            HomestuckPalette p = t.palette as HomestuckPalette;
+            textCanvas.context2D.fillStyle = p.aspect_light.toStyleString();
+            textCanvas.context2D.fillText(text, 0, fontSize);
             return textCanvas;
         }
 
