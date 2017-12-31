@@ -177,6 +177,24 @@ class PetInventory {
 
 
     Future<Null> drawAlumni(Element container) async{
+
+        if(rulingEmpress != null) {
+            SpanElement subContainer = new SpanElement();
+            subContainer.style.width = "${rulingEmpress.width}px";
+            subContainer.classes.add("petInventorySlot");
+
+            subContainer.append(rulingEmpress.makeDollLoader());
+            Element title = new DivElement();
+            title.text = "Current Empress:";
+            subContainer.append(title);
+
+
+            container.append(subContainer);
+
+
+            await drawPet(subContainer, rulingEmpress);
+        }
+
         for(Pet p in alumni) {
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";

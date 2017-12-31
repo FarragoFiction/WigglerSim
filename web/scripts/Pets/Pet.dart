@@ -82,8 +82,8 @@ import "Stat.dart";
 abstract class Pet {
 
     //all life stages should be centered around this.
-    static int timeUnit = 30*60* 1000; //30 minutes
-    //static int timeUnit = 3* 1000;
+    //static int timeUnit = 30*60* 1000; //30 minutes
+    static int timeUnit = 3* 1000;
 
 
     int millisecondsToChange = Pet.timeUnit;
@@ -91,6 +91,8 @@ abstract class Pet {
     //TODO procedural description of personality based on stats.
     int textHeight = 800;
     int textWidth = 420;
+    //empresses are drawn slightly different. only alumni are empresses
+    bool empress = false;
 
     static String HEALTHJSON = "healthJson";
     static String BOREDOMEJSON = "boredomJson";
@@ -384,8 +386,14 @@ abstract class Pet {
     Future<CanvasElement> drawStats() async {
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
-        textCanvas.context2D.fillStyle = "#d2ac7c";
-        textCanvas.context2D.strokeStyle = "#2c1900";
+        if(empress) {
+            textCanvas.context2D.fillStyle = "#d27cc9";
+            textCanvas.context2D.strokeStyle = "#2c002a";
+        }else {
+            textCanvas.context2D.fillStyle = "#d2ac7c";
+            textCanvas.context2D.strokeStyle = "#2c1900";
+        }
+
         textCanvas.context2D.lineWidth = 3;
 
 
