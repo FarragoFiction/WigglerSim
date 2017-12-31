@@ -186,16 +186,26 @@ class Emotion {
             }
             return cachedIconCanvas;
         }else {
-            CanvasElement textCanvas = new CanvasElement(width: 1000, height: 98);
-            int fontSize = 20;
-            textCanvas.context2D.font = "${fontSize}px Strife";
-            textCanvas.context2D.strokeStyle = "#ff0000";
             Random rand = new Random();
             String text = rand.pickFrom(textChoices);
+            int txtWidth = 400;
+            int txtHeight = 98;
+            int buffer = 10;
+            CanvasElement textCanvas = new CanvasElement(width: txtWidth, height: txtHeight);
+            int fontSize = 20;
+            textCanvas.context2D.font = "${fontSize}px Strife";
+            //no wider than it needs to be.
+            txtWidth = textCanvas.context2D.measureText(text).width.ceil() + buffer;
+            textCanvas.width = txtWidth;
+
             print ('going to display text $text');
-            //Renderer.drawBG(textCanvas, ReferenceColours.RED, ReferenceColours.WHITE);
+            textCanvas.context2D.fillStyle = "#ffffff";
+            textCanvas.context2D.strokeStyle = "#000000";
+            textCanvas.context2D.fillRect(0, 0, txtWidth, txtHeight);
+            textCanvas.context2D.strokeRect(0, 0, txtWidth, txtHeight);
            // Renderer.wrap_text(textCanvas.context2D,"HELLO WORLD",10,10,fontSize,400,"center");
             //TODO why is color wrong? it's black
+            textCanvas.context2D.strokeStyle = "#00ff00";
             textCanvas.context2D.fillText(text, 100, fontSize*2);
             return textCanvas;
         }
