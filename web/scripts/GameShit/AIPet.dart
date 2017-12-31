@@ -176,14 +176,26 @@ class Emotion {
 
     Future<CanvasElement> draw(Grub grub) async {
         //grub decides if i pick text or if i pick icon 89 x 108
-        if(cachedIconCanvas == null) {
-            CanvasElement dollCanvas = new CanvasElement(width: 89, height: 98);
-            await Renderer.drawWhateverFuture(dollCanvas, "$folder/$iconLocation.png");
-            cachedIconCanvas = dollCanvas;
+        bool iconmode = false; //TODO once done testing, check grub's age
+        if(iconmode) {
+            if (cachedIconCanvas == null) {
+                CanvasElement iconCanvas = new CanvasElement(width: 89, height: 98);
+                await Renderer.drawWhateverFuture(iconCanvas, "$folder/$iconLocation.png");
+                cachedIconCanvas = iconCanvas;
+            }
+            return cachedIconCanvas;
+        }else {
+            CanvasElement textCanvas = new CanvasElement(width: 250, height: 98);
+            int fontSize = 20;
+            textCanvas.context2D.font = "${fontSize}px Strife";
+            textCanvas.context2D.strokeStyle = "#ff0000";
+            Random rand = new Random();
+            String text = rand.pickFrom(textChoices);
+
+            Renderer.wrap_text(textCanvas.context2D,text,0,0,fontSize,400,"center");
+            return textCanvas;
+
         }
-        return cachedIconCanvas;
-
-
 
     }
 }
