@@ -185,12 +185,10 @@ class PetInventory {
 
             subContainer.append(rulingEmpress.makeDollLoader());
             Element title = new DivElement();
-            title.text = "Current Empress:";
+            title.text = "Current Empress: ";
             subContainer.append(title);
 
-
             container.append(subContainer);
-
 
             await drawPet(subContainer, rulingEmpress);
         }

@@ -112,6 +112,8 @@ abstract class Pet {
     static String CURIOUS = "curious";
     static String LOYAL = "loyal";
     static String EXTERNAL = "external";
+    static String ISEMPRESS = "isempress";
+
 
     Stat patience;
     Stat energetic;
@@ -253,6 +255,14 @@ abstract class Pet {
         String lastPlayedString = jsonObj[LASTPLAYED];
         String hatchString = jsonObj[HATCHDATE];
         String fedString = jsonObj[LASTFED];
+        String empressString = jsonObj[ISEMPRESS];
+        if(empressString != null) {
+            if(empressString == "true") {
+                empress = true;
+            }else {
+                empress = false;
+            }
+        }
         name = jsonObj[NAMEJSON];
         loadStatsFromJSON(jsonObj);
 
@@ -268,6 +278,7 @@ abstract class Pet {
     JSONObject toJson() {
         JSONObject json = new JSONObject();
         json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
+        json[ISEMPRESS] = empress.toString();
         json[HATCHDATE] =  "${hatchDate.millisecondsSinceEpoch}";
         json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";
         json[DOLLDATAURL] = doll.toDataBytesX();
