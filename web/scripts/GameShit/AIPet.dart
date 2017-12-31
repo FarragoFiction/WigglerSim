@@ -79,6 +79,7 @@ class AIPet {
         CanvasElement emotionCanvas = null;
         if(currentEmotion != null) {
             emotionCanvas = await currentEmotion.draw(grub);
+            print("emotion canvas is $emotionCanvas");
         }
         canvas.context2D.drawImage(frame,x,y);
         if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x+3*frame.width/4,y);
@@ -185,16 +186,18 @@ class Emotion {
             }
             return cachedIconCanvas;
         }else {
-            CanvasElement textCanvas = new CanvasElement(width: 250, height: 98);
+            CanvasElement textCanvas = new CanvasElement(width: 1000, height: 98);
             int fontSize = 20;
             textCanvas.context2D.font = "${fontSize}px Strife";
             textCanvas.context2D.strokeStyle = "#ff0000";
             Random rand = new Random();
             String text = rand.pickFrom(textChoices);
-
-            Renderer.wrap_text(textCanvas.context2D,text,0,0,fontSize,400,"center");
+            print ('going to display text $text');
+            //Renderer.drawBG(textCanvas, ReferenceColours.RED, ReferenceColours.WHITE);
+           // Renderer.wrap_text(textCanvas.context2D,"HELLO WORLD",10,10,fontSize,400,"center");
+            //TODO why is color wrong? it's black
+            textCanvas.context2D.fillText(text, 100, fontSize*2);
             return textCanvas;
-
         }
 
     }
