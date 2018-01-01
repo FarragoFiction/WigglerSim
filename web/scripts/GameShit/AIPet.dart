@@ -22,23 +22,21 @@ import "../Pets/PetLib.dart";
 import 'dart:html';
 import 'dart:async';
 import 'package:DollLibCorrect/DollRenderer.dart';
+import "AIObject.dart";
 
 
-class AIPet {
-    int x;
-    int y;
-    double _scaleX = 1.0;
-    double _scaleY = 1.0;
-    double rotation = 0.0;
+class AIPet extends AIObject {
+
     Grub grub;
     AnimationObject idleAnimation = new AnimationObject();
     //will usually be null
     Emotion currentEmotion;
 
-    AIPet(Grub this.grub, {int this.x: 0, int this.y: 100}) {
+    AIPet(Grub this.grub, {int x: 0, int y: 100}):super(x: x, y:y) {
     }
 
     //grub body 0 and grub body 1
+    @override
     Future<Null> setUpIdleAnimation() async {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
@@ -71,6 +69,7 @@ class AIPet {
         currentEmotion  = e;
     }
 
+    @override
     Future<Null> draw(CanvasElement canvas) async {
         //TODO figure out more complex things than standing in one spot and twitching later.
         //TODO figure out how i want to do text, emoticons, scale and rotation.
@@ -126,31 +125,6 @@ class AIPet {
 }
 
 
-class AnimationObject {
-    List<CanvasElement> animations = new List<CanvasElement>();
-    int index = 0;
-
-    void addAnimationFrame(CanvasElement canvas, [int index = -13]) {
-        print("adding animation frame");
-        if(index >= 0) {
-            animations[index] = canvas;
-        }else {
-            animations.add(canvas);
-        }
-    }
-
-    CanvasElement getNextFrame() {
-        index ++;
-        if(index >= animations.length) {
-            index = 0;
-        }
-        print("next frame is $index, so that's ${animations[index]}");
-        return animations[index];
-    }
-
-
-
-}
 
 //an emotion has an icon and a list of text equivalents (to go in a text bubble?)
 //kept as instances
