@@ -83,7 +83,7 @@ abstract class Pet {
 
     //all life stages should be centered around this.
     static int timeUnit = 30*60* 1000; //30 minutes
-    // /static int timeUnit = 3* 1000;
+    //DEPRECATED, use the thing in the init instead /static int timeUnit = 3* 1000;
 
 
     int millisecondsToChange = Pet.timeUnit;
@@ -142,7 +142,7 @@ abstract class Pet {
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
-        //if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
+        if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
         hatchDate = new DateTime.now();
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();

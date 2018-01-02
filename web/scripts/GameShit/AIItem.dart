@@ -1,5 +1,7 @@
 import "AIObject.dart";
 import "../Pets/Stat.dart";
+import 'dart:async';
+import 'dart:html';
 /*
     has a list of strings that are possible image files, a string that is it's name (generic troll word)
     soft thing, living thing, food thing, hard thing
@@ -12,6 +14,7 @@ import "../Pets/Stat.dart";
     i.e. tildeath book and skull (hypothetically) both show in same slot, randomly???
  */
 class AIItem extends AIObject {
+    String folder = "images/Items/"; //theoretically can be changed
     List<String> imageLocations;
     //fuzzy friend, sleepy pal, etc. Weird memey shit.
     List<String> trollNames;
@@ -26,6 +29,11 @@ class AIItem extends AIObject {
         makeCurious(curious_value);
         makeLoyal(loyal_value);
         makeExternal(external_value);
+    }
+
+    @override
+    Future<Null> draw(CanvasElement canvas) async {
+        //draw self with rotation and scaling
     }
 
     void makePatience(int value) {

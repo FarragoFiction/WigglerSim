@@ -1,4 +1,7 @@
 import "AIPet.dart";
+import "AIObject.dart";
+import "AIItem.dart";
+
 import 'dart:html';
 import 'dart:async';
 import "package:DollLibCorrect/DollRenderer.dart";
@@ -19,6 +22,8 @@ so the playpen doesn't have a list of wigglers, but a list of AnimatedWigglers??
  */
 class PlayPen {
     List<AIPet> pets = new List<AIPet>();
+    List<AIItem> items = new List<AIItem>();
+
     CanvasElement canvas = new CanvasElement(width: 1000, height: 400);
     String backgroundImage = "images/BroodingCaverns.png";
 
@@ -30,16 +35,23 @@ class PlayPen {
 
     Future<Null> loadPets(List<Pet> potentialGrubs) async {
         int x = 0;
+        Random rand = new Random();
+        rand.nextInt(); //init
         for(Pet p in potentialGrubs) {
             if(p is Grub && pets.length < 4) {
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
+                if(rand.nextBool()) aip.turnWays = true;
                 await aip.setUpIdleAnimation();
-
                 pets.add(aip);
                 x += 200;
                 //return; // this keeps it at one pet at a time.
             }
         }
+    }
+
+    Future<Null> addItem(AIItem item) async {
+        await item.setUpIdleAnimation();
+        items.add(item);
     }
 
     //set the bg to the div so that the canvas can just clear itself instead of redrawing pixels
@@ -54,7 +66,11 @@ class PlayPen {
         Renderer.clearCanvas(canvas);
         print("drawing playpen");
         for(AIPet pet in pets) {
-            pet.draw(canvas); //async
+           await pet.draw(canvas); //async
+        }
+
+        for(AIItem item in items) {
+            await item.draw(canvas); //async
         }
     }
 

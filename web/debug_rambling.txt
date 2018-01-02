@@ -580,7 +580,21 @@ I need to setEmotion before I do anything else though... should do that in contr
 In my head, I want the emotion popups to bob a bit before being dismissed. I'm not sure how willing I
 am to do this right vs fast though.
 
+~~~~~~
+Implementing items.
 
+Test Case:
+
+In controller, create a test item with three names, and three sprites, stats.
+
+Add to playpen.
+
+This causes it to be rendered somewhere randomly (but on the ground).
+
+All wigglers react (no matter where they are).
+
+Then, work on wiggler walk animations.
+Wigglers notice, investigate if they choose to.
 
 
 
