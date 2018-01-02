@@ -30,6 +30,12 @@ abstract class AIObject {
     double _scaleX = 1.0;
     double _scaleY = 1.0;
     double rotation = 0.0;
+    Stat patience;
+    Stat energetic;
+    Stat idealistic;
+    Stat curious;
+    Stat loyal;
+    Stat external;
     AnimationObject idleAnimation = new AnimationObject();
 
 

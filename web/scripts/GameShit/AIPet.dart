@@ -28,6 +28,19 @@ import "AIObject.dart";
 class AIPet extends AIObject {
 
     Grub grub;
+    @override
+    Stat get patience => grub.patience;
+    @override
+    Stat get energetic => grub.energetic;
+    @override
+    Stat get idealistic => grub.idealistic;
+    @override
+    Stat get curious => grub.curious;
+    @override
+    Stat get loyal => grub.loyal;
+    @override
+    Stat get external => grub.external;
+
     AnimationObject idleAnimation = new AnimationObject();
     //will usually be null
     Emotion currentEmotion;
@@ -139,7 +152,12 @@ class Emotion {
     String iconLocation;
     List<String> textChoices;
     CanvasElement cachedIconCanvas;
+
+
+
     Emotion(String this.iconLocation, List<String> this.textChoices);
+
+
 
     //this is such a dope robot thing to call.
     static void initEmotions() {
@@ -147,6 +165,7 @@ class Emotion {
         DIAMOND = new Emotion("diamond",<String>["u gud","pap u","sleep now","soft thing"]);
         CLUBS = new Emotion("clubs",<String>["bad!","why do?","stop!","no!"]);
         SPADE = new Emotion("spade",<String>["hate","u bad","i bite!","bite u"]);
+        //scared: i hide, scawy, bad, go way!
     }
 
     Future<CanvasElement> draw(Grub grub) async {
