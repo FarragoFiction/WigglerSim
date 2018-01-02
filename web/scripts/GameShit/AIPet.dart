@@ -105,7 +105,7 @@ class AIPet extends AIObject {
         CanvasElement petFrame = await drawPet(frame);
         canvas.context2D.drawImage(petFrame,x,y);
 
-        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x+2*frame.width/4,6*y/4);
+        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x+1.8*frame.width/4,4*y/4);
 
     }
 
