@@ -27,6 +27,13 @@ import "AIObject.dart";
 
 class AIPet extends AIObject {
 
+    //grubs are too big
+    @override
+    double scaleX = 0.5;
+    @override
+    double scaleY = 0.5;
+
+
     Grub grub;
     @override
     Stat get patience => grub.patience;
@@ -45,7 +52,7 @@ class AIPet extends AIObject {
     //will usually be null
     Emotion currentEmotion;
 
-    AIPet(Grub this.grub, {int x: 0, int y: 100}):super(x: x, y:y) {
+    AIPet(Grub this.grub, {int x: 0, int y: 150}):super(x: x, y:y) {
     }
 
     //grub body 0 and grub body 1
@@ -93,9 +100,27 @@ class AIPet extends AIObject {
             emotionCanvas = await currentEmotion.draw(grub);
             print("emotion canvas is $emotionCanvas");
         }
-        canvas.context2D.drawImage(frame,x,y);
-        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x+3*frame.width/4,y);
+        //TODO apply rotation and scaling to this.
+        //canvas.context2D.drawImage(frame,x,y);
+        CanvasElement petFrame = await drawPet(frame);
+        canvas.context2D.drawImage(petFrame,x,y);
 
+        if(emotionCanvas != null) canvas.context2D.drawImage(emotionCanvas,x+2*frame.width/4,6*y/4);
+
+    }
+
+    Future<CanvasElement> drawPet(CanvasElement canvas) async {
+        CanvasElement ret = new CanvasElement(width: grub.doll.width, height: grub.doll.height);
+        ret.context2D.translate(ret.width/2, ret.height/2);
+        ret.context2D.rotate(rotation);
+
+        if(turnWays) {
+            ret.context2D.scale(-1*scaleX, scaleY);
+        }else {
+            ret.context2D.scale(scaleX, scaleY);
+        }
+        ret.context2D.drawImage(canvas, -ret.width/2, -ret.height/2);
+        return ret;
     }
 
 

@@ -27,8 +27,9 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 abstract class AIObject {
     int x;
     int y;
-    double _scaleX = 1.0;
-    double _scaleY = 1.0;
+    bool turnWays = false;
+    double scaleX = 1.0;
+    double scaleY = 1.0;
     double rotation = 0.0;
     Stat patience;
     Stat energetic;

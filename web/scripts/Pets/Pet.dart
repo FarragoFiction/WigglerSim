@@ -83,7 +83,7 @@ abstract class Pet {
 
     //all life stages should be centered around this.
     static int timeUnit = 30*60* 1000; //30 minutes
-    //static int timeUnit = 3* 1000;
+    // /static int timeUnit = 3* 1000;
 
 
     int millisecondsToChange = Pet.timeUnit;
@@ -141,6 +141,7 @@ abstract class Pet {
     List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
+        if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
         hatchDate = new DateTime.now();
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();

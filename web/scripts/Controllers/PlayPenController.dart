@@ -44,8 +44,27 @@ Future<Null> start() async {
         }
         playPen.draw();
     });
+
+
+    ButtonElement b3 = new ButtonElement();
+    b3.text = "Deploy Item";
+    b3.onClick.listen((e)
+    {
+        //TODO
+        /*
+            TODO create a sample item. add it to playpen.
+
+            make sure it's on floor.
+
+            What does that mean? Have pet react?
+         */
+    });
+
+
     querySelector("#output").append(b);
     querySelector("#output").append(b2);
+    querySelector("#output").append(b3);
+
 
 
 }
