@@ -95,7 +95,7 @@ class Troll extends Pet{
         List<String> badThing = <String>["threats","danger","enemies","predators","drones","other trolls","other lusii"];
         List<String> goodThing = <String>["vegetables","food","safety","water","shelter","meat","friends","self-esteem"];
         List<String> lifeSkill = <String>["fight","scavenge","hide","forage","collect food","hoard resources","share","cooperate","hunt"];
-        List<String> violentLifeSkill = <String>["fight","strife","kill","murder","hunt","assasinate"];
+        List<String> violentLifeSkill = <String>["fight","strife","kill","murder","hunt","assassinate"];
 
 
         List<String> actions1 = <String>["protected them from ${rand.pickFrom(badThing)}","made sure they got enough ${rand.pickFrom(goodThing)}","taught them how to ${rand.pickFrom(lifeSkill)}","made sure they knew how to ${rand.pickFrom(violentLifeSkill)}"];
