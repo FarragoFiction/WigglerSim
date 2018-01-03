@@ -65,13 +65,18 @@ class PlayPen {
     Future<Null> draw() async {
         Renderer.clearCanvas(canvas);
         print("drawing playpen");
+
+        //in testing, pressing button too much makes it crash from concurrent mod
+        List<AIItem> copyItems = new List.from(items);
+        for(AIItem item in copyItems) {
+            await item.draw(canvas); //async
+        }
+
         for(AIPet pet in pets) {
            await pet.draw(canvas); //async
         }
 
-        for(AIItem item in items) {
-            await item.draw(canvas); //async
-        }
+
     }
 
 }
