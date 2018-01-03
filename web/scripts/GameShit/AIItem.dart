@@ -39,8 +39,10 @@ class AIItem extends AIObject {
 
     //depending on my image size, i need to be rendered in different places to be on the ground.
     void placeOnGround(CanvasElement groundCanvas) {
-        x = new Random().nextInt(groundCanvas.width);
+        Random rand = new Random();
+        x = rand.nextInt(groundCanvas.width);
         y = groundCanvas.height - canvas.height;
+        if(rand.nextBool()) turnWays = true;
     }
 
     Future<Null> pickImage() async {
