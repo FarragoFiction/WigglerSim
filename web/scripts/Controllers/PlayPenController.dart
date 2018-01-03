@@ -49,7 +49,7 @@ Future<Null> start() async {
     b3.text = "Deploy Item";
     b3.onClick.listen((e)
     {
-        AIItem item = new AIItem(<String>["Smupet_Blu.png","redscale.png","eldritchplushie.png"],<String>["Soft Friend","Nap Buddy","Plush Pal"], curious_value: 5);
+        AIItem item = new AIItem(<String>["Soft Friend","Nap Buddy","Plush Pal"],<String>["Smupet_Blu.png","redscale.png","eldritchplushie.png"], curious_value: 5);
         playPen.addItem(item);
         playPen.draw();
     });

@@ -2,6 +2,8 @@ import "AIObject.dart";
 import "../Pets/Stat.dart";
 import 'dart:async';
 import 'dart:html';
+import "package:DollLibCorrect/DollRenderer.dart";
+
 /*
     has a list of strings that are possible image files, a string that is it's name (generic troll word)
     soft thing, living thing, food thing, hard thing
@@ -16,8 +18,12 @@ import 'dart:html';
 class AIItem extends AIObject {
     String folder = "images/Items/"; //theoretically can be changed
     List<String> imageLocations;
+    CanvasElement canvas;
     //fuzzy friend, sleepy pal, etc. Weird memey shit.
     List<String> trollNames;
+
+    ImageElement imageElement;
+
 
 
 
@@ -31,9 +37,42 @@ class AIItem extends AIObject {
         makeExternal(external_value);
     }
 
+    //depending on my image size, i need to be rendered in different places to be on the ground.
+    void placeOnGround(CanvasElement groundCanvas) {
+        y = groundCanvas.height - canvas.height;
+    }
+
+    Future<Null> pickImage() async {
+        Random rand = new Random();
+        String chosen = rand.pickFrom(imageLocations);
+        imageElement = await Loader.getResource(("$folder$chosen"));
+    }
+
     @override
-    Future<Null> draw(CanvasElement canvas) async {
+    Future<Null> draw(CanvasElement destination) async {
         //draw self with rotation and scaling
+        if(imageElement == null) await pickImage();
+        if(canvas == null) {
+            //draw image to canvas
+            canvas = new CanvasElement(width: imageElement.width, height: imageElement.height);
+            canvas.context2D.drawImage(imageElement, 0, 0);
+            placeOnGround(destination);
+        }
+        //draw canvas to destination with rotation and scaling
+        CanvasElement ret = new CanvasElement(width: imageElement.width, height: imageElement.height);
+        ///ret.context2D.fillRect(0,0, ret.width, ret.height);
+        ret.context2D.translate(ret.width/2, ret.height/2);
+        ret.context2D.rotate(rotation);
+
+        if(turnWays) {
+            ret.context2D.scale(-1*scaleX, scaleY);
+        }else {
+            ret.context2D.scale(scaleX, scaleY);
+        }
+        ret.context2D.drawImage(canvas, -ret.width/2, -ret.height/2);
+
+        destination.context2D.drawImage(ret,x,y);
+
     }
 
     void makePatience(int value) {
