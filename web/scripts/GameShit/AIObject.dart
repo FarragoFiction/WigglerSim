@@ -86,7 +86,7 @@ class AnimationObject {
     int index = 0;
 
     void addAnimationFrame(CanvasElement canvas, [int index = -13]) {
-        print("adding animation frame");
+        //print("adding animation frame");
         if(index >= 0) {
             animations[index] = canvas;
         }else {
@@ -99,7 +99,7 @@ class AnimationObject {
         if(index >= animations.length) {
             index = 0;
         }
-        print("next frame is $index, so that's ${animations[index]}");
+        //print("next frame is $index, so that's ${animations[index]}");
         return animations[index];
     }
 

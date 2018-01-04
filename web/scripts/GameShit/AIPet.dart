@@ -100,11 +100,11 @@ class AIPet extends AIObject {
         //TODO figure out more complex things than standing in one spot and twitching later.
         //TODO figure out how i want to do text, emoticons, scale and rotation.
         CanvasElement frame = idleAnimation.getNextFrame();
-        print("frame is $frame and canvas is $canvas");
+        //print("frame is $frame and canvas is $canvas");
         CanvasElement emotionCanvas = null;
         if(currentEmotion != null) {
             emotionCanvas = await currentEmotion.draw(grub);
-            print("emotion canvas is $emotionCanvas");
+            //print("emotion canvas is $emotionCanvas");
         }
         //canvas.context2D.drawImage(frame,x,y);
         CanvasElement petFrame = await drawPet(frame);
@@ -412,9 +412,9 @@ class Emotion {
         BORED = new Emotion(0,"bored",<String>["bored","why","is ok"]);
 
         //bad: angery, fear, sad
-        ANGERY = new Emotion(-1,"angery",<String>["i bite!","hate thing","angwy","fight thing", "*incoherent screeching*"]);
+        ANGERY = new Emotion(-1,"angery",<String>["i bite!","hate thing","angwy","fight thing", "*screech*"]);
         FEAR = new Emotion(-1,"fear",<String>["i scare","go away","scawy","no","i hide", "*shivering*"]);
-        SAD = new Emotion(-1,"sad",<String>["sad thing","sad","*incoherent crying*"]);
+        SAD = new Emotion(-1,"sad",<String>["sad thing","sad","*cry*",'heck',"dang"]);
 
     }
 
@@ -442,7 +442,7 @@ class Emotion {
             txtWidth = textCanvas.context2D.measureText(text).width.ceil() + buffer;
             //textCanvas.width = txtWidth;
 
-            print ('going to display text $text');
+            //print ('going to display text $text');
             textCanvas.context2D.fillStyle = "#ffffff";
             textCanvas.context2D.strokeStyle = "#000000";
             textCanvas.context2D.fillRect(0, 0, txtWidth, txtHeight);
