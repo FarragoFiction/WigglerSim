@@ -100,7 +100,6 @@ class AIPet extends AIObject {
             emotionCanvas = await currentEmotion.draw(grub);
             print("emotion canvas is $emotionCanvas");
         }
-        //TODO apply rotation and scaling to this.
         //canvas.context2D.drawImage(frame,x,y);
         CanvasElement petFrame = await drawPet(frame);
         canvas.context2D.drawImage(petFrame,x,y);
@@ -124,13 +123,72 @@ class AIPet extends AIObject {
     }
 
 
-    void getPositiveEmotion() {
-        //TODO
+
+    //happy, love, or cool vaguely related to stats
+    Emotion getPositiveEmotion() {
+        //cool is patient, calm, accepting, free spirited
+        int coolPoints = 0;
+        //love is idealistic, loyal, energetic, external
+        int lovePoints = 0;
+        //happy is internal, realistic, curious, impatient
+        int happyPoints = 0;
+
+        if(coolPoints > lovePoints && coolPoints > happyPoints) {
+            return Emotion.COOL;
+        }else if(lovePoints > happyPoints) {
+            return Emotion.LOVE;
+        }else {
+            return Emotion.HAPPY;
+        }
     }
 
+
+
+    //angery, fear, sad,vaguely related to stats
     //some grubs get scared, others get angry
-    void getNegativeEmotion() {
+    Emotion getNegativeEmotion() {
         //TODO
+        //internal, loyal, curious,energetic
+        int fearPoints = 0;
+        //realisitc, free-spirited, impatient, external
+        int angeryPoints = 0;
+        //accepting, calm, patient, idealistic
+        int sadPoints = 0;
+
+        if(angeryPoints > fearPoints && angeryPoints > sadPoints) {
+            return Emotion.ANGERY;
+        }else if(fearPoints > sadPoints) {
+            return Emotion.FEAR;
+        }else {
+            return Emotion.SAD;
+        }
+    }
+
+
+    /*
+        Stat patience;
+    Stat energetic;
+    Stat idealistic;
+    Stat curious;
+    Stat loyal;
+    Stat external;
+     */
+
+    //sleep, bored, or meh are more randomly distributed
+    Emotion getNeutralEmotion() {
+        //patient, energetic, idealistic, internal
+        int sleepPoints = 0;
+        //calm, realistic, accepting, freespirited
+        int boredPoints = 0;
+        //curious, loyal, external, impatient
+        int mehPoints = 0;
+        if(sleepPoints > boredPoints && sleepPoints > mehPoints) {
+            return Emotion.SLEEP;
+        }else if(boredPoints > mehPoints) {
+            return Emotion.BORED;
+        }else {
+            return Emotion.MEH;
+        }
     }
 
     //given my stats, do i like things i've seen before?
@@ -143,8 +201,17 @@ class AIPet extends AIObject {
         throw "TODO";
     }
 
+    void giveObject() {
+        /*
+        TODO:
+            first, it judges the object. If it likes it, 2x points, if it does not, 0.5 times.
+            then, apply objects stats to the grub.
+            judging changes emotional state.
+         */
+    }
+
     //can be positive or negative about an object
-    bool judgeObject() {
+    void judgeObject() {
         /*
             TODO: Take in an AIObject
             First it judges how similar the object is to me.
@@ -173,24 +240,66 @@ class Emotion {
     static Emotion CLUBS;
     static Emotion SPADE;
 
+    static Emotion HAPPY;
+    static Emotion LOVE;
+    static Emotion COOL;
+
+    //meme misspelling
+    static Emotion ANGERY;
+    static Emotion FEAR;
+    static Emotion SAD;
+
+    static Emotion SLEEP;
+    static Emotion BORED;
+    static Emotion MEH;
+
+    static Emotion SHOUTPOLE;
+    static Emotion SURPRISENOODLE;
+
+    static int GOOD = 1;
+    static int NEUTRAL = 0;
+    static int BAD = -1;
+
     static String folder = "images/Emoticons";
     String iconLocation;
     List<String> textChoices;
     CanvasElement cachedIconCanvas;
 
+    int value;
 
 
-    Emotion(String this.iconLocation, List<String> this.textChoices);
+
+    Emotion(int this.value, String this.iconLocation, List<String> this.textChoices);
 
 
 
     //this is such a dope robot thing to call.
     static void initEmotions() {
-        HEART = new Emotion("heart",<String>["wuv you","wuv","luv you","luv"]);
-        DIAMOND = new Emotion("diamond",<String>["u gud","pap u","sleep now","soft thing"]);
-        CLUBS = new Emotion("clubs",<String>["bad!","why do?","stop!","no!"]);
-        SPADE = new Emotion("spade",<String>["hate","u bad","i bite!","bite u"]);
-        //scared: i hide, scawy, bad, go way!
+        //for grubs
+        HEART = new Emotion(1,"heart",<String>["wuv you","wuv","luv you","luv"]);
+        DIAMOND = new Emotion(1,"diamond",<String>["u gud","pap u","sleep now","soft thing"]);
+        CLUBS = new Emotion(-1,"clubs",<String>["bad!","why do?","stop!","no!"]);
+        SPADE = new Emotion(-1,"spade",<String>["hate","u bad","i bite!","bite u"]);
+
+        SURPRISENOODLE = new Emotion(0,"surpriseNoodle",<String>["?"]);
+        SHOUTPOLE = new Emotion(0,"shoutPole",<String>["!"]);
+
+
+        //good:  happy, love, or cool
+        HAPPY = new Emotion(1,"happy",<String>["gud thing","wike thing","is good","happy"]);
+        LOVE = new Emotion(1,"love",<String>["best thing","wuv thing","is mine","my thing"]);
+        COOL = new Emotion(1,"cool",<String>["coo thing","luk thing","ok thing","is coo"]);
+
+        //neutral: sleep, bored, or meh
+        SLEEP = new Emotion(0,"sleep",<String>["zzz","sweepy","yawn"]);
+        MEH = new Emotion(0,"meh",<String>["oh","...","ok","is thing"]);
+        BORED = new Emotion(0,"bored",<String>["bored","why","is ok"]);
+
+        //bad: angery, fear, sad
+        ANGERY = new Emotion(-1,"angery",<String>["i bite!","hate thing","angwy","fight thing", "*incoherent screeching*"]);
+        FEAR = new Emotion(-1,"fear",<String>["i scare","go away","scawy","no","i hide", "*shivering*"]);
+        SAD = new Emotion(-1,"sad",<String>["sad thing","sad","*incoherent crying*"]);
+
     }
 
     Future<CanvasElement> draw(Grub grub) async {

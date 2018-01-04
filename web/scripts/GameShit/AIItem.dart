@@ -16,6 +16,12 @@ import "package:DollLibCorrect/DollRenderer.dart";
     i.e. tildeath book and skull (hypothetically) both show in same slot, randomly???
  */
 class AIItem extends AIObject {
+
+    static int NORMAL_PLUS = 5;
+    static int NORMAL_MINUS = -5;
+
+
+
     String folder = "images/Items/"; //theoretically can be changed
     List<String> imageLocations;
     CanvasElement canvas;
