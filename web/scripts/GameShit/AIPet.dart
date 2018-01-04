@@ -248,24 +248,54 @@ class AIPet extends AIObject {
 
     //given my stats, do i like things i've seen before?
     int likesFamiliar() {
-        throw "TODO";
+        int likesFamiliar = 0;
+        if(grub.isPatient) likesFamiliar +=1;
+        if(grub.isImpatient) likesFamiliar += -1;
+
+        if(grub.isIdealistic) likesFamiliar  += -1;
+        if(grub.isRealistic) likesFamiliar  += 1;
+
+        if(grub.isEnergetic) likesFamiliar  += -1;
+        if(grub.isCalm) likesFamiliar  += 1;
+
+        if(grub.isCurious) likesFamiliar  +=  -1;
+        if(!grub.isAccepting) likesFamiliar  +=1;
+
+        if(grub.isLoyal) likesFamiliar  +=1;
+        if(grub.isFreeSprited) likesFamiliar  +=-1;
+
+        if(grub.isExternal) likesFamiliar  +=-1;
+        if(!grub.isInternal) likesFamiliar  +=1;
+        print("${grub.name} likes familiar is $likesFamiliar");
+        return likesFamiliar;
+
     }
 
-    //given my stats, do i like things similar to me?
+    //given my stats, do i like things similar to me?  postive for yes, negative for no.
     int likesSimilar() {
-        throw "TODO";
+        int likesSimilar = 0;
+        if(grub.isPatient) likesSimilar += -1;
+        if(grub.isImpatient) likesSimilar += 1;
+
+        if(grub.isIdealistic) likesSimilar  += 1;
+        if(grub.isRealistic) likesSimilar  += -1;
+
+        if(grub.isEnergetic) likesSimilar  += -1;
+        if(grub.isCalm) likesSimilar  += 1;
+
+        if(grub.isCurious) likesSimilar  +=  1;
+        if(!grub.isAccepting) likesSimilar  +=-1;
+
+        if(grub.isLoyal) likesSimilar  +=1;
+        if(grub.isFreeSprited) likesSimilar  +=-1;
+
+        if(grub.isExternal) likesSimilar  +=-1;
+        if(!grub.isInternal) likesSimilar  +=1;
+        print("${grub.name} likes similar is $likesSimilar");
+        return likesSimilar;
     }
 
     void giveObject(AIItem item) {
-        /*
-        TODO:
-            first, it judges the object. If it likes it, 2x points, if it does not, 0.5 times.
-            then, apply objects stats to the grub.
-            judging changes emotional state.
-
-            so, just ask what your current emotional state is and apply the bonus.
-            if it's somehow null, do nothing.
-         */
         double multiplier = 1.0;
         judgeObject(item);
 
@@ -288,34 +318,22 @@ class AIPet extends AIObject {
 
     //can be positive or negative about an object
     void judgeObject(AIItem item) {
-        /*
-            TODO: Take in an AIObject
-            First it judges how similar the object is to me.
-    Then it decides whether similarity is a good or bad thing.
-
-    THEN it checks the grubs memory to see if it's seen that object before
-        (item name or stat match, both work, so it means you like familiar things even if you
-        haven't seen that exact thing before)
-
-    Then it decides whether familiarity is a good or bad thing.
-
-    ULTIMATELY, it applies either a positive, negative, or neutral emotion.
-
-
-        */
         int reactionToSimilar = likesSimilar();
-        int similarityRatingValue = similarityRating(item);
+        int similarityRatingValue = similarityRating(item) * reactionToSimilar;
 
         int reactionToFamiliar = likesFamiliar();
-        int familiarityRatingValue = isFamiliarItem(item); //TODO implement this
-        //is the item similar?
-        //do i like similar?
+        int familiarityRatingValue = isFamiliarItem(item) * reactionToFamiliar;
 
-        //is the item familiar?
-        //do i like familiar?
+        //i might not like what it is, but be comforted by familarity, etc etc.
+        int opinionOnItem = similarityRatingValue + familiarityRatingValue;
 
-
-        setEmotion(getNeutralEmotion());
+        if(opinionOnItem > 0) {
+            setEmotion(getPositiveEmotion());
+        }if(opinionOnItem < 0) {
+            setEmotion(getNegativeEmotion());
+        }else {
+            setEmotion(getNeutralEmotion());
+        }
         print("judged ${item.trollNames}, emotion is ${currentEmotion.iconLocation}");
     }
 
