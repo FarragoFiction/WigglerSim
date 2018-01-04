@@ -133,6 +133,21 @@ class AIPet extends AIObject {
         //happy is internal, realistic, curious, impatient
         int happyPoints = 0;
 
+        if(grub.isPatient) coolPoints ++;
+        if(grub.isCalm) coolPoints ++;
+        if(grub.isAccepting) coolPoints ++;
+        if(grub.isFreeSprited) coolPoints ++;
+
+        if(grub.isIdealistic) lovePoints ++;
+        if(grub.isLoyal) lovePoints ++;
+        if(grub.isEnergetic) lovePoints ++;
+        if(!grub.isExternal) lovePoints ++;
+
+        if(grub.isInternal) happyPoints ++;
+        if(grub.isRealistic) happyPoints ++;
+        if(grub.isCurious) happyPoints ++;
+        if(!grub.isImpatient) happyPoints ++;
+
         if(coolPoints > lovePoints && coolPoints > happyPoints) {
             return Emotion.COOL;
         }else if(lovePoints > happyPoints) {
@@ -154,6 +169,21 @@ class AIPet extends AIObject {
         int angeryPoints = 0;
         //accepting, calm, patient, idealistic
         int sadPoints = 0;
+
+        if(grub.isInternal) fearPoints ++;
+        if(grub.isLoyal) fearPoints ++;
+        if(grub.isCurious) fearPoints ++;
+        if(grub.isEnergetic) fearPoints ++;
+
+        if(grub.isRealistic) angeryPoints ++;
+        if(grub.isFreeSprited) angeryPoints ++;
+        if(grub.isImpatient) angeryPoints ++;
+        if(!grub.isExternal) angeryPoints ++;
+
+        if(grub.isAccepting) sadPoints ++;
+        if(grub.isCalm) sadPoints ++;
+        if(grub.isPatient) sadPoints ++;
+        if(!grub.isIdealistic) sadPoints ++;
 
         if(angeryPoints > fearPoints && angeryPoints > sadPoints) {
             return Emotion.ANGERY;
@@ -182,6 +212,22 @@ class AIPet extends AIObject {
         int boredPoints = 0;
         //curious, loyal, external, impatient
         int mehPoints = 0;
+
+        if(grub.isPatient) sleepPoints ++;
+        if(grub.isEnergetic) sleepPoints ++;
+        if(grub.isIdealistic) sleepPoints ++;
+        if(grub.isInternal) sleepPoints ++;
+
+        if(grub.isCalm) boredPoints ++;
+        if(grub.isRealistic) boredPoints ++;
+        if(grub.isAccepting) boredPoints ++;
+        if(!grub.isFreeSprited) boredPoints ++;
+
+        if(grub.isCurious) mehPoints ++;
+        if(grub.isLoyal) mehPoints ++;
+        if(grub.isExternal) mehPoints ++;
+        if(!grub.isImpatient) mehPoints ++;
+
         if(sleepPoints > boredPoints && sleepPoints > mehPoints) {
             return Emotion.SLEEP;
         }else if(boredPoints > mehPoints) {

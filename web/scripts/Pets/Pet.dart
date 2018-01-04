@@ -159,6 +159,55 @@ abstract class Pet {
         makeExternal(null);
     }
 
+    bool get isPatient {
+        return patience.value > 0;
+    }
+
+    bool get isEnergetic {
+        return energetic.value > 0;
+    }
+
+    bool get isIdealistic {
+        return idealistic.value > 0;
+    }
+
+    bool get isCurious {
+        return curious.value > 0;
+    }
+
+    bool get isLoyal {
+        return loyal.value > 0;
+    }
+
+    bool get isExternal {
+        return external.value > 0;
+    }
+
+    bool get isImpatient {
+        return patience.value <= 0;
+    }
+
+    bool get isCalm {
+        return energetic.value <= 0;
+    }
+
+    bool get isRealistic {
+        return idealistic.value <= 0;
+    }
+
+    bool get isAccepting {
+        return curious.value <= 0;
+    }
+
+    bool get isFreeSprited {
+        return loyal.value <= 0;
+    }
+
+    bool get isInternal {
+        return external.value <= 0;
+    }
+
+
     void makePatience(int value) {
         patience = new Stat(value, "Patient","Impatient", Stat.patienceFlavor, Stat.impatienceFlavor);
     }
