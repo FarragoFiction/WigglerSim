@@ -15,8 +15,8 @@ class JSONObject extends Object with MapMixin<String,String>{
         JSONObject test = new JSONObject();
         test["HELLO"] = "WORLD ";
         test["GOODBYE"] = "WORLD BUT A SECOND TIME ";
-        print("Encoded: ${JSON.encode(test)}");
-        print("String: ${test}");
+        //print("Encoded: ${JSON.encode(test)}");
+        //print("String: ${test}");
 
         json  = JSON.decode(j);
     }

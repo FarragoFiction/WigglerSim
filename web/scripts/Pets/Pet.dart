@@ -244,9 +244,9 @@ abstract class Pet {
 
     //it doesn't like treating the json object i got as a string for whatever reason.
     static Pet loadPetFromJSON(String json, [JSONObject jsonObj]) {
-        print("jsonObj is ${jsonObj}");
+        //print("jsonObj is ${jsonObj}");
         if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
-        print("Loading abstract pet from json, obj is ${jsonObj}");
+        //print("Loading abstract pet from json, obj is ${jsonObj}");
         if(jsonObj[TYPE] == GRUB) {
             return new Grub.fromJSON(null,jsonObj);
         }else if(jsonObj[TYPE] == EGG) {

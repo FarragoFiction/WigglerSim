@@ -47,18 +47,51 @@ abstract class AIObject {
 
     //https://codereview.stackexchange.com/questions/107635/checking-if-two-numbers-have-the-same-sign
     bool sameSign(int num1, int num2) {
+        print("similarity rating: does $num1 have the same sign as $num2? ${(num1 ^ num2) >= 0}");
         return (num1 ^ num2) >= 0;
     }
 
+    @override
+    String toString() {
+        return "AiObject";
+    }
+
     int similarityRating(AIObject obj) {
+        print("getting similarity rating between ${this} and ${obj}");
+
         int similarity = 0;
         //for each stat we have the same value for, add a point
-        if(sameSign(patience.value, obj.patience.value)) similarity ++;
-        if(sameSign(curious.value, obj.curious.value)) similarity ++;
-        if(sameSign(energetic.value, obj.energetic.value)) similarity ++;
-        if(sameSign(idealistic.value, obj.idealistic.value)) similarity ++;
-        if(sameSign(loyal.value, obj.loyal.value)) similarity ++;
-        if(sameSign(external.value, obj.external.value)) similarity ++;
+        //for objects, assume stat of zero means neither way
+        if(obj.patience.value != 0 && sameSign(patience.value, obj.patience.value)) {
+            similarity ++;
+        }else if(obj.patience.value != 0)  {
+            similarity += -1;
+        }
+        if(obj.curious.value != 0 && sameSign(curious.value, obj.curious.value)){
+            similarity ++;
+        }else if(obj.curious.value != 0) {
+            similarity += -1;
+        }
+        if(obj.energetic.value != 0 &&sameSign(energetic.value, obj.energetic.value)){
+            similarity ++;
+        }else if(obj.energetic.value != 0)  {
+            similarity += -1;
+        }
+        if(obj.idealistic.value != 0 &&sameSign(idealistic.value, obj.idealistic.value)){
+            similarity ++;
+        }else if(obj.idealistic.value != 0)  {
+            similarity += -1;
+        }
+        if(obj.loyal.value != 0 &&sameSign(loyal.value, obj.loyal.value)){ similarity ++;
+        }else if(obj.loyal.value != 0)  {
+            similarity += -1;
+        }
+        if(obj.external.value != 0 &&sameSign(external.value, obj.external.value)){
+            similarity ++;
+        }else if(obj.external.value != 0) {
+            similarity += -1;
+        }
+        print("similarity rating between ${this} and ${obj} is $similarity");
         return similarity;
     }
 

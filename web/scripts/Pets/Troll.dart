@@ -33,7 +33,7 @@ class Troll extends Pet{
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
         assignSign();
         //print("doll for troll is $doll");
-        print ("loaded $name");
+       // print ("loaded $name");
     }
 
     //troll signgs are based on stats (which are low key the aspects)

@@ -35,7 +35,7 @@ class Egg extends Pet{
 
     Egg.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
-        print ("loaded $name");
+        //print ("loaded $name");
     }
 
 

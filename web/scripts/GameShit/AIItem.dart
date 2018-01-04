@@ -45,6 +45,11 @@ class AIItem extends AIObject {
         makeExternal(external_value);
     }
 
+    @override
+    String toString() {
+        return "${trollNames}";
+    }
+
     //depending on my image size, i need to be rendered in different places to be on the ground.
     void placeOnGround(CanvasElement groundCanvas) {
         Random rand = new Random();

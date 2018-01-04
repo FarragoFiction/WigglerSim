@@ -30,7 +30,7 @@ class PetInventory {
     PetInventory();
 
     PetInventory.fromJSON(String json){
-        print("loading pet inventory with json $json");
+        //print("loading pet inventory with json $json");
         loadFromJSON(json);
     }
 
@@ -296,7 +296,7 @@ class PetInventory {
         JSONObject json = new JSONObject();
         List<JSONObject> jsonArray = new List<JSONObject>();
         for(Pet p in pets) {
-            print("Saving ${p.name}");
+           // print("Saving ${p.name}");
             jsonArray.add(p.toJson());
         }
         json[PETSLIST] = jsonArray.toString(); //will this work?
@@ -304,12 +304,12 @@ class PetInventory {
 
         jsonArray = new List<JSONObject>();
         for(Troll p in alumni) {
-            print("Saving ${p.name}");
+            //print("Saving ${p.name}");
             jsonArray.add(p.toJson());
         }
         json[ALUMNI] = jsonArray.toString(); //will this work?
 
-        print("pet inventory json is: ${json} and pets are ${pets.length}");
+        //print("pet inventory json is: ${json} and pets are ${pets.length}");
         return json;
     }
 

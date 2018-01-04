@@ -316,9 +316,15 @@ class AIPet extends AIObject {
         GameObject.instance.save();
     }
 
+    @override
+    String toString() {
+        return "${grub.name}";
+    }
+
     //can be positive or negative about an object
     void judgeObject(AIItem item) {
         int reactionToSimilar = likesSimilar();
+        print("getting simulatity rating");
         int similarityRatingValue = similarityRating(item) * reactionToSimilar;
 
         int reactionToFamiliar = likesFamiliar();

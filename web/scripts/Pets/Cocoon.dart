@@ -27,7 +27,7 @@ class Cocoon extends Pet{
 
     Cocoon.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
-        print ("loaded $name");
+       // print ("loaded $name");
     }
 
 

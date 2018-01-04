@@ -141,7 +141,7 @@ class Player {
     //TODO convert self to json (including pet inventory) to save in this localStorage
     void save() {
         String json = toJson().toString();
-        print("saving player ${json}. Pet inventory has ${petInventory.pets.length} in it.");
+        //print("saving player ${json}. Pet inventory has ${petInventory.pets.length} in it.");
         window.localStorage[DOLLSAVEID] = json;
     }
 

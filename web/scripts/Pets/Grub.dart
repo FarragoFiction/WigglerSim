@@ -29,7 +29,7 @@ class Grub extends Pet{
 
   Grub.fromJSON(String json, [JSONObject jsonObj]) : super(null){
     loadFromJSON(json, jsonObj);
-    print ("loaded $name");
+    //print ("loaded $name");
     //at half way mark, eyes turn yellow like a trolls.
     if(percentToChange > 0.5) {
       HomestuckPalette p = doll.palette as HomestuckPalette;
