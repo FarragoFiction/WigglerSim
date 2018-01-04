@@ -19,6 +19,11 @@ class PetInventory {
 
     List<Pet> pets = new List<Pet>();
     //for now just for fun but later could be used for interesting things
+    //like having life events and causes of death change based on current empress
+    //if violent empress, odds of violent death go up
+    //if non violent, odds go down, and mutants have no extra cause of death
+    //how to determine if violent. extra non stat bool?
+    //maybe also influences game features. option to cull grubs if you have a violent empress.
     Pet rulingEmpress;
     List<Troll> alumni = new List<Troll>();
 
