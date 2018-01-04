@@ -51,6 +51,11 @@ class PlayPen {
 
     Future<Null> addItem(AIItem item) async {
         await item.setUpIdleAnimation();
+
+        //TODO eventually, only give them the item if they go up to it.
+        for(AIPet p in pets) {
+            p.giveObject(item);
+        }
         items.add(item);
     }
 

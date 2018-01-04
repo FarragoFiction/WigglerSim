@@ -23,6 +23,9 @@ import 'dart:html';
 import 'dart:async';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "AIObject.dart";
+import "GameObject.dart";
+import "AIItem.dart";
+
 
 
 class AIPet extends AIObject {
@@ -247,17 +250,37 @@ class AIPet extends AIObject {
         throw "TODO";
     }
 
-    void giveObject() {
+    void giveObject(AIItem item) {
         /*
         TODO:
             first, it judges the object. If it likes it, 2x points, if it does not, 0.5 times.
             then, apply objects stats to the grub.
             judging changes emotional state.
+
+            so, just ask what your current emotional state is and apply the bonus.
+            if it's somehow null, do nothing.
          */
+        double multiplier = 1.0;
+        judgeObject(item);
+        if(currentEmotion != null) {
+            if(currentEmotion.value > 0) multiplier = 2.0;
+            if(currentEmotion.value<0) multiplier = 0.5;
+        }
+
+        //TODO for stat in item stats, apply that stat to the grub. (eh, i'll just do it by hand, only 6 of them)
+        //SAVE.
+        grub.patience.value += (item.patience.value * multiplier).round();
+        grub.curious.value += (item.curious.value * multiplier).round();
+        grub.external.value += (item.external.value * multiplier).round();
+        grub.idealistic.value += (item.idealistic.value * multiplier).round();
+        grub.energetic.value += (item.energetic.value * multiplier).round();
+        grub.loyal.value += (item.loyal.value * multiplier).round();
+
+        GameObject.instance.save();
     }
 
     //can be positive or negative about an object
-    void judgeObject() {
+    void judgeObject(AIItem item) {
         /*
             TODO: Take in an AIObject
             First it judges how similar the object is to me.
