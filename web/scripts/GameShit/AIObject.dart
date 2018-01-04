@@ -25,6 +25,7 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 
 
 abstract class AIObject {
+    int id;
     int x;
     int y;
     bool turnWays = false;
@@ -42,6 +43,23 @@ abstract class AIObject {
 
 
     AIObject({int this.x: 0, int this.y: 100}) {
+    }
+
+    //https://codereview.stackexchange.com/questions/107635/checking-if-two-numbers-have-the-same-sign
+    bool sameSign(int num1, int num2) {
+        return (num1 ^ num2) >= 0;
+    }
+
+    int similarityRating(AIObject obj) {
+        int similarity = 0;
+        //for each stat we have the same value for, add a point
+        if(sameSign(patience.value, obj.patience.value)) similarity ++;
+        if(sameSign(curious.value, obj.curious.value)) similarity ++;
+        if(sameSign(energetic.value, obj.energetic.value)) similarity ++;
+        if(sameSign(idealistic.value, obj.idealistic.value)) similarity ++;
+        if(sameSign(loyal.value, obj.loyal.value)) similarity ++;
+        if(sameSign(external.value, obj.external.value)) similarity ++;
+        return similarity;
     }
 
     //grub body 0 and grub body 1

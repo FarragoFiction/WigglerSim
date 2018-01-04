@@ -56,6 +56,9 @@ class AIPet extends AIObject {
     Emotion currentEmotion;
 
     AIPet(Grub this.grub, {int x: 0, int y: 150}):super(x: x, y:y) {
+        if(Emotion.HEART == null) {
+            Emotion.initEmotions();
+        }
     }
 
     //grub body 0 and grub body 1
@@ -232,21 +235,24 @@ class AIPet extends AIObject {
         if(!grub.isImpatient) mehPoints ++;
 
         if(sleepPoints > boredPoints && sleepPoints > mehPoints) {
+            print ("sleep");
             return Emotion.SLEEP;
         }else if(boredPoints > mehPoints) {
+            print ("bored");
             return Emotion.BORED;
         }else {
+            print ("meh");
             return Emotion.MEH;
         }
     }
 
     //given my stats, do i like things i've seen before?
-    bool likesFamiliar() {
+    int likesFamiliar() {
         throw "TODO";
     }
 
     //given my stats, do i like things similar to me?
-    bool likesSimilar() {
+    int likesSimilar() {
         throw "TODO";
     }
 
@@ -262,6 +268,7 @@ class AIPet extends AIObject {
          */
         double multiplier = 1.0;
         judgeObject(item);
+
         if(currentEmotion != null) {
             if(currentEmotion.value > 0) multiplier = 2.0;
             if(currentEmotion.value<0) multiplier = 0.5;
@@ -292,7 +299,29 @@ class AIPet extends AIObject {
 
     Then it decides whether familiarity is a good or bad thing.
 
+    ULTIMATELY, it applies either a positive, negative, or neutral emotion.
+
+
         */
+        int reactionToSimilar = likesSimilar();
+        int similarityRatingValue = similarityRating(item);
+
+        int reactionToFamiliar = likesFamiliar();
+        int familiarityRatingValue = isFamiliarItem(item); //TODO implement this
+        //is the item similar?
+        //do i like similar?
+
+        //is the item familiar?
+        //do i like familiar?
+
+
+        setEmotion(getNeutralEmotion());
+        print("judged ${item.trollNames}, emotion is ${currentEmotion.iconLocation}");
+    }
+
+    int isFamiliarItem(AIItem item) {
+        if(grub.itemsRemembered.contains(item.id)) return 1;
+        return 0;
     }
 
 
@@ -401,7 +430,6 @@ class Emotion {
             textCanvas.context2D.fillRect(0, 0, txtWidth, txtHeight);
             textCanvas.context2D.strokeRect(0, 0, txtWidth, txtHeight);
            // Renderer.wrap_text(textCanvas.context2D,"HELLO WORLD",10,10,fontSize,400,"center");
-            //TODO why is color wrong? it's black
             HomestuckTrollDoll t = grub.doll as HomestuckTrollDoll;
             HomestuckPalette p = t.palette as HomestuckPalette;
             textCanvas.context2D.fillStyle = p.aspect_light.toStyleString();

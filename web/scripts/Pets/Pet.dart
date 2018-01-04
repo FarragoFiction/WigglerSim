@@ -139,6 +139,7 @@ abstract class Pet {
     //when make a new pet, give it an id that isn't currently in the player's inventory. just increment numbers till you find one.
     int id;
     List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
+    List<int> itemsRemembered = new List<int>();
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
