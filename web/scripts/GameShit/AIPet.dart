@@ -332,12 +332,16 @@ class AIPet extends AIObject {
 
         //i might not like what it is, but be comforted by familarity, etc etc.
         int opinionOnItem = similarityRatingValue + familiarityRatingValue;
+        print("judged similarity is ${similarityRatingValue} and familar is ${familiarityRatingValue} and opinion is ${opinionOnItem}");
 
         if(opinionOnItem > 0) {
+            print("judged positive");
             setEmotion(getPositiveEmotion());
-        }if(opinionOnItem < 0) {
+        }else if(opinionOnItem < 0) {
+            print("judged negative");
             setEmotion(getNegativeEmotion());
         }else {
+            print("judged neutral");
             setEmotion(getNeutralEmotion());
         }
         print("judged ${item.trollNames}, emotion is ${currentEmotion.iconLocation}");
