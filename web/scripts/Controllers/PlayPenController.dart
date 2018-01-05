@@ -9,6 +9,8 @@ import "navbar.dart";
 
 GameObject game;
 PlayPen playPen;
+int frameRate = 100;
+
 void main() {
     //loadNavbar();
     game = new GameObject();
@@ -21,4 +23,12 @@ Future<Null> start() async {
     DivElement container = new DivElement();
     querySelector("#output").append(container);
     playPen = new PlayPen(container, game.player.petInventory.pets);
+    drawLoop();
+}
+
+Future<Null> drawLoop() async {
+    print("draw loop");
+    await playPen.draw();
+    print("playpen returned");
+    new Timer(new Duration(milliseconds: frameRate), () => drawLoop());
 }
