@@ -270,9 +270,10 @@ class AIPet extends AIObject {
 
         if(grub.isExternal) likesFamiliar  +=-1;
         if(!grub.isInternal) likesFamiliar  +=1;
-        print("${grub.name} likes familiar is $likesFamiliar");
         //you can't be neutral about familiar objects. you either are drawn to them or not.
         if(likesFamiliar == 0) likesFamiliar =1;
+        print("${grub.name} likes familiar is $likesFamiliar");
+
         return likesFamiliar;
 
     }

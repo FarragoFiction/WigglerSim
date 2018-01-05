@@ -23,7 +23,7 @@ class JSONObject extends Object with MapMixin<String,String>{
 
     static Set<int> jsonStringToIntSet(String str) {
         if(str == null) return new Set<int>();
-        print("str is $str");
+        //print("str is $str");
         str = str.replaceAll("{", "");
         str = str.replaceAll("}", "");
         str = str.replaceAll(" ", "");
@@ -31,13 +31,13 @@ class JSONObject extends Object with MapMixin<String,String>{
         List<String> tmp = str.split(",");
         Set<int> ret = new Set<int>();
         for(String s in tmp) {
-            print("s is $s");
+            //print("s is $s");
             try {
                 int i = int.parse(s);
-                print("adding $i");
+                //print("adding $i");
                 ret.add(i);
             }catch(e) {
-                //oh well.
+                //oh well. probably a bracket or a space or something
             }
         }
         return ret;

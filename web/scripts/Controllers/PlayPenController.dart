@@ -50,7 +50,7 @@ Future<Null> start() async {
     b3.onClick.listen((e)
     {
        // AIItem item = new AIItem(0,<String>["Soft Friend","Nap Buddy","Plush Pal"],<String>["Smupet_Blu.png","redscale.png","eldritchplushie.png"], curious_value: AIItem.NORMAL_PLUS, idealistic_value: AIItem.NORMAL_MINUS);
-        AIItem item = new AIItem(0,<String>["Soft Friend","Nap Buddy","Plush Pal"],<String>["Smupet_Blu.png","redscale.png","eldritchplushie.png"], curious_value: AIItem.NORMAL_MINUS, idealistic_value: AIItem.NORMAL_PLUS);
+        AIItem item = new AIItem(1,<String>["Soft Friend","Nap Buddy","Plush Pal"],<String>["Smupet_Blu.png","redscale.png","eldritchplushie.png"], curious_value: AIItem.NORMAL_MINUS, idealistic_value: AIItem.NORMAL_PLUS);
 
         playPen.addItem(item);
         playPen.draw();

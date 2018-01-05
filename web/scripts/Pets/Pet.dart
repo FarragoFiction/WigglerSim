@@ -320,7 +320,7 @@ abstract class Pet {
         name = jsonObj[NAMEJSON];
         loadStatsFromJSON(jsonObj);
         itemsRemembered = JSONObject.jsonStringToIntSet(jsonObj[REMEMBEREDITEMS]);
-        print("items remembered is $itemsRemembered and json as ${jsonObj[REMEMBEREDITEMS]}");
+        //print("items remembered is $itemsRemembered and json as ${jsonObj[REMEMBEREDITEMS]}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
         lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
@@ -348,7 +348,7 @@ abstract class Pet {
         json[ENERGETIC] = "${energetic.value}";
         json[EXTERNAL] = "${external.value}";
         json[REMEMBEREDITEMS] = itemsRemembered.toString();
-        if(itemsRemembered.isNotEmpty) print(" saving $name, items remembered is $itemsRemembered and json is ${json[REMEMBEREDITEMS]} ");
+       // if(itemsRemembered.isNotEmpty) print(" saving $name, items remembered is $itemsRemembered and json is ${json[REMEMBEREDITEMS]} ");
 
 
         return json;
