@@ -21,6 +21,28 @@ class JSONObject extends Object with MapMixin<String,String>{
         json  = JSON.decode(j);
     }
 
+    static Set<int> jsonStringToIntSet(String str) {
+        if(str == null) return new Set<int>();
+        print("str is $str");
+        str = str.replaceAll("{", "");
+        str = str.replaceAll("}", "");
+        str = str.replaceAll(" ", "");
+
+        List<String> tmp = str.split(",");
+        Set<int> ret = new Set<int>();
+        for(String s in tmp) {
+            print("s is $s");
+            try {
+                int i = int.parse(s);
+                print("adding $i");
+                ret.add(i);
+            }catch(e) {
+                //oh well.
+            }
+        }
+        return ret;
+    }
+
     @override
     String toString() {
         return JSON.encode(json);

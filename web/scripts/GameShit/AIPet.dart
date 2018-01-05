@@ -271,6 +271,8 @@ class AIPet extends AIObject {
         if(grub.isExternal) likesFamiliar  +=-1;
         if(!grub.isInternal) likesFamiliar  +=1;
         print("${grub.name} likes familiar is $likesFamiliar");
+        //you can't be neutral about familiar objects. you either are drawn to them or not.
+        if(likesFamiliar == 0) likesFamiliar =1;
         return likesFamiliar;
 
     }
@@ -310,7 +312,6 @@ class AIPet extends AIObject {
             if(currentEmotion.value<0) multiplier = 0.5;
         }
 
-        //TODO for stat in item stats, apply that stat to the grub. (eh, i'll just do it by hand, only 6 of them)
         //SAVE.
         grub.patience.value += (item.patience.value * multiplier).round();
         grub.curious.value += (item.curious.value * multiplier).round();
@@ -318,7 +319,8 @@ class AIPet extends AIObject {
         grub.idealistic.value += (item.idealistic.value * multiplier).round();
         grub.energetic.value += (item.energetic.value * multiplier).round();
         grub.loyal.value += (item.loyal.value * multiplier).round();
-
+        grub.itemsRemembered.add(item.id);
+        print("after givign object, items rememberered is ${grub.itemsRemembered}");
         GameObject.instance.save();
     }
 
@@ -354,7 +356,10 @@ class AIPet extends AIObject {
     }
 
     int isFamiliarItem(AIItem item) {
-        if(grub.itemsRemembered.contains(item.id)) return 1;
+        if(grub.itemsRemembered.contains(item.id)) {
+            print("$item is familiar to $grub");
+            return 1;
+        }
         return 0;
     }
 

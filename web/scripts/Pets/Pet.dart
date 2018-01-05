@@ -113,6 +113,8 @@ abstract class Pet {
     static String LOYAL = "loyal";
     static String EXTERNAL = "external";
     static String ISEMPRESS = "isempress";
+    static String REMEMBEREDITEMS = "remembered";
+
 
 
     Stat patience;
@@ -139,7 +141,7 @@ abstract class Pet {
     //when make a new pet, give it an id that isn't currently in the player's inventory. just increment numbers till you find one.
     int id;
     List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
-    List<int> itemsRemembered = new List<int>();
+    Set<int> itemsRemembered = new Set<int>();
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
@@ -317,7 +319,8 @@ abstract class Pet {
         }
         name = jsonObj[NAMEJSON];
         loadStatsFromJSON(jsonObj);
-
+        itemsRemembered = JSONObject.jsonStringToIntSet(jsonObj[REMEMBEREDITEMS]);
+        print("items remembered is $itemsRemembered and json as ${jsonObj[REMEMBEREDITEMS]}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
         lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
@@ -344,6 +347,9 @@ abstract class Pet {
         json[LOYAL] = "${loyal.value}";
         json[ENERGETIC] = "${energetic.value}";
         json[EXTERNAL] = "${external.value}";
+        json[REMEMBEREDITEMS] = itemsRemembered.toString();
+        if(itemsRemembered.isNotEmpty) print(" saving $name, items remembered is $itemsRemembered and json is ${json[REMEMBEREDITEMS]} ");
+
 
         return json;
     }
