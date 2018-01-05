@@ -54,6 +54,8 @@ class AIPet extends AIObject {
     AnimationObject idleAnimation = new AnimationObject();
     //will usually be null
     Emotion currentEmotion;
+    //don't randomly pick a new word each frame, plz
+    String currentEmotionPhrase;
 
     AIPet(Grub this.grub, {int x: 0, int y: 150}):super(x: x, y:y) {
         if(Emotion.HEART == null) {
@@ -93,6 +95,8 @@ class AIPet extends AIObject {
             Emotion.initEmotions();
         }
         currentEmotion  = e;
+        Random rand = new Random();
+        currentEmotionPhrase = rand.pickFrom(currentEmotion.textChoices);
     }
 
     @override
@@ -103,7 +107,7 @@ class AIPet extends AIObject {
         //print("frame is $frame and canvas is $canvas");
         CanvasElement emotionCanvas = null;
         if(currentEmotion != null) {
-            emotionCanvas = await currentEmotion.draw(grub);
+            emotionCanvas = await currentEmotion.draw(grub,currentEmotionPhrase);
             //print("emotion canvas is $emotionCanvas");
         }
         //canvas.context2D.drawImage(frame,x,y);
@@ -292,6 +296,8 @@ class AIPet extends AIObject {
         if(grub.isExternal) likesSimilar  +=-1;
         if(!grub.isInternal) likesSimilar  +=1;
         print("${grub.name} likes similar is $likesSimilar");
+        //you can't be neutral about similar objects. you either are drawn to them or not.
+        if(likesSimilar == 0) likesSimilar =1;
         return likesSimilar;
     }
 
@@ -428,7 +434,7 @@ class Emotion {
 
     }
 
-    Future<CanvasElement> draw(Grub grub) async {
+    Future<CanvasElement> draw(Grub grub, String chosenPhrase) async {
         //grub decides if i pick text or if i pick icon 89 x 108
         bool iconmode = grub.percentToChange < 0.5; //if eyes done, talk.
         if(iconmode) {
@@ -440,7 +446,6 @@ class Emotion {
             return cachedIconCanvas;
         }else {
             Random rand = new Random();
-            String text = rand.pickFrom(textChoices);
             int txtWidth = 400;
             int fontSize = 20;
             int buffer = 10;
@@ -449,7 +454,7 @@ class Emotion {
             textCanvas.context2D.font = "${fontSize}px Strife";
 
             //no wider than it needs to be.
-            txtWidth = textCanvas.context2D.measureText(text).width.ceil() + buffer;
+            txtWidth = textCanvas.context2D.measureText(chosenPhrase).width.ceil() + buffer;
             //textCanvas.width = txtWidth;
 
             //print ('going to display text $text');
@@ -461,7 +466,7 @@ class Emotion {
             HomestuckTrollDoll t = grub.doll as HomestuckTrollDoll;
             HomestuckPalette p = t.palette as HomestuckPalette;
             textCanvas.context2D.fillStyle = p.aspect_light.toStyleString();
-            textCanvas.context2D.fillText(text, buffer/2, fontSize);
+            textCanvas.context2D.fillText(chosenPhrase, buffer/2, fontSize);
             return textCanvas;
         }
 
