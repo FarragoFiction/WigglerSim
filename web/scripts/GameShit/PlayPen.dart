@@ -57,7 +57,7 @@ class PlayPen {
 
         //TODO eventually, only give them the item if they go up to it.
         for(AIPet p in pets) {
-            p.giveObject(item);
+            p.giveObjectStats(item);
         }
         items.add(item);
     }
@@ -68,6 +68,16 @@ class PlayPen {
         print("background image is $backgroundImage");
         divForCanvas.style.backgroundImage = "url(${image.src})";
 
+    }
+
+    //passes the current state of the world to every pet in it so they can make decisions
+    void aiTick() {
+
+        List<AIObject> objects = new List.from(pets);
+        objects.addAll(items);
+        for(AIPet p in pets) {
+            p.reactToWorld(objects);
+        }
     }
 
     Future<Null> draw() async {

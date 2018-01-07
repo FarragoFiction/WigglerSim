@@ -651,4 +651,62 @@ At that point I'll need to have a "emotions only last x frames" fucntion.
 
 Alright, coded wigglers reacting to each other, now to test via button.
 
+~~~~
+
+Alright tested.
+
+What now?
+
+I want to write a method that has a grub ask the playpen if any grubs are near the grub.
+
+Or....no, not quite that.
+
+Grub asks playpen "what other objects are there?" then the grub asks each object where it is and decides
+if it's close enough to try to walk to.
+
+(curious grubs will basically have the entire field as "true" for investigation))
+
+once a list of valid targets (eeeeeyyyy is this a refrance? ) are compiled, the grub
+will pick one at random and head to it.
+
+Once you have a target you ignore everything else till you reach it.
+
+
+
+Independant of target picking, grubs need to be able to say "I am X close to an object, i should react to it", even
+if it's not their target.
+
+THAT means I need an AI loop independant of frame rate?
+
+for now have it just be frame rate and decide later if that matters.
+
+
+v1 of emotions will have "if you are not near an object, do not have an emotion"
+and "have the emotion so long as you are near it".
+
+FORSEEN PROBLEM: if a grub gets stat boosts every time it is in a frame next to an object
+shit will get OP fast.
+
+How can I fix this?
+
+Could have objects vanish when used? But then unfair because you might want grub X
+to get the boost but they aren't curious/energetic enough?  ((valid point, since items are currently
+deployed randomly, should uncurious grubs have a random chance of checking something out anyways if nothing is in their queue?))
+
+I got distracted. Okay, well, easy fix is all grubs in playpen are given the item's stats on deploys, but don't
+react until they get close to it.
+
+
+Alright, that's been a lot of rambling, but what are my action items?
+
+*  on give item give stats, but don't react (make new method for give stats).
+*  in same as draw loop, playpen passes each pet a list of the other pets and items in the playpen in AITICK.
+*  each pet uses curiosity to get a list of things it wants to investigate
+*  picks one thing to investigate, sets it as "target". display "?" or "!" emotion.
+*  if already has target, don't pick new target in next AITICK
+*  whether target or not, if item or grub falls within RADIUS of grub, react.
+
+so, first, make a method for giving list of objects.
+
+next, make a method for picking a new target (if no current target exists). 
 

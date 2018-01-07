@@ -392,6 +392,10 @@ class AIPet extends AIObject {
         return likesSimilar;
     }
 
+    void reactToWorld(List<AIObject> objects) {
+        throw ("todo");
+    }
+
     void giveObject(AIObject obj) {
         if(obj is AIItem) return giveItem(obj);
         if(obj is AIPet) return giveGrubFriend(obj);
@@ -404,6 +408,11 @@ class AIPet extends AIObject {
     }
 
     void giveItem(AIItem item) {
+        judgeObject(item);
+        //only get stats the first time it's placed in the world.
+    }
+
+    void giveObjectStats(AIItem item) {
         double multiplier = 1.0;
         judgeObject(item);
 
