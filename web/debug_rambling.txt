@@ -598,3 +598,51 @@ Wigglers notice, investigate if they choose to.
 
 
 
+~~~~~~~~~~~~~
+
+Alright.
+
+I need to concentrate.
+
+I have no other thing I can do right now except ....
+
+Wait even without internet I can use my phone to check typo fixes and bug reports. Okay
+
+I'll do that first. Get my chill.
+
+~~~~~~~~
+
+Okay. that was less typos and bug reports than I hoped.
+
+I know it's hard to think right now.
+
+But I need to code so I can get my chill back.
+
+So.
+
+~~~~~~~~~~
+
+
+GOAL:   Wigglers need to be able to choose when they walk around vs sit and do nothing.
+
+Triggers for walking:
+
+I'm gonna try to ramble rather than bullet points, I don't have a solid idea on this one.
+
+
+Basically, I want only ITEMS to give their stats to a wiggler, but for a wiggler to be able to
+investigate other wigglers or ITEMS.
+
+If they investigate another wiggler, they respond with a QUADRANT SYMBOL.
+
+If they investigate an ITEM they are GIVEN THE ITEM which is already coded and has them react and also get stats.
+
+So, step one is to code a GIVE WIGGLER function. It should assign a quadrant symbol based on likesSimilar and
+likesFamiliar. Right? except I don't want wigglers to have IDs. So no familiarity with other wigglers.
+
+It should also call the GIVE WIGGLER function on the target with a "don't recurse" type of flag.
+
+I need to test this on the test page.  Give all wigglers first wiggler and see how they react.
+
+Then, i can call it on the animated page.
+At that point I'll need to have a "emotions only last x frames" fucntion.

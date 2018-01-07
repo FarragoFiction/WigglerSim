@@ -42,6 +42,9 @@ class PlayPen {
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
                 if(rand.nextBool()) aip.turnWays = true;
                 await aip.setUpIdleAnimation();
+                await aip.setUpWalkAnimation();
+                aip.currentAnimation = aip.idleAnimation;
+
                 pets.add(aip);
                 x += 200;
                 //return; // this keeps it at one pet at a time.

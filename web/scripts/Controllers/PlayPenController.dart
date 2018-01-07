@@ -11,9 +11,17 @@ GameObject game;
 PlayPen playPen;
 int frameRate = 100;
 
+bool stop = true;
+
 void main() {
     //loadNavbar();
     game = new GameObject();
+    ButtonElement b = new ButtonElement();
+    b.text = "toggle animation";
+    querySelector("#output").append(b);
+    b.onClick.listen((e) {
+        toggle();
+    });
 
     start();
 }
@@ -30,5 +38,10 @@ Future<Null> drawLoop() async {
     print("draw loop");
     await playPen.draw();
     print("playpen returned");
-    new Timer(new Duration(milliseconds: frameRate), () => drawLoop());
+    if(!stop) new Timer(new Duration(milliseconds: frameRate), () => drawLoop());
+}
+
+void toggle() {
+    stop = !stop;
+    if(!stop) drawLoop();
 }

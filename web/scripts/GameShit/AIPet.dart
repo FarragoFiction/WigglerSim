@@ -52,8 +52,15 @@ class AIPet extends AIObject {
     Stat get external => grub.external;
 
     AnimationObject idleAnimation = new AnimationObject();
+    AnimationObject walkAnimation = new AnimationObject();
+
     //will usually be null
     Emotion currentEmotion;
+
+    //what should i use
+    AnimationObject currentAnimation = new AnimationObject();
+
+
     //don't randomly pick a new word each frame, plz
     String currentEmotionPhrase;
 
@@ -88,6 +95,33 @@ class AIPet extends AIObject {
         }
     }
 
+    //grub body 3 and grub body 4
+    @override
+    Future<Null> setUpWalkAnimation() async {
+        HomestuckGrubDoll g = grub.doll;
+        Random rand = new Random();
+        rand.nextInt(10); //init
+        if(rand.nextBool()) {
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.body.imgNumber = 3;
+            await grub.draw();
+            walkAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.body.imgNumber = 4;
+            await grub.draw();
+            walkAnimation.addAnimationFrame(grub.canvas);
+        }else { //so they don't all look the same
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.body.imgNumber = 4;
+            await grub.draw();
+            walkAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.body.imgNumber = 3;
+            await grub.draw();
+            walkAnimation.addAnimationFrame(grub.canvas);
+        }
+    }
+
     //can set to null, too.
     //IMPORTANT. WHEN RENDERING IT SHOULD BOB, AND THEN AFTER A SECOND OR TWO VANISH WITH NEXT STATE CHANGE
     void setEmotion(Emotion e) {
@@ -103,7 +137,7 @@ class AIPet extends AIObject {
     Future<Null> draw(CanvasElement canvas) async {
         //TODO figure out more complex things than standing in one spot and twitching later.
         //TODO figure out how i want to do text, emoticons, scale and rotation.
-        CanvasElement frame = idleAnimation.getNextFrame();
+        CanvasElement frame = currentAnimation.getNextFrame();
         //print("frame is $frame and canvas is $canvas");
         CanvasElement emotionCanvas = null;
         if(currentEmotion != null) {
@@ -304,7 +338,25 @@ class AIPet extends AIObject {
         return likesSimilar;
     }
 
-    void giveObject(AIItem item) {
+    void giveObject(AIObject obj) {
+        if(obj is AIItem) return giveItem(obj);
+        if(obj is AIPet) return giveGrubFriend(obj, true);
+
+    }
+
+    //hello new friend
+    void giveGrubFriend(AIPet friend, bool recurse) {
+        throw ("TODO");
+        /*
+        TODO:
+            judge whether you like the friend or not based soley on similarity.
+            display positive or negative QUADRANT symbol.
+
+            call giveGrubFriend to friend, with a bool of 'don't recurse '
+         */
+    }
+
+    void giveItem(AIItem item) {
         double multiplier = 1.0;
         judgeObject(item);
 
