@@ -394,20 +394,13 @@ class AIPet extends AIObject {
 
     void giveObject(AIObject obj) {
         if(obj is AIItem) return giveItem(obj);
-        if(obj is AIPet) return giveGrubFriend(obj, true);
+        if(obj is AIPet) return giveGrubFriend(obj);
 
     }
 
-    //hello new friend
-    void giveGrubFriend(AIPet friend, bool recurse) {
-        throw ("TODO");
-        /*
-        TODO:
-            judge whether you like the friend or not based soley on similarity.
-            display positive or negative QUADRANT symbol.
-
-            call giveGrubFriend to friend, with a bool of 'don't recurse '
-         */
+    //hello new friend (don't need to recurse, if ou're close enough to see friend they can see you)
+    void giveGrubFriend(AIPet friend) {
+        judgeGrub(friend);
     }
 
     void giveItem(AIItem item) {
@@ -542,7 +535,7 @@ class Emotion {
     //this is such a dope robot thing to call.
     static void initEmotions() {
         //for grubs
-        HEART = new Emotion(1,"heart",<String>["wuv you","wuv","luv you","luv"]);
+        HEART = new Emotion(1,"heart",<String>["wuv u","wuv","luv you","luv"]);
         DIAMOND = new Emotion(1,"diamond",<String>["u gud","pap u","sleep now","soft thing"]);
         CLUBS = new Emotion(-1,"clubs",<String>["bad!","why do?","stop!","no!"]);
         SPADE = new Emotion(-1,"spade",<String>["hate","u bad","i bite!","bite u"]);

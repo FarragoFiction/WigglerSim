@@ -646,3 +646,9 @@ I need to test this on the test page.  Give all wigglers first wiggler and see h
 
 Then, i can call it on the animated page.
 At that point I'll need to have a "emotions only last x frames" fucntion.
+
+~~~~
+
+Alright, coded wigglers reacting to each other, now to test via button.
+
+
