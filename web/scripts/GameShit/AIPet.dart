@@ -166,6 +166,60 @@ class AIPet extends AIObject {
         return ret;
     }
 
+    //happy, love, or cool vaguely related to stats
+    Emotion getNegativeQuadrantEmotion() {
+        int ashenPoints = 0;
+        int pitchPoints = 0;
+
+        if(grub.isPatient) pitchPoints ++;
+        if(grub.isCalm) ashenPoints ++;
+        if(grub.isAccepting) pitchPoints ++;
+        if(grub.isFreeSprited) ashenPoints ++;
+
+        if(grub.isIdealistic) pitchPoints ++;
+        if(grub.isLoyal) pitchPoints ++;
+        if(grub.isEnergetic) pitchPoints ++;
+        if(!grub.isExternal) ashenPoints ++;
+
+        if(grub.isInternal) pitchPoints ++;
+        if(grub.isRealistic) ashenPoints ++;
+        if(grub.isCurious) ashenPoints ++;
+        if(!grub.isImpatient) ashenPoints ++;
+
+        if(ashenPoints > pitchPoints) {
+            return Emotion.CLUBS;
+        }else {
+            return Emotion.SPADE;
+        }
+    }
+
+
+    //happy, love, or cool vaguely related to stats
+    Emotion getPositiveQuadrantEmotion() {
+        int flushedPoints = 0;
+        int palePoints = 0;
+
+        if(grub.isPatient) palePoints ++;
+        if(grub.isCalm) palePoints ++;
+        if(grub.isAccepting) palePoints ++;
+        if(grub.isFreeSprited) palePoints ++;
+
+        if(grub.isIdealistic) flushedPoints ++;
+        if(grub.isLoyal) flushedPoints ++;
+        if(grub.isEnergetic) flushedPoints ++;
+        if(!grub.isExternal) palePoints ++;
+
+        if(grub.isInternal) flushedPoints ++;
+        if(grub.isRealistic) palePoints ++;
+        if(grub.isCurious) flushedPoints ++;
+        if(!grub.isImpatient) flushedPoints ++;
+
+        if(palePoints > flushedPoints) {
+            return Emotion.DIAMOND;
+        }else {
+            return Emotion.HEART;
+        }
+    }
 
 
     //happy, love, or cool vaguely related to stats
@@ -382,6 +436,26 @@ class AIPet extends AIObject {
         return "${grub.name}";
     }
 
+    void judgeGrub(AIPet grub) {
+        int reactionToSimilar = likesSimilar();
+        print("getting simulatity rating");
+        int similarityRatingValue = similarityRating(grub) * reactionToSimilar;
+
+        print("judged similarity is ${similarityRatingValue}");
+
+        if(similarityRatingValue > 0) {
+            print("judged positive");
+            setEmotion(getPositiveQuadrantEmotion());
+        }else if(similarityRatingValue < 0) {
+            print("judged negative");
+            setEmotion(getNegativeQuadrantEmotion());
+        }else {
+            print("judged neutral");
+            setEmotion(Emotion.NEUTRALQUADRANT);
+        }
+        print("judged ${grub.grub.name}, emotion is ${currentEmotion.iconLocation}");
+    }
+
     //can be positive or negative about an object
     void judgeObject(AIItem item) {
         int reactionToSimilar = likesSimilar();
@@ -429,6 +503,8 @@ class Emotion {
     static Emotion DIAMOND;
     static Emotion CLUBS;
     static Emotion SPADE;
+    static Emotion NEUTRALQUADRANT;
+
 
     static Emotion HAPPY;
     static Emotion LOVE;
@@ -470,6 +546,8 @@ class Emotion {
         DIAMOND = new Emotion(1,"diamond",<String>["u gud","pap u","sleep now","soft thing"]);
         CLUBS = new Emotion(-1,"clubs",<String>["bad!","why do?","stop!","no!"]);
         SPADE = new Emotion(-1,"spade",<String>["hate","u bad","i bite!","bite u"]);
+        NEUTRALQUADRANT = new Emotion(0,"meh",<String>["oh","...","ok","is grub","u ok"]);
+
 
         SURPRISENOODLE = new Emotion(0,"surpriseNoodle",<String>["?"]);
         SHOUTPOLE = new Emotion(0,"shoutPole",<String>["!"]);
