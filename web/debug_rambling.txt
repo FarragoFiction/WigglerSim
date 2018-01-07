@@ -705,8 +705,9 @@ Alright, that's been a lot of rambling, but what are my action items?
 *  picks one thing to investigate, sets it as "target". display "?" or "!" emotion.
 *  if already has target, don't pick new target in next AITICK
 *  whether target or not, if item or grub falls within RADIUS of grub, react.
+*  walk towards target with "walk" animation and x position changing based on ENERGETIC QUOTIENT
 
 so, first, make a method for giving list of objects.
 
-next, make a method for picking a new target (if no current target exists). 
+next, make a method for picking a new target (if no current target exists).
 

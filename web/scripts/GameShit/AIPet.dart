@@ -36,6 +36,14 @@ class AIPet extends AIObject {
     @override
     double scaleY = 0.5;
 
+    //how close to an object do you need to be to react to it.
+    int giveRange = 100;
+    //how close does an object need to be for you to notice it?
+    int baseExploreRange = 300;
+
+    //what am i moving towards?
+    AIObject target;
+
 
     Grub grub;
     @override
@@ -393,6 +401,25 @@ class AIPet extends AIObject {
     }
 
     void reactToWorld(List<AIObject> objects) {
+        //based on stats, have range you're willing to go to check out a thing.
+        //some stats increase range you want to explore, some decrease it.
+        //RAW STAT VALUE MATTERS HERE. If you're only a little curious you only get a little range.
+
+        /*
+        So what are default stat ranges?  -19 to 19
+
+        so, for every 10 points you increase/decrease range by 50 px?
+
+        curious and external should raise it by 2 and 1 units respectively
+        accepting and internal should lower it by 2 and 1
+         */
+
+        int unit = 50; //how much each 10 points in a stat should raise/lower it.
+        double value = 0.0;
+        value += unit * 2 * curious.value/10;
+        value += unit * 1 * external.value/10;
+        //TODO what do i do with this value? having to stop here suddenly.
+
         throw ("todo");
     }
 
