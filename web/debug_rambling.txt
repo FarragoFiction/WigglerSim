@@ -712,3 +712,14 @@ so, first, make a method for giving list of objects.
 next, make a method for picking a new target (if no current target exists).
 
 once target is picked, test changing animation and moving towards target (flip correctly, too)
+
+
+~~~~~~~~
+
+Well that's one way to lose your train of thought. IRL Shit intensifies in a bad way.
+
+But doing this helps me focus, so let's go.
+
+I've tested that picking a target is now a thing that can happen.
+
+I need to now translate a target into a direction I should be walking.

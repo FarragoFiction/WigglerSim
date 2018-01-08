@@ -25,6 +25,8 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import "AIObject.dart";
 import "GameObject.dart";
 import "AIItem.dart";
+import 'dart:math' as Math;
+
 
 
 
@@ -400,11 +402,27 @@ class AIPet extends AIObject {
         return likesSimilar;
     }
 
-    List<AIObject> getObjectsInRange() {
 
+
+    void walkTowardsTarget() {
+        //if their x is less than me, face turnways.
+        int direction = 1;
+        if(target.x < x) direction = -1;
+        x += speed  * direction;
     }
 
-    int getExplorationRange() {
+    int get speed {
+        int unit = 10; //how much each 10 points in a stat should raise/lower it.
+        int speed = 0;
+        speed += (unit * 2 * energetic.value/10).round();
+        print ("after moding by energy of ${energetic.value}, range is $speed");
+        speed += (unit * 1 * idealistic.value/10).round();
+        print ("after moding by external of ${idealistic.value}, range is $speed");
+        return Math.min(speed,unit); //don't go negative asshole.
+    }
+
+
+    int get explorationRange {
         int unit = 50; //how much each 10 points in a stat should raise/lower it.
         int exploreRange = 0;
         exploreRange += (unit * 2 * curious.value/10).round();
@@ -421,9 +439,9 @@ class AIPet extends AIObject {
 
         //if an object is within your explore range, add it to explore targets
         List<AIObject> exploreTargets = new List<AIObject>();
-        int explorationRange = getExplorationRange();
+        int explorationRangeSaved = explorationRange;
         for(AIObject obj in copiedObjects) {
-            if(distanceFromTarget(obj) <= explorationRange) {
+            if(distanceFromTarget(obj) <= explorationRangeSaved) {
                 exploreTargets.add(obj);
             }
         }
@@ -435,6 +453,8 @@ class AIPet extends AIObject {
         }else {
             target = rand.pickFrom(exploreTargets);
         }
+
+        if(target != null) walkTowardsTarget();
 
        print("target for $this is $target");
     }
