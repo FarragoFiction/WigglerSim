@@ -36,6 +36,7 @@ Future<Null> start() async {
 
 Future<Null> drawLoop() async {
     print("draw loop");
+    playPen.aiTick();
     await playPen.draw();
     print("playpen returned");
     if(!stop) new Timer(new Duration(milliseconds: frameRate), () => drawLoop());

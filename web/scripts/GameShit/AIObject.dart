@@ -20,6 +20,7 @@
 import 'dart:async';
 import "../Pets/PetLib.dart";
 import 'dart:html';
+import 'dart:math' as Math;
 import 'dart:async';
 import 'package:DollLibCorrect/DollRenderer.dart';
 
@@ -54,6 +55,17 @@ abstract class AIObject {
     @override
     String toString() {
         return "AiObject";
+    }
+
+    static int distance(int x1, int y1, int x2, int y2) {
+        int xs = (x1-x2)^2;
+        int ys = (y1-y2)^2;
+        return Math.sqrt(xs+ys).round();
+
+    }
+
+    int distanceFromTarget(AIObject target) {
+        return distance(target.x, target.y, x, y);
     }
 
     int similarityRating(AIObject obj) {

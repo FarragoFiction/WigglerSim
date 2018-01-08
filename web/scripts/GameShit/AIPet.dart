@@ -400,27 +400,40 @@ class AIPet extends AIObject {
         return likesSimilar;
     }
 
-    void reactToWorld(List<AIObject> objects) {
-        //based on stats, have range you're willing to go to check out a thing.
-        //some stats increase range you want to explore, some decrease it.
-        //RAW STAT VALUE MATTERS HERE. If you're only a little curious you only get a little range.
+    List<AIObject> getObjectsInRange() {
 
-        /*
-        So what are default stat ranges?  -19 to 19
+    }
 
-        so, for every 10 points you increase/decrease range by 50 px?
-
-        curious and external should raise it by 2 and 1 units respectively
-        accepting and internal should lower it by 2 and 1
-         */
-
+    int getExplorationRange() {
         int unit = 50; //how much each 10 points in a stat should raise/lower it.
-        double value = 0.0;
-        value += unit * 2 * curious.value/10;
-        value += unit * 1 * external.value/10;
-        //TODO what do i do with this value? having to stop here suddenly.
+        int exploreRange = 0;
+        exploreRange += (unit * 2 * curious.value/10).round();
+        exploreRange += (unit * 1 * external.value/10).round();
+        return exploreRange;
+    }
 
-        throw ("todo");
+    void reactToWorld(List<AIObject> objects) {
+        //make a copy, remove self from it.
+        List<AIObject> copiedObjects = new List.from(objects);
+        copiedObjects.remove(this);
+
+        //if an object is within your explore range, add it to explore targets
+        List<AIObject> exploreTargets = new List<AIObject>();
+        for(AIObject obj in copiedObjects) {
+            if(distanceFromTarget(obj) <= getExplorationRange()) {
+                exploreTargets.add(obj);
+            }
+        }
+        Random rand = new Random();
+
+        if(exploreTargets.isEmpty) {
+            //small chance of exploring anyways, so uncurious grubs don't just sit there
+            if(rand.nextDouble() > 0.99) target= rand.pickFrom(copiedObjects);
+        }else {
+            target = rand.pickFrom(exploreTargets);
+        }
+
+       print("target for $this is $target");
     }
 
     void giveObject(AIObject obj) {
