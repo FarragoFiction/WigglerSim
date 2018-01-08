@@ -454,7 +454,10 @@ class AIPet extends AIObject {
             target = rand.pickFrom(exploreTargets);
         }
 
-        if(target != null) walkTowardsTarget();
+        if(target != null) {
+            currentAnimation = walkAnimation;
+            walkTowardsTarget();
+        }
 
        print("target for $this is $target");
     }
