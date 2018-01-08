@@ -60,7 +60,7 @@ abstract class AIObject {
     static int distance(int x1, int y1, int x2, int y2) {
         int xs = (x1-x2)^2;
         int ys = (y1-y2)^2;
-        print("xs $xs ys $ys");
+        //print("xs $xs ys $ys");
         return Math.sqrt((xs+ys).abs()).round();
 
     }

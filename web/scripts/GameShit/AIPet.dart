@@ -408,7 +408,9 @@ class AIPet extends AIObject {
         int unit = 50; //how much each 10 points in a stat should raise/lower it.
         int exploreRange = 0;
         exploreRange += (unit * 2 * curious.value/10).round();
+        print ("after moding by curiosity of ${curious.value}, range is $exploreRange");
         exploreRange += (unit * 1 * external.value/10).round();
+        print ("after moding by external of ${external.value}, range is $exploreRange");
         return exploreRange;
     }
 
@@ -419,8 +421,9 @@ class AIPet extends AIObject {
 
         //if an object is within your explore range, add it to explore targets
         List<AIObject> exploreTargets = new List<AIObject>();
+        int explorationRange = getExplorationRange();
         for(AIObject obj in copiedObjects) {
-            if(distanceFromTarget(obj) <= getExplorationRange()) {
+            if(distanceFromTarget(obj) <= explorationRange) {
                 exploreTargets.add(obj);
             }
         }
