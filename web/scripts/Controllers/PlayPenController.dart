@@ -14,7 +14,7 @@ int frameRate = 100;
 bool stop = true;
 
 void main() {
-    //loadNavbar();
+    loadNavbar();
     game = new GameObject();
     ButtonElement b = new ButtonElement();
     b.text = "toggle animation";
