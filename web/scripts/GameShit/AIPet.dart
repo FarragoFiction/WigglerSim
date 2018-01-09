@@ -415,6 +415,8 @@ class AIPet extends AIObject {
             print("$this needs to go left.");
             turnWays = true;
             direction = -1;
+        }else {
+            turnWays = false;
         }
         x += speed  * direction;
     }

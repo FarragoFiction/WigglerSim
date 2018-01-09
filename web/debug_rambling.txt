@@ -723,3 +723,17 @@ But doing this helps me focus, so let's go.
 I've tested that picking a target is now a thing that can happen.
 
 I need to now translate a target into a direction I should be walking.
+
+~~~~~~~~~~~
+
+Alright. The AI is ALMOST done.
+
+I need to figure out the last little bit.
+
+They do not always face the correct direction, and sometimes they walk off in a direction no other grub is.
+
+Let's simplify the problem. get rid of two grubs.
+
+AHAH: I think I see it. it's not enough that they turn turnways if they need to go left, they also need
+to UN turn turnways if they need to go right. derp.
+
