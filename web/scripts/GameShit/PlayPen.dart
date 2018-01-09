@@ -6,6 +6,7 @@ import 'dart:html';
 import 'dart:async';
 import "package:DollLibCorrect/DollRenderer.dart";
 import "../Pets/PetLib.dart";
+import "../GameShit/GameObject.dart";
 
 /*
 TODO:
@@ -39,6 +40,8 @@ class PlayPen {
         rand.nextInt(); //init
         for(Pet p in potentialGrubs) {
             if(p is Grub && pets.length < 6) {
+                p.lastPlayed = new DateTime.now();
+                print("$p last played with ${p.daysSincePlayed}");
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
                 if(rand.nextBool()) aip.turnWays = true;
                 await aip.setUpIdleAnimation();
@@ -50,6 +53,7 @@ class PlayPen {
                 //return; // this keeps it at one pet at a time.
             }
         }
+        GameObject.instance.save();
     }
 
     Future<Null> addItem(AIItem item) async {
