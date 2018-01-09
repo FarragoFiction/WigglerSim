@@ -737,3 +737,21 @@ Let's simplify the problem. get rid of two grubs.
 AHAH: I think I see it. it's not enough that they turn turnways if they need to go left, they also need
 to UN turn turnways if they need to go right. derp.
 
+~~~~~
+Alright, that just means I have the "wiggler suddenly sprints off screen" problem.
+
+I'm assuming it's either a target problem ( are they targeting themselves somehow?) or a direction
+problem (are they going the wrong way to get to their target?)
+
+I've got some logs where Novice Nitche sprints off screen.
+
+target for Novice Nietzsche is Master Pooplord
+VM88:1 drawing playpen
+
+Master Pooplord is in the left half of the screen, near the purple grub.
+it prints out 'Novice Nietzsche needs to go left.'
+
+Novice runs to the right.
+
+WHY.
+

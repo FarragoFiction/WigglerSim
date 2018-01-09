@@ -412,9 +412,10 @@ class AIPet extends AIObject {
         //if their x is less than me, face turnways.
         int direction = 1;
         if(target.x < x) {
-            print("$this needs to go left.");
             turnWays = true;
             direction = -1;
+            print("$this needs to go left., speed is $speed and direction is $direction");
+
         }else {
             turnWays = false;
         }
@@ -428,7 +429,7 @@ class AIPet extends AIObject {
         print ("after moding by energy of ${energetic.value}, range is $speed");
         speed += (unit * 1 * idealistic.value/10).round();
         print ("after moding by external of ${idealistic.value}, range is $speed");
-        return Math.min(speed,unit); //don't go negative asshole.
+        return Math.max(speed,unit); //don't go negative asshole.
     }
 
 
