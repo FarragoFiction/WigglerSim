@@ -39,12 +39,16 @@ class AIPet extends AIObject {
     double scaleY = 0.5;
 
     //how close to an object do you need to be to react to it.
-    int giveRange = 100;
-    //how close does an object need to be for you to notice it?
-    int baseExploreRange = 300;
+    int giveRange = 10;
+
+
 
     //what am i moving towards?
     AIObject target;
+    //don't fucking spam reacting to the same object over and over.
+    AIObject lastSeen;
+    int emotionalCoolDown = 5;
+    int timeSinceLastEmotion = 0;
 
 
     Grub grub;
@@ -407,7 +411,11 @@ class AIPet extends AIObject {
     void walkTowardsTarget() {
         //if their x is less than me, face turnways.
         int direction = 1;
-        if(target.x < x) direction = -1;
+        if(target.x < x) {
+            print("$this needs to go left.");
+            turnWays = true;
+            direction = -1;
+        }
         x += speed  * direction;
     }
 
@@ -432,8 +440,7 @@ class AIPet extends AIObject {
         return exploreRange;
     }
 
-    void reactToWorld(List<AIObject> objects) {
-        //make a copy, remove self from it.
+    void pickTarget(List<AIObject> objects) {
         List<AIObject> copiedObjects = new List.from(objects);
         copiedObjects.remove(this);
 
@@ -454,9 +461,57 @@ class AIPet extends AIObject {
             target = rand.pickFrom(exploreTargets);
         }
 
+    }
+
+    void reactToCloseByThings(List<AIObject> objects) {
+        //react to the closest thing that is within react radius.
+        //if it's NOT your target random chance of forgetting what you were doing depending on loyalty
+        //if it IS your target, definitely forget it (i.e. do something else)
+        double ficklnessOdds = 1.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
+        AIObject closestThing;
+        int distanceToClosestThing = 1000;
+        List<AIObject> copiedObjects = new List.from(objects);
+        copiedObjects.remove(this);
+
+        for(AIObject obj in copiedObjects) {
+            if(distanceFromTarget(obj) <= giveRange) {
+                int distance = distanceFromTarget(obj);
+                if(distance < distanceToClosestThing) {
+                    closestThing = obj;
+                    distanceToClosestThing = distance;
+                }
+            }
+        }
+        Random rand = new Random();
+        rand.nextInt(); //init
+        if(closestThing != null) {
+            //don't keep spamming reactions.
+            if(lastSeen != closestThing) giveObject(closestThing);
+            lastSeen = closestThing;
+            if(closestThing == target ) {
+                print ("found target $target");
+                target = null;
+            }else if(ficklnessOdds > rand.nextDouble()) {
+                print("was fickle with loyalty of ${loyal.value}");
+                target = null;
+            }
+        }
+    }
+
+    void reactToWorld(List<AIObject> objects) {
+        //make a copy, remove self from it.
+        if(target == null && currentEmotion == null) pickTarget(objects);
+        reactToCloseByThings(objects);
         if(target != null) {
             currentAnimation = walkAnimation;
             walkTowardsTarget();
+        }else {
+            currentAnimation = idleAnimation;
+            timeSinceLastEmotion ++;
+            if(timeSinceLastEmotion >= emotionalCoolDown) {
+                timeSinceLastEmotion = 0;
+                currentEmotion = null;
+            }
         }
 
        print("target for $this is $target");
@@ -506,22 +561,20 @@ class AIPet extends AIObject {
 
     void judgeGrub(AIPet grub) {
         int reactionToSimilar = likesSimilar();
-        print("getting simulatity rating");
+        //print("getting simulatity rating");
         int similarityRatingValue = similarityRating(grub) * reactionToSimilar;
-
-        print("judged similarity is ${similarityRatingValue}");
-
+       // print("judged similarity is ${similarityRatingValue}");
         if(similarityRatingValue > 0) {
-            print("judged positive");
+            //print("judged positive");
             setEmotion(getPositiveQuadrantEmotion());
         }else if(similarityRatingValue < 0) {
-            print("judged negative");
+            //print("judged negative");
             setEmotion(getNegativeQuadrantEmotion());
         }else {
-            print("judged neutral");
+            //print("judged neutral");
             setEmotion(Emotion.NEUTRALQUADRANT);
         }
-        print("judged ${grub.grub.name}, emotion is ${currentEmotion.iconLocation}");
+        //print("judged ${grub.grub.name}, emotion is ${currentEmotion.iconLocation}");
     }
 
     //can be positive or negative about an object
