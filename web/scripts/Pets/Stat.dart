@@ -102,8 +102,8 @@ class Stat {
 
         internalFlavor = new StatFlavor(0,Sign.HEART)
             ..medium = <String>["learned to be their true self"]
-            ..high = <String>["never stayed in any one place long"]
-            ..veryHigh = <String>["never stayed in any one place long"];
+            ..high = <String>["helped other trolls through stories of their own lives"]
+            ..veryHigh = <String>["discovered enlightenment through meditation"];
     }
 
     Stat(this.value, this.positiveName, this.negativeName, this.positiveFlavor, this.negativeFlavor) {
