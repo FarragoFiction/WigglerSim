@@ -86,14 +86,24 @@ class Stat {
             ..high = <String>["never went without a Moiral","became a trophy Moiral to an up and coming Highblood"]
             ..veryHigh = <String>["turned an entire army away from bloodlust","convinced all Trolls that there was a better, less violent path"];
         realisticFlavor = new StatFlavor(0,Sign.RAGE)
-            ..medium = <String>["always strove to see the world for how it truly was"];
+            ..medium = <String>["always strove to see the world for how it truly was"]
+            ..high = <String>["never accepted pretty lies","combated the Empire's propaganda"]
+            ..veryHigh = <String>["tore down the lies of the Empire","spread anarchy and chaos wherever they went"];
         acceptingFlavor = new StatFlavor(-3,Sign.VOID)
-            ..medium = <String>["collected unsolved mysteries"];
+            ..medium = <String>["knew that they knew nothing","collected unsolved mysteries","censored unwanted bits of history for the Empire"]
+            ..high = <String>["kept the Empire's secrets", "went around proving pseudoscience false"]
+            ..veryHigh = <String>["founded an entire new field of study when the old ones proved to not be enough","took valuable secrets to their grave"];
+
         freeFlavor = new StatFlavor(1,Sign.BREATH)
-            ..death  = <String>["rebelling against the empire","without any friends beside them","betraying the wrong Highblood"]
-            ..medium = <String>["never stayed in any one place long"];
+            ..death  = <String>["rebelling against the Empire","without any friends beside them","betraying the wrong Highblood"]
+            ..medium = <String>["refused to conform","never stayed in any one place long","worked as avant garde artist"]
+            ..high = <String>["worked as a Scout for the Empire","rebeled against the Empire","didn't get drawn into political drama","were free to live their life as they pleased"]
+            ..veryHigh = <String>["wandered the galaxy","lived without ties as a hermit on the Homeworld"];
+
         internalFlavor = new StatFlavor(0,Sign.HEART)
-            ..medium = <String>["learned to be their true self"];
+            ..medium = <String>["learned to be their true self"]
+            ..high = <String>["never stayed in any one place long"]
+            ..veryHigh = <String>["never stayed in any one place long"];
     }
 
     Stat(this.value, this.positiveName, this.negativeName, this.positiveFlavor, this.negativeFlavor) {
