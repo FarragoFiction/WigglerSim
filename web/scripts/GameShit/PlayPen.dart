@@ -34,11 +34,11 @@ class PlayPen {
     }
 
     Future<Null> loadPets(List<Pet> potentialGrubs) async {
-        int x = 0;
+        int x = -50;
         Random rand = new Random();
         rand.nextInt(); //init
         for(Pet p in potentialGrubs) {
-            if(p is Grub && pets.length < 4) {
+            if(p is Grub && pets.length < 6) {
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
                 if(rand.nextBool()) aip.turnWays = true;
                 await aip.setUpIdleAnimation();
@@ -46,7 +46,7 @@ class PlayPen {
                 aip.currentAnimation = aip.idleAnimation;
 
                 pets.add(aip);
-                x += 200;
+                x += 150;
                 //return; // this keeps it at one pet at a time.
             }
         }
