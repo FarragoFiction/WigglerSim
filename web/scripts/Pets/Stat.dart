@@ -49,28 +49,28 @@ class Stat {
 
         //these only have the fields that would be interesting to have
         patienceFlavor = new StatFlavor(-3, Sign.SPACE)
-            ..medium = <String>["followed the philosophy that 'slow and steady wins the race'"]
-            ..high = <String>["gained a reputation for slow and steady excellence","never gave up or let anyone down"]
-            ..veryHigh = <String>["was the Empress's moirail", "brought about real change to the Empire, one troll at a time."];
+            ..medium = <String>["followed the philosophy that 'slow and steady wins the race'","never let failure make them frustrated","always listened to their friends' problems"]
+            ..high = <String>["gained a reputation for slow and steady excellence","never gave up or let anyone down","were a good Moirail"]
+            ..veryHigh = <String>["were the Empress's moirail", "brought about real change to the Empire, one troll at a time."];
         energeticFlavor = new StatFlavor(0, Sign.LIFE)
             ..high = <String>["became an expert in multiple fields","became a rock star known for flamboyant performances"]
             ..high = <String>["manged to change the Empire through sheer force of personality","became the leading expert in dozens of different fields"]
-            ..medium = <String>["brought a vibrant energy to everything they did"];
+            ..medium = <String>["never seemed to stop moving","brought a vibrant energy to everything they did","had ALL the goals"];
         idealisticFlavor = new StatFlavor(1,Sign.HOPE)
             ..death  = <String>["fighting for what they believed in","trying to change the world","trying to change the empire"]
             ..high = <String>["fought hard for the changes they believed in"]
             ..veryHigh = <String>["founded a cult of personality","changed the Empire forever with their ideals","convinced everyone to agree with them through a sweeping religious movement"]
-            ..medium = <String>["inspired the trolls around them with their ideals"];
+            ..medium = <String>["inspired the trolls around them with their ideals","dreamed of a better life","never stopped dreaming"];
         curiousFlavor = new StatFlavor(1, Sign.LIGHT)
             ..high = <String>["became a respected scientist known for breakthrough discoveries","became a Papperterorrist and exposed all sorts of corruption in the Empire"]
             ..veryHigh = <String>["revealed the secrets of the universe","figured out reality was actually a simulation"]
             ..death  = <String>["asking the wrong questions","probing into things better left alone","exposing the wrong Highblood's secrets"]
-            ..medium = <String>["never stopped asking questions"];
+            ..medium = <String>["had to know all there was to know","never stopped asking questions","always kept searching for truth"];
         loyalFlavor = new StatFlavor(1,Sign.BLOOD)
             ..death  = <String>["fighting the Empire's enemies","protecting their friends","putting down rebels and traitors"]
             ..high = <String>["stuck with their childhood dream and became a Firebrigand","had high ranking political allies"]
             ..veryHigh = <String>["became so friendly and helpful that they ended up having an entire faction of loyal supporters","convinced all trolls everywhere to stop fighting each other"]
-            ..medium = <String>["were a staunch supporter of the Empire","never betrayed their friends"];
+            ..medium = <String>["were a good friend","were a staunch supporter of the Empire","never betrayed their friends"];
         externalFlavor = new StatFlavor(1,Sign.MIND)
             ..death  = <String>["getting into other troll's business too much","trying to manipulate the wrong Highblood","bugging and fussing and meddling with the wrong Highblood"]
             ..medium = <String>["investigated the world around them constantly"]
@@ -101,9 +101,9 @@ class Stat {
             ..veryHigh = <String>["wandered the galaxy","lived without ties as a hermit on the Homeworld"];
 
         internalFlavor = new StatFlavor(0,Sign.HEART)
-            ..medium = <String>["learned to be their true self"]
-            ..high = <String>["helped other trolls through stories of their own lives"]
-            ..veryHigh = <String>["discovered enlightenment through meditation"];
+            ..medium = <String>["tried to be true to themself","were the heart of their core of friends"]
+            ..high = <String>["learned to be their true self","reflected the world around them so others could understand it","helped other trolls through stories of their own lives"]
+            ..veryHigh = <String>["went down in history as a master philosopher","discovered enlightenment through meditation"];
     }
 
     Stat(this.value, this.positiveName, this.negativeName, this.positiveFlavor, this.negativeFlavor) {

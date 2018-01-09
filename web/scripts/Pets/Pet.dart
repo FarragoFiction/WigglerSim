@@ -145,7 +145,7 @@ abstract class Pet {
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
-       // if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
+        if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
         hatchDate = new DateTime.now();
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();
