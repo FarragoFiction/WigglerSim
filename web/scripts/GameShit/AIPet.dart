@@ -494,6 +494,7 @@ class AIPet extends AIObject {
         }
         double boredomOdds = 1000000.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
+        print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
             print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
             currentEmotion = Emotion.SURPRISENOODLE;
@@ -528,6 +529,7 @@ class AIPet extends AIObject {
             //don't keep spamming reactions.
             if(lastSeen != closestThing) {
                 giveObject(closestThing);
+            }
                 lastSeen = closestThing;
                 if (closestThing == target) {
                     print("TARGET TEST: ${grub.name} found target $target so removing");
@@ -536,7 +538,6 @@ class AIPet extends AIObject {
                     print("TARGET TEST: ${grub.name}was fickle to ${target} with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
                     target = null;
                 }
-            }
         }
     }
 
