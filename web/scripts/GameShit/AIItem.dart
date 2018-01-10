@@ -31,12 +31,14 @@ class AIItem extends AIObject {
     ImageElement imageElement;
     //so wigglers know if they remember this or not.
     int id;
+    //for buying in store.
+    int cost;
 
 
 
 
     //if you don't have a stat it's zero
-    AIItem(this.id, this.trollNames, this.imageLocations, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
+    AIItem(this.id, this.cost, this.trollNames, this.imageLocations, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
         makePatience(patience_value);
         makeEnergetic(energetic_value);
         makeIdealistic(idealistic_value);

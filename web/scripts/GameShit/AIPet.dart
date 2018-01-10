@@ -474,7 +474,7 @@ class AIPet extends AIObject {
             left = false;
         }
         //then, make an AI object on the opposite side
-        AIItem item = new AIItem(0,<String>["Imaginary Friend"],<String>["Smupet_Blu.png"]);
+        AIItem item = new AIItem(0,0,<String>["Imaginary Friend"],<String>["Smupet_Blu.png"]);
 
         int buffer = 200;
         if(left) {
