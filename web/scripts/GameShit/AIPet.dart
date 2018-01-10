@@ -47,7 +47,7 @@ class AIPet extends AIObject {
     AIObject target;
     //don't fucking spam reacting to the same object over and over.
     AIObject lastSeen;
-    int emotionalCoolDown = 15;
+    int emotionalCoolDown = 25;
     int timeSinceLastEmotion = 0;
 
 
