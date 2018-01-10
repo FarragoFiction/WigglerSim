@@ -492,7 +492,7 @@ class AIPet extends AIObject {
             print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
-        double boredomOdds = -1.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
+        double boredomOdds = 1000000.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
         if(boredomOdds > rand.nextDouble()) {
             print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
@@ -507,7 +507,7 @@ class AIPet extends AIObject {
         //if it's NOT your target random chance of forgetting what you were doing depending on loyalty
         //if it IS your target, definitely forget it (i.e. do something else)
         //if fickleness is too low they never leave whoever they first find.
-        double ficklnessOdds = 0.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
+        double ficklnessOdds = -1.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
         AIObject closestThing;
         int distanceToClosestThing = 1000;
         List<AIObject> copiedObjects = new List.from(objects);
@@ -533,7 +533,7 @@ class AIPet extends AIObject {
                     print("TARGET TEST: ${grub.name} found target $target so removing");
                     target = null;
                 } else if (ficklnessOdds > rand.nextDouble()) {
-                    print("TARGET TEST: ${grub.name}was fickle with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
+                    print("TARGET TEST: ${grub.name}was fickle to ${target} with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
                     target = null;
                 }
             }
