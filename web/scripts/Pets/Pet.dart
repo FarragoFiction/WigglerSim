@@ -515,6 +515,16 @@ abstract class Pet {
         return canvas;
     }
 
+    Future<CanvasElement> drawNoResize() async {
+        //caches by default. if you want it to redraw, set canvas to null.
+        if(canvas == null) {
+            canvas = new CanvasElement(width: doll.width, height: doll.height);
+            canvas.context2D.clearRect(0, 0, width, height);
+            await Renderer.drawDoll(canvas, doll);
+        }
+        return canvas;
+    }
+
 
 
 }

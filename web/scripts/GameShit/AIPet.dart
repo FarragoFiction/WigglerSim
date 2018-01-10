@@ -98,19 +98,19 @@ class AIPet extends AIObject {
         rand.nextInt(10); //init
         if(rand.nextBool()) {
             g.body.imgNumber = 0;
-            await grub.draw();
+            await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 1;
-            await grub.draw();
+            await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }else { //so they don't all look the same
             g.body.imgNumber = 1;
-            await grub.draw();
+            await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 0;
-            await grub.draw();
+            await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }
     }
@@ -124,20 +124,20 @@ class AIPet extends AIObject {
         if(rand.nextBool()) {
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 3;
-            await grub.draw();
+            await grub.drawNoResize();
             walkAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 4;
-            await grub.draw();
+            await grub.drawNoResize();
             walkAnimation.addAnimationFrame(grub.canvas);
         }else { //so they don't all look the same
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 4;
-            await grub.draw();
+            await grub.drawNoResize();
             walkAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 3;
-            await grub.draw();
+            await grub.drawNoResize();
             walkAnimation.addAnimationFrame(grub.canvas);
         }
     }
