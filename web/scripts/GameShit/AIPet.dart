@@ -476,7 +476,7 @@ class AIPet extends AIObject {
         //if it's NOT your target random chance of forgetting what you were doing depending on loyalty
         //if it IS your target, definitely forget it (i.e. do something else)
         //if fickleness is too low they never leave whoever they first find.
-        double ficklnessOdds = 2.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
+        double ficklnessOdds = 0.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
         AIObject closestThing;
         int distanceToClosestThing = 1000;
         List<AIObject> copiedObjects = new List.from(objects);
