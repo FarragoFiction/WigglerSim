@@ -513,6 +513,8 @@ class AIPet extends AIObject {
         int distanceToClosestThing = 1000;
         List<AIObject> copiedObjects = new List.from(objects);
         copiedObjects.remove(this);
+        //imaginary objects will never get hit by this otherwise.
+        if(!copiedObjects.contains(target)) copiedObjects.add(target);
 
         for(AIObject obj in copiedObjects) {
             if(distanceFromTarget(obj) <= giveRange) {
@@ -525,6 +527,7 @@ class AIPet extends AIObject {
         }
         Random rand = new Random();
         rand.nextInt(); //init
+        print("TARGET TEST: closest thing is $closestThing");
         if(closestThing != null) {
             //don't keep spamming reactions.
             if(lastSeen != closestThing) {
