@@ -64,7 +64,7 @@ class Stat {
             ..high = <String>["fought hard for the changes they believed in", "never compromised their ideals"]
             ..jade = <String>["reformed culling policies in the caverns","fought hard for each wiggler to be allowed to live"]
             ..purple = <String>["reformed the Church", "inspired the Church to be less bloodthirsty"]
-            ..fuchsia = <String>["reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","worked hard to use their status to change the Empire for the better"]
+            ..fuchsia = <String>["reformed ${rand.pickFrom(<String>["culling policies","education","warfare"])}","used their status to change the Empire for the better"]
             ..veryHigh = <String>["founded a cult of personality","changed the Empire forever with their ideals","convinced everyone to agree with them through a sweeping religious movement"]
             ..medium = <String>["inspired the trolls around them with their ideals","dreamed of a better life","never stopped dreaming"];
         curiousFlavor = new StatFlavor(1, Sign.LIGHT)
@@ -110,6 +110,7 @@ class Stat {
         freeFlavor = new StatFlavor(1,Sign.BREATH)
             ..death  = <String>["rebelling against the Empire","without any friends beside them","betraying the wrong Highblood"]
             ..jade = <String>["resented their role as a wiggler caregiver", "attempted to avoid the Caverns entirely"]
+            ..fuchsia = <String>["strove to be their own type of ruler, independant of those who came before","completely ignored the foundations their predecessor had left behind"]
             ..purple = <String>["ignored the Juggalo Church entirely","resented the Juggalo stereotypes about their caste"]
             ..medium = <String>["refused to conform","never stayed in any one place long","worked as avant garde artist"]
             ..high = <String>["worked as a Scout for the Empire","rebeled against the Empire","didn't get drawn into political drama","were free to live their life as they pleased"]
