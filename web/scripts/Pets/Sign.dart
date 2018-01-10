@@ -1,15 +1,6 @@
 import 'package:DollLibCorrect/DollRenderer.dart';
 
 class Sign {
-/*
-    TODO: Signs have lunar sway, caste and aspect.
-
-    static var that has all created signs in a big stupid pile.
-
-    can filter signs by lunar sway, case and aspect (three x where combob?)
-
-
- */
 
     static String PROSPIT = "PROSPIT";
     static String DERSE = "DERSE";
