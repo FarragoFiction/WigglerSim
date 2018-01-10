@@ -456,10 +456,13 @@ class AIPet extends AIObject {
         //then, make an AI object on the opposite side
         AIItem item = new AIItem(0,<String>["Imaginary Friend"],<String>["Smupet_Blu.png"]);
 
+        int buffer = 200;
         if(left) {
-            item.x = 0;
+            item.x = assumedCanvasWidth-buffer;
+            print("bored ${grub.name} imagines there is a fun object on the right side of the canvas at ${item.x}");
         }else {
-            item.x = assumedCanvasWidth;
+            item.x = 0;
+            print("bored ${grub.name} imagines there is a fun object on the left side of the canvas at ${item.x}");
         }
         return item;
 
@@ -492,7 +495,7 @@ class AIPet extends AIObject {
             print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
-        double boredomOdds = 1000000.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
+        double boredomOdds = 0.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
         print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
@@ -508,7 +511,7 @@ class AIPet extends AIObject {
         //if it's NOT your target random chance of forgetting what you were doing depending on loyalty
         //if it IS your target, definitely forget it (i.e. do something else)
         //if fickleness is too low they never leave whoever they first find.
-        double ficklnessOdds = -1.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
+        double ficklnessOdds = -0.5 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
         AIObject closestThing;
         int distanceToClosestThing = 1000;
         List<AIObject> copiedObjects = new List.from(objects);
