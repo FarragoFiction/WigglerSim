@@ -34,9 +34,9 @@ class AIPet extends AIObject {
 
     //grubs are too big
     @override
-    double scaleX = 0.5;
+    double scaleX = 0.7;
     @override
-    double scaleY = 0.5;
+    double scaleY = 0.7;
 
     //i'm not getting it directly but right now it doesn't matter too much
     int assumedCanvasWidth = 1000;
@@ -87,6 +87,24 @@ class AIPet extends AIObject {
     AIPet(Grub this.grub, {int x: 0, int y: 150}):super(x: x, y:y) {
         if(Emotion.HEART == null) {
             Emotion.initEmotions();
+        }
+        setScaleBasedStableThing();
+    }
+
+    //should NOT be fully random or based on stats which can change.
+    void setScaleBasedStableThing() {
+        HomestuckTrollDoll d = grub.doll;
+        double bonus = d.hairBack.imgNumber/d.maxHair; //should be hair so lots of variety
+        bonus = Math.min(0.1, bonus);
+        int seed = d.hairBack.imgNumber;
+        Random rand = new Random(seed);
+        rand.nextInt(); //init
+        if(rand.nextBool()) {
+            scaleX += bonus;
+            scaleY += bonus;
+        }else {
+            scaleX += -1 * bonus;
+            scaleY += -1 * bonus;
         }
     }
 
