@@ -47,7 +47,7 @@ class AIPet extends AIObject {
     AIObject target;
     //don't fucking spam reacting to the same object over and over.
     AIObject lastSeen;
-    int emotionalCoolDown = 25;
+    int emotionalCoolDown = 40;
     int timeSinceLastEmotion = 0;
 
 
@@ -458,9 +458,14 @@ class AIPet extends AIObject {
         Random rand = new Random();
 
         if(exploreTargets.isEmpty) {
+            print("TARGET TEST: nobody close by to ${grub.name}");
             //small chance of exploring anyways, so uncurious grubs don't just sit there
-            if(rand.nextDouble() > 0.99) target= rand.pickFrom(copiedObjects);
+            if(rand.nextDouble() > 0.1) {
+                target = rand.pickFrom(copiedObjects);
+                print("TARGET TEST: ${grub.name} going to check someone at random");
+            }
         }else {
+            print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
 
@@ -470,7 +475,8 @@ class AIPet extends AIObject {
         //react to the closest thing that is within react radius.
         //if it's NOT your target random chance of forgetting what you were doing depending on loyalty
         //if it IS your target, definitely forget it (i.e. do something else)
-        double ficklnessOdds = 1.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
+        //if fickleness is too low they never leave whoever they first find.
+        double ficklnessOdds = 2.0 - loyal.value/Stat.HIGH; //might be way more negative or way more positive.
         AIObject closestThing;
         int distanceToClosestThing = 1000;
         List<AIObject> copiedObjects = new List.from(objects);
@@ -492,10 +498,10 @@ class AIPet extends AIObject {
             if(lastSeen != closestThing) giveObject(closestThing);
             lastSeen = closestThing;
             if(closestThing == target ) {
-                print ("found target $target");
+                print ("TARGET TEST: ${grub.name} found target $target so removing");
                 target = null;
             }else if(ficklnessOdds > rand.nextDouble()) {
-                print("was fickle with loyalty of ${loyal.value}");
+                print("TARGET TEST: ${grub.name}was fickle with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
                 target = null;
             }
         }
