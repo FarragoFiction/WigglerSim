@@ -492,7 +492,7 @@ class AIPet extends AIObject {
             print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
-        double boredomOdds = 0.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
+        double boredomOdds = -1.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
         if(boredomOdds > rand.nextDouble()) {
             print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
@@ -526,14 +526,16 @@ class AIPet extends AIObject {
         rand.nextInt(); //init
         if(closestThing != null) {
             //don't keep spamming reactions.
-            if(lastSeen != closestThing) giveObject(closestThing);
-            lastSeen = closestThing;
-            if(closestThing == target ) {
-                print ("TARGET TEST: ${grub.name} found target $target so removing");
-                target = null;
-            }else if(ficklnessOdds > rand.nextDouble()) {
-                print("TARGET TEST: ${grub.name}was fickle with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
-                target = null;
+            if(lastSeen != closestThing) {
+                giveObject(closestThing);
+                lastSeen = closestThing;
+                if (closestThing == target) {
+                    print("TARGET TEST: ${grub.name} found target $target so removing");
+                    target = null;
+                } else if (ficklnessOdds > rand.nextDouble()) {
+                    print("TARGET TEST: ${grub.name}was fickle with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
+                    target = null;
+                }
             }
         }
     }
