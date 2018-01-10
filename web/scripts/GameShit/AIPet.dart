@@ -514,7 +514,7 @@ class AIPet extends AIObject {
         List<AIObject> copiedObjects = new List.from(objects);
         copiedObjects.remove(this);
         //imaginary objects will never get hit by this otherwise.
-        if(!copiedObjects.contains(target)) copiedObjects.add(target);
+        if(target != null && !copiedObjects.contains(target)) copiedObjects.add(target);
 
         for(AIObject obj in copiedObjects) {
             if(distanceFromTarget(obj) <= giveRange) {
