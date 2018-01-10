@@ -38,6 +38,9 @@ class AIPet extends AIObject {
     @override
     double scaleY = 0.5;
 
+    //i'm not getting it directly but right now it doesn't matter too much
+    int assumedCanvasWidth = 1000;
+
     //how close to an object do you need to be to react to it.
     int giveRange = 10;
 
@@ -443,9 +446,30 @@ class AIPet extends AIObject {
         return exploreRange;
     }
 
+    //give me an excuse to walk to other side of canvas.
+    AIObject makeImaginaryObject() {
+        //first, am i to the left or the right of the canvas
+        bool left = true;
+        if(x > assumedCanvasWidth/2) {
+            left = false;
+        }
+        //then, make an AI object on the opposite side
+        AIItem item = new AIItem(0,<String>["Imaginary Friend"],<String>["Smupet_Blu.png"]);
+
+        if(left) {
+            item.x = 0;
+        }else {
+            item.x = assumedCanvasWidth;
+        }
+        return item;
+
+    }
+
+
     void pickTarget(List<AIObject> objects) {
         List<AIObject> copiedObjects = new List.from(objects);
         copiedObjects.remove(this);
+        copiedObjects.remove(lastSeen);
 
         //if an object is within your explore range, add it to explore targets
         List<AIObject> exploreTargets = new List<AIObject>();
@@ -467,6 +491,13 @@ class AIPet extends AIObject {
         }else {
             print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
+        }
+        double boredomOdds = 0.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
+        boredomOdds +=  external.value/Stat.HIGH;
+        if(boredomOdds > rand.nextDouble()) {
+            print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
+            currentEmotion = Emotion.SURPRISENOODLE;
+            target = makeImaginaryObject();
         }
 
     }
