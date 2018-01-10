@@ -72,7 +72,10 @@ class AIPet extends AIObject {
     AnimationObject walkAnimation = new AnimationObject();
 
     //will usually be null
-    Emotion currentEmotion;
+    Emotion _currentEmotion;
+
+    //so i don't set it directly like an ass and fuck shit up.
+    Emotion get currentEmotion => _currentEmotion;
 
     //what should i use
     AnimationObject currentAnimation = new AnimationObject();
@@ -145,7 +148,7 @@ class AIPet extends AIObject {
         if(Emotion.HEART == null) {
             Emotion.initEmotions();
         }
-        currentEmotion  = e;
+        _currentEmotion  = e;
         Random rand = new Random();
         currentEmotionPhrase = rand.pickFrom(currentEmotion.textChoices);
     }
@@ -498,7 +501,7 @@ class AIPet extends AIObject {
         boredomOdds +=  external.value/Stat.HIGH;
         print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
-            currentEmotion = Emotion.SURPRISENOODLE;
+            setEmotion(Emotion.SURPRISENOODLE);
             print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
             target = makeImaginaryObject();
         }
@@ -558,7 +561,7 @@ class AIPet extends AIObject {
             timeSinceLastEmotion ++;
             if(timeSinceLastEmotion >= emotionalCoolDown) {
                 timeSinceLastEmotion = 0;
-                currentEmotion = null;
+                _currentEmotion = null;
             }
         }
 

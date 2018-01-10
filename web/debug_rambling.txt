@@ -780,3 +780,19 @@ Then, when they leave, they say their bored phrase AGAIN.
 Why?
 
 This is so insane. Emotions shouldn't cache?
+
+Is it the emotion caching...or the canvas?
+
+......................
+
+oh my fucking god.
+
+I'm caching the emotion's text.
+
+and i'm doing currentEmotion = surpriseNoodle
+instead of setting it directly.
+
+so fucking dumb.
+
+fix for this is making it private with no setter.
+
