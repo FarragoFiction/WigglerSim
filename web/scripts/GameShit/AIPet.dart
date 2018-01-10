@@ -230,7 +230,6 @@ class AIPet extends AIObject {
         if(grub.isRealistic) palePoints ++;
         if(grub.isCurious) flushedPoints ++;
         if(!grub.isImpatient) flushedPoints ++;
-
         if(palePoints > flushedPoints) {
             return Emotion.DIAMOND;
         }else {
@@ -499,8 +498,8 @@ class AIPet extends AIObject {
         boredomOdds +=  external.value/Stat.HIGH;
         print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
-            print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
             currentEmotion = Emotion.SURPRISENOODLE;
+            print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
             target = makeImaginaryObject();
         }
 
@@ -719,8 +718,8 @@ class Emotion {
         NEUTRALQUADRANT = new Emotion(0,"meh",<String>["oh","...","ok","is grub","u ok"]);
 
 
-        SURPRISENOODLE = new Emotion(0,"surpriseNoodle",<String>["?"]);
-        SHOUTPOLE = new Emotion(0,"shoutPole",<String>["!"]);
+        SURPRISENOODLE = new Emotion(0,"surpriseNoodle",<String>["?","wat this","go see"]);
+        SHOUTPOLE = new Emotion(0,"shoutPole",<String>["!","shock","suwpwise"]);
 
 
         //good:  happy, love, or cool
@@ -738,6 +737,11 @@ class Emotion {
         FEAR = new Emotion(-1,"fear",<String>["i scare","go away","scawy","no","i hide", "*shivering*"]);
         SAD = new Emotion(-1,"sad",<String>["sad thing","sad","*cry*",'heck',"dang"]);
 
+    }
+
+    @override
+    String toString() {
+        return "$textChoices";
     }
 
     Future<CanvasElement> draw(Grub grub, String chosenPhrase) async {
