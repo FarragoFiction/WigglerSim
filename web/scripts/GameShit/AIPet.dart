@@ -346,13 +346,13 @@ class AIPet extends AIObject {
         if(!grub.isImpatient) mehPoints ++;
 
         if(sleepPoints > boredPoints && sleepPoints > mehPoints) {
-            print ("sleep");
+           // print ("sleep");
             return Emotion.SLEEP;
         }else if(boredPoints > mehPoints) {
-            print ("bored");
+            //print ("bored");
             return Emotion.BORED;
         }else {
-            print ("meh");
+            //print ("meh");
             return Emotion.MEH;
         }
     }
@@ -379,7 +379,7 @@ class AIPet extends AIObject {
         if(!grub.isInternal) likesFamiliar  +=1;
         //you can't be neutral about familiar objects. you either are drawn to them or not.
         if(likesFamiliar == 0) likesFamiliar =1;
-        print("${grub.name} likes familiar is $likesFamiliar");
+       // print("${grub.name} likes familiar is $likesFamiliar");
 
         return likesFamiliar;
 
@@ -405,7 +405,7 @@ class AIPet extends AIObject {
 
         if(grub.isExternal) likesSimilar  +=-1;
         if(!grub.isInternal) likesSimilar  +=1;
-        print("${grub.name} likes similar is $likesSimilar");
+       // print("${grub.name} likes similar is $likesSimilar");
         //you can't be neutral about similar objects. you either are drawn to them or not.
         if(likesSimilar == 0) likesSimilar =1;
         return likesSimilar;
@@ -419,7 +419,7 @@ class AIPet extends AIObject {
         if(target.x < x) {
             turnWays = true;
             direction = -1;
-            print("$this needs to go left., speed is $speed and direction is $direction");
+           // print("$this needs to go left., speed is $speed and direction is $direction");
 
         }else {
             turnWays = false;
@@ -431,9 +431,9 @@ class AIPet extends AIObject {
         int unit = 10; //how much each 10 points in a stat should raise/lower it.
         int speed = 0;
         speed += (unit * 2 * energetic.value/10).round();
-        print ("after moding by energy of ${energetic.value}, range is $speed");
+       // print ("after moding by energy of ${energetic.value}, range is $speed");
         speed += (unit * 1 * idealistic.value/10).round();
-        print ("after moding by external of ${idealistic.value}, range is $speed");
+       // print ("after moding by external of ${idealistic.value}, range is $speed");
         return Math.max(speed,unit); //don't go negative asshole.
     }
 
@@ -442,9 +442,9 @@ class AIPet extends AIObject {
         int unit = 50; //how much each 10 points in a stat should raise/lower it.
         int exploreRange = 0;
         exploreRange += (unit * 2 * curious.value/10).round();
-        print ("after moding by curiosity of ${curious.value}, range is $exploreRange");
+       // print ("after moding by curiosity of ${curious.value}, range is $exploreRange");
         exploreRange += (unit * 1 * external.value/10).round();
-        print ("after moding by external of ${external.value}, range is $exploreRange");
+       // print ("after moding by external of ${external.value}, range is $exploreRange");
         return exploreRange;
     }
 
@@ -461,10 +461,10 @@ class AIPet extends AIObject {
         int buffer = 200;
         if(left) {
             item.x = assumedCanvasWidth-buffer;
-            print("bored ${grub.name} imagines there is a fun object on the right side of the canvas at ${item.x}");
+         //   print("bored ${grub.name} imagines there is a fun object on the right side of the canvas at ${item.x}");
         }else {
             item.x = 0;
-            print("bored ${grub.name} imagines there is a fun object on the left side of the canvas at ${item.x}");
+          //  print("bored ${grub.name} imagines there is a fun object on the left side of the canvas at ${item.x}");
         }
         return item;
 
@@ -487,22 +487,22 @@ class AIPet extends AIObject {
         Random rand = new Random();
 
         if(exploreTargets.isEmpty) {
-            print("TARGET TEST: nobody close by to ${grub.name}");
+           // print("TARGET TEST: nobody close by to ${grub.name}");
             //small chance of exploring anyways, so uncurious grubs don't just sit there
             if(rand.nextDouble() > 0.1) {
                 target = rand.pickFrom(copiedObjects);
-                print("TARGET TEST: ${grub.name} going to check someone at random");
+                //print("TARGET TEST: ${grub.name} going to check someone at random");
             }
         }else {
-            print("TARGET TEST: ${grub.name} can see somebody clsoe by");
+           // print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
         double boredomOdds = 0.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
-        print("checking for boredom");
+        //print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
             setEmotion(Emotion.SURPRISENOODLE);
-            print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
+            //print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
             target = makeImaginaryObject();
         }
 
@@ -532,7 +532,7 @@ class AIPet extends AIObject {
         }
         Random rand = new Random();
         rand.nextInt(); //init
-        print("TARGET TEST: closest thing is $closestThing");
+       // print("TARGET TEST: closest thing is $closestThing");
         if(closestThing != null) {
             //don't keep spamming reactions.
             if(lastSeen != closestThing) {
@@ -540,10 +540,10 @@ class AIPet extends AIObject {
             }
                 lastSeen = closestThing;
                 if (closestThing == target) {
-                    print("TARGET TEST: ${grub.name} found target $target so removing");
+                    //print("TARGET TEST: ${grub.name} found target $target so removing");
                     target = null;
                 } else if (ficklnessOdds > rand.nextDouble()) {
-                    print("TARGET TEST: ${grub.name}was fickle to ${target} with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
+                  //  print("TARGET TEST: ${grub.name}was fickle to ${target} with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
                     target = null;
                 }
         }
@@ -565,7 +565,7 @@ class AIPet extends AIObject {
             }
         }
 
-       print("target for $this is $target");
+      // print("target for $this is $target");
     }
 
     void giveObject(AIObject obj) {
@@ -601,7 +601,7 @@ class AIPet extends AIObject {
         grub.energetic.value += (item.energetic.value * multiplier).round();
         grub.loyal.value += (item.loyal.value * multiplier).round();
         grub.itemsRemembered.add(item.id);
-        print("after givign object, items rememberered is ${grub.itemsRemembered}");
+       // print("after givign object, items rememberered is ${grub.itemsRemembered}");
         GameObject.instance.save();
     }
 
@@ -631,7 +631,7 @@ class AIPet extends AIObject {
     //can be positive or negative about an object
     void judgeObject(AIItem item) {
         int reactionToSimilar = likesSimilar();
-        print("getting simulatity rating");
+       // print("getting simulatity rating");
         int similarityRatingValue = similarityRating(item) * reactionToSimilar;
 
         int reactionToFamiliar = likesFamiliar();
@@ -639,24 +639,24 @@ class AIPet extends AIObject {
 
         //i might not like what it is, but be comforted by familarity, etc etc.
         int opinionOnItem = similarityRatingValue + familiarityRatingValue;
-        print("judged similarity is ${similarityRatingValue} and familar is ${familiarityRatingValue} and opinion is ${opinionOnItem}");
+       // print("judged similarity is ${similarityRatingValue} and familar is ${familiarityRatingValue} and opinion is ${opinionOnItem}");
 
         if(opinionOnItem > 0) {
-            print("judged positive");
+           // print("judged positive");
             setEmotion(getPositiveEmotion());
         }else if(opinionOnItem < 0) {
-            print("judged negative");
+            //print("judged negative");
             setEmotion(getNegativeEmotion());
         }else {
-            print("judged neutral");
+            //print("judged neutral");
             setEmotion(getNeutralEmotion());
         }
-        print("judged ${item.trollNames}, emotion is ${currentEmotion.iconLocation}");
+       // print("judged ${item.trollNames}, emotion is ${currentEmotion.iconLocation}");
     }
 
     int isFamiliarItem(AIItem item) {
         if(grub.itemsRemembered.contains(item.id)) {
-            print("$item is familiar to $grub");
+           // print("$item is familiar to $grub");
             return 1;
         }
         return 0;
