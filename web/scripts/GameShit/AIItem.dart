@@ -105,7 +105,7 @@ class AIItem extends AIObject {
 
     Future<Null> pickVersion() async {
         await pickImage();
-        pickName();
+        await pickName();
     }
 
     //makes sure the index exists
@@ -133,7 +133,7 @@ class AIItem extends AIObject {
 
     Future<Null> pickName() async {
         name = itemTypes[versionIndex].name;
-        //print("chosen name is $name");
+        print("chosen name is $name");
     }
 
     @override
@@ -166,16 +166,15 @@ class AIItem extends AIObject {
     //includes list of stats and buttons for buying or deploying myself (depending on if i belong to player or not)
     Future<Null> drawHTML(Element destination) async {
         if(imageElement == null) await pickVersion();
-        /*
-            TODO: render image element to screen.
+        imageElement.classes.add("itemImageSrc");
 
-         */
         DivElement container = new DivElement();
         container.classes.add("itemElement");
         DivElement image = new DivElement();
-        container.classes.add("itemImage");
+        image.classes.add("itemImage");
         DivElement stats = new DivElement();
-        container.classes.add("itemStats");
+        stats.classes.add("itemStats");
+        drawHtmlStats(stats);
 
         container.append(image);
         container.append(stats);
@@ -183,8 +182,22 @@ class AIItem extends AIObject {
         destination.append(container);
 
         image.append(imageElement);
+    }
 
-
+    void drawHtmlStats(Element destination) {
+        Element container = new DivElement();
+        container.classes.add("itemNameDiv");
+        container.text = "${name}";
+        destination.append(container);
+        print("chosen name in html stats is $name");
+        for(Stat s in stats) {
+            if(s.value != 0) {
+                Element container = new DivElement();
+                container.classes.add("statDiv");
+                container.text = "${s.toString()}";
+                destination.append(container);
+            }
+        }
     }
 
     void makePatience(int value) {

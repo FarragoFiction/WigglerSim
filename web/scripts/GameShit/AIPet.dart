@@ -131,6 +131,15 @@ class AIPet extends AIObject {
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }
+
+    }
+
+    void restoreDefaultBody() {
+        List<int> bodies = <int>[0,1,2];
+        HomestuckGrubDoll g = grub.doll;
+        Random rand = new Random();
+        rand.nextInt(10); //init
+        g.body.imgNumber = rand.pickFrom(bodies);
     }
 
     //grub body 3 and grub body 4

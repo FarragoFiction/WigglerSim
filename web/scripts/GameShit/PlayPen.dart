@@ -46,6 +46,7 @@ class PlayPen {
                 if(rand.nextBool()) aip.turnWays = true;
                 await aip.setUpIdleAnimation();
                 await aip.setUpWalkAnimation();
+                aip.restoreDefaultBody(); //fucks up the doll otherwise
                 aip.currentAnimation = aip.idleAnimation;
 
                 pets.add(aip);

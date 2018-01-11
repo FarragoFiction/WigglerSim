@@ -45,6 +45,9 @@ class Player {
         //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
         //petInventory = new PetInventory();
         petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
+        //TODO make a 'fromJSON' method
+        itemInventory = new ItemInventory();
+
      }
 
     String get daysSincePlayed {

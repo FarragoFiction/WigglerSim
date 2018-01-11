@@ -224,3 +224,50 @@ li.dropdown {
 z-index: 13;
     display: block;
 }
+
+.itemElement{
+    width: 250px;
+    height: 375px;
+    border: 3px solid #5d2c1c;
+    background: #d2ac7c;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
+.itemImage{
+    height: 150px;
+    max-width: 250px;
+    max-height: 150px;
+}
+
+
+
+.itemImageSrc{
+    max-width: 250px;
+    vertical-align: bottom;
+    max-height: 150px;
+}
+
+.statDiv{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    color: #5d2c1c;
+    text-align: left;
+}
+
+.itemNameDiv{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    font-size: 18px;
+
+    color: #5d2c1c;
+    text-align: center;
+}
+
+.itemStats{
+
+}
