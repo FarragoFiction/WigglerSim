@@ -560,7 +560,7 @@ class AIPet extends AIObject {
         Random rand = new Random();
         rand.nextInt(); //init
         if(closestThing != null) {
-            print("TARGET TEST: closest thing is $closestThing");
+            print("TARGET TEST: closest thing is $closestThing at distance $distanceToClosestThing and x of ${closestThing.x}");
 
             //don't keep spamming reactions.
             if(lastSeen != closestThing) {
@@ -633,6 +633,7 @@ class AIPet extends AIObject {
        // print("after givign object, items rememberered is ${grub.itemsRemembered}");
         GameObject.instance.save();
         lastSeen = null; //don't count this for last seen, stop grub raves. probably.
+        _currentEmotion = null; //clear out before rendering, they can react later.
     }
 
     @override

@@ -45,7 +45,7 @@ abstract class AIObject {
 
 
 
-    AIObject({int this.x: 0, int this.y: 100}) {
+    AIObject({int this.x: -100013, int this.y: 100}) {
     }
 
     //https://codereview.stackexchange.com/questions/107635/checking-if-two-numbers-have-the-same-sign

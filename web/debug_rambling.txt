@@ -900,5 +900,29 @@ Wiggler decides carrot is close enough to react to.
 Wiggler no longer has a target.
 
 When wiggler finally does try to go see the carrot, it never thinks it reaches it.
+starts raving.
+
+
+Since I am making wigglers target new items, no more auto react. Turn that off, see if it helps.
+
+.....
+No matter where the carrot spawns. It thinks it's at distance "2";
+What happens if I spawn the carrot in a set location?
+
+
+........
+
+It's rendering half way across the map but thinks it's x is zero.
+
+
+.......
+
+WTH.
+
+Okay.
+
+"place on ground" is called once it renders. until then x is zero. instead, i should make
+x default to something that can  never be accidentally triggered.
+-100013 perhaps?
 
 
