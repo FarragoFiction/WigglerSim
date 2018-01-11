@@ -19,6 +19,8 @@ import 'dart:convert';
     i.e. tildeath book and skull (hypothetically) both show in same slot, randomly???
  */
 class AIItem extends AIObject {
+    static String ITEMAPPERANCES = "itemAppearances";
+
     static String PATIENCE = "patience";
     static String ENERGETIC = "energetic";
     static String IDEALISTIC = "idealistic";
@@ -78,7 +80,17 @@ class AIItem extends AIObject {
     }
 
     void loadFromJSON(String json, [JSONObject jsonObj]) {
-        throw("TODO");
+        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
+        id = int.parse(jsonObj[ID]);
+        patience.value = int.parse(jsonObj[PATIENCE]);
+        idealistic.value = int.parse(jsonObj[IDEALISTIC]);
+        curious.value = int.parse(jsonObj[CURIOUS]);
+        loyal.value = int.parse(jsonObj[LOYAL]);
+        energetic.value = int.parse(jsonObj[ENERGETIC]);
+        external.value = int.parse(jsonObj[EXTERNAL]);
+
+        String idontevenKnow = jsonObj[ITEMAPPERANCES];
+        loadItemVersionsFromJSON(idontevenKnow);
     }
 
     void loadItemVersionsFromJSON(String idontevenKnow) {
@@ -164,9 +176,6 @@ class AIItem extends AIObject {
 
     JSONObject toJson() {
         JSONObject json = new JSONObject();
-
-        //    AIItem(this.id,this.itemTypes, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
-
         json[ID] = "${id}";
         json[PATIENCE] = "${patience.value}";
         json[IDEALISTIC] = "${idealistic.value}";
@@ -175,7 +184,13 @@ class AIItem extends AIObject {
         json[ENERGETIC] = "${energetic.value}";
         json[EXTERNAL] = "${external.value}";
 
-        //TODO how to have ITEMAPPEARANCES to json.
+        List<JSONObject> jsonArray = new List<JSONObject>();
+        for(ItemAppearance p in itemTypes) {
+            // print("Saving ${p.name}");
+            jsonArray.add(p.toJson());
+        }
+        json[ITEMAPPERANCES] = jsonArray.toString(); //will this work?
+
 
         return json;
     }
