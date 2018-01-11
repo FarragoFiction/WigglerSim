@@ -325,6 +325,8 @@ class Troll extends Pet{
 
     }
 
+
+
     void createEpilogue() {
         epilogue = "";
 

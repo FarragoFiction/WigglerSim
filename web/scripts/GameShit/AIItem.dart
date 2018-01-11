@@ -89,7 +89,7 @@ class AIItem extends AIObject {
     //makes sure the index exists
     int get versionIndex {
         int avgStats = averageStatsIgnoreZero;
-        print("getting version index. Average stats is ${avgStats} and itemTypes is ${itemTypes.length} long.");
+        //print("getting version index. Average stats is ${avgStats} and itemTypes is ${itemTypes.length} long.");
         if(avgStats >= AIItem.VERY_HIGH && itemTypes.length > 3) {
             return 3;
         }else if(avgStats >= AIItem.HIGH && itemTypes.length > 2) {
@@ -104,14 +104,14 @@ class AIItem extends AIObject {
     Future<Null> pickImage() async {
         //version index takes care of making sure it is a valid location
         String chosen = itemTypes[versionIndex].imageLocation;
-        print("chosen image is $chosen");
+        //print("chosen image is $chosen");
 
         imageElement = await Loader.getResource(("$folder$chosen"));
     }
 
     Future<Null> pickName() async {
         name = itemTypes[versionIndex].name;
-        print("chosen name is $name");
+        //print("chosen name is $name");
     }
 
     @override

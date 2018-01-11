@@ -210,6 +210,65 @@ abstract class Pet {
         return external.value <= 0;
     }
 
+    @override
+    String toString() {
+        return "$name";
+    }
+
+    static int averagePetPatience(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.patience.value;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int averagePetEnergetic(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.energetic.value;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int  averagePetIdealistic(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.idealistic.value;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int  averagePetCurious(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.curious.value;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int averagePetLoyal(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.loyal.value;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int averagePetExternal(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.external.value;
+        }
+        return (total/pets.length).round();
+    }
+
 
     void makePatience(int value) {
         patience = new Stat(value, "Patient","Impatient", Stat.patienceFlavor, Stat.impatienceFlavor);

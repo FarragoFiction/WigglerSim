@@ -27,6 +27,12 @@ class PetInventory {
     Pet rulingEmpress;
     List<Troll> alumni = new List<Troll>();
 
+    List<Troll> get last12Alumni {
+
+        return alumni.sublist(0, 12);
+
+    }
+
     PetInventory();
 
     PetInventory.fromJSON(String json){

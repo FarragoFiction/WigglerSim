@@ -29,9 +29,23 @@ class ItemInventory {
     }
 
     //even default items should have stat values influenced by value of last 12 grubs
-    static List<AIItem> defaultItems;
+    static List<AIItem> get  defaultItems
+
+    {
+        List<AIItem> ret = new List<AIItem>();
+        //TODO game object needs to have a get for last 12 alumni
+        //then set stat values based on asking those alumni what the average of stat x or y is.
+        //static method on pet?
+        List<Troll> last12 = (GameObject.instance.player.petInventory.last12Alumni);
+
+        ret.add(new AIItem(0,1,<ItemAppearance>[new ItemAppearance("Level 1","Smupet_Blu.png"),new ItemAppearance("Level 2","redscale.png"),new ItemAppearance("Level 3","eldritchplushie.png")], curious_value: AIItem.LOW, idealistic_value: -1*AIItem.HIGH));
+        ret.add(new AIItem(0,1,<ItemAppearance>[new ItemAppearance("Level 1","Smupet_Blu.png"),new ItemAppearance("Level 2","redscale.png"),new ItemAppearance("Level 3","eldritchplushie.png")], curious_value: AIItem.LOW, idealistic_value: -1*AIItem.HIGH));
+        ret.add(new AIItem(0,1,<ItemAppearance>[new ItemAppearance("Level 1","Smupet_Blu.png"),new ItemAppearance("Level 2","redscale.png"),new ItemAppearance("Level 3","eldritchplushie.png")], curious_value: AIItem.LOW, idealistic_value: -1*AIItem.HIGH));
+        return ret;
+    }
     static List<AIItem> mutantItems;
     static List<AIItem> calmEmpressItems;
+
 
     List<AIItem> myItems = new List<AIItem>();
 
