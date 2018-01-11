@@ -25,15 +25,18 @@ import 'dart:convert';
 class ItemInventory {
 
     static get allItems {
-
+        List<AIItem> ret = new List<AIItem>();
+        ret.addAll(defaultItems);
+        return ret;
     }
 
     //even default items should have stat values influenced by value of last 12 grubs
+    //should have enough items that all stats are possible
     static List<AIItem> get  defaultItems
 
     {
         List<AIItem> ret = new List<AIItem>();
-        List<Troll> last12 = (GameObject.instance.player.petInventory.last12Alumni);
+        List<Troll> last12 = (GameObject.instance.last12Alumni);
         //default items are based on troll stats, but still have a set positive/negative leaning.
         ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: -1* Pet.averagePetEnergetic(last12).abs(), idealistic_value: Pet.averagePetIdealistic(last12).abs()));
         ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], energetic_value: Pet.averagePetEnergetic(last12).abs(), idealistic_value: -1*Pet.averagePetIdealistic(last12).abs()));

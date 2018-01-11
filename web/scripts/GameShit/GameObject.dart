@@ -30,6 +30,12 @@ class GameObject {
         }
     }
 
+    List<Troll> get last12Alumni {
+
+        return player.petInventory.last12Alumni;
+
+    }
+
     Future<Null> preloadManifest() async {
         await Loader.preloadManifest();
         print ("loader returned");

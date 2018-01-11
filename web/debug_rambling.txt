@@ -804,3 +804,13 @@ Current bug: items aren't even CALLING their version method?
 
 (my goal is for one item to have several forms based on it's average stats).
 
+~~~~~~~
+
+Okay, I've got some sample items created.
+
+FIRST STEP: have an AI item know how to render itself into html (not canvas).
+
+includes a "purchase" or "deploy" button and a list of it's stats. (ignoring zero stat ones).
+
+Render these items unto the stat page.
+
