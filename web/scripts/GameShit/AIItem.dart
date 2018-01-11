@@ -1,8 +1,11 @@
 import "AIObject.dart";
 import "../Pets/Stat.dart";
 import 'dart:async';
+import "../Pets/JSONObject.dart";
 import 'dart:html';
 import "package:DollLibCorrect/DollRenderer.dart";
+import 'dart:convert';
+
 
 /*
     has a list of strings that are possible image files, a string that is it's name (generic troll word)
@@ -16,7 +19,13 @@ import "package:DollLibCorrect/DollRenderer.dart";
     i.e. tildeath book and skull (hypothetically) both show in same slot, randomly???
  */
 class AIItem extends AIObject {
-
+    static String PATIENCE = "patience";
+    static String ENERGETIC = "energetic";
+    static String IDEALISTIC = "idealistic";
+    static String CURIOUS = "curious";
+    static String LOYAL = "loyal";
+    static String ID = "id";
+    static String EXTERNAL = "external";
     static int LOW = 5;
     static int MID = 10;
     static int HIGH = 15;
@@ -62,6 +71,28 @@ class AIItem extends AIObject {
         makeCurious(curious_value);
         makeLoyal(loyal_value);
         makeExternal(external_value);
+    }
+
+    AIItem.fromJSON(String json){
+        loadFromJSON(json);
+    }
+
+    void loadFromJSON(String json, [JSONObject jsonObj]) {
+        throw("TODO");
+    }
+
+    void loadItemVersionsFromJSON(String idontevenKnow) {
+        if(idontevenKnow == null) return;
+
+        List<dynamic> what = JSON.decode(idontevenKnow);
+        //print("what json is $what");
+        for(dynamic d in what) {
+            //print("dynamic json thing is  $d");
+            JSONObject j = new JSONObject();
+            j.json = d;
+            itemTypes.add(new ItemAppearance.fromJSON(null,j));
+        }
+
     }
 
     AIItem copyItemForInventory() {
@@ -131,6 +162,25 @@ class AIItem extends AIObject {
         imageElement = await Loader.getResource(("$folder$chosen"));
     }
 
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+
+        //    AIItem(this.id,this.itemTypes, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
+
+        json[ID] = "${id}";
+        json[PATIENCE] = "${patience.value}";
+        json[IDEALISTIC] = "${idealistic.value}";
+        json[CURIOUS] = "${curious.value}";
+        json[LOYAL] = "${loyal.value}";
+        json[ENERGETIC] = "${energetic.value}";
+        json[EXTERNAL] = "${external.value}";
+
+        //TODO how to have ITEMAPPEARANCES to json.
+
+        return json;
+    }
+
+
     Future<Null> pickName() async {
         name = itemTypes[versionIndex].name;
         print("chosen name is $name");
@@ -169,6 +219,8 @@ class AIItem extends AIObject {
         imageElement.classes.add("itemImageSrc");
 
         DivElement container = new DivElement();
+        drawButton(container);
+
         container.classes.add("itemElement");
         DivElement image = new DivElement();
         image.classes.add("itemImage");
@@ -184,12 +236,22 @@ class AIItem extends AIObject {
         image.append(imageElement);
     }
 
+    void drawButton(Element destination) {
+        ButtonElement button = new ButtonElement();
+        if(belongsToPlayer) {
+            button.text = "Deploy";
+        }else {
+            button.text = "Buy";
+        }
+        destination.append(button);
+
+    }
+
     void drawHtmlStats(Element destination) {
         Element container = new DivElement();
         container.classes.add("itemNameDiv");
         container.text = "${name}";
         destination.append(container);
-        print("chosen name in html stats is $name");
         for(Stat s in stats) {
             if(s.value != 0) {
                 Element container = new DivElement();
@@ -223,12 +285,32 @@ class AIItem extends AIObject {
 }
 
 class ItemAppearance {
+    static String NAMEJSON = "name";
+    static String IMAGELOCJSON = "imageLoc";
+
     String name; //weird troll memey shit
     String imageLocation;
     ItemAppearance(this.name, this.imageLocation);
 
+    ItemAppearance.fromJSON(String json, [JSONObject jsonObj]){
+        loadFromJSON(json,jsonObj);
+    }
+
     @override
     String toString() {
         return name;
+    }
+
+    void loadFromJSON(String json, [JSONObject jsonObj]) {
+        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
+        name = jsonObj[NAMEJSON];
+        imageLocation = jsonObj[IMAGELOCJSON];
+    }
+
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json[IMAGELOCJSON] = "${imageLocation}";
+        json[NAMEJSON] = "${name}";
+        return json;
     }
 }

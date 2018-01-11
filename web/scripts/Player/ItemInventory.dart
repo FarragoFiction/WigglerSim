@@ -24,6 +24,9 @@ import 'dart:convert';
  */
 class ItemInventory {
 
+    static String ITEMLIST = "itemList";
+
+
     static get allItems {
         List<AIItem> ret = new List<AIItem>();
         ret.addAll(defaultItems);
@@ -40,15 +43,61 @@ class ItemInventory {
         //default items are based on troll stats, but still have a set positive/negative leaning.
         ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: -1* Pet.averagePetEnergetic(last12).abs(), idealistic_value: Pet.averagePetIdealistic(last12).abs()));
         ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], energetic_value: Pet.averagePetEnergetic(last12).abs(), idealistic_value: -1*Pet.averagePetIdealistic(last12).abs()));
-        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Seadwelling Hop Beast","frogcroak.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],idealistic_value: 1,external_value: 1, curious_value:1, energetic_value:1, loyal_value: Pet.averagePetLoyal(last12).abs(), patience_value: Pet.averagePetPatience(last12).abs()));
+        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Seadwelling Hop Beast","frogcroak.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],idealistic_value: Pet.averagePetIdealistic(last12),external_value: Pet.averagePetExternal(last12), curious_value:Pet.averagePetCurious(last12), energetic_value:Pet.averagePetEnergetic(last12), loyal_value: Pet.averagePetLoyal(last12), patience_value: Pet.averagePetPatience(last12)));
 
         return ret;
     }
     static List<AIItem> mutantItems;
     static List<AIItem> calmEmpressItems;
 
-
     List<AIItem> myItems = new List<AIItem>();
+
+
+    ItemInventory.fromJSON(String json){
+        //print("loading pet inventory with json $json");
+        loadFromJSON(json);
+    }
+
+
+    void loadFromJSON(String json) {
+
+        // print("In pet inventory, json is $json");
+        JSONObject jsonObj = new JSONObject.fromJSONString(json);
+        String idontevenKnow = jsonObj[PETSLIST];
+        loadPetsFromJSON(idontevenKnow);
+        idontevenKnow = jsonObj[ALUMNI];
+        loadAlumniFromJSON(idontevenKnow);
+        String empressJson = jsonObj[EMPRESS];
+        if(empressJson != null) rulingEmpress = Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson));
+
+    }
+
+    void loadPetsFromJSON(String idontevenKnow) {
+        if(idontevenKnow == null) return;
+
+        List<dynamic> what = JSON.decode(idontevenKnow);
+        //print("what json is $what");
+        for(dynamic d in what) {
+            //print("dynamic json thing is  $d");
+            JSONObject j = new JSONObject();
+            j.json = d;
+            pets.add(Pet.loadPetFromJSON(null,j));
+        }
+
+    }
+
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        List<JSONObject> jsonArray = new List<JSONObject>();
+        for(AIItem p in myItems) {
+            // print("Saving ${p.name}");
+            jsonArray.add(p.toJson());
+        }
+        json[ITEMLIST] = jsonArray.toString(); //will this work?
+        print("item inventory json is: ${json} and items are ${myItems.length}");
+        return json;
+    }
+
 
     Future<Null> drawShop(Element container) async {
         await drawItems(allItems, container);

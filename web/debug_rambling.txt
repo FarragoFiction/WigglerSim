@@ -814,3 +814,14 @@ includes a "purchase" or "deploy" button and a list of it's stats. (ignoring zer
 
 Render these items unto the stat page.
 
+~~~~~~~~
+
+Alright, now for the HARD part.
+
+I need to get the itemInventory to save itself to JSON, and load as well.
+
+Once I do that I can make the "buy" button work
+and display my inventory on the playpen page (under the playpen itself)
+
+
+

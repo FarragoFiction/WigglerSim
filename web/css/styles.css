@@ -14,6 +14,16 @@ html, body {
 
 }
 
+
+button{
+    margin: 10px;
+    padding: 10px;
+    background-color: #5d2c1c;
+    color: #935b49;
+    border: 1px solid #935b49;
+    font-family: 'strife', sans-serif;
+}
+
 #pkmnProf{
     display: none;
     background-color: #935b49;
@@ -227,7 +237,7 @@ z-index: 13;
 
 .itemElement{
     width: 250px;
-    height: 375px;
+    height: 425px;
     border: 3px solid #5d2c1c;
     background: #d2ac7c;
     display: inline-block;
@@ -247,7 +257,10 @@ z-index: 13;
     max-width: 250px;
     vertical-align: bottom;
     max-height: 150px;
+    padding: 10px;
 }
+
+
 
 .statDiv{
     padding-left: 10px;
