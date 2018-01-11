@@ -60,6 +60,7 @@ class ItemInventory {
 
     void addItem(AIItem item) {
         _myItems.add(item.copyItemForInventory());
+        GameObject.instance.save();
     }
 
     int numberOf(AIItem item) {

@@ -823,5 +823,31 @@ I need to get the itemInventory to save itself to JSON, and load as well.
 Once I do that I can make the "buy" button work
 and display my inventory on the playpen page (under the playpen itself)
 
+~~~~~~~
 
+Alright, the store is WORKING, except when I reload the page it's not storing how many items I have.
+
+So. Is it a save issue. Or a load issue.
+
+First, check saving:
+
+AHAH i bet i'm just straight up never saving. I need to be saving after each purchase.
+
+alright, now there's an error on load.
+
+~~~~~~
+....................
+................
+.........
+.....
+.
+
+What
+The
+Actual
+Fuck.
+
+Items are saving and loading, 10/10. Except hte player's inventory has MULTIPLE carrots, for example
+but only the first one renders........
+because the ImageElement isn't being copied because omfg.
 

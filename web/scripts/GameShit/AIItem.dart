@@ -62,7 +62,7 @@ class AIItem extends AIObject {
         return total;
     }
 
-    List<ItemAppearance> itemTypes;
+    List<ItemAppearance> itemTypes = new List<ItemAppearance>();
 
 
 
@@ -79,6 +79,13 @@ class AIItem extends AIObject {
     }
 
     AIItem.fromJSON(String json, [JSONObject jsonObj]){
+        //init
+        makePatience(0);
+        makeEnergetic(0);
+        makeIdealistic(0);
+        makeCurious(0);
+        makeLoyal(0);
+        makeExternal(0);
         loadFromJSON(json, jsonObj);
     }
 
