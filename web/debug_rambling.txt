@@ -851,3 +851,22 @@ Items are saving and loading, 10/10. Except hte player's inventory has MULTIPLE 
 but only the first one renders........
 because the ImageElement isn't being copied because omfg.
 
+Wait. that can't be true. The copying is happening on another page.
+
+So what IS happening?
+
+There is no img tag in there. Hrrrm.
+
+wait not it's the last one that has it.
+
+bluh. Why is that?
+
+(also it's a buy button when it should be a deploy button)
+
+oh.
+
+AHAH:
+
+        imageElement = await Loader.getResource(("$folder$chosen"));
+ but what i need to do is make a copy of it. not use the cached one hte loader has.
+
