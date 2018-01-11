@@ -106,7 +106,7 @@ abstract class AIObject {
         }else if(obj.external.value != 0) {
             similarity += -1;
         }
-        print("similarity rating between ${this} and ${obj} is $similarity");
+      //  print("similarity rating between ${this} and ${obj} is $similarity");
         return similarity;
     }
 

@@ -796,3 +796,11 @@ so fucking dumb.
 
 fix for this is making it private with no setter.
 
+~~~~~~
+
+No discord till i get the shop done or lunch happens.
+
+Current bug: items aren't even CALLING their version method?
+
+(my goal is for one item to have several forms based on it's average stats).
+
