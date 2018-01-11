@@ -59,6 +59,7 @@ class GameObject {
         player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
     }
 
+
     Future<Null> drawPlayer(Element container) async {
         CanvasElement canvas = await player.draw();
         container.append(canvas);
@@ -91,6 +92,10 @@ class GameObject {
 
     void drawShop(Element container) {
         player.itemInventory.drawShop(container);
+    }
+
+    void drawItemInventory(Element container) {
+        player.itemInventory.drawInventory(container);
     }
 
     void drawAdoptables(Element container) {
