@@ -33,14 +33,12 @@ class ItemInventory {
 
     {
         List<AIItem> ret = new List<AIItem>();
-        //TODO game object needs to have a get for last 12 alumni
-        //then set stat values based on asking those alumni what the average of stat x or y is.
-        //static method on pet?
         List<Troll> last12 = (GameObject.instance.player.petInventory.last12Alumni);
+        //default items are based on troll stats, but still have a set positive/negative leaning.
+        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: -1* Pet.averagePetEnergetic(last12).abs(), idealistic_value: Pet.averagePetIdealistic(last12).abs()));
+        ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], energetic_value: Pet.averagePetEnergetic(last12).abs(), idealistic_value: -1*Pet.averagePetIdealistic(last12).abs()));
+        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Seadwelling Hop Beast","frogcroak.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")], loyal_value: Pet.averagePetLoyal(last12).abs(), patience_value: Pet.averagePetPatience(last12).abs()));
 
-        ret.add(new AIItem(0,1,<ItemAppearance>[new ItemAppearance("Level 1","Smupet_Blu.png"),new ItemAppearance("Level 2","redscale.png"),new ItemAppearance("Level 3","eldritchplushie.png")], curious_value: AIItem.LOW, idealistic_value: -1*AIItem.HIGH));
-        ret.add(new AIItem(0,1,<ItemAppearance>[new ItemAppearance("Level 1","Smupet_Blu.png"),new ItemAppearance("Level 2","redscale.png"),new ItemAppearance("Level 3","eldritchplushie.png")], curious_value: AIItem.LOW, idealistic_value: -1*AIItem.HIGH));
-        ret.add(new AIItem(0,1,<ItemAppearance>[new ItemAppearance("Level 1","Smupet_Blu.png"),new ItemAppearance("Level 2","redscale.png"),new ItemAppearance("Level 3","eldritchplushie.png")], curious_value: AIItem.LOW, idealistic_value: -1*AIItem.HIGH));
         return ret;
     }
     static List<AIItem> mutantItems;

@@ -36,7 +36,14 @@ class AIItem extends AIObject {
     //so wigglers know if they remember this or not.
     int id;
     //for buying in store.
-    int cost;
+    //not standardized because of how items can change
+    int get cost {
+        int total = 0;
+        for(Stat s in stats) {
+            total += s.value.abs();
+        }
+        return total;
+    }
 
     List<ItemAppearance> itemTypes;
 
@@ -45,7 +52,7 @@ class AIItem extends AIObject {
 
     //if you don't have a stat it's zero
     //troll names and image locations should be same length. probably should make it an object then.
-    AIItem(this.id, this.cost, this.itemTypes, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
+    AIItem(this.id,this.itemTypes, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
         makePatience(patience_value);
         makeEnergetic(energetic_value);
         makeIdealistic(idealistic_value);
