@@ -115,19 +115,19 @@ class AIPet extends AIObject {
         Random rand = new Random();
         rand.nextInt(10); //init
         if(rand.nextBool()) {
-            g.body.imgNumber = 0;
+            g.body.imgNumber = 5;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
-            g.body.imgNumber = 1;
+            g.body.imgNumber = 6;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }else { //so they don't all look the same
-            g.body.imgNumber = 1;
+            g.body.imgNumber = 6;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
-            g.body.imgNumber = 0;
+            g.body.imgNumber = 5;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }
