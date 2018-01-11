@@ -3,11 +3,14 @@ import '../Player/Player.dart';
 import 'dart:async';
 import 'dart:html';
 import "../Pets/PetLib.dart";
+import "PlayPen.dart";
 
 
 //handles shit that my instincts want to put on a page controller.
 class GameObject {
     Player player;
+    //will be null everywhere but the playpen screen.
+    PlayPen playPen;
 
     static GameObject instance;
 

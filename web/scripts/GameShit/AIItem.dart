@@ -163,6 +163,30 @@ class AIItem extends AIObject {
 
     }
 
+    //includes list of stats and buttons for buying or deploying myself (depending on if i belong to player or not)
+    Future<Null> drawHTML(Element destination) async {
+        if(imageElement == null) await pickVersion();
+        /*
+            TODO: render image element to screen.
+
+         */
+        DivElement container = new DivElement();
+        container.classes.add("itemElement");
+        DivElement image = new DivElement();
+        container.classes.add("itemImage");
+        DivElement stats = new DivElement();
+        container.classes.add("itemStats");
+
+        container.append(image);
+        container.append(stats);
+
+        destination.append(container);
+
+        image.append(imageElement);
+
+
+    }
+
     void makePatience(int value) {
         patience = new Stat(value, "Patient","Impatient", Stat.patienceFlavor, Stat.impatienceFlavor);
     }

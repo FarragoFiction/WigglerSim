@@ -60,9 +60,9 @@ class ItemInventory {
 
     //all shop does is tell items to render buy button instead of deploy button.
     Future<Null> drawItems(List<AIItem> chosenItems, Element container) async {
-
+        for(AIItem item in chosenItems) {
+            item.drawHTML(container);
+        }
     }
-
-
-
+    
 }
