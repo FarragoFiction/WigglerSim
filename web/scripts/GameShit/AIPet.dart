@@ -514,9 +514,9 @@ class AIPet extends AIObject {
         Random rand = new Random();
 
         if(exploreTargets.isEmpty) {
-           // print("TARGET TEST: nobody close by to ${grub.name}");
+            if(copiedObjects.isNotEmpty) print("TARGET TEST: nobody close by to ${grub.name} but there are ${copiedObjects.length} items in the world");
             //small chance of exploring anyways, so uncurious grubs don't just sit there
-            if(rand.nextDouble() > 0.1) {
+            if(rand.nextDouble() > 0.3) {
                 target = rand.pickFrom(copiedObjects);
                 //print("TARGET TEST: ${grub.name} going to check someone at random");
             }
@@ -524,7 +524,7 @@ class AIPet extends AIObject {
            // print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
-        double boredomOdds = 0.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
+        double boredomOdds = -10.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
         //print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
@@ -559,8 +559,9 @@ class AIPet extends AIObject {
         }
         Random rand = new Random();
         rand.nextInt(); //init
-       // print("TARGET TEST: closest thing is $closestThing");
         if(closestThing != null) {
+            print("TARGET TEST: closest thing is $closestThing");
+
             //don't keep spamming reactions.
             if(lastSeen != closestThing) {
                 giveObject(closestThing);
@@ -578,6 +579,7 @@ class AIPet extends AIObject {
 
     void reactToWorld(List<AIObject> objects) {
         //make a copy, remove self from it.
+        GameObject.instance.infoElement.text = "target is $target and currentEmotion is $currentEmotion";
         if(target == null && currentEmotion == null) pickTarget(objects);
         reactToCloseByThings(objects);
         if(target != null) {
@@ -630,6 +632,7 @@ class AIPet extends AIObject {
         grub.itemsRemembered.add(item.id);
        // print("after givign object, items rememberered is ${grub.itemsRemembered}");
         GameObject.instance.save();
+        lastSeen = null; //don't count this for last seen, stop grub raves. probably.
     }
 
     @override

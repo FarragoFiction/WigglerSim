@@ -180,7 +180,7 @@ class AIItem extends AIObject {
     Future<Null> pickImage() async {
         //version index takes care of making sure it is a valid location
         String chosen = itemTypes[versionIndex].imageLocation;
-        print("chosen image is $chosen");
+       // print("chosen image is $chosen");
 
         imageElement = await Loader.getResource(("$folder$chosen"));
         imageElement = imageElement.clone(false);
@@ -210,7 +210,7 @@ class AIItem extends AIObject {
 
     Future<Null> pickName() async {
         name = itemTypes[versionIndex].name;
-        print("chosen name is $name");
+        //print("chosen name is $name");
     }
 
     @override
@@ -268,6 +268,7 @@ class AIItem extends AIObject {
         if(belongsToPlayer) {
             button.text = "Deploy";
             button.onClick.listen((e) {
+                //print("adding item ${name} with calm of ${energetic.value} and realisitic of ${idealistic.value}. and curious of ${curious.value}");
                 GameObject.instance.playPen.addItem(this);
                 GameObject.instance.player.itemInventory.removeItem(this);
                 destination.remove();
@@ -294,7 +295,7 @@ class AIItem extends AIObject {
             if(s.value != 0) {
                 Element container = new DivElement();
                 container.classes.add("statDiv");
-                container.text = "${s.toString()}";
+                container.text = "${s.toString()} (${s.value})";
                 destination.append(container);
             }
         }

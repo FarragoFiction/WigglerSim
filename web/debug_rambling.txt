@@ -870,3 +870,35 @@ AHAH:
         imageElement = await Loader.getResource(("$folder$chosen"));
  but what i need to do is make a copy of it. not use the cached one hte loader has.
 
+
+ ~~~~~~
+
+ alright, deployed items aren't attracting as much attention as hoped.
+ I think i need to dial down the boredom rates.
+
+
+ ~~~~~
+
+ Stats are wrong. Giving them even one carrot makes them INSANELY high. why?
+
+ ~~~~~~
+
+ Alright, now grubs are flipping their shit about items and refusing to ever stop from reacting to the. WHY.
+
+well, to make it easier to test i coul dmake it so curious grubs always investigate new items.
+
+~~~~~~~~~~~
+
+Current Sequence of Events:
+
+Fresh Screen.
+Toggle Animations.
+Deploy Carrot.
+Wiggler reacts to carrot.
+Wiggler spends a split second wanting to investigate carrot.
+Wiggler decides carrot is close enough to react to.
+Wiggler no longer has a target.
+
+When wiggler finally does try to go see the carrot, it never thinks it reaches it.
+
+

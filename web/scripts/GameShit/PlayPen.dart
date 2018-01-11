@@ -59,10 +59,15 @@ class PlayPen {
 
     Future<Null> addItem(AIItem item) async {
         await item.setUpIdleAnimation();
-
-        //TODO eventually, only give them the item if they go up to it.
         for(AIPet p in pets) {
             p.giveObjectStats(item);
+            if(p.grub.isCurious) {
+                print("want to investigate $item");
+                p.target = item; //they are interested in it.
+            }else {
+                print("fuck that $item, my curiosity is ${p.curious.value}");
+
+            }
         }
         items.add(item);
     }

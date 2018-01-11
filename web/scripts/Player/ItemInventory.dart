@@ -106,7 +106,7 @@ class ItemInventory {
             jsonArray.add(p.toJson());
         }
         json[ITEMLIST] = jsonArray.toString(); //will this work?
-        print("item inventory json is: ${json} and items are ${_myItems.length}");
+       // print("item inventory json is: ${json} and items are ${_myItems.length}");
         return json;
     }
 
