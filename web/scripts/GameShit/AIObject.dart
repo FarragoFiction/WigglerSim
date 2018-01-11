@@ -50,7 +50,7 @@ abstract class AIObject {
 
     //https://codereview.stackexchange.com/questions/107635/checking-if-two-numbers-have-the-same-sign
     bool sameSign(int num1, int num2) {
-        print("similarity rating: does $num1 have the same sign as $num2? ${(num1 ^ num2) >= 0}");
+       // print("similarity rating: does $num1 have the same sign as $num2? ${(num1 ^ num2) >= 0}");
         return (num1 ^ num2) >= 0;
     }
 
@@ -72,7 +72,7 @@ abstract class AIObject {
     }
 
     int similarityRating(AIObject obj) {
-        print("getting similarity rating between ${this} and ${obj}");
+       // print("getting similarity rating between ${this} and ${obj}");
 
         int similarity = 0;
         //for each stat we have the same value for, add a point

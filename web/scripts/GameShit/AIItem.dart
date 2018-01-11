@@ -82,7 +82,7 @@ class AIItem extends AIObject {
     }
 
     Future<Null> pickVersion() async {
-        pickImage();
+        await pickImage();
         pickName();
     }
 
@@ -103,13 +103,14 @@ class AIItem extends AIObject {
     Future<Null> pickImage() async {
         //version index takes care of making sure it is a valid location
         String chosen = itemTypes[versionIndex].imageLocation;
+        print("chosen image is $chosen");
 
         imageElement = await Loader.getResource(("$folder$chosen"));
     }
 
     Future<Null> pickName() async {
-        String chosen = itemTypes[versionIndex].name;
-        imageElement = await Loader.getResource(("$folder$chosen"));
+        name = itemTypes[versionIndex].name;
+        print("chosen name is $name");
     }
 
     @override
