@@ -60,19 +60,13 @@ class ItemInventory {
 
 
     void loadFromJSON(String json) {
-
-        // print("In pet inventory, json is $json");
+        // print("In item inventory, json is $json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
-        String idontevenKnow = jsonObj[PETSLIST];
-        loadPetsFromJSON(idontevenKnow);
-        idontevenKnow = jsonObj[ALUMNI];
-        loadAlumniFromJSON(idontevenKnow);
-        String empressJson = jsonObj[EMPRESS];
-        if(empressJson != null) rulingEmpress = Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson));
-
+        String idontevenKnow = jsonObj[ITEMLIST];
+        loadItemsFromJSON(idontevenKnow);
     }
 
-    void loadPetsFromJSON(String idontevenKnow) {
+    void loadItemsFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
 
         List<dynamic> what = JSON.decode(idontevenKnow);
@@ -81,7 +75,7 @@ class ItemInventory {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
             j.json = d;
-            pets.add(Pet.loadPetFromJSON(null,j));
+            myItems.add(new AIItem.fromJSON(null,j));
         }
 
     }

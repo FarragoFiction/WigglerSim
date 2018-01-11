@@ -75,8 +75,8 @@ class AIItem extends AIObject {
         makeExternal(external_value);
     }
 
-    AIItem.fromJSON(String json){
-        loadFromJSON(json);
+    AIItem.fromJSON(String json, [JSONObject jsonObj]){
+        loadFromJSON(json, jsonObj);
     }
 
     void loadFromJSON(String json, [JSONObject jsonObj]) {

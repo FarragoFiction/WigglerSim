@@ -47,7 +47,6 @@ class Player {
         //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
         //petInventory = new PetInventory();
         petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
-        //TODO make a 'fromJSON' method
         itemInventory = new ItemInventory.fromJSON(jsonObj[ITEMINVENTORY]);
 
      }
@@ -173,7 +172,6 @@ class Player {
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
         json[PETINVENTORY] = petInventory.toJson().toString();
         json[ITEMINVENTORY] = itemInventory.toJson().toString();
-
         return json;
     }
 }
