@@ -63,6 +63,11 @@ class ItemInventory {
         GameObject.instance.save();
     }
 
+    void removeItem(AIItem item) {
+        _myItems.remove(item);
+        GameObject.instance.save();
+    }
+
     int numberOf(AIItem item) {
         int ret = 0;
         for(AIItem i in _myItems) {

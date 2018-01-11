@@ -267,6 +267,12 @@ class AIItem extends AIObject {
         ButtonElement button = new ButtonElement();
         if(belongsToPlayer) {
             button.text = "Deploy";
+            button.onClick.listen((e) {
+                GameObject.instance.playPen.addItem(this);
+                GameObject.instance.player.itemInventory.removeItem(this);
+                destination.remove();
+                //GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
+            });
         }else {
             //TODO hide button if you can't afford item.
             button.text = "Buy For ${cost} cg";
