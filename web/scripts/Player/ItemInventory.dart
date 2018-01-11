@@ -50,12 +50,16 @@ class ItemInventory {
     static List<AIItem> mutantItems;
     static List<AIItem> calmEmpressItems;
 
-    List<AIItem> myItems = new List<AIItem>();
+    List<AIItem> _myItems = new List<AIItem>();
 
 
     ItemInventory.fromJSON(String json){
         //print("loading pet inventory with json $json");
         loadFromJSON(json);
+    }
+
+    void addItem(AIItem item) {
+        _myItems.add(item.copyItemForInventory());
     }
 
 
@@ -75,7 +79,7 @@ class ItemInventory {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
             j.json = d;
-            myItems.add(new AIItem.fromJSON(null,j));
+            _myItems.add(new AIItem.fromJSON(null,j));
         }
 
     }
@@ -83,12 +87,12 @@ class ItemInventory {
     JSONObject toJson() {
         JSONObject json = new JSONObject();
         List<JSONObject> jsonArray = new List<JSONObject>();
-        for(AIItem p in myItems) {
+        for(AIItem p in _myItems) {
             // print("Saving ${p.name}");
             jsonArray.add(p.toJson());
         }
         json[ITEMLIST] = jsonArray.toString(); //will this work?
-        print("item inventory json is: ${json} and items are ${myItems.length}");
+        print("item inventory json is: ${json} and items are ${_myItems.length}");
         return json;
     }
 
@@ -98,7 +102,7 @@ class ItemInventory {
     }
 
     Future<Null> drawInventory(Element container) async {
-        await drawItems(myItems, container);
+        await drawItems(_myItems, container);
     }
 
     //all shop does is tell items to render buy button instead of deploy button.

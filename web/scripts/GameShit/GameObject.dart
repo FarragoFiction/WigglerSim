@@ -13,11 +13,15 @@ class GameObject {
     PlayPen playPen;
 
     static GameObject instance;
+    Element infoElement;
 
     GameObject() {
         window.onError.listen((e) {
             window.alert("Shit. There's been an error.");
         });
+
+        infoElement = new DivElement();
+        querySelector("#output").append(infoElement);
 
 
         instance = this;

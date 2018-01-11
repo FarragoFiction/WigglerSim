@@ -5,6 +5,9 @@ import "../Pets/JSONObject.dart";
 import 'dart:html';
 import "package:DollLibCorrect/DollRenderer.dart";
 import 'dart:convert';
+import '../GameShit/GameObject.dart';
+
+
 
 
 /*
@@ -256,7 +259,12 @@ class AIItem extends AIObject {
         if(belongsToPlayer) {
             button.text = "Deploy";
         }else {
-            button.text = "Buy";
+            //TODO hide button if you can't afford item.
+            button.text = "Buy For ${cost} cg";
+            button.onClick.listen((e) {
+                GameObject.instance.player.itemInventory.addItem(this);
+                GameObject.instance.infoElement.text = "Bought $name!";
+            });
         }
         destination.append(button);
 
