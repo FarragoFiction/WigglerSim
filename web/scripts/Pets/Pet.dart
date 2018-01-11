@@ -502,8 +502,8 @@ abstract class Pet {
     int drawTimeStats(CanvasElement textCanvas, int x, int y, int fontSize,buffer) {
         Renderer.wrap_text(textCanvas.context2D,daysSinceHatch,x,y,fontSize+buffer,400,"left");
 
-        y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize+buffer,400,"left");
+       // y = y + fontSize+buffer;
+       // Renderer.wrap_text(textCanvas.context2D,daysSinceFed,x,y,fontSize+buffer,400,"left");
 
         y = y + fontSize+buffer;
         Renderer.wrap_text(textCanvas.context2D,daysSincePlayed,x,y,fontSize+buffer,400,"left");
@@ -543,11 +543,11 @@ abstract class Pet {
 
         y = drawTimeStats(textCanvas,x,y,fontSize,buffer);
 
-        y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize+buffer,275,"left");
+        //y = y + fontSize+buffer;
+        //Renderer.wrap_text(textCanvas.context2D,"HP: $health",x,y,fontSize+buffer,275,"left");
 
-        y = y + fontSize+buffer;
-        Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize+buffer,275,"left");
+        //y = y + fontSize+buffer;
+        //Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize+buffer,275,"left");
 
         for(Stat s in stats) {
             y = y + fontSize+buffer;

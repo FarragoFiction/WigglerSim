@@ -62,11 +62,10 @@ class PlayPen {
         for(AIPet p in pets) {
             p.giveObjectStats(item);
             if(p.grub.isCurious) {
-                print("want to investigate $item");
+                //print("want to investigate $item");
                 p.target = item; //they are interested in it.
             }else {
-                print("fuck that $item, my curiosity is ${p.curious.value}");
-
+               // print("fuck that $item, my curiosity is ${p.curious.value}");
             }
         }
         items.add(item);

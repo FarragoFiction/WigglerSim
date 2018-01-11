@@ -547,10 +547,11 @@ class AIPet extends AIObject {
         copiedObjects.remove(this);
         //imaginary objects will never get hit by this otherwise.
         if(target != null && !copiedObjects.contains(target)) copiedObjects.add(target);
-
+        print("there are this many objects besides me ${copiedObjects.length}");
         for(AIObject obj in copiedObjects) {
+            int distance = distanceFromTarget(obj);
+            print("distance to $obj is $distance, my range is $giveRange, items x is ${obj.x}");
             if(distanceFromTarget(obj) <= giveRange) {
-                int distance = distanceFromTarget(obj);
                 if(distance < distanceToClosestThing) {
                     closestThing = obj;
                     distanceToClosestThing = distance;
