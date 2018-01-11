@@ -39,6 +39,8 @@ abstract class AIObject {
     Stat curious;
     Stat loyal;
     Stat external;
+    List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
+
     AnimationObject idleAnimation = new AnimationObject();
 
 

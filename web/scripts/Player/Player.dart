@@ -3,6 +3,7 @@
 //a player has a graduatesList.
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "PetInventory.dart";
+import "ItemInventory.dart";
 import 'dart:html';
 import "../Pets/JSONObject.dart";
 import 'dart:async';
@@ -20,6 +21,7 @@ class Player {
     int height = 300;
 
     PetInventory petInventory;
+    ItemInventory itemInventory;
 
     DateTime lastPlayed;
     DateTime oldLastPlayed;

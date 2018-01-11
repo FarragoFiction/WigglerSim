@@ -17,28 +17,35 @@ import "package:DollLibCorrect/DollRenderer.dart";
  */
 class AIItem extends AIObject {
 
-    static int NORMAL_PLUS = 5;
-    static int NORMAL_MINUS = -5;
+    static int LOW = 5;
+    static int MID = 10;
+    static int HIGH = 15;
+    static int VERY_HIGH = 25;
 
 
 
     String folder = "images/Items/"; //theoretically can be changed
-    List<String> imageLocations;
     CanvasElement canvas;
-    //fuzzy friend, sleepy pal, etc. Weird memey shit.
-    List<String> trollNames;
 
+
+    //so i know which version of the item this is.
     ImageElement imageElement;
+    String name;
+
+
     //so wigglers know if they remember this or not.
     int id;
     //for buying in store.
     int cost;
 
+    List<ItemAppearance> itemTypes;
+
 
 
 
     //if you don't have a stat it's zero
-    AIItem(this.id, this.cost, this.trollNames, this.imageLocations, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
+    //troll names and image locations should be same length. probably should make it an object then.
+    AIItem(this.id, this.cost, this.itemTypes, {int external_value: 0, int curious_value: 0, int loyal_value: 0, int patience_value: 0, int energetic_value: 0, int idealistic_value: 0} ) {
         makePatience(patience_value);
         makeEnergetic(energetic_value);
         makeIdealistic(idealistic_value);
@@ -49,7 +56,7 @@ class AIItem extends AIObject {
 
     @override
     String toString() {
-        return "${trollNames}";
+        return "${itemTypes}";
     }
 
     //depending on my image size, i need to be rendered in different places to be on the ground.
@@ -60,16 +67,55 @@ class AIItem extends AIObject {
         if(rand.nextBool()) turnWays = true;
     }
 
+    //if the stats are zero they don't exist.
+    int get averageStatsIgnoreZero{
+        int ret = 0;
+        int count = 0;
+        for(Stat s in stats) {
+            if(s.value != 0) {
+                //don't care if positive or negative, just care about magnitude
+                ret += s.normalizedValue;
+                count ++;
+            }
+        }
+        return (ret/count).round();
+    }
+
+    Future<Null> pickVersion() async {
+        pickImage();
+        pickName();
+    }
+
+    //makes sure the index exists
+    int get versionIndex {
+        int avgStats = averageStatsIgnoreZero;
+        if(avgStats > AIItem.VERY_HIGH && itemTypes.length > 3) {
+            return 3;
+        }else if(avgStats > AIItem.HIGH && itemTypes.length > 2) {
+            return 2;
+        }else if(avgStats > AIItem.MID && itemTypes.length > 1) {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     Future<Null> pickImage() async {
-        Random rand = new Random();
-        String chosen = rand.pickFrom(imageLocations);
+        //version index takes care of making sure it is a valid location
+        String chosen = itemTypes[versionIndex].imageLocation;
+
+        imageElement = await Loader.getResource(("$folder$chosen"));
+    }
+
+    Future<Null> pickName() async {
+        String chosen = itemTypes[versionIndex].name;
         imageElement = await Loader.getResource(("$folder$chosen"));
     }
 
     @override
     Future<Null> draw(CanvasElement destination) async {
         //draw self with rotation and scaling
-        if(imageElement == null) await pickImage();
+        if(imageElement == null) await pickVersion();
         if(canvas == null) {
             //draw image to canvas
             canvas = new CanvasElement(width: imageElement.width, height: imageElement.height);
@@ -113,4 +159,15 @@ class AIItem extends AIObject {
         external = new Stat(value, "External","Interal",Stat.externalFlavor, Stat.internalFlavor);
     }
 
+}
+
+class ItemAppearance {
+    String name; //weird troll memey shit
+    String imageLocation;
+    ItemAppearance(this.name, this.imageLocation);
+
+    @override
+    String toString() {
+        return name;
+    }
 }
