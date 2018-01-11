@@ -62,6 +62,14 @@ class ItemInventory {
         _myItems.add(item.copyItemForInventory());
     }
 
+    int numberOf(AIItem item) {
+        int ret = 0;
+        for(AIItem i in _myItems) {
+            if(i.id == item.id) ret ++;
+        }
+        return ret;
+    }
+
 
     void loadFromJSON(String json) {
         // print("In item inventory, json is $json");

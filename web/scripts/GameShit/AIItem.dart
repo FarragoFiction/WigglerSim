@@ -263,7 +263,7 @@ class AIItem extends AIObject {
             button.text = "Buy For ${cost} cg";
             button.onClick.listen((e) {
                 GameObject.instance.player.itemInventory.addItem(this);
-                GameObject.instance.infoElement.text = "Bought $name!";
+                GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
             });
         }
         destination.append(button);
