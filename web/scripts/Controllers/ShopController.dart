@@ -15,5 +15,8 @@ void main() {
 
 Future<Null> start() async {
     await game.preloadManifest();
-    //TODO load all static items, display
+    Element container = new DivElement();
+    container.style.display = "inline-block";
+    querySelector('#output').append(container);
+    game.drawShop(container);
 }

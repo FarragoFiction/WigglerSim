@@ -50,6 +50,19 @@ class ItemInventory {
 
     List<AIItem> myItems = new List<AIItem>();
 
+    Future<Null> drawShop(Element container) async {
+        await drawItems(allItems, container);
+    }
+
+    Future<Null> drawInventory(Element container) async {
+        await drawItems(myItems, container);
+    }
+
+    //all shop does is tell items to render buy button instead of deploy button.
+    Future<Null> drawItems(List<AIItem> chosenItems, Element container) async {
+
+    }
+
 
 
 }

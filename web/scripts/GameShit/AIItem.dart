@@ -32,6 +32,9 @@ class AIItem extends AIObject {
     ImageElement imageElement;
     String name;
 
+    //if false, render buy button, if true, render deploy button.
+    bool belongsToPlayer = false;
+
 
     //so wigglers know if they remember this or not.
     int id;
@@ -59,6 +62,18 @@ class AIItem extends AIObject {
         makeCurious(curious_value);
         makeLoyal(loyal_value);
         makeExternal(external_value);
+    }
+
+    AIItem copyItemForInventory() {
+        AIItem copiedItem = new AIItem(id, new List<ItemAppearance>.from(itemTypes))
+            ..belongsToPlayer = true
+            ..patience.value = patience.value
+            ..loyal.value = loyal.value
+            ..external.value = external.value
+            ..energetic.value = energetic.value
+            ..curious.value = curious.value
+            ..idealistic.value = idealistic.value;
+        return copiedItem;
     }
 
     @override
