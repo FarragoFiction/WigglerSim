@@ -48,7 +48,6 @@ class ItemInventory {
         return ret;
     }
     static List<AIItem> mutantItems;
-    static List<AIItem> calmEmpressItems;
 
     List<AIItem> _myItems = new List<AIItem>();
 

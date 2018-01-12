@@ -1,4 +1,7 @@
 import "../Pets/PetLib.dart";
+import 'package:DollLibCorrect/DollRenderer.dart';
+import "../GameShit/AIItem.dart";
+
 /*
     Empresses control basic facts about the session.
     How much money you get per Empire Funding.
@@ -10,6 +13,8 @@ import "../Pets/PetLib.dart";
     MAYBE eventually a "sauce" button.
 
     With this feature...you're kind of playing as Doc Scratch, aren't you?
+
+    TODO: page summarizing effect current empress has on sim
  */
 class Empress {
     static Empress _instance;
@@ -47,13 +52,113 @@ class Empress {
     }
 
     int get maxGrubs {
-        //TODO raise or lower this based on curious. (if it's very high, +6, if very low, -4).  (2 min)
+        //TODO raise or lower this based on energetic. (if it's very high, +6, if very low, -4).  (2 min)
         int defaultAmount = 6;
         return defaultAmount;
     }
-    //What to do for loyal and energetic? 
+
+    //how much will it cost to adopt this troll
+    //or how much will you get for having raised it.
+    int priceOfTroll(Pet p) {
+        int base = p.totalStatsABS;
+        double multiplier = 1.0;
+        int divisor = 12;
+        if(p.colorWord == HomestuckTrollDoll.BURGUNDY) multiplier = priceBurgundy/divisor;
+        if(p.colorWord == HomestuckTrollDoll.BRONZE) multiplier = priceBronze/divisor;
+        if(p.colorWord == HomestuckTrollDoll.GOLD) multiplier = priceGold/divisor;
+        if(p.colorWord == HomestuckTrollDoll.LIME) multiplier = priceLime/divisor;
+        if(p.colorWord == HomestuckTrollDoll.OLIVE) multiplier = priceOlive/divisor;
+        if(p.colorWord == HomestuckTrollDoll.JADE) multiplier = priceJade/divisor;
+        if(p.colorWord == HomestuckTrollDoll.TEAL) multiplier = priceTeal/divisor;
+        if(p.colorWord == HomestuckTrollDoll.CERULEAN) multiplier = priceCerulean/divisor;
+        if(p.colorWord == HomestuckTrollDoll.INDIGO) multiplier = priceIndigo/divisor;
+        if(p.colorWord == HomestuckTrollDoll.PURPLE) multiplier = pricePurple/divisor;
+        if(p.colorWord == HomestuckTrollDoll.VIOLET) multiplier = priceViolet/divisor;
+        if(p.colorWord == HomestuckTrollDoll.FUCHSIA) multiplier = priceFuchsia/divisor;
+        if(p.colorWord == HomestuckTrollDoll.MUTANT) multiplier = priceMutant/divisor;
+
+        return  (base * multiplier/12).round();;
+
+    }
+
+    //loyal is all caste prices. more loyal you are the more you are hemoist since you are loyal to your in group.
+    int get priceBurgundy {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 1;
+        return defaultAmount;
+    }
+
+    int get priceBronze {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 2;
+        return defaultAmount;
+    }
+    int get priceGold {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 3;
+        return defaultAmount;
+    }
+    int get priceLime {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 4;
+        return defaultAmount;
+    }
+    int get priceOlive {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 5;
+        return defaultAmount;
+    }
+    int get priceJade {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 6;
+        return defaultAmount;
+    }
+    int get priceTeal {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 7;
+        return defaultAmount;
+    }
+    int get priceCerulean {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 8;
+        return defaultAmount;
+    }
+    int get priceIndigo {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 9;
+        return defaultAmount;
+    }
+    int get pricePurple {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 10;
+        return defaultAmount;
+    }
+    int get priceViolet {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 11;
+        return defaultAmount;
+    }
+    int get priceFuchsia {
+        //TODO raise or lower this based on loyal.
+        int defaultAmount = 24;
+        return defaultAmount;
+    }
+    int get priceMutant {
+        //TODO raise or lower this based on loyal. either worth the most or the least
+        int defaultAmount = 0;
+        return defaultAmount;
+    }
+
+    //what about curious? items available.
+    List<AIItem> get items {
+        //TODO: at lowest curiosity (highest acceptance) no items.
+        //at max curiosity, ALL items.
+        //what items are possible are based on empress stats though
+        List<AIItem> defaultItems = new List<AIItem>();
+        return defaultItems;
+
+    }
 
 }
 
 
-}

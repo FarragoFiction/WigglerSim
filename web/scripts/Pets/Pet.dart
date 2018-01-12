@@ -215,6 +215,20 @@ abstract class Pet {
         return "$name";
     }
 
+    String get colorWord {
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
+        return t.bloodColorToWord(p.aspect_light);
+    }
+
+    int get totalStatsABS {
+        int ret = 0;
+        for(Stat s in stats) {
+            ret += s.normalizedValue;
+        }
+        return ret;
+    }
+
     static int averagePetPatience(List<Pet> pets) {
         if(pets.isEmpty) return 0;
         int total = 0;
