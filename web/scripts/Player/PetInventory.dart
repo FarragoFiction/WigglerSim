@@ -28,8 +28,8 @@ class PetInventory {
     List<Troll> alumni = new List<Troll>();
 
     List<Troll> get last12Alumni {
-
-        return alumni.sublist(0, 12);
+        List<Troll> reversedAlumni = new List.from(alumni.reversed);
+        return reversedAlumni.sublist(0, 12);
 
     }
 

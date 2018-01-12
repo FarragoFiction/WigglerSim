@@ -5,6 +5,8 @@ import 'dart:async';
 import "../GameShit/AIItem.dart";
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
+import 'dart:math' as Math;
+
 
 /*
  *Knows what current items the player has
@@ -29,51 +31,64 @@ class ItemInventory {
 
     //the abs have pos and negative because they force a sign.
     static get calmABS {
-        return -1* Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12);
+        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get realisticABS {
-        return -1* Pet.averagePetIdealisticABS(last12);
+        int value = Pet.averagePetIdealisticABS(last12);
+        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+
     }
 
     static get acceptingABS {
-        return -1* Pet.averagePetCuriousABS(last12);
+        int value = Pet.averagePetCuriousABS(last12);
+        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get internalABS {
-        return -1* Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12);
+        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get freeABS {
-        return -1*  Pet.averagePetLoyalABS(last12);
+        int value = Pet.averagePetLoyalABS(last12);
+        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get impatientABS {
-        return -1* Pet.averagePetPatienceABS(last12);
+        int value = Pet.averagePetPatienceABS(last12);
+        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get energeticABS {
-        return Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12);
+        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get idealisticABS {
-        return Pet.averagePetIdealisticABS(last12);
+        int value = Pet.averagePetIdealisticABS(last12);
+        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get curiousABS {
-        return Pet.averagePetCuriousABS(last12);
+        int value = Pet.averagePetCuriousABS(last12);
+        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get externalABS {
-        return Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12);
+        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get loyalABS {
-        return Pet.averagePetLoyalABS(last12);
+        int value = Pet.averagePetLoyalABS(last12);
+        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get patientABS {
-        return Pet.averagePetPatienceABS(last12);
+        int value = Pet.averagePetPatienceABS(last12);
+        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     //non abs keep the sign, so don't need positive or negative.
