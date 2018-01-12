@@ -55,7 +55,7 @@ class ItemInventory {
 
     ItemInventory.fromJSON(String json){
         //print("loading pet inventory with json $json");
-        loadFromJSON(json);
+        if(json != null && json.isNotEmpty) loadFromJSON(json);
     }
 
     void addItem(AIItem item) {
