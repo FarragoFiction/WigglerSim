@@ -43,6 +43,7 @@ class MoneyHandler {
                 //give player money.
                 GameObject.instance.player.caegers += Empress.instance.fundingAmount;
                 print("caegers is now ${ GameObject.instance.player.caegers}");
+                GameObject.instance.save();
             }else {
                 GameObject.instance.infoElement.text = "Something has gone wrong. How can you click this button if time hasn't run out yet?";
             }
@@ -63,9 +64,10 @@ class MoneyHandler {
         }else {
             timeTillAllowence = now.difference(now);
         }
-        countdownElement.text = "Time Till Next Empire Funding: ${timeTillAllowence}";
+        int secondsRemaining = Empress.instance.timeBetweenFunding -timeTillAllowence.inSeconds;
+        Duration d = new Duration(seconds: secondsRemaining);
+        countdownElement.text = "Next Empire Funding In: ${d}.";
         showOrHideButtonAndCountdown();
-        GameObject.instance.save();
         new Timer(new Duration(milliseconds: syncFrequency), () => sync());
 
     }
@@ -74,7 +76,7 @@ class MoneyHandler {
         if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding) {
             allowenceButton.disabled  = false;
             allowenceButton.style.display = "inline-block";
-            countdownElement.style.display = "none";
+            //countdownElement.style.display = "none";
         }else {
             allowenceButton.disabled  = true;
             allowenceButton.style.display = "none";

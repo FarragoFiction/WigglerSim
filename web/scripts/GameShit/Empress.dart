@@ -37,7 +37,7 @@ class Empress {
     int get timeBetweenFunding {
         //TODO raise or lower this based on patience.
         int defaultAmount = 24 * 60 * 60; //24 hours;
-        return 10;
+        return defaultAmount;
     }
 
     int get fundingAmount {
@@ -74,9 +74,9 @@ class Empress {
     //how much will it cost to adopt this troll
     //or how much will you get for having raised it.
     int priceOfTroll(Pet p) {
-        int base = p.totalStatsABS;
+        int base = p.totalStatsABS + 1000000;
         double multiplier = 1.0;
-        int divisor = 12;
+        int divisor = 1;
         if(p.colorWord == HomestuckTrollDoll.BURGUNDY) multiplier = priceBurgundy/divisor;
         if(p.colorWord == HomestuckTrollDoll.BRONZE) multiplier = priceBronze/divisor;
         if(p.colorWord == HomestuckTrollDoll.GOLD) multiplier = priceGold/divisor;

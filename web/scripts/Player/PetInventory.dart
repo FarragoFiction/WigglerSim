@@ -259,14 +259,15 @@ class PetInventory {
             container.append(subContainer);
             drawPet(subContainer, p);
             ButtonElement button = new ButtonElement();
-            button.text = "Choose";
+            button.text = "Choose ${Empress.instance.priceOfTroll(p)}";
             subContainer.append(button);
+
             button.onClick.listen((e) {
                 //add wiggler to inventory. save. refresh.
                 pets.add(p);
                 GameObject.instance.save();
-                window.location.href= "petInventory.html";
-
+                subContainer.remove();
+                //window.location.href= "petInventory.html";
             });
         }
 
