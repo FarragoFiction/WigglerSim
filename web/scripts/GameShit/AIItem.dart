@@ -278,8 +278,15 @@ class AIItem extends AIObject {
             button.text = "Buy For ${cost} cg";
             if(cost <= GameObject.instance.player.caegers) {
                 button.onClick.listen((e) {
-                    GameObject.instance.player.itemInventory.addItem(this);
-                    GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
+                    //inner if because you might go to negative money when you buy shit here.
+                    if(cost <= GameObject.instance.player.caegers) {
+                        GameObject.instance.player.itemInventory.addItem(this);
+                        GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
+                    }else {
+                        button.disabled;
+                        button.classes.add("invertButton");
+                        button.text = "Cannot Afford to Buy ${cost}";
+                    }
                 });
             }else {
                 button.disabled;

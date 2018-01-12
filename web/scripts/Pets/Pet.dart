@@ -13,7 +13,6 @@
 
     Pet knows how to animate itself based on actions???
 
-    TODO Pet knows how to convert to json (so it can be saved).
 
     A pet has a birthday.
     A pet has a "time last fed".
@@ -46,7 +45,6 @@
     Breath/Blood Free/Committed
     Heart/Mind Introversion/Extroversion
 
-    TODO need to brainstorm wiggler actions that pair with all 12 things.
 
     So, use cases:  You are in the wiggler playpen. The are three wigglers total.
 

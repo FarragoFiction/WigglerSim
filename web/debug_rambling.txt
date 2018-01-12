@@ -941,5 +941,25 @@ buying items costs money based on stats.
 graduating a grub gets money based on stats and caste.
 
 
+~~~~~~
+
+Alright. Slow and steady. Focus. I'm running out of time but I'm ALSO running out of features.
+
+I can do this.
+
+I even canceled my IRl friday hangout so I could do this.
+
+First thing I need to do is fix the bug where it lets you buy multiple of an item even if you'd run out of money.
+
+It happens because the button only validates on creation, but after other shit.
+
+disable and change class if at any point the button is clicked but shouldn't be? good enough for now.
+
+
+I can feel a headache coming on. Luckily I'm going to break for dinner soon.
+
+~~~~~~
+
+
 
 
