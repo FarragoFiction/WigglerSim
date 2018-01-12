@@ -22,6 +22,14 @@ void main() {
         toggle();
     });
 
+
+    ButtonElement b2 = new ButtonElement();
+    b2.text = "Remove All Items";
+    querySelector("#output").append(b2);
+    b2.onClick.listen((e) {
+        removeItems();
+    });
+
     start();
 }
 
@@ -47,4 +55,8 @@ Future<Null> drawLoop() async {
 void toggle() {
     stop = !stop;
     if(!stop) drawLoop();
+}
+
+void removeItems() {
+    game.playPen.items.clear();
 }
