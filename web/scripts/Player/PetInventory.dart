@@ -266,6 +266,7 @@ class PetInventory {
                 button.onClick.listen((e) {
                     //add wiggler to inventory. save. refresh.
                     pets.add(p);
+                    GameObject.instance.player.caegers += -1* price;
                     GameObject.instance.save();
                     //subContainer.remove();
                     window.location.href= "petInventory.html";

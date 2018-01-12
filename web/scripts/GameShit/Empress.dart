@@ -36,7 +36,7 @@ class Empress {
     //in seconds
     int get timeBetweenFunding {
         //TODO raise or lower this based on patience.
-        int defaultAmount = 24 * 60 * 60; //24 hours;
+        int defaultAmount = 12 * 60 * 60; //12 hours;
         return defaultAmount;
     }
 
