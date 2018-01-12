@@ -45,9 +45,20 @@ class Empress {
         return defaultAmount;
     }
 
-    double get oddsViolentDeath {
+    //TODO: for display
+    double get violentDeathRation {
+        return argumentsForViolentDeath/argumentsAgainstViolentDeath;
+    }
+
+    int get argumentsForViolentDeath {
         //TODO raise or lower this based on idealistic.
-        double defaultAmount = 0.5;
+        int defaultAmount = 0;
+        return defaultAmount;
+    }
+
+    int get argumentsAgainstViolentDeath {
+        //TODO raise or lower this based on idealistic.
+        int defaultAmount = 0;
         return defaultAmount;
     }
 

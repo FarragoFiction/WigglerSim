@@ -12,7 +12,6 @@ import 'dart:convert';
 
 //TODO have a "from JSON" constructor
 class PetInventory {
-    static int MAXPETS = 6;
     static String PETSLIST = "petsList";
     static String ALUMNI = "alumni";
     static String EMPRESS = "empress";
@@ -41,7 +40,7 @@ class PetInventory {
         loadFromJSON(json);
     }
 
-    bool get hasRoom => (pets.length < MAXPETS);
+    bool get hasRoom => (pets.length < Empress.instance.maxGrubs);
 
 
     //for hatching eggs and shit

@@ -241,8 +241,8 @@ class Troll extends Pet{
     }
 
     String regularEnding(int maxLife) {
-        int argumentsFor = 0;
-        int argumentsAgainst = 0;
+        int argumentsFor = Empress.instance.argumentsForViolentDeath;
+        int argumentsAgainst = Empress.instance.argumentsAgainstViolentDeath;
         for(Stat s in stats) {
             int odds = s.flavor.oddsOfViolentDeath;
             if(odds > 0.0) {

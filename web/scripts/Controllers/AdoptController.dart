@@ -20,6 +20,6 @@ Future<Null> start() async {
     if(game.player.petInventory.hasRoom) {
         game.drawAdoptables(container);
     }else {
-        container.appendHtml("You have no more room for wigglers! Let the ones you have already grow up first!");
+        container.appendHtml("By Emperial Decree: You have no more room for wigglers! Let the ones you have already grow up first!");
     }
 }
