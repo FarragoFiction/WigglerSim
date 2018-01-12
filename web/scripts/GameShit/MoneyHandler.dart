@@ -10,7 +10,8 @@ class MoneyHandler {
     ButtonElement allowenceButton;
     Element countdownElement;
 
-    int syncFrequency;
+    //in milliseconds
+    int syncFrequency = 1000;
     Duration timeTillAllowence;
 
     MoneyHandler(Element container) {
@@ -42,6 +43,7 @@ class MoneyHandler {
                 GameObject.instance.player.lastGotAllowence =  new DateTime.now();
                 //give player money.
                 GameObject.instance.player.caegers += Empress.instance.fundingAmount;
+                print("caegers is now ${ GameObject.instance.player.caegers}");
             }else {
                 GameObject.instance.infoElement.text = "Something has gone wrong. How can you click this button if time hasn't run out yet?";
             }
@@ -64,6 +66,9 @@ class MoneyHandler {
         }
         countdownElement.text = "Time Till Next Empire Funding: ${timeTillAllowence}";
         showOrHideButtonAndCountdown();
+        GameObject.instance.save();
+        new Timer(new Duration(milliseconds: syncFrequency), () => sync());
+
     }
 
     void showOrHideButtonAndCountdown() {

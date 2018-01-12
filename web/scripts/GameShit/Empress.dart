@@ -40,7 +40,8 @@ class Empress {
     }
 
     int get fundingAmount {
-        //TODO raise or lower this based on external.
+        //TODO raise or lower this based on external. don't let it go below 1.
+        //external because they are thinking of other trolls and shit
         int defaultAmount = 413;
         return defaultAmount;
     }
@@ -50,6 +51,7 @@ class Empress {
         return argumentsForViolentDeath/argumentsAgainstViolentDeath;
     }
 
+    //doesn't effect base heiress death rate tho. that shit's biological
     int get argumentsForViolentDeath {
         //TODO raise or lower this based on idealistic.
         int defaultAmount = 0;
