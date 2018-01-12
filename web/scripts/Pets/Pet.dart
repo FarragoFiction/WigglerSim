@@ -76,6 +76,7 @@ import 'Egg.dart';
 import 'Cocoon.dart';
 import 'Troll.dart';
 import "Stat.dart";
+import "../GameShit/Empress.dart";
 
 
 
@@ -562,6 +563,9 @@ abstract class Pet {
 
         //y = y + fontSize+buffer;
         //Renderer.wrap_text(textCanvas.context2D,"Boredom: $boredom",x,y,fontSize+buffer,275,"left");
+
+        y = y + fontSize+buffer;
+        Renderer.wrap_text(textCanvas.context2D,"Valuation: ${Empress.instance.priceOfTroll(this)}",x,y,fontSize+buffer,275,"left");
 
         for(Stat s in stats) {
             y = y + fontSize+buffer;

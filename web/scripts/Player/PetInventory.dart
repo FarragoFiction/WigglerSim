@@ -139,7 +139,7 @@ class PetInventory {
                     hatchButton.text = "Spin Cocoon";
                     subContainer.append(hatchButton);
                 }else if(p is Cocoon) {
-                    hatchButton.text = "Pupate";
+                    hatchButton.text = "Pupate (Get ${Empress.instance.priceOfTroll(p)})";
                     subContainer.append(hatchButton);
                 }
             }
@@ -167,6 +167,7 @@ class PetInventory {
                 }else if(p is Cocoon) {
                     print("3,2,1, POOF! Holy Fuck it's a Troll!");
                     Pet tmp = new Troll(p.doll);
+                    GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
                     window.location.href= "goodbye.html";
                 }

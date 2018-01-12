@@ -59,6 +59,7 @@ class ItemInventory {
 
     void addItem(AIItem item) {
         _myItems.add(item.copyItemForInventory());
+        GameObject.instance.player.caegers += -1 * item.cost;
         GameObject.instance.save();
     }
 

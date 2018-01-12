@@ -55,7 +55,7 @@ class AIItem extends AIObject {
     //for buying in store.
     //not standardized because of how items can change
     int get cost {
-        int total = 0;
+        int total = 13;
         for(Stat s in stats) {
             total += s.value.abs();
         }
@@ -275,12 +275,17 @@ class AIItem extends AIObject {
                 //GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
             });
         }else {
-            //TODO hide button if you can't afford item.
             button.text = "Buy For ${cost} cg";
-            button.onClick.listen((e) {
-                GameObject.instance.player.itemInventory.addItem(this);
-                GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
-            });
+            if(cost <= GameObject.instance.player.caegers) {
+                button.onClick.listen((e) {
+                    GameObject.instance.player.itemInventory.addItem(this);
+                    GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
+                });
+            }else {
+                button.disabled;
+                button.classes.add("invertButton");
+                button.text = "Cannot Afford to Buy ${cost}";
+            }
         }
         destination.append(button);
 
