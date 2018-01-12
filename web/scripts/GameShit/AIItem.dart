@@ -166,11 +166,11 @@ class AIItem extends AIObject {
     int get versionIndex {
         int avgStats = averageStatsIgnoreZero;
         //print("getting version index. Average stats is ${avgStats} and itemTypes is ${itemTypes.length} long.");
-        if(avgStats >= AIItem.VERY_HIGH && itemTypes.length > 3) {
+        if(avgStats > AIItem.VERY_HIGH && itemTypes.length > 3) {
             return 3;
-        }else if(avgStats >= AIItem.HIGH && itemTypes.length > 2) {
+        }else if(avgStats > AIItem.HIGH && itemTypes.length > 2) {
             return 2;
-        }else if(avgStats >= AIItem.MID && itemTypes.length > 1) {
+        }else if(avgStats > AIItem.MID && itemTypes.length > 1) {
             return 1;
         }else{
             return 0;
@@ -311,7 +311,7 @@ class AIItem extends AIObject {
     }
 
     void makeEnergetic(int value) {
-        energetic = new Stat(value, "Calm","Energetic", Stat.calmFlavor, Stat.energeticFlavor);
+        energetic = new Stat(value, "Energetic","Calm", Stat.calmFlavor, Stat.energeticFlavor);
     }
     void makeIdealistic(int value) {
         idealistic = new Stat(value, "Idealistic","Realistic", Stat.idealisticFlavor, Stat.realisticFlavor);

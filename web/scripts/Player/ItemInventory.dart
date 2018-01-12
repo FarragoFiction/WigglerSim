@@ -25,19 +25,99 @@ class ItemInventory {
         return ret;
     }
 
+    static List<Pet> last12 = (GameObject.instance.last12Alumni);
+
+    //the abs have pos and negative because they force a sign.
+    static get calmABS {
+        return -1* Pet.averagePetEnergeticABS(last12);
+    }
+
+    static get realisticABS {
+        return -1* Pet.averagePetIdealisticABS(last12);
+    }
+
+    static get acceptingABS {
+        return -1* Pet.averagePetCuriousABS(last12);
+    }
+
+    static get internalABS {
+        return -1* Pet.averagePetEnergeticABS(last12);
+    }
+
+    static get freeABS {
+        return -1*  Pet.averagePetLoyalABS(last12);
+    }
+
+    static get impatientABS {
+        return -1* Pet.averagePetPatienceABS(last12);
+    }
+
+    static get energeticABS {
+        return Pet.averagePetEnergeticABS(last12);
+    }
+
+    static get idealisticABS {
+        return Pet.averagePetIdealisticABS(last12);
+    }
+
+    static get curiousABS {
+        return Pet.averagePetCuriousABS(last12);
+    }
+
+    static get externalABS {
+        return Pet.averagePetEnergeticABS(last12);
+    }
+
+    static get loyalABS {
+        return Pet.averagePetLoyalABS(last12);
+    }
+
+    static get patientABS {
+        return Pet.averagePetPatienceABS(last12);
+    }
+
+    //non abs keep the sign, so don't need positive or negative.
+    static get energetic {
+        return Pet.averagePetEnergetic(last12);
+    }
+
+    static get idealistic {
+        return Pet.averagePetIdealistic(last12);
+    }
+
+    static get curious {
+        return Pet.averagePetCurious(last12);
+    }
+
+    static get external {
+        return Pet.averagePetEnergetic(last12);
+    }
+
+    static get loyal {
+        return Pet.averagePetLoyal(last12);
+    }
+
+    static get patient {
+        return Pet.averagePetPatience(last12);
+    }
+
+
     //even default items should have stat values influenced by value of last 12 grubs
     //should have enough items that all stats are possible
     static List<AIItem> get  defaultItems
 
     {
         List<AIItem> ret = new List<AIItem>();
-        List<Troll> last12 = (GameObject.instance.last12Alumni);
         //default items are based on troll stats, but still have a set positive/negative leaning.
-        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: -1* Pet.averagePetEnergeticABS(last12), idealistic_value: Pet.averagePetIdealisticABS(last12)));
-        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Beast Flesh","meat.png"),new ItemAppearance("Cherub Teeth","FakeCherubTeeth.png"),new ItemAppearance("Pastry Discs","cookies.png"),new ItemAppearance("Wicked Elixer","winners_dont_do_faygo.png")], energetic_value: Pet.averagePetEnergeticABS(last12), idealistic_value: -1*Pet.averagePetIdealisticABS(last12)));
+        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: calmABS, patience_value: patientABS));
+        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Fiduhost","fidushost.png"),new ItemAppearance("Best Friend","lil_cal.png"),new ItemAppearance("Stickball Demon","Felt_smuppet.png"),new ItemAppearance("Wing Beast","batpal.png")], energetic_value: energeticABS, patience_value: impatientABS));
 
-        ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], energetic_value: Pet.averagePetEnergeticABS(last12), idealistic_value: -1*Pet.averagePetIdealisticABS(last12)));
-        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Meow Beast","SleepyMutie.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],idealistic_value: Pet.averagePetIdealistic(last12),external_value: Pet.averagePetExternal(last12), curious_value:Pet.averagePetCurious(last12), energetic_value:Pet.averagePetEnergetic(last12), loyal_value: Pet.averagePetLoyal(last12), patience_value: Pet.averagePetPatience(last12)));
+
+        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Beast Flesh","meat.png"),new ItemAppearance("Cherub Teeth","FakeCherubTeeth.png"),new ItemAppearance("Pastry Discs","cookies.png"),new ItemAppearance("Wicked Elixer","winners_dont_do_faygo.png")], curious_value: curiousABS, idealistic_value: realisticABS));
+        ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], curious_value: acceptingABS, idealistic_value: idealisticABS));
+
+        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Nap Meow Beast","SleepyMutie.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],loyal_value: loyalABS, external_value: externalABS));
+        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Meow Beast","Mutie.png"),new ItemAppearance("Cuttle Creature","SmallFriend.png"),new ItemAppearance("Sea Hop Beast","frogcroak.png"),new ItemAppearance("Swim Beast","SmallerFriend.png")],loyal_value: freeABS, external_value: internalABS));
 
         return ret;
     }

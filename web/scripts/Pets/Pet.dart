@@ -344,7 +344,7 @@ abstract class Pet {
     }
 
     void makeEnergetic(int value) {
-        energetic = new Stat(value, "Calm","Energetic", Stat.calmFlavor, Stat.energeticFlavor);
+        energetic = new Stat(value, "Energetic","Calm", Stat.calmFlavor, Stat.energeticFlavor);
     }
     void makeIdealistic(int value) {
         idealistic = new Stat(value, "Idealistic","Realistic", Stat.idealisticFlavor, Stat.realisticFlavor);

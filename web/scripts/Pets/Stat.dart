@@ -160,7 +160,7 @@ class Stat {
     double get percentOfHighValue => (normalizedValue/Stat.HIGH);
 
     String get stringValue {
-        if(normalizedValue > VERYFUCKINGHIGH) return "Insanely High";
+        if(normalizedValue > VERYFUCKINGHIGH) return "Crazy High";
         if(normalizedValue > HIGH) return "High";
         if(normalizedValue > MEDIUM) return "Medium";
         if(normalizedValue >= LOW) return "Low";
@@ -170,9 +170,9 @@ class Stat {
     @override
     String toString() {
         if(value >= 0) {
-            return "$positiveName: $stringValue ($value)";
+            return "$positiveName: $stringValue ($normalizedValue)";
         }else {
-            return "$negativeName: $stringValue ($value)";
+            return "$negativeName: $stringValue ($normalizedValue)";
         }
     }
 
