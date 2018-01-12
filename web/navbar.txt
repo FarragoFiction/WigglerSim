@@ -6,11 +6,13 @@
 
 
   <li class = "menuButtonPureCSS"><a href="index.html">Your Data</a></li>
-  <li class = "menuButtonPureCSS"><a href="petInventory.html">View Pets</a></li>
+  <li class = "menuButtonPureCSS"><a href="petInventory.html">Wigglers</a></li>
+    <li class = "menuButtonPureCSS"><a href="itemShop.html">Growth Items</a></li>
+
     <li class = "menuButtonPureCSS"><a href="playPen.html">Playpen</a></li>
 
-  <li class = "menuButtonPureCSS"><a href="wigglerShop.html">View Adopts</a></li>
-    <li class = "menuButtonPureCSS"><a href="viewAlumni.html">View Alumni</a></li>
+  <li class = "menuButtonPureCSS"><a href="wigglerShop.html">Adopts</a></li>
+    <li class = "menuButtonPureCSS"><a href="viewAlumni.html">Alumni</a></li>
     <li class = "menuButtonPureCSS"><a href="status.html">News</a></li>
 
 

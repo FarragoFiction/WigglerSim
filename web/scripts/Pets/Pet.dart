@@ -284,6 +284,60 @@ abstract class Pet {
         return (total/pets.length).round();
     }
 
+    static int averagePetPatienceABS(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.patience.normalizedValue;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int averagePetEnergeticABS(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.energetic.normalizedValue;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int  averagePetIdealisticABS(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.idealistic.normalizedValue;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int  averagePetCuriousABS(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.curious.normalizedValue;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int averagePetLoyalABS(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.loyal.normalizedValue;
+        }
+        return (total/pets.length).round();
+    }
+
+    static int averagePetExternalABS(List<Pet> pets) {
+        if(pets.isEmpty) return 0;
+        int total = 0;
+        for(Pet p in pets) {
+            total += p.external.normalizedValue;
+        }
+        return (total/pets.length).round();
+    }
+
 
     void makePatience(int value) {
         patience = new Stat(value, "Patient","Impatient", Stat.patienceFlavor, Stat.impatienceFlavor);

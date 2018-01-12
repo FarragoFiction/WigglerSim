@@ -13,15 +13,7 @@ import 'dart:convert';
  * items in this list are dynamic, and built from a default list
  * list for different empress traits
  * and list for different castes in the 12 most recent trolls list (with stats from averages of these 12 trolls)
- *
- * TODO: instead of picking a random pic/name, pick one based on whether item is low, mid, high or very high stats.
- *
- * TODO: method to turn an array of trolls into stats for an item (ignoring any stats that are zero in the itme)
- *
- * TODO: render an item along with it's stats (put in AI Item).
- *
- * TODO: method to copy a static item to the specific inventory.
- */
+*/
 class ItemInventory {
 
     static String ITEMLIST = "itemList";
@@ -41,9 +33,11 @@ class ItemInventory {
         List<AIItem> ret = new List<AIItem>();
         List<Troll> last12 = (GameObject.instance.last12Alumni);
         //default items are based on troll stats, but still have a set positive/negative leaning.
-        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: -1* Pet.averagePetEnergetic(last12).abs(), idealistic_value: Pet.averagePetIdealistic(last12).abs()));
-        ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], energetic_value: Pet.averagePetEnergetic(last12).abs(), idealistic_value: -1*Pet.averagePetIdealistic(last12).abs()));
-        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Seadwelling Hop Beast","frogcroak.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],idealistic_value: Pet.averagePetIdealistic(last12),external_value: Pet.averagePetExternal(last12), curious_value:Pet.averagePetCurious(last12), energetic_value:Pet.averagePetEnergetic(last12), loyal_value: Pet.averagePetLoyal(last12), patience_value: Pet.averagePetPatience(last12)));
+        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: -1* Pet.averagePetEnergeticABS(last12), idealistic_value: Pet.averagePetIdealisticABS(last12)));
+        ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Beast Flesh","meat.png"),new ItemAppearance("Cherub Teeth","FakeCherubTeeth.png"),new ItemAppearance("Pastry Discs","cookies.png"),new ItemAppearance("Wicked Elixer","winners_dont_do_faygo.png")], energetic_value: Pet.averagePetEnergeticABS(last12), idealistic_value: -1*Pet.averagePetIdealisticABS(last12)));
+
+        ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Occular Root","carrot.png"),new ItemAppearance("Leaf Sphere","cabbage.png"),new ItemAppearance("Mystery Fruit","bigpumpkin.png"),new ItemAppearance("Small Mystery Fruit","LilPumpkin.png")], energetic_value: Pet.averagePetEnergeticABS(last12), idealistic_value: -1*Pet.averagePetIdealisticABS(last12)));
+        ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Meow Beast","SleepyMutie.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],idealistic_value: Pet.averagePetIdealistic(last12),external_value: Pet.averagePetExternal(last12), curious_value:Pet.averagePetCurious(last12), energetic_value:Pet.averagePetEnergetic(last12), loyal_value: Pet.averagePetLoyal(last12), patience_value: Pet.averagePetPatience(last12)));
 
         return ret;
     }

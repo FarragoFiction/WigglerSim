@@ -170,9 +170,9 @@ class Stat {
     @override
     String toString() {
         if(value >= 0) {
-            return "$positiveName: $stringValue";
+            return "$positiveName: $stringValue ($value)";
         }else {
-            return "$negativeName: $stringValue";
+            return "$negativeName: $stringValue ($value)";
         }
     }
 

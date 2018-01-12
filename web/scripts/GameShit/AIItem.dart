@@ -300,7 +300,7 @@ class AIItem extends AIObject {
             if(s.value != 0) {
                 Element container = new DivElement();
                 container.classes.add("statDiv");
-                container.text = "${s.toString()} (${s.value})";
+                container.text = "${s.toString()}";
                 destination.append(container);
             }
         }
