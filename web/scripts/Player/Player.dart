@@ -87,6 +87,7 @@ class Player {
 
     Player(this.doll, [bool makeJade = true]) {
         lastPlayed = new DateTime.now();
+        oldLastPlayed = new DateTime.now();
         if(makeJade && doll is HomestuckTrollDoll) {
             HomestuckTrollDoll troll = doll as HomestuckTrollDoll;
             Random rand = new Random();
@@ -96,6 +97,7 @@ class Player {
             print("canon symbol set to ${troll.canonSymbol.imgNumber} which should be jade");
         }
         petInventory = new PetInventory();
+        itemInventory = new ItemInventory();
     }
 
 

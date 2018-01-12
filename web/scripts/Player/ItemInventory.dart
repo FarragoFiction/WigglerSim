@@ -140,6 +140,8 @@ class ItemInventory {
 
     List<AIItem> _myItems = new List<AIItem>();
 
+    ItemInventory();
+
 
     ItemInventory.fromJSON(String json){
         //print("loading pet inventory with json $json");
