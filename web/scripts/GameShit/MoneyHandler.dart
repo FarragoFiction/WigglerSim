@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 import "GameObject.dart";
+import "Empress.dart";
 
 class MoneyHandler {
     static MoneyHandler instance;
@@ -36,10 +37,13 @@ class MoneyHandler {
         allowenceButton.text = "Receive Empire Funding";
         //TODO ask the player if time since last allowence >= time unit. on click disabled if false
         allowenceButton.onClick.listen((e) {
-            if(timeTillAllowence.inSeconds <= 0) {
+            if(timeTillAllowence.inSeconds <= Empress.instance.timeBetweenFunding) {
                 //reset countdown.
                 GameObject.instance.player.lastGotAllowence =  new DateTime.now();
                 //give player money.
+                GameObject.instance.player.caegers += Empress.instance.fundingAmount;
+            }else {
+                GameObject.instance.infoElement.text = "Something has gone wrong. How can you click this button if time hasn't run out yet?";
             }
         });
     }
@@ -63,7 +67,7 @@ class MoneyHandler {
     }
 
     void showOrHideButtonAndCountdown() {
-        if(timeTillAllowence.inSeconds <= 0) {
+        if(timeTillAllowence.inSeconds <= Empress.instance.timeBetweenFunding) {
             allowenceButton.disabled  = false;
             allowenceButton.style.display = "inline-block";
             countdownElement.style.display = "none";

@@ -46,7 +46,7 @@ class Empress {
     }
 
     //TODO: for display
-    double get violentDeathRation {
+    double get violentDeathRatio {
         return argumentsForViolentDeath/argumentsAgainstViolentDeath;
     }
 
