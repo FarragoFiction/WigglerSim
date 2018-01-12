@@ -574,7 +574,7 @@ class AIPet extends AIObject {
                 if (closestThing == target) {
                     //print("TARGET TEST: ${grub.name} found target $target so removing");
                     target = null;
-                } else if (closestThing.name.contains("Imaginary") &&ficklnessOdds > rand.nextDouble()) {
+                } else if (ficklnessOdds > rand.nextDouble()) {
                   //  print("TARGET TEST: ${grub.name}was fickle to ${target} with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
                     target = null;
                 }
@@ -583,7 +583,7 @@ class AIPet extends AIObject {
 
     void reactToWorld(List<AIObject> objects) {
         //make a copy, remove self from it.
-        GameObject.instance.infoElement.text = "target is $target and currentEmotion is $currentEmotion";
+        //GameObject.instance.infoElement.text = "target is $target and currentEmotion is $currentEmotion";
         if(target == null && currentEmotion == null) pickTarget(objects);
         reactToCloseByThings(objects);
         if(target != null) {
