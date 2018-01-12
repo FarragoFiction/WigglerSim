@@ -37,7 +37,7 @@ class MoneyHandler {
         containerElement.append(allowenceButton);
         allowenceButton.text = "Receive Empire Funding";
         allowenceButton.onClick.listen((e) {
-            if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding) {
+            if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding || GameObject.instance.player.lastGotAllowence == null) {
                 //reset countdown.
                 GameObject.instance.player.lastGotAllowence =  new DateTime.now();
                 //give player money.
@@ -73,10 +73,10 @@ class MoneyHandler {
     }
 
     void showOrHideButtonAndCountdown() {
-        if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding) {
+        if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding || GameObject.instance.player.lastGotAllowence == null) {
             allowenceButton.disabled  = false;
             allowenceButton.style.display = "inline-block";
-            //countdownElement.style.display = "none";
+            countdownElement.style.display = "none";
         }else {
             allowenceButton.disabled  = true;
             allowenceButton.style.display = "none";
