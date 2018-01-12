@@ -33,10 +33,11 @@ class Empress {
         _instance = this;
     }
 
+    //in seconds
     int get timeBetweenFunding {
         //TODO raise or lower this based on patience.
-        int defaultAmount = 24 * 60 * 60 * 1000; //24 hours;
-        return defaultAmount;
+        int defaultAmount = 24 * 60 * 60; //24 hours;
+        return 10;
     }
 
     int get fundingAmount {

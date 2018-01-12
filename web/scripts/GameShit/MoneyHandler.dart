@@ -36,9 +36,8 @@ class MoneyHandler {
         allowenceButton = new ButtonElement();
         containerElement.append(allowenceButton);
         allowenceButton.text = "Receive Empire Funding";
-        //TODO ask the player if time since last allowence >= time unit. on click disabled if false
         allowenceButton.onClick.listen((e) {
-            if(timeTillAllowence.inSeconds <= Empress.instance.timeBetweenFunding) {
+            if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding) {
                 //reset countdown.
                 GameObject.instance.player.lastGotAllowence =  new DateTime.now();
                 //give player money.
@@ -72,7 +71,7 @@ class MoneyHandler {
     }
 
     void showOrHideButtonAndCountdown() {
-        if(timeTillAllowence.inSeconds <= Empress.instance.timeBetweenFunding) {
+        if(timeTillAllowence.inSeconds >= Empress.instance.timeBetweenFunding) {
             allowenceButton.disabled  = false;
             allowenceButton.style.display = "inline-block";
             countdownElement.style.display = "none";
