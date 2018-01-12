@@ -42,7 +42,7 @@ class AIPet extends AIObject {
     int assumedCanvasWidth = 1000;
 
     //how close to an object do you need to be to react to it.
-    int giveRange = 10;
+    int giveRange = 100;
 
 
 
@@ -70,6 +70,8 @@ class AIPet extends AIObject {
 
     AnimationObject idleAnimation = new AnimationObject();
     AnimationObject walkAnimation = new AnimationObject();
+    AIItem imaginaryLeft;
+    AIItem imaginaryRight;
 
     //will usually be null
     Emotion _currentEmotion;
@@ -482,19 +484,20 @@ class AIPet extends AIObject {
         if(x > assumedCanvasWidth/2) {
             left = false;
         }
+        int buffer = 300;
         //then, make an AI object on the opposite side
-        AIItem item = new AIItem(0,<ItemAppearance>[new ItemAppearance("Imaginary Friend","Smupet_Blu.png")]);
+        if(imaginaryLeft == null) {
+            imaginaryLeft = new AIItem(0, <ItemAppearance>[new ItemAppearance("Imaginary Friend", "Smupet_Blu.png")]);
+            imaginaryLeft.x = -100; //right now grub wants to stop on right side of objects
+            imaginaryRight = new AIItem(0, <ItemAppearance>[new ItemAppearance("Imaginary Friend", "Smupet_Blu.png")]);
+            imaginaryRight.x = assumedCanvasWidth-buffer;
 
-        int buffer = 200;
-        if(left) {
-            item.x = assumedCanvasWidth-buffer;
-         //   print("bored ${grub.name} imagines there is a fun object on the right side of the canvas at ${item.x}");
-        }else {
-            item.x = 0;
-          //  print("bored ${grub.name} imagines there is a fun object on the left side of the canvas at ${item.x}");
         }
-        return item;
-
+        if(left) {
+            return imaginaryRight; //go right
+        }else {
+            return imaginaryLeft;
+        }
     }
 
 
@@ -524,7 +527,7 @@ class AIPet extends AIObject {
            // print("TARGET TEST: ${grub.name} can see somebody clsoe by");
             target = rand.pickFrom(exploreTargets);
         }
-        double boredomOdds = -10.0 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
+        double boredomOdds = -0.8 + curious.value/Stat.HIGH; //might be way more negative or way more positive.
         boredomOdds +=  external.value/Stat.HIGH;
         //print("checking for boredom");
         if(boredomOdds > rand.nextDouble()) {
@@ -547,10 +550,10 @@ class AIPet extends AIObject {
         copiedObjects.remove(this);
         //imaginary objects will never get hit by this otherwise.
         if(target != null && !copiedObjects.contains(target)) copiedObjects.add(target);
-        print("there are this many objects besides me ${copiedObjects.length}");
+        //print("there are this many objects besides me ${copiedObjects.length}");
         for(AIObject obj in copiedObjects) {
             int distance = distanceFromTarget(obj);
-            print("distance to $obj is $distance, my range is $giveRange, items x is ${obj.x}");
+            //print("distance to $obj is $distance, my range is $giveRange, items x is ${obj.x}");
             if(distanceFromTarget(obj) <= giveRange) {
                 if(distance < distanceToClosestThing) {
                     closestThing = obj;
@@ -561,7 +564,7 @@ class AIPet extends AIObject {
         Random rand = new Random();
         rand.nextInt(); //init
         if(closestThing != null) {
-            print("TARGET TEST: closest thing is $closestThing at distance $distanceToClosestThing and x of ${closestThing.x}");
+            //print("TARGET TEST: closest thing is $closestThing at distance $distanceToClosestThing and x of ${closestThing.x}");
 
             //don't keep spamming reactions.
             if(lastSeen != closestThing) {
@@ -571,7 +574,7 @@ class AIPet extends AIObject {
                 if (closestThing == target) {
                     //print("TARGET TEST: ${grub.name} found target $target so removing");
                     target = null;
-                } else if (ficklnessOdds > rand.nextDouble()) {
+                } else if (closestThing.name.contains("Imaginary") &&ficklnessOdds > rand.nextDouble()) {
                   //  print("TARGET TEST: ${grub.name}was fickle to ${target} with loyalty of ${loyal.value} and fickleness odds of $ficklnessOdds");
                     target = null;
                 }
