@@ -926,3 +926,20 @@ x default to something that can  never be accidentally triggered.
 -100013 perhaps?
 
 
+~~~~~~
+
+Alright, let's fucking go.
+
+Today I need to implement currency.  money will be a field on player directly,
+and i want the navbar to both display current currency and a button for collecting daily amounts
+(and a timer counting down to next amount).
+
+anything that updates money doesn't do so directly, wrapped in method that updates navbar.
+
+buying grubs costs money based on stats and caste.
+buying items costs money based on stats.
+graduating a grub gets money based on stats and caste.
+
+
+
+

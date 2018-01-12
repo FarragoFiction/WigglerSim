@@ -12,6 +12,8 @@ import 'dart:convert';
 class Player {
     static String DATASTRING = "dataString";
     static String LASTPLAYED = "lastPlayed";
+    static String LASTALLOWENCE = "lastAllowence";
+    static String MONEYJSON = "caegers";
     static String DOLLSAVEID = "WigglerCaretaker";
     static String PETINVENTORY = "PetInventory";
     static String ITEMINVENTORY = "ItemInventory";
@@ -28,6 +30,13 @@ class Player {
     DateTime lastPlayed;
     DateTime oldLastPlayed;
 
+    int caegers = 0;
+    DateTime lastGotAllowence;
+
+    int timeBetweenAllowence = 24*60*60* 1000; //24 hours
+
+
+
     Player.fromJSON(String json){
         loadFromJSON(json);
     }
@@ -41,6 +50,15 @@ class Player {
 
         String dataString = jsonObj[DATASTRING];
         String lastPlayedString = jsonObj[LASTPLAYED];
+        if(jsonObj[LASTALLOWENCE] != null) {
+            String lastAllowenceString = jsonObj[LASTALLOWENCE];
+            lastGotAllowence = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastAllowenceString));
+        }
+
+        if(jsonObj[MONEYJSON] != null) {
+            caegers = int.parse(jsonObj[MONEYJSON]);
+        }
+
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
@@ -171,6 +189,8 @@ class Player {
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
         json[PETINVENTORY] = petInventory.toJson().toString();
         json[ITEMINVENTORY] = itemInventory.toJson().toString();
+        json[MONEYJSON] = "$caegers";
+        json[LASTALLOWENCE] = "${lastGotAllowence.millisecondsSinceEpoch}";
         return json;
     }
 }
