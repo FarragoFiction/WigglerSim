@@ -266,8 +266,8 @@ class PetInventory {
                 //add wiggler to inventory. save. refresh.
                 pets.add(p);
                 GameObject.instance.save();
-                subContainer.remove();
-                //window.location.href= "petInventory.html";
+                //subContainer.remove();
+                window.location.href= "petInventory.html";
             });
         }
 
