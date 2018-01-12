@@ -259,16 +259,23 @@ class PetInventory {
             container.append(subContainer);
             drawPet(subContainer, p);
             ButtonElement button = new ButtonElement();
-            button.text = "Choose ${Empress.instance.priceOfTroll(p)}";
+            int price = Empress.instance.priceOfTroll(p);
+            button.text = "Choose ${price}";
             subContainer.append(button);
+            if(price <= GameObject.instance.player.caegers) {
+                button.onClick.listen((e) {
+                    //add wiggler to inventory. save. refresh.
+                    pets.add(p);
+                    GameObject.instance.save();
+                    //subContainer.remove();
+                    window.location.href= "petInventory.html";
+                });
+            }else {
+                button.disabled;
+                button.classes.add("invertButton");
+                button.text = "Cannot Afford to Choose ${price}";
+            }
 
-            button.onClick.listen((e) {
-                //add wiggler to inventory. save. refresh.
-                pets.add(p);
-                GameObject.instance.save();
-                //subContainer.remove();
-                window.location.href= "petInventory.html";
-            });
         }
 
     }

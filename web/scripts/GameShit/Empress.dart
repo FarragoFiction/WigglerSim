@@ -74,7 +74,7 @@ class Empress {
     //how much will it cost to adopt this troll
     //or how much will you get for having raised it.
     int priceOfTroll(Pet p) {
-        int base = p.totalStatsABS + 1000000;
+        int base = p.totalStatsABS;
         double multiplier = 1.0;
         int divisor = 1;
         if(p.colorWord == HomestuckTrollDoll.BURGUNDY) multiplier = priceBurgundy/divisor;
