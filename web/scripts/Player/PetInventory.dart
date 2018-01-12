@@ -4,7 +4,7 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';
 import "../GameShit/Empress.dart";
-
+import 'dart:math' as Math;
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
 
@@ -29,7 +29,8 @@ class PetInventory {
 
     List<Troll> get last12Alumni {
         List<Troll> reversedAlumni = new List.from(alumni.reversed);
-        return reversedAlumni.sublist(0, 12);
+        int length = Math.min(reversedAlumni.length-1, 12);
+        return reversedAlumni.sublist(0, length);
 
     }
 
