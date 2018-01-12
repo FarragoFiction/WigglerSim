@@ -14,7 +14,7 @@ bool stop = true;
 
 void main() {
     loadNavbar();
-    game = new GameObject();
+    game = new GameObject(true);
     ButtonElement b = new ButtonElement();
     b.text = "toggle animation";
     querySelector("#output").append(b);

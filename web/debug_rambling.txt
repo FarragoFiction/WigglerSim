@@ -961,5 +961,12 @@ I can feel a headache coming on. Luckily I'm going to break for dinner soon.
 ~~~~~~
 
 
+Next up: I need to make it so that if you go to ANY page (besides your data) without any grubs, it redirects
+you to the adopt page.
+
+Then, I need to make a loading/auto play for playpen.
+
+THEN I can take my victory lap and do the fun stuff of making Empresses effect the sim.
+
 
 

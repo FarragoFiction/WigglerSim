@@ -15,10 +15,11 @@ class GameObject {
     static GameObject instance;
     Element infoElement;
 
-    GameObject() {
+    GameObject(bool redirect) {
         window.onError.listen((e) {
             window.alert("Shit. There's been an error.");
         });
+
 
         infoElement = new DivElement();
         instance = this;
@@ -34,6 +35,10 @@ class GameObject {
         }
         new MoneyHandler(querySelector("#output"));
         querySelector("#output").append(infoElement);
+
+        if(redirect && player.petInventory.pets.isEmpty) {
+            window.location.href= "petInventory.html";
+        }
     }
 
     List<Troll> get last12Alumni {
