@@ -55,11 +55,11 @@ class AIItem extends AIObject {
     //for buying in store.
     //not standardized because of how items can change
     int get cost {
-        int total = 13;
+        int total = 0;
         for(Stat s in stats) {
             total += s.value.abs();
         }
-        return total;
+        return total*3; //assume each item is applied to an average of three grubs.
     }
 
     List<ItemAppearance> itemTypes = new List<ItemAppearance>();
