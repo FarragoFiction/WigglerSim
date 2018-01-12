@@ -33,7 +33,8 @@ class Player {
     int caegers = 0;
     DateTime lastGotAllowence;
 
-    int timeBetweenAllowence = 24*60*60* 1000; //24 hours
+    //TODO call this on empress
+    int get timeBetweenAllowence => 24*60*60* 1000; //24 hours
 
 
 
@@ -190,7 +191,7 @@ class Player {
         json[PETINVENTORY] = petInventory.toJson().toString();
         json[ITEMINVENTORY] = itemInventory.toJson().toString();
         json[MONEYJSON] = "$caegers";
-        json[LASTALLOWENCE] = "${lastGotAllowence.millisecondsSinceEpoch}";
+        if(lastGotAllowence != null) json[LASTALLOWENCE] = "${lastGotAllowence.millisecondsSinceEpoch}";
         return json;
     }
 }

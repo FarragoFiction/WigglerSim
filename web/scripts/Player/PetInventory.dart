@@ -3,6 +3,7 @@ import "../Pets/PetLib.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';
+import "../GameShit/Empress.dart";
 
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
@@ -24,7 +25,7 @@ class PetInventory {
     //if non violent, odds go down, and mutants have no extra cause of death
     //how to determine if violent. extra non stat bool?
     //maybe also influences game features. option to cull grubs if you have a violent empress.
-    Pet rulingEmpress;
+    Empress rulingEmpress;
     List<Troll> alumni = new List<Troll>();
 
     List<Troll> get last12Alumni {
@@ -67,7 +68,7 @@ class PetInventory {
         idontevenKnow = jsonObj[ALUMNI];
         loadAlumniFromJSON(idontevenKnow);
         String empressJson = jsonObj[EMPRESS];
-        if(empressJson != null) rulingEmpress = Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson));
+        if(empressJson != null) rulingEmpress = new Empress(Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson)));
 
     }
 
@@ -191,17 +192,17 @@ class PetInventory {
 
         if(rulingEmpress != null) {
             SpanElement subContainer = new SpanElement();
-            subContainer.style.width = "${rulingEmpress.width}px";
+            subContainer.style.width = "${rulingEmpress.troll.width}px";
             subContainer.classes.add("petInventorySlot");
 
-            subContainer.append(rulingEmpress.makeDollLoader());
+            subContainer.append(rulingEmpress.troll.makeDollLoader());
             Element title = new DivElement();
             title.text = "Current Empress: ";
             subContainer.append(title);
 
             container.append(subContainer);
 
-            await drawPet(subContainer, rulingEmpress);
+            await drawPet(subContainer, rulingEmpress.troll);
         }
 
         for(Pet p in alumni) {
@@ -306,7 +307,7 @@ class PetInventory {
             jsonArray.add(p.toJson());
         }
         json[PETSLIST] = jsonArray.toString(); //will this work?
-        if(rulingEmpress != null) json[EMPRESS] = rulingEmpress.toJson().toString();
+        if(rulingEmpress != null) json[EMPRESS] = rulingEmpress.troll.toJson().toString();
 
         jsonArray = new List<JSONObject>();
         for(Troll p in alumni) {

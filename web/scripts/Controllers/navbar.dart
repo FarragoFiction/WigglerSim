@@ -1,5 +1,4 @@
 import 'dart:html';
-
 import "package:DollLibCorrect/DollRenderer.dart";
 
 String simulatedParamsGlobalVar = "";
@@ -21,6 +20,10 @@ void onNavbarLoaded(String data) {
         (querySelector("#voidButton") as ButtonElement).onClick.listen((Event e) => toggleVoid());
     }
 }
+
+
+
+
 String getParamStringMinusParam(String name) {
     String params = window.location.href.substring(window.location.href.indexOf("?") + 1);
     if (params == window.location.href) params = "";
@@ -113,4 +116,3 @@ void hide(Element v) {
     }
     v.style.display = "none";
 }
-

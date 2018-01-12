@@ -24,6 +24,19 @@ button{
     font-family: 'strife', sans-serif;
 }
 
+.moneyFacts{
+    padding: 10px;
+}
+
+.invertButton{
+    margin: 10px;
+    padding: 10px;
+    background-color: #935b49;
+    color: #5d2c1c;
+    border: 1px solid #5d2c1c;
+    font-family: 'strife', sans-serif;
+}
+
 #pkmnProf{
     display: none;
     background-color: #935b49;

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:html';
 import "../Pets/PetLib.dart";
 import "PlayPen.dart";
-
+import "MoneyHandler.dart";
 
 //handles shit that my instincts want to put on a page controller.
 class GameObject {
@@ -21,9 +21,6 @@ class GameObject {
         });
 
         infoElement = new DivElement();
-        querySelector("#output").append(infoElement);
-
-
         instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             //window.localStorage.remove(Player.DOLLSAVEID);
@@ -35,6 +32,8 @@ class GameObject {
             player.save();
             print("creating new player");
         }
+        new MoneyHandler(querySelector("#output"));
+        querySelector("#output").append(infoElement);
     }
 
     List<Troll> get last12Alumni {
@@ -119,7 +118,7 @@ class GameObject {
 
     void drawSaveLink(Element container) {
         String saveData =  player.toJson().toString();
-        print("save data is: $saveData");
+        //print("save data is: $saveData");
 
         DivElement fileContainer = new DivElement();
         fileContainer.text = "Restore from Save Backup?";

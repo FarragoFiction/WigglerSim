@@ -7,7 +7,6 @@ GameObject game;
 
 void main() {
     loadNavbar();
-
     game = new GameObject();
     start();
 }

@@ -6,6 +6,7 @@ import 'dart:html';
 import "../GameShit/GameObject.dart";
 import "Stat.dart";
 import "Sign.dart";
+import "../GameShit/Empress.dart";
 
 
 
@@ -203,7 +204,7 @@ class Troll extends Pet{
 
     String heiressBecameEmpress(int maxLifespan) {
         empress = true;
-        GameObject.instance.player.petInventory.rulingEmpress = this;
+        GameObject.instance.player.petInventory.rulingEmpress = new Empress(this);
         Random rand = new Random();
         int numberOfSweeps = rand.nextIntRange(5, maxLifespan*2);
         if(numberOfSweeps >= maxLifespan) {
