@@ -109,6 +109,7 @@ class ItemInventory {
     //non abs keep the sign, so don't need positive or negative.
     static get energetic {
         int value = Pet.averagePetEnergetic(last12);
+        if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
 
@@ -116,30 +117,35 @@ class ItemInventory {
 
     static get idealistic {
         int value = Pet.averagePetIdealistic(last12);
+        if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get curious {
         int value =  Pet.averagePetCurious(last12);
+        if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get external {
         int value =  Pet.averagePetEnergetic(last12);
+        if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get loyal {
         int value =  Pet.averagePetLoyal(last12);
+        if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get patient {
         int value =  Pet.averagePetPatience(last12);
+        if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }

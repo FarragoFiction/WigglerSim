@@ -59,7 +59,8 @@ class AIItem extends AIObject {
         for(Stat s in stats) {
             total += s.value.abs();
         }
-        return total*6+10; //assume each item is applied to an average of three grubs.
+        int numPets = GameObject.instance.player.petInventory.pets.length;
+        return total*numPets+10; //costs more if you have more grubs, thems the breaks.
     }
 
     List<ItemAppearance> itemTypes = new List<ItemAppearance>();
