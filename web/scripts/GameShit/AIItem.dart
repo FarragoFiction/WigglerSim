@@ -59,7 +59,7 @@ class AIItem extends AIObject {
         for(Stat s in stats) {
             total += s.value.abs();
         }
-        return total*3; //assume each item is applied to an average of three grubs.
+        return total*6; //assume each item is applied to an average of three grubs.
     }
 
     List<ItemAppearance> itemTypes = new List<ItemAppearance>();

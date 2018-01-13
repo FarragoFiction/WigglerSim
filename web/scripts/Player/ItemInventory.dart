@@ -21,6 +21,9 @@ class ItemInventory {
 
     static String ITEMLIST = "itemList";
 
+    //what do you multiply troll stat values by to get item stats?
+    static double statMultiplier = 0.5;
+
 
     static get allItems {
         List<AIItem> ret = new List<AIItem>();
@@ -44,88 +47,101 @@ class ItemInventory {
     static get calmABS {
         // + 1 because it makes items with no stats if no alum
         int value = Pet.averagePetEnergeticABS(last12)+1;
-        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get realisticABS {
         int value = Pet.averagePetIdealisticABS(last12)+1;
-        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
 
     }
 
     static get acceptingABS {
         int value = Pet.averagePetCuriousABS(last12)+1;
-        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get internalABS {
         int value = Pet.averagePetEnergeticABS(last12)+1;
-        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get freeABS {
         int value = Pet.averagePetLoyalABS(last12)+1;
-        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get impatientABS {
         int value = Pet.averagePetPatienceABS(last12)+1;
-        return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get energeticABS {
         int value = Pet.averagePetEnergeticABS(last12)+1;
-        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get idealisticABS {
         int value = Pet.averagePetIdealisticABS(last12)+1;
-        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get curiousABS {
         int value = Pet.averagePetCuriousABS(last12)+1;
-        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get externalABS {
         int value = Pet.averagePetEnergeticABS(last12)+1;
-        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get loyalABS {
         int value = Pet.averagePetLoyalABS(last12)+1;
-        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get patientABS {
         int value = Pet.averagePetPatienceABS(last12)+1;
-        return Math.min(value, Stat.VERYFUCKINGHIGH+1);
+        return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     //non abs keep the sign, so don't need positive or negative.
     static get energetic {
-        return Pet.averagePetEnergetic(last12);
+        int value = Pet.averagePetEnergetic(last12);
+        int sign = (value/value.abs()).round();
+        return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
+
     }
 
     static get idealistic {
-        return Pet.averagePetIdealistic(last12);
+        int value = Pet.averagePetIdealistic(last12);
+        int sign = (value/value.abs()).round();
+        return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get curious {
-        return Pet.averagePetCurious(last12);
+        int value =  Pet.averagePetCurious(last12);
+        int sign = (value/value.abs()).round();
+        return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get external {
-        return Pet.averagePetEnergetic(last12);
+        int value =  Pet.averagePetEnergetic(last12);
+        int sign = (value/value.abs()).round();
+        return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get loyal {
-        return Pet.averagePetLoyal(last12);
+        int value =  Pet.averagePetLoyal(last12);
+        int sign = (value/value.abs()).round();
+        return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     static get patient {
-        return Pet.averagePetPatience(last12);
+        int value =  Pet.averagePetPatience(last12);
+        int sign = (value/value.abs()).round();
+        return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
 
