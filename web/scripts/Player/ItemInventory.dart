@@ -6,6 +6,7 @@ import "../GameShit/AIItem.dart";
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
 import 'dart:math' as Math;
+import "../GameShit/Empress.dart";
 
 
 /*
@@ -134,6 +135,7 @@ class ItemInventory {
 
     {
         List<AIItem> ret = new List<AIItem>();
+        ret.addAll(Empress.instance.items);
         //default items are based on troll stats, but still have a set positive/negative leaning.
         ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Soft Friend","Smupet_Blu.png"),new ItemAppearance("Legal Friend","redscale.png"),new ItemAppearance("Squiddle Friend","eldritchplushie.png"),new ItemAppearance("Man Friend","goofs.png")], energetic_value: calmABS, patience_value: patientABS));
         ret.add(new AIItem(1,<ItemAppearance>[new ItemAppearance("Fiduhost","fidushost.png"),new ItemAppearance("Best Friend","lil_cal.png"),new ItemAppearance("Stickball Demon","Felt_smuppet.png"),new ItemAppearance("Wing Beast","batpal.png")], energetic_value: energeticABS, patience_value: impatientABS));
@@ -144,6 +146,12 @@ class ItemInventory {
 
         ret.add(new AIItem(4,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Nap Meow Beast","SleepyMutie.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],loyal_value: loyalABS, external_value: externalABS));
         ret.add(new AIItem(5,<ItemAppearance>[new ItemAppearance("Meow Beast","Mutie.png"),new ItemAppearance("Cuttle Creature","SmallFriend.png"),new ItemAppearance("Sea Hop Beast","frogcroak.png"),new ItemAppearance("Swim Beast","SmallerFriend.png")],loyal_value: freeABS, external_value: internalABS));
+
+        ret.add(new AIItem(1005,<ItemAppearance>[new ItemAppearance("Tricky Book","wiseguy.png"),new ItemAppearance("FLARP Manuals","flarps.png"),new ItemAppearance("Dark Magycks","black_book.png"),new ItemAppearance("~ATH Book","athbook.png")],patience_value: patient, loyal_value: loyal, external_value: external, curious_value: curious, energetic_value: energetic, idealistic_value: idealistic));
+        ret.add(new AIItem(1006,<ItemAppearance>[new ItemAppearance("Tab","tabstack.png"),new ItemAppearance("Grain Teeth","CornCan.png"),new ItemAppearance("Nutrition Tall Circles","cans2.png")],patience_value: -1*patient, loyal_value: -1*loyal, external_value: -1*external, curious_value: -1*curious, energetic_value: -1*energetic, idealistic_value: -1*idealistic));
+        ret.add(new AIItem(1007,<ItemAppearance>[new ItemAppearance("Loyal Partner","pyralspite_-_scalemate_single.png"),new ItemAppearance("Evidence","beetle_bag.png"),new ItemAppearance("Fiduspawn Cards","fiducards.png"),new ItemAppearance("4 Wheel Device","Sk8Board.png")], loyal_value: loyal, external_value: external,energetic_value: calmABS, patience_value: patientABS));
+        ret.add(new AIItem(1007,<ItemAppearance>[new ItemAppearance("Soft Pile","scarf_pile.png"),new ItemAppearance("Friend Pile","stuffpile.png"),new ItemAppearance("Duttle","theduttle.png"),new ItemAppearance("Highblood Pillow","velvetpillow.png")], idealistic_value: idealistic, curious_value: curious,energetic_value: calmABS, patience_value: patientABS));
+        ret.add(new AIItem(1008,<ItemAppearance>[new ItemAppearance("Soft Victim","Smupet_red.png"),new ItemAppearance("Best Enemy","do_you_want_to_play_a_game.png"),new ItemAppearance("Accused Pile","TH34CCUS3D.png"),new ItemAppearance("Criminal Scum","scalemate.png")], idealistic_value: -1*idealistic, curious_value: -1*curious,energetic_value: energeticABS, patience_value: impatientABS));
 
         List<String> colors = last12ColorWords;
 
@@ -198,6 +206,7 @@ class ItemInventory {
         if(colors.contains(HomestuckTrollDoll.MUTANT)) {
             ret.add(new AIItem(18,<ItemAppearance>[new ItemAppearance("Mutant Essence","mutant.png")], loyal_value: loyalABS));
         }
+
 
         return ret;
     }

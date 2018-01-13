@@ -41,10 +41,10 @@ class Empress {
 
     //in seconds
     int get timeBetweenFunding {
-        int defaultAmount = 12 * 60 * 60; //12 hours;
+        int defaultAmount = 6 * 60 * 60; //6 hours;
         if(troll == null) return defaultAmount;
         //if(window.location.hostname.contains("localhost")) defaultAmount = 3;
-        defaultAmount += (60*60 * troll.patience.value/Stat.MEDIUM).round();
+        defaultAmount += (2*60*60 * troll.patience.value/Stat.MEDIUM).round();
 
         return Math.max(60*60, defaultAmount);
     }
