@@ -262,15 +262,27 @@ class Empress {
 
     //what about curious? items available.
     List<AIItem> get items {
-        //TODO: at lowest curiosity (highest acceptance) no items.
         //at max curiosity, ALL items.
-        //what items are possible are based on empress stats though
         List<AIItem> defaultItems = new List<AIItem>();
         if(troll == null) return defaultItems;
         if(troll.isCurious) {
-            defaultItems.add(new AIItem(113, <ItemAppearance>[new ItemAppearance("SCIENCE 3-DENT", "wiredent.png")], energetic_value: troll.energetic.value.abs()));
-            defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("SCIENCE 3-DENT", "wiredent.png")], energetic_value: troll.energetic.value.abs()));
+            defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Glow Bug", "flyfulamber.png")], energetic_value: -1*troll.energetic.value.abs(), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
+            defaultItems.add(new AIItem(118, <ItemAppearance>[new ItemAppearance("${troll.name}'s Honorable Tyranny Blood", "better_than_bleach.png")],curious_value: troll.curious.value, external_value: troll.external.value.abs(),loyal_value: troll.loyal.value.abs()));
 
+            if(troll.curious.value > Stat.VERYFUCKINGHIGH) {
+                defaultItems.add(new AIItem(121, <ItemAppearance>[new ItemAppearance("${troll.name}'s Cosbytop", "Cosbytop.png")], curious_value: troll.curious.value,external_value: troll.external.value.abs()));
+                defaultItems.add(new AIItem(120, <ItemAppearance>[new ItemAppearance("${troll.name}'s SCIENCE 3-DENT", "wiredent.png")],curious_value: troll.curious.value, idealistic_value: -1*troll.idealistic.value.abs()));
+                defaultItems.add(new AIItem(113, <ItemAppearance>[new ItemAppearance("${troll.name}'s Alien Specimen", "MisterTFetus.png")],curious_value: troll.curious.value, idealistic_value: -1*troll.idealistic.value.abs()));
+            }
+            if(troll.curious.value > Stat.HIGH) {
+                defaultItems.add(new AIItem(115, <ItemAppearance>[new ItemAppearance("${troll.name}'s PCHOOOES", "pchoooes.png")], curious_value: troll.curious.value, patience_value: -1*troll.patience.value.abs(), energetic_value: troll.energetic.value.abs()));
+                defaultItems.add(new AIItem(119, <ItemAppearance>[new ItemAppearance("${troll.name}'s Husktop", "skaiatop.png")],curious_value: troll.curious.value, external_value: -1* troll.external.value.abs()));
+
+            }
+            if(troll.curious.value > Stat.MEDIUM) {
+                defaultItems.add(new AIItem(116, <ItemAppearance>[new ItemAppearance("${troll.name}'s Picture Box", "jpgcamera.png")],curious_value: troll.curious.value, patience_value: troll.patience.value, external_value: troll.external.value.abs()));
+                defaultItems.add(new AIItem(117, <ItemAppearance>[new ItemAppearance("${troll.name}'s Zap Cube", "skaianbattery.png")],curious_value: troll.curious.value, energetic_value: -1*troll.energetic.value.abs()));
+            }
         }
 
         return defaultItems;
