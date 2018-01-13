@@ -42,6 +42,7 @@ class Empress {
     //in seconds
     int get timeBetweenFunding {
         int defaultAmount = 12 * 60 * 60; //12 hours;
+        if(troll == null) return defaultAmount;
         //if(window.location.hostname.contains("localhost")) defaultAmount = 3;
         defaultAmount += (60*60 * troll.patience.value/Stat.MEDIUM).round();
 
@@ -51,6 +52,7 @@ class Empress {
     int get fundingAmount {
         //external because they are thinking of other trolls and shit
         int defaultAmount = 413;
+        if(troll == null) return defaultAmount;
         defaultAmount += (100 * troll.external.value/Stat.MEDIUM).round();
         return Math.max(1, defaultAmount);
     }
@@ -60,6 +62,8 @@ class Empress {
     //doesn't effect base heiress death rate tho. that shit's biological
     int get argumentsForViolentDeath {
         int defaultAmount = 0;
+        if(troll == null) return defaultAmount;
+
         int ratio = (troll.idealistic.value/Stat.MEDIUM).round();
         if(ratio <0) {
             defaultAmount += ratio.abs();
@@ -69,6 +73,8 @@ class Empress {
 
     int get argumentsAgainstViolentDeath {
         int defaultAmount = 0;
+        if(troll == null) return defaultAmount;
+
         int ratio = (troll.idealistic.value/Stat.MEDIUM).round();
         if(ratio >0) {
             defaultAmount += ratio.abs();
@@ -78,6 +84,7 @@ class Empress {
 
     int get maxGrubs {
         int defaultAmount = 6;
+        if(troll == null) return defaultAmount;
         defaultAmount += (troll.external.value/Stat.MEDIUM).round();
         defaultAmount =  Math.max(2, defaultAmount);
         return Math.min(12,defaultAmount);
@@ -110,6 +117,8 @@ class Empress {
     //loyal is all caste prices. more loyal you are the more you are hemoist since you are loyal to your in group.
     int get priceBurgundy {
         int defaultAmount = 1;
+        if(troll == null) return defaultAmount;
+
         if(troll.isLoyal) {
             //no change
         }else {
@@ -121,6 +130,8 @@ class Empress {
 
     int get priceBronze {
         int defaultAmount = 2;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -130,6 +141,8 @@ class Empress {
     }
     int get priceGold {
         int defaultAmount = 3;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -139,6 +152,8 @@ class Empress {
     }
     int get priceLime {
         int defaultAmount = 4;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -148,6 +163,8 @@ class Empress {
     }
     int get priceOlive {
         int defaultAmount = 5;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -157,6 +174,8 @@ class Empress {
     }
     int get priceJade {
         int defaultAmount = 6;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -166,6 +185,8 @@ class Empress {
     }
     int get priceTeal {
         int defaultAmount = 7;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -176,6 +197,8 @@ class Empress {
 
     int get priceCerulean {
         int defaultAmount = 8;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -185,6 +208,8 @@ class Empress {
     }
     int get priceIndigo {
         int defaultAmount = 9;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -194,6 +219,8 @@ class Empress {
     }
     int get pricePurple {
         int defaultAmount = 10;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -204,6 +231,8 @@ class Empress {
     int get priceViolet {
 
         int defaultAmount = 11;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
         }else {
@@ -213,6 +242,8 @@ class Empress {
     }
     int get priceFuchsia {
         int defaultAmount = 24; //never changes. she doesn't want an heiress.
+        if(troll == null) return defaultAmount;
+
         if(troll.isLoyal) {
             defaultAmount += (24 * troll.external.value/Stat.MEDIUM).round();
         }
@@ -221,6 +252,8 @@ class Empress {
     int get priceMutant {
         //TODO raise or lower this based on loyal. either worth the most or the least
         int defaultAmount = 0;
+        if(troll == null) return defaultAmount;
+
         if(!troll.isLoyal) {
             defaultAmount += (24 * troll.external.value/Stat.MEDIUM).round();
         }
@@ -233,6 +266,8 @@ class Empress {
         //at max curiosity, ALL items.
         //what items are possible are based on empress stats though
         List<AIItem> defaultItems = new List<AIItem>();
+        if(troll == null) return defaultItems;
+
         return defaultItems;
 
     }
@@ -246,8 +281,10 @@ class Empress {
         canvas.context2D.drawImage(textCanvas,0,0);
 
         //this is the thing we'll hang on. so do it last.
-        CanvasElement grubCanvas = await troll.draw();
-        canvas.context2D.drawImage(grubCanvas,10,10);
+        if(troll != null) {
+            CanvasElement grubCanvas = await troll.draw();
+            canvas.context2D.drawImage(grubCanvas, 10, 10);
+        }
         container.append(canvas);
 
     }
@@ -270,7 +307,9 @@ class Empress {
         textCanvas.context2D.font = "${fontSize}px Strife";
         int y = 330;
         int x = 10;
-        Renderer.wrap_text(textCanvas.context2D, troll.name, x, y, fontSize, 400, "center");
+        String name = "Nameless Empress";
+        if(troll != null) name = troll.name;
+        Renderer.wrap_text(textCanvas.context2D, name, x, y, fontSize, 400, "center");
 
         y = y + fontSize * 2;
         fontSize = 12;
@@ -286,9 +325,11 @@ class Empress {
         numItems
          */
 
-        for(Stat s in troll.stats) {
-            y = y + fontSize + buffer;
-            Renderer.wrap_text(textCanvas.context2D, "${s.toString()}", x, y, fontSize + buffer, 275, "left");
+        if(troll != null) {
+            for (Stat s in troll.stats) {
+                y = y + fontSize + buffer;
+                Renderer.wrap_text(textCanvas.context2D, "${s.toString()}", x, y, fontSize + buffer, 275, "left");
+            }
         }
 
         y = y + fontSize + buffer;
