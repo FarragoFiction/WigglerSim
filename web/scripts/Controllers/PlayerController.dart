@@ -27,5 +27,14 @@ Future<Null> start() async {
   game.drawPlayer(canvasContainer);
   game.drawPlayerIntroShit(introContainer);
 
+  ButtonElement deleteButton = new ButtonElement();
+  deleteButton.text = "Reset Game";
+  container.append(deleteButton);
+  container.onClick.listen((e) {
+    if(window.confirm("Do you want to reset your game? If you don't have a back up, this is permanent.")) {
+      game.reset();
+    }
+  });
+
 }
 

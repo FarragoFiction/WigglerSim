@@ -41,6 +41,12 @@ class GameObject {
         }
     }
 
+    void reset() {
+        player = new Player(new HomestuckTrollDoll());
+        player.save();
+        window.location.href= "index.html";
+    }
+
     List<Troll> get last12Alumni {
 
         return player.petInventory.last12Alumni;

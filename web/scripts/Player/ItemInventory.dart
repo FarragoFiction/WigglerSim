@@ -31,63 +31,64 @@ class ItemInventory {
 
     //the abs have pos and negative because they force a sign.
     static get calmABS {
-        int value = Pet.averagePetEnergeticABS(last12);
+        // + 1 because it makes items with no stats if no alum
+        int value = Pet.averagePetEnergeticABS(last12)+1;
         return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get realisticABS {
-        int value = Pet.averagePetIdealisticABS(last12);
+        int value = Pet.averagePetIdealisticABS(last12)+1;
         return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
 
     }
 
     static get acceptingABS {
-        int value = Pet.averagePetCuriousABS(last12);
+        int value = Pet.averagePetCuriousABS(last12)+1;
         return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get internalABS {
-        int value = Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12)+1;
         return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get freeABS {
-        int value = Pet.averagePetLoyalABS(last12);
+        int value = Pet.averagePetLoyalABS(last12)+1;
         return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get impatientABS {
-        int value = Pet.averagePetPatienceABS(last12);
+        int value = Pet.averagePetPatienceABS(last12)+1;
         return -1* Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get energeticABS {
-        int value = Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12)+1;
         return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get idealisticABS {
-        int value = Pet.averagePetIdealisticABS(last12);
+        int value = Pet.averagePetIdealisticABS(last12)+1;
         return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get curiousABS {
-        int value = Pet.averagePetCuriousABS(last12);
+        int value = Pet.averagePetCuriousABS(last12)+1;
         return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get externalABS {
-        int value = Pet.averagePetEnergeticABS(last12);
+        int value = Pet.averagePetEnergeticABS(last12)+1;
         return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get loyalABS {
-        int value = Pet.averagePetLoyalABS(last12);
+        int value = Pet.averagePetLoyalABS(last12)+1;
         return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
     static get patientABS {
-        int value = Pet.averagePetPatienceABS(last12);
+        int value = Pet.averagePetPatienceABS(last12)+1;
         return Math.min(value, Stat.VERYFUCKINGHIGH+1);
     }
 
