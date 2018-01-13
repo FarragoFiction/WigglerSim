@@ -315,15 +315,6 @@ class Empress {
         fontSize = 12;
 
         int buffer = 10;
-        /*
-
-        timeBetweenFunding
-        fundingAmount
-        violentDeathRatio
-        maxGrubs
-        priceBurgundy
-        numItems
-         */
 
         if(troll != null) {
             for (Stat s in troll.stats) {

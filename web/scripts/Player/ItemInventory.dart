@@ -29,6 +29,16 @@ class ItemInventory {
 
     static List<Pet> last12 = (GameObject.instance.last12Alumni);
 
+    static List<String> get last12ColorWords
+
+    {
+        List<String> ret = new List<String>();
+        for(Troll t in last12) {
+            ret.add(t.colorWord);
+        }
+        return ret;
+    }
+
     //the abs have pos and negative because they force a sign.
     static get calmABS {
         // + 1 because it makes items with no stats if no alum
@@ -134,6 +144,60 @@ class ItemInventory {
 
         ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Feather Beast","Crow1.png"),new ItemAppearance("Hop Beast","frogsilent.png"),new ItemAppearance("Nap Meow Beast","SleepyMutie.png"),new ItemAppearance("My Little HoofBeast","maplehoof.png")],loyal_value: loyalABS, external_value: externalABS));
         ret.add(new AIItem(2,<ItemAppearance>[new ItemAppearance("Meow Beast","Mutie.png"),new ItemAppearance("Cuttle Creature","SmallFriend.png"),new ItemAppearance("Sea Hop Beast","frogcroak.png"),new ItemAppearance("Swim Beast","SmallerFriend.png")],loyal_value: freeABS, external_value: internalABS));
+
+        List<String> colors = last12ColorWords;
+
+        if(colors.contains(HomestuckTrollDoll.BURGUNDY)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Burgundy Essence","burgundy.png")], patience_value: impatientABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.BRONZE)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Bronze Essence","bronze.png")], loyal_value: freeABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.GOLD)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Gold Essence","gold.png")], energetic_value: calmABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.LIME)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Lime Essence","lime.png")], loyal_value: loyalABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.OLIVE)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Olive Essence","olive.png")], external_value: internalABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.JADE)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Jade Essence","jade.png")], patience_value: patientABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.TEAL)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Teal Essence","teal.png")], external_value: external));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.CERULEAN)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Cerulean Essence","cerulean.png")], curious_value: curiousABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.INDIGO)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Indigo Essence","indigo.png")], curious_value: acceptingABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.PURPLE)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Purple Essence","purple.png")], idealistic_value: realisticABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.VIOLET)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Violet Essence","violet.png")], idealistic_value: idealisticABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.FUCHSIA)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Fuschsia Essence","fuchsia.png")], energetic_value: energeticABS));
+        }
+
+        if(colors.contains(HomestuckTrollDoll.MUTANT)) {
+            ret.add(new AIItem(0,<ItemAppearance>[new ItemAppearance("Mutant Essence","mutant.png")], loyal_value: loyalABS));
+        }
 
         return ret;
     }
