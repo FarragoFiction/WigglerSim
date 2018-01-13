@@ -3,6 +3,8 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import "../GameShit/AIItem.dart";
 import 'dart:html';
 import 'dart:async';
+import 'dart:math' as Math;
+
 
 
 
@@ -17,12 +19,10 @@ import 'dart:async';
     MAYBE eventually a "sauce" button.
 
     With this feature...you're kind of playing as Doc Scratch, aren't you?
-
-    TODO: page summarizing effect current empress has on sim
  */
 class Empress {
     static Empress _instance;
-    int textHeight = 800;
+    int textHeight = 950;
     int textWidth = 420;
 
     //if there is no empress we use the default one.
@@ -41,38 +41,45 @@ class Empress {
 
     //in seconds
     int get timeBetweenFunding {
-        //TODO raise or lower this based on patience.
         int defaultAmount = 12 * 60 * 60; //12 hours;
         //if(window.location.hostname.contains("localhost")) defaultAmount = 3;
+        defaultAmount += (60*60 * troll.patience.value/Stat.MEDIUM).round();
 
-        return defaultAmount;
+        return Math.max(60*60, defaultAmount);
     }
 
     int get fundingAmount {
-        //TODO raise or lower this based on external. don't let it go below 1.
         //external because they are thinking of other trolls and shit
         int defaultAmount = 413;
-        return defaultAmount;
+        defaultAmount += (100 * troll.external.value/Stat.MEDIUM).round();
+        return Math.max(1, defaultAmount);
     }
 
 
     //max of six possible normally for either end.
     //doesn't effect base heiress death rate tho. that shit's biological
     int get argumentsForViolentDeath {
-        //TODO raise or lower this based on idealistic.
         int defaultAmount = 0;
-        return defaultAmount;
+        int ratio = (troll.idealistic.value/Stat.MEDIUM).round();
+        if(ratio <0) {
+            defaultAmount += ratio.abs();
+        }
+        return Math.min(6, defaultAmount);
     }
 
     int get argumentsAgainstViolentDeath {
-        //TODO raise or lower this based on idealistic.
         int defaultAmount = 0;
-        return defaultAmount;
+        int ratio = (troll.idealistic.value/Stat.MEDIUM).round();
+        if(ratio >0) {
+            defaultAmount += ratio.abs();
+        }
+        return Math.min(6, defaultAmount);
     }
 
     int get maxGrubs {
-        //TODO raise or lower this based on energetic. (if it's very high, +6, if very low, -4).  (2 min)
         int defaultAmount = 6;
+        defaultAmount += (troll.external.value/Stat.MEDIUM).round();
+        return Math.max(2, defaultAmount);
         return defaultAmount;
     }
 
@@ -102,70 +109,119 @@ class Empress {
 
     //loyal is all caste prices. more loyal you are the more you are hemoist since you are loyal to your in group.
     int get priceBurgundy {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 1;
-        return defaultAmount;
+        if(troll.isLoyal) {
+            //no change
+        }else {
+            //intent is to make it NOT enough to make up for the normal prejudice. you're trying, but you still think you're better.
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
 
     int get priceBronze {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 2;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceGold {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 3;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceLime {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 4;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceOlive {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 5;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceJade {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 6;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceTeal {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 7;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
+
     int get priceCerulean {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 8;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceIndigo {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 9;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get pricePurple {
-        //TODO raise or lower this based on loyal.
         int defaultAmount = 10;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceViolet {
-        //TODO raise or lower this based on loyal.
+
         int defaultAmount = 11;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }else {
+            defaultAmount += (defaultAmount * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(1, defaultAmount);
     }
     int get priceFuchsia {
-        //TODO raise or lower this based on loyal.
-        int defaultAmount = 24;
+        int defaultAmount = 24; //never changes. she doesn't want an heiress.
         return defaultAmount;
     }
     int get priceMutant {
         //TODO raise or lower this based on loyal. either worth the most or the least
         int defaultAmount = 0;
-        return defaultAmount;
+        if(!troll.isLoyal) {
+            defaultAmount += (24 * troll.external.value/Stat.MEDIUM).round();
+        }
+        return Math.max(0, defaultAmount);
     }
 
     //what about curious? items available.
@@ -190,6 +246,7 @@ class Empress {
         CanvasElement grubCanvas = await troll.draw();
         canvas.context2D.drawImage(grubCanvas,10,10);
         container.append(canvas);
+
     }
 
     Future<CanvasElement> drawStats() async {
@@ -226,15 +283,29 @@ class Empress {
         numItems
          */
 
+        for(Stat s in troll.stats) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "${s.toString()}", x, y, fontSize + buffer, 275, "left");
+        }
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "", x, y, fontSize + buffer, 275, "left");
+
+
         y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "Time To Fund: ${new Duration(seconds: timeBetweenFunding)}", x, y, fontSize + buffer, 275, "left");
 
         y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "Fund Amount: ${fundingAmount}", x, y, fontSize + buffer, 275, "left");
 
-        y = y + fontSize + buffer;
-        Renderer.wrap_text(textCanvas.context2D, "Violent Death Ratio: ${argumentsForViolentDeath}/${argumentsAgainstViolentDeath}", x, y, fontSize + buffer, 275, "left");
 
+        if(argumentsForViolentDeath >0) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Violent Death Bonus: ${argumentsForViolentDeath}", x, y, fontSize + buffer, 275, "left");
+        }else {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Peaceful Death Bonus: ${argumentsAgainstViolentDeath}", x, y, fontSize + buffer, 275, "left");
+        }
         y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "Max Grubs: ${maxGrubs}", x, y, fontSize + buffer, 275, "left");
 
@@ -278,7 +349,7 @@ class Empress {
         Renderer.wrap_text(textCanvas.context2D, "Fuchsia Multiplier: ${priceFuchsia}", x, y, fontSize + buffer, 275, "left");
 
         y = y + fontSize + buffer;
-        Renderer.wrap_text(textCanvas.context2D, "Mutant Value: ${priceMutant}", x, y, fontSize + buffer, 275, "left");
+        Renderer.wrap_text(textCanvas.context2D, "Mutant Multiplier: ${priceMutant}", x, y, fontSize + buffer, 275, "left");
 
         return textCanvas;
     }

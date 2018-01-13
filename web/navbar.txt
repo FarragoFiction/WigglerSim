@@ -5,14 +5,16 @@
   <span class = 'centeredMenu'>
 
 
-  <li class = "menuButtonPureCSS"><a href="index.html">Your Data</a></li>
+  <li class = "menuButtonPureCSS"><a href="index.html">Data</a></li>
   <li class = "menuButtonPureCSS"><a href="petInventory.html">Wigglers</a></li>
-    <li class = "menuButtonPureCSS"><a href="itemShop.html">Growth Items</a></li>
+    <li class = "menuButtonPureCSS"><a href="itemShop.html">Items</a></li>
 
     <li class = "menuButtonPureCSS"><a href="playPen.html">Playpen</a></li>
 
   <li class = "menuButtonPureCSS"><a href="wigglerShop.html">Adopts</a></li>
     <li class = "menuButtonPureCSS"><a href="viewAlumni.html">Alumni</a></li>
+        <li class = "menuButtonPureCSS"><a href="currentEmpress.html">Empress</a></li>
+
     <li class = "menuButtonPureCSS"><a href="status.html">News</a></li>
 
 
