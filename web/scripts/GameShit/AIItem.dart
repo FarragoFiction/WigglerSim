@@ -331,7 +331,7 @@ class AIItem extends AIObject {
         loyal = new Stat(value, "Loyal","Free-Spirited", Stat.loyalFlavor, Stat.freeFlavor);
     }
     void makeExternal(int value) {
-        external = new Stat(value, "External","Interal",Stat.externalFlavor, Stat.internalFlavor);
+        external = new Stat(value, "External","Internal",Stat.externalFlavor, Stat.internalFlavor);
     }
 
 }

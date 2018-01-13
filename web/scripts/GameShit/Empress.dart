@@ -267,6 +267,11 @@ class Empress {
         //what items are possible are based on empress stats though
         List<AIItem> defaultItems = new List<AIItem>();
         if(troll == null) return defaultItems;
+        if(troll.isCurious) {
+            defaultItems.add(new AIItem(113, <ItemAppearance>[new ItemAppearance("SCIENCE 3-DENT", "wiredent.png")], energetic_value: troll.energetic.value.abs()));
+            defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("SCIENCE 3-DENT", "wiredent.png")], energetic_value: troll.energetic.value.abs()));
+
+        }
 
         return defaultItems;
 
