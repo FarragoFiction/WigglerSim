@@ -2,6 +2,8 @@ import "../Pets/PetLib.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "../GameShit/AIItem.dart";
 import 'dart:html';
+import 'dart:async';
+
 
 
 /*
@@ -20,6 +22,8 @@ import 'dart:html';
  */
 class Empress {
     static Empress _instance;
+    int textHeight = 800;
+    int textWidth = 420;
 
     //if there is no empress we use the default one.
     static Empress get  instance
@@ -51,11 +55,8 @@ class Empress {
         return defaultAmount;
     }
 
-    //TODO: for display
-    double get violentDeathRatio {
-        return argumentsForViolentDeath/argumentsAgainstViolentDeath;
-    }
 
+    //max of six possible normally for either end.
     //doesn't effect base heiress death rate tho. that shit's biological
     int get argumentsForViolentDeath {
         //TODO raise or lower this based on idealistic.
@@ -176,6 +177,112 @@ class Empress {
         return defaultItems;
 
     }
+
+    Future<Null> drawDecrees(Element container) async {
+        //picture.
+        //decrees
+        CanvasElement canvas = new CanvasElement(width: textWidth, height: textHeight);
+
+        CanvasElement textCanvas = await drawStats();
+        canvas.context2D.drawImage(textCanvas,0,0);
+
+        //this is the thing we'll hang on. so do it last.
+        CanvasElement grubCanvas = await troll.draw();
+        canvas.context2D.drawImage(grubCanvas,10,10);
+        container.append(canvas);
+    }
+
+    Future<CanvasElement> drawStats() async {
+        //never cache
+        CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
+        textCanvas.context2D.fillStyle = "#d27cc9";
+        textCanvas.context2D.strokeStyle = "#2c002a";
+
+        textCanvas.context2D.lineWidth = 3;
+
+
+        textCanvas.context2D.fillRect(0, 0, textWidth, textHeight);
+        textCanvas.context2D.strokeRect(0, 0, textWidth, textHeight);
+
+        textCanvas.context2D.fillStyle = "#2c1900";
+
+        int fontSize = 20;
+        textCanvas.context2D.font = "${fontSize}px Strife";
+        int y = 330;
+        int x = 10;
+        Renderer.wrap_text(textCanvas.context2D, troll.name, x, y, fontSize, 400, "center");
+
+        y = y + fontSize * 2;
+        fontSize = 12;
+
+        int buffer = 10;
+        /*
+
+        timeBetweenFunding
+        fundingAmount
+        violentDeathRatio
+        maxGrubs
+        priceBurgundy
+        numItems
+         */
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Time To Fund: ${new Duration(seconds: timeBetweenFunding)}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Fund Amount: ${fundingAmount}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Violent Death Ratio: ${argumentsForViolentDeath}/${argumentsAgainstViolentDeath}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Max Grubs: ${maxGrubs}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Number Bonus Items: ${items.length}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Burgundy Multiplier: ${priceBurgundy}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Bronze Multiplier: ${priceBronze}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Gold Multiplier: ${priceGold}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Lime Multiplier: ${priceLime}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Olive Multiplier: ${priceOlive}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Jade Multiplier: ${priceJade}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Teal Multiplier: ${priceTeal}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Cerulean Multiplier: ${priceCerulean}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Indigo Multiplier: ${priceIndigo}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Purple Multiplier: ${pricePurple}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Violet Multiplier: ${priceViolet}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Fuchsia Multiplier: ${priceFuchsia}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Mutant Value: ${priceMutant}", x, y, fontSize + buffer, 275, "left");
+
+        return textCanvas;
+    }
+
 
 }
 
