@@ -25,6 +25,8 @@ class PlayPen {
     List<AIPet> pets = new List<AIPet>();
     List<AIItem> items = new List<AIItem>();
 
+    bool readyToAnimate = false;
+
     CanvasElement canvas = new CanvasElement(width: 1000, height: 400);
     String backgroundImage = "images/BroodingCaverns.png";
 
@@ -54,6 +56,7 @@ class PlayPen {
                 //return; // this keeps it at one pet at a time.
             }
         }
+        readyToAnimate = true;
         GameObject.instance.save();
     }
 
@@ -106,6 +109,17 @@ class PlayPen {
         }
 
 
+    }
+
+    Future<Null> drawLoading() async {
+        Renderer.clearCanvas(canvas);
+        int fontSize = 200;
+        canvas.context2D.font = "${fontSize}px Strife";
+        canvas.context2D.fillStyle = "#ffffff";
+        Random rand = new Random();
+        int y = (canvas.height/2).round() + rand.nextInt(10)+50;
+        int x = (canvas.width/2).round()+ rand.nextInt(10)-200;
+        Renderer.wrap_text(canvas.context2D,"LOADING",x,y,fontSize,400,"center");
     }
 
 }

@@ -968,5 +968,14 @@ Then, I need to make a loading/auto play for playpen.
 
 THEN I can take my victory lap and do the fun stuff of making Empresses effect the sim.
 
+~~~~~
+
+First thought:
+
+Just make stop = false and see what htat breaks.
+
+if it breaks NOTHING and just looks bad,
+have it display "Loading" until it loads.
+
 
 

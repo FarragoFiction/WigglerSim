@@ -10,7 +10,7 @@ import "navbar.dart";
 GameObject game;
 int frameRate = 100;
 
-bool stop = true;
+bool stop = false;
 
 void main() {
     loadNavbar();
@@ -47,7 +47,11 @@ Future<Null> start() async {
 Future<Null> drawLoop() async {
     //print("draw loop");
     game.playPen.aiTick();
-    await game.playPen.draw();
+    if(game.playPen.readyToAnimate) {
+        await game.playPen.draw();
+    }else {
+        await game.playPen.drawLoading();
+    }
     //print("playpen returned");
     if(!stop) new Timer(new Duration(milliseconds: frameRate), () => drawLoop());
 }

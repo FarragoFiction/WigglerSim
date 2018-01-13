@@ -39,7 +39,7 @@ class Empress {
     int get timeBetweenFunding {
         //TODO raise or lower this based on patience.
         int defaultAmount = 12 * 60 * 60; //12 hours;
-        if(window.location.hostname.contains("localhost")) defaultAmount = 3;
+        //if(window.location.hostname.contains("localhost")) defaultAmount = 3;
 
         return defaultAmount;
     }
