@@ -207,7 +207,7 @@ class PetInventory {
             await drawPet(subContainer, rulingEmpress.troll);
         }
 
-        for(Pet p in alumni) {
+        for(Pet p in alumni.reversed) {
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");

@@ -252,6 +252,7 @@ class Troll extends Pet{
             }
         }
         Random rand = new Random();
+        rand.nextInt(); //intitialize
         //you can still get lucky
         if(argumentsFor > argumentsAgainst && rand.nextBool()) {
             //violent death
