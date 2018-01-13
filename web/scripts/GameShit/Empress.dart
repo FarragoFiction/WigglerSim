@@ -110,7 +110,7 @@ class Empress {
         if(p.colorWord == HomestuckTrollDoll.FUCHSIA) multiplier = priceFuchsia/divisor;
         if(p.colorWord == HomestuckTrollDoll.MUTANT) multiplier = priceMutant/divisor;
 
-        return  (base * multiplier/12).round();;
+        return  Math.min((base * multiplier/12).round(),1025);
 
     }
 

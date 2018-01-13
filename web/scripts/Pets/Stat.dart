@@ -1,12 +1,14 @@
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "Sign.dart";
+import 'dart:math' as Math;
+
 
 class Stat {
-    static int HIGH = 20;
+    static int HIGH = 50;
     static int LOW = 0;
-    static int MEDIUM = 10;
-    static int VERYFUCKINGHIGH = 50;  //TODO figure out what's a rare but obtainable value once there's gameplay
-
+    static int MEDIUM = 25;
+    static int VERYFUCKINGHIGH = 112;
+    
     int value;
     String positiveName;
     String negativeName;
@@ -128,6 +130,9 @@ class Stat {
         if(value == null) {
             Random rand = new Random();
             value = rand.nextIntRange(-1* HIGH, HIGH); //won't go above medium normally except rarely
+        }else if(value != 0) {
+            int direction = (value/value.abs()).round();
+            value =  (direction * Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
         }
 
         if(Stat.defaultFlavor == null) {

@@ -59,7 +59,7 @@ class AIItem extends AIObject {
         for(Stat s in stats) {
             total += s.value.abs();
         }
-        return total*6; //assume each item is applied to an average of three grubs.
+        return total*6+10; //assume each item is applied to an average of three grubs.
     }
 
     List<ItemAppearance> itemTypes = new List<ItemAppearance>();
@@ -138,7 +138,7 @@ class AIItem extends AIObject {
     //depending on my image size, i need to be rendered in different places to be on the ground.
     void placeOnGround(CanvasElement groundCanvas) {
         Random rand = new Random();
-        x = rand.nextInt(groundCanvas.width);
+        x = rand.nextInt(groundCanvas.width)-200;
         y = groundCanvas.height - canvas.height;
         if(rand.nextBool()) turnWays = true;
     }
