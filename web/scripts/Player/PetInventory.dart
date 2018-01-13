@@ -28,6 +28,7 @@ class PetInventory {
     List<Troll> alumni = new List<Troll>();
 
     List<Troll> get last12Alumni {
+        if(alumni.isEmpty) return alumni;
         List<Troll> reversedAlumni = new List.from(alumni.reversed);
         int length = Math.min(reversedAlumni.length-1, 12);
         return reversedAlumni.sublist(0, length);
