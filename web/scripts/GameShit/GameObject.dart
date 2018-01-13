@@ -153,12 +153,15 @@ class GameObject {
             });
         });
 
+        DivElement linkContainer = new DivElement();
+        linkContainer.style.padding = "10px";
         AnchorElement saveLink = new AnchorElement();
         saveLink.href = new UriData.fromString(saveData, mimeType: "text/plain").toString();
         saveLink.target = "_blank";
         saveLink.download = "wigglerSimData.txt";
         saveLink.setInnerHtml("Download Save Backup?");
-        container.append(saveLink);
+        linkContainer.append(saveLink);
+        container.append(linkContainer);
     }
 
 }

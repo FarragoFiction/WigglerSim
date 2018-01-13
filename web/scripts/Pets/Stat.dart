@@ -160,7 +160,7 @@ class Stat {
     double get percentOfHighValue => (normalizedValue/Stat.HIGH);
 
     String get stringValue {
-        if(normalizedValue > VERYFUCKINGHIGH) return "Crazy High";
+        if(normalizedValue > VERYFUCKINGHIGH) return "V High";
         if(normalizedValue > HIGH) return "High";
         if(normalizedValue > MEDIUM) return "Medium";
         if(normalizedValue >= LOW) return "Low";
