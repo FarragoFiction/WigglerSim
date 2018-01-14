@@ -356,7 +356,7 @@ class Empress {
             Renderer.wrap_text(textCanvas.context2D, "Violent Death Bonus: ${argumentsForViolentDeath}", x, y, fontSize + buffer, 275, "left");
         }else {
             y = y + fontSize + buffer;
-            Renderer.wrap_text(textCanvas.context2D, "Peaceful Death Bonus: ${argumentsAgainstViolentDeath}", x, y, fontSize + buffer, 275, "left");
+            Renderer.wrap_text(textCanvas.context2D, "Peaceful Death Odds: ${argumentsAgainstViolentDeath}", x, y, fontSize + buffer, 275, "left");
         }
         y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "Max Grubs: ${maxGrubs}", x, y, fontSize + buffer, 275, "left");

@@ -170,8 +170,11 @@ class Troll extends Pet{
 
     //mutants are likely to be culled.
     String mutantEnding(int maxLife) {
-        int argumentsFor = 10; //mutants are REALLY likely to be culled.
-        int argumentsAgainst = 0;
+        int argumentsFor = Empress.instance.argumentsForViolentDeath;
+        int argumentsAgainst = Empress.instance.argumentsAgainstViolentDeath;
+        if(Empress.instance.priceMutant == 0) {
+            argumentsFor +=10; //especially targeted
+        }
         for(Stat s in stats) {
             int odds = s.flavor.oddsOfViolentDeath;
             if(odds > 0.0) {
@@ -181,7 +184,8 @@ class Troll extends Pet{
             }
         }
         Random rand = new Random();
-        if(rand.nextIntRange(argumentsAgainst, argumentsFor) > 0) {
+        rand.nextInt(); //init
+        if(argumentsFor > argumentsAgainst && rand.nextBool()) {
             int lifespan = rand.nextIntRange(0, maxLife);
             if(lifespan <= 1) return deathString(lifespan, "being found by culling drones while still in the caverns");
 
