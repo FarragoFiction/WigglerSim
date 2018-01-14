@@ -465,7 +465,7 @@ abstract class Pet {
         castesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDCASTES]);
 
 
-        print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
+       // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
         lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));

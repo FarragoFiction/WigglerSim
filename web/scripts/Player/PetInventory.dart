@@ -56,6 +56,10 @@ class PetInventory {
         replacement.energetic = original.energetic;
         replacement.idealistic = original.idealistic;
         replacement.patience = original.patience;
+        replacement.castesRemembered = original.castesRemembered;
+        replacement.namesRemembered = original.namesRemembered;
+        replacement.itemsRemembered = original.itemsRemembered;
+
 
         int index = pets.indexOf(original);
         pets[index] = replacement;
@@ -69,7 +73,11 @@ class PetInventory {
         idontevenKnow = jsonObj[ALUMNI];
         loadAlumniFromJSON(idontevenKnow);
         String empressJson = jsonObj[EMPRESS];
-        if(empressJson != null) rulingEmpress = new Empress(Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson)));
+        if(empressJson != null) {
+            Pet p = Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson));
+            print("Empress loaded, ${p.name} with hatchmates ${p.hatchmatesString}.");
+            rulingEmpress = new Empress(p);
+        }
 
     }
 

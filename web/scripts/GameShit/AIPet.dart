@@ -669,7 +669,7 @@ class AIPet extends AIObject {
         if(numNames != grub.namesRemembered.length || numCastes != grub.castesRemembered.length ) {
             GameObject.instance.save();
         }
-        print("Remembering: ${grub.castesRemembered} and ${grub.namesRemembered}");
+       // print("Remembering: ${grub.castesRemembered} and ${grub.namesRemembered}");
         //print("judged ${grub.grub.name}, emotion is ${currentEmotion.iconLocation}");
     }
 

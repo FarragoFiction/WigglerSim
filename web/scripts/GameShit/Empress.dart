@@ -37,6 +37,8 @@ class Empress {
     Troll troll;
     Empress(this.troll) {
         _instance = this;
+        print("Empress loaded with wigglerhood friends ${troll.hatchmatesString}");
+
     }
 
 
