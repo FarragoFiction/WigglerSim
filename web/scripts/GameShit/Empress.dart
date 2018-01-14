@@ -45,6 +45,8 @@ class Empress {
         if(troll == null) return defaultAmount;
         //if(window.location.hostname.contains("localhost")) defaultAmount = 3;
         defaultAmount += (2*60*60 * troll.patience.value/Stat.MEDIUM).round();
+        defaultAmount += (60*60 * troll.energetic.value/Stat.HIGH).round();
+
 
         return Math.max(60*60, defaultAmount);
     }
@@ -54,6 +56,8 @@ class Empress {
         int defaultAmount = 413;
         if(troll == null) return defaultAmount;
         defaultAmount += (100 * troll.external.value/Stat.MEDIUM).round();
+        defaultAmount += (50 * troll.loyal.value/Stat.HIGH).round();
+
         return Math.max(1, defaultAmount);
     }
 
@@ -65,6 +69,8 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         int ratio = (troll.idealistic.value/Stat.MEDIUM).round();
+        ratio += (troll.patience.value/Stat.HIGH).round();
+
         if(ratio <0) {
             defaultAmount += ratio.abs();
         }
@@ -76,6 +82,8 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         int ratio = (troll.idealistic.value/Stat.MEDIUM).round();
+        ratio += (troll.patience.value/Stat.HIGH).round();
+
         if(ratio >0) {
             defaultAmount += ratio.abs();
         }
@@ -85,7 +93,9 @@ class Empress {
     int get maxGrubs {
         int defaultAmount = 6;
         if(troll == null) return defaultAmount;
-        defaultAmount += (troll.external.value/Stat.MEDIUM).round();
+        defaultAmount += (troll.energetic.value/Stat.MEDIUM).round();
+        defaultAmount += (troll.external.value/Stat.HIGH).round();
+
         defaultAmount =  Math.max(2, defaultAmount);
         return Math.min(12,defaultAmount);
     }
