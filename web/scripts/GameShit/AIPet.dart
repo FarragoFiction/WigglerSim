@@ -645,10 +645,10 @@ class AIPet extends AIObject {
         return "${grub.name}";
     }
 
-    void judgeGrub(AIPet grub) {
+    void judgeGrub(AIPet g) {
         int reactionToSimilar = likesSimilar();
         //print("getting simulatity rating");
-        int similarityRatingValue = similarityRating(grub) * reactionToSimilar;
+        int similarityRatingValue = similarityRating(g) * reactionToSimilar;
        // print("judged similarity is ${similarityRatingValue}");
         if(similarityRatingValue > 0) {
             //print("judged positive");
@@ -660,6 +660,16 @@ class AIPet extends AIObject {
             //print("judged neutral");
             setEmotion(Emotion.NEUTRALQUADRANT);
         }
+        int numNames = grub.namesRemembered.length;
+        int numCastes = grub.castesRemembered.length;
+
+        grub.namesRemembered.add(g.grub.name);
+        grub.castesRemembered.add(g.grub.colorWord);
+        grub.castesRemembered.add(grub.colorWord); //know about own caste
+        if(numNames != grub.namesRemembered.length || numCastes != grub.castesRemembered.length ) {
+            GameObject.instance.save();
+        }
+        print("Remembering: ${grub.castesRemembered} and ${grub.namesRemembered}");
         //print("judged ${grub.grub.name}, emotion is ${currentEmotion.iconLocation}");
     }
 

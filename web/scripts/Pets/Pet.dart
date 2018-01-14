@@ -113,6 +113,10 @@ abstract class Pet {
     static String EXTERNAL = "external";
     static String ISEMPRESS = "isempress";
     static String REMEMBEREDITEMS = "remembered";
+    static String REMEMBEREDNAMES = "rememberedNames";
+    static String REMEMBEREDCASTES = "rememberedCastes";
+
+
 
 
 
@@ -141,6 +145,9 @@ abstract class Pet {
     int id;
     List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
     Set<int> itemsRemembered = new Set<int>();
+    //kills spaces, gets fucked up by commas, probably not useable
+    Set<String> namesRemembered = new Set<String>();
+    Set<String> castesRemembered = new Set<String>();
 
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
@@ -446,7 +453,11 @@ abstract class Pet {
         name = jsonObj[NAMEJSON];
         loadStatsFromJSON(jsonObj);
         itemsRemembered = JSONObject.jsonStringToIntSet(jsonObj[REMEMBEREDITEMS]);
-        //print("items remembered is $itemsRemembered and json as ${jsonObj[REMEMBEREDITEMS]}");
+        namesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDNAMES]);
+        castesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDCASTES]);
+
+
+        print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
         lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
@@ -474,7 +485,10 @@ abstract class Pet {
         json[ENERGETIC] = "${energetic.value}";
         json[EXTERNAL] = "${external.value}";
         json[REMEMBEREDITEMS] = itemsRemembered.toString();
-       // if(itemsRemembered.isNotEmpty) print(" saving $name, items remembered is $itemsRemembered and json is ${json[REMEMBEREDITEMS]} ");
+        json[REMEMBEREDNAMES] = namesRemembered.toString();
+        json[REMEMBEREDCASTES] = castesRemembered.toString();
+
+        // if(itemsRemembered.isNotEmpty) print(" saving $name, items remembered is $itemsRemembered and json is ${json[REMEMBEREDITEMS]} ");
 
 
         return json;

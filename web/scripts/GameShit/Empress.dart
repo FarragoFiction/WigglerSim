@@ -22,7 +22,7 @@ import 'dart:math' as Math;
  */
 class Empress {
     static Empress _instance;
-    int textHeight = 950;
+    int textHeight = 975;
     int textWidth = 420;
 
     //if there is no empress we use the default one.
@@ -133,7 +133,7 @@ class Empress {
             //no change
         }else {
             //intent is to make it NOT enough to make up for the normal prejudice. you're trying, but you still think you're better.
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -143,9 +143,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -154,9 +154,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -165,9 +165,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -176,9 +176,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -187,9 +187,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -198,9 +198,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -210,9 +210,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -221,9 +221,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -232,9 +232,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -244,9 +244,9 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(!troll.isLoyal) {
-            defaultAmount += (12/defaultAmount * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
-            defaultAmount += (defaultAmount/6 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
     }
@@ -255,12 +255,11 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(troll.isLoyal) {
-            defaultAmount += (24 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (24 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return defaultAmount;
     }
     int get priceMutant {
-        //TODO raise or lower this based on loyal. either worth the most or the least
         int defaultAmount = 0;
         if(troll == null) return defaultAmount;
 
@@ -349,6 +348,9 @@ class Empress {
                 Renderer.wrap_text(textCanvas.context2D, "${s.toString()}", x, y, fontSize + buffer, 275, "left");
             }
         }
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Childhood Friends: ${troll.castesRemembered}", x, y, fontSize + buffer, 275, "left");
 
         y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "", x, y, fontSize + buffer, 275, "left");
