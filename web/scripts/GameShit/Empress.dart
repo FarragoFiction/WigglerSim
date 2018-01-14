@@ -37,7 +37,7 @@ class Empress {
     Troll troll;
     Empress(this.troll) {
         _instance = this;
-        print("Empress loaded with wigglerhood friends ${troll.hatchmatesString}");
+        ///print("Empress loaded with wigglerhood friends ${troll.hatchmatesString}");
 
     }
 
@@ -434,7 +434,9 @@ class Empress {
         Renderer.wrap_text(textCanvas.context2D, "Mutant Multiplier: ${priceMutant}", x, y, fontSize + buffer, 275, "left");
 
         y = y + fontSize + buffer;
-        Renderer.wrap_text(textCanvas.context2D, "Hatchmates: ${troll.hatchmatesString}", x, y, fontSize + buffer, 275, "left");
+        String hs = "";
+        if(troll != null) hs = troll.hatchmatesString;
+        Renderer.wrap_text(textCanvas.context2D, "Hatchmates: ${hs}", x, y, fontSize + buffer, 275, "left");
 
 
 
