@@ -134,7 +134,7 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(troll.isLoyal) {
-            //no change
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.BURGUNDY)).round();
         }else {
             //intent is to make it NOT enough to make up for the normal prejudice. you're trying, but you still think you're better.
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
@@ -149,6 +149,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.BRONZE)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -160,6 +161,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.GOLD)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -171,6 +173,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.LIME)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -182,6 +185,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.OLIVE)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -193,6 +197,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.JADE)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -204,6 +209,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.TEAL)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -216,6 +222,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.CERULEAN)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -227,6 +234,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.INDIGO)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -238,6 +246,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.PURPLE)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -250,6 +259,7 @@ class Empress {
         if(!troll.isLoyal) {
             defaultAmount += (12/defaultAmount * troll.loyal.value/Stat.MEDIUM).round();
         }else {
+            defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.VIOLET)).round();
             defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
         return Math.max(1, defaultAmount);
@@ -267,11 +277,16 @@ class Empress {
     }
     int get priceMutant {
         int defaultAmount = 0;
-        if(troll == null) return defaultAmount;
 
+        if(troll == null) return defaultAmount;
+        //for mutants, if you grew up with them you'll at  least value them a bit,whether loyal or not
+        defaultAmount += (10 * troll.percentHatchMatesWithCaste(HomestuckTrollDoll.MUTANT)).round();
+        print("after memory, default amount is $defaultAmount");
         if(!troll.isLoyal) {
-            defaultAmount += (24 * troll.external.value/Stat.MEDIUM).round();
+            defaultAmount += (24 * troll.loyal.value/Stat.MEDIUM).round();
+        }else {
         }
+
         return Math.max(0, defaultAmount);
     }
 

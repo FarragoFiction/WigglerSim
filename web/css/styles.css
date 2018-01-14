@@ -74,6 +74,7 @@ button{
 
 #output {
     width:1000px;
+    vertical-align: top;
  	background-color: #935b49;
  	margin-left: auto;
  	margin-right: auto;

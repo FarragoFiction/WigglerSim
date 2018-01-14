@@ -157,6 +157,7 @@ abstract class Pet {
         return ret;
     }
 
+
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
         if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
@@ -165,6 +166,20 @@ abstract class Pet {
         lastPlayed = new DateTime.now();
         name = randomAsFuckName();
         randomizeStats();
+    }
+
+    double percentHatchMatesWithCaste(String caste) {
+        if(castesRemembered.length == 0) return 0.0;
+        //its' a set, so zero or one
+        int count = 0;
+        int length = 0;
+        //can't do a raw "contains" cuz might have spaces
+        for(String s in castesRemembered) {
+            print ("Found a $caste  in memory");
+            if(s.contains(caste)) count ++;
+            if(s != null && s.isNotEmpty) length ++; //can have nulls in it.
+        }
+        return count/length;
     }
 
     void randomizeStats() {
@@ -566,11 +581,11 @@ abstract class Pet {
         Random rand = new Random();
         List<String> titles = <String>["Citizen", "Engineer", "Captain", "Commodore", "Private", "Sergeant", "Lieutenant", "Senior", "Senpai", "Psychicboi", "Hotboi", "Viceroy", "Lord", "Shogun", "Captain", "Baron","Prophesied", "Demon","Destroyer","Darling" "The Esteemed", "Mr.", "Mrs.", "Mdms.", "Count", "Countess", "Darth", "Clerk", "President", "Pounceler", "Counciler", "Minister", "Ambassador", "Admiral", "Rear Admiral", "Commander", "Dr.", "Sir", "Senator", "Contessa"];
         //these titles thanks to duckking
-        titles.addAll(<String>["Duke", "Earl", "Duchess", "Marquess", "Marchioness", "Lord", "Viscount", "Viscountess", "Baroness", "Chief", "Chieftain", "Saint", "Bishop", "Archbishop", "Cardinal", "Chorbishop", "Dean", "Vice", "Pope", "Supreme", "Bishop", "Assistant", "Researcher", "Vice President", "Archdeacon", "Sensei", "Archpriest", "Abbot", "Abbess", "Monk", "Novice", "Sister", "Brother", "Father", "Mother", "Elder", "Judge", "Executioner", "Patriarch", "Reverend", "Pastor", "Rabbi", "Cleric", "Master", "King", "Queen", "Druid", "Knight", "Seer", "Bard", "Heir", "Maid", "Rogue", "Thief", "Page", "Sylph", "Witch", "Prince", "Princess", "Mage", "Monsignor", "TV's", "Sherrif", "Professor", "Vice-Chancellor"]);
-        List<String> firstNames = <String>["Chuck", "Jerry", "Capybara", "Bibbles", "Jiggy", "Jibbly", "Wiggly", "Wiggler", "Grubby", "Zoosmell", "Farmstink", "Bubbles", "Nic", "Lil", "Liv", "Charles", "Meowsers", "Casey","Candy", "Sterling", "Fred", "Kid", "Meowgon", "Fluffy", "Meredith", "Bill", "Ted", "Ash", "Frank", "Flan", "Quill", "Squeezykins", "Spot", "Squeakems", "Stephen", "Edward", "Hissy", "Scaley", "Glubglub", "Mutie", "Donnie", "Clattersworth", "Bonebone", "Nibbles", "Fossilbee", "Skulligan", "Jack", "Nigel", "Dazzle", "Fancy", "Pounce"];
+        titles.addAll(<String>["Player","Duke", "Earl", "Duchess", "Marquess", "Marchioness", "Lord", "Viscount", "Viscountess", "Baroness", "Chief", "Chieftain", "Saint", "Bishop", "Archbishop", "Cardinal", "Chorbishop", "Dean", "Vice", "Pope", "Supreme", "Bishop", "Assistant", "Researcher", "Vice President", "Archdeacon", "Sensei", "Archpriest", "Abbot", "Abbess", "Monk", "Novice", "Sister", "Brother", "Father", "Mother", "Elder", "Judge", "Executioner", "Patriarch", "Reverend", "Pastor", "Rabbi", "Cleric", "Master", "King", "Queen", "Druid", "Knight", "Seer", "Bard", "Heir", "Maid", "Rogue", "Thief", "Page", "Sylph", "Witch", "Prince", "Princess", "Mage", "Monsignor", "TV's", "Sherrif", "Professor", "Vice-Chancellor"]);
+        List<String> firstNames = <String>["Sauce","Juice","Juicy","Chuck", "Jerry", "Capybara", "Bibbles", "Jiggy", "Jibbly", "Wiggly", "Wiggler", "Grubby", "Zoosmell", "Farmstink", "Bubbles", "Nic", "Lil", "Liv", "Charles", "Meowsers", "Casey","Candy", "Sterling", "Fred", "Kid", "Meowgon", "Fluffy", "Meredith", "Bill", "Ted", "Ash", "Frank", "Flan", "Quill", "Squeezykins", "Spot", "Squeakems", "Stephen", "Edward", "Hissy", "Scaley", "Glubglub", "Mutie", "Donnie", "Clattersworth", "Bonebone", "Nibbles", "Fossilbee", "Skulligan", "Jack", "Nigel", "Dazzle", "Fancy", "Pounce"];
         firstNames.addAll(<String>["Cheddar", "Bob", "Winston", "Lobster", "Snookems", "Squeezy Face", "Cutie", "Sugar", "Sweetie", "Squishy","Katana","Sakura", "Snuffles", "Sniffles", "John", "Rose", "Dave", "Jade","Brock", "Dirk", "Roxy", "Jane", "Jake", "Sneezy", "Bubbly", "Bubbles", "Licky", "Fido", "Spot", "Grub", "Elizabeth", "Malory", "Elenora", "Vic", "Jason", "Christmas", "Hershey", "Mario","Judy"]);
         List<String> lastNames = <String>["Lickface", "McProblems", "Pooper", "von Wigglesmith", "von Horn", "Grub", "Dumbface", "Buttlass", "Pooplord", "Cage", "Sebastion", "Taylor", "Dutton", "von Wigglebottom","Kazoo", "von Salamancer", "Savage", "Rock", "Spangler", "Fluffybutton", "Wigglesona", "S Preston", "Logan", "Juice", "Clowder", "Squeezykins", "Boi", "Oldington the Third", "Malone", "Ribs", "Noir", "Sandwich"];
-        lastNames.addAll(<String>["Lobster", "Butter", "Pie", "Poofykins", "Snugglepuff", "Diabetes", "Face", "Puffers", "Dorkbutt", "Butt","Katanta","Sakura", "Legs", "Poppenfresh", "Stubblies", "Licker","Kilobyte","Samson","Terabyte","Gigabyte","Megabyte", "Puker", "Grub", "Edington", "Rockerfeller", "Archer", "Addington", "Ainsworth", "Gladestone", "Valentine", "Heart", "Love", "Sniffles"]);
+        lastNames.addAll(<String>["Sauce","Juice","Lobster", "Butter", "Pie", "Poofykins", "Snugglepuff", "Diabetes", "Face", "Puffers", "Dorkbutt", "Butt","Katanta","Sakura", "Legs", "Poppenfresh", "Stubblies", "Licker","Kilobyte","Samson","Terabyte","Gigabyte","Megabyte", "Puker", "Grub", "Edington", "Rockerfeller", "Archer", "Addington", "Ainsworth", "Gladestone", "Valentine", "Heart", "Love", "Sniffles"]);
         //these last names from duckking
         lastNames.addAll(<String>["Ross", "Churchill", "Washington", "Adams", "Jefferson", "Madison", "Monroe", "Jackson", "Van Buren", "Harrison", "Knox", "Polk", "Taylor", "Fillmore", "T Robot", "Servo", "Wonder", "Pierce", "Buchanan", "Grant", "Hayes", "Garfield", "Arthur", "Cleveland", "Ketchum", "Williams", "Quill", "Weave", "Myers", "Voorhees", "Kramer", "Seinfeld", "Dent", "Nigma", "Cobblepot", "Strange", "Universe", "Darko"]);
         lastNames.addAll(<String>["McKinley", "Roosevelt", "Taft", "Harding", "Wilson", "Coolidge", "Hoover", "Truman", "Eisenhower", "Kennedy", "Johnson", "Wilson", "Carter", "Arbuckle", "Rodgers", "T", "G", "Henson", "Newton", "Tesla", "Edison", "Valentine", "Claus", "Hershey", "Freeman", "Nietzsche"]);
