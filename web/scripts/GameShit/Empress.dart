@@ -273,7 +273,7 @@ class Empress {
         }
 
         if(troll.isRealistic) defaultAmount += -100; //realistically, you can't let there be other heiresses.
-        return defaultAmount;
+        return Math.max(-1,defaultAmount);
     }
     int get priceMutant {
         int defaultAmount = 0;

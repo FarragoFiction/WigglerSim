@@ -179,6 +179,7 @@ abstract class Pet {
             if(s.contains(caste)) count ++;
             if(s != null && s.isNotEmpty) length ++; //can have nulls in it.
         }
+        if(length == 0) return 0.0;
         return count/length;
     }
 
