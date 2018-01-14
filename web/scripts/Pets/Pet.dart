@@ -149,6 +149,14 @@ abstract class Pet {
     Set<String> namesRemembered = new Set<String>();
     Set<String> castesRemembered = new Set<String>();
 
+    String get hatchmatesString {
+        String ret = "";
+        for(String s in castesRemembered) {
+            if(s != null && s.isNotEmpty) ret += " $s,";
+        }
+        return ret;
+    }
+
     Pet(this.doll, {this.health: 100, this.boredom: 0}) {
         //never again will i accidentally leave shit in debug mode
         if(window.location.hostname.contains("localhost")) timeUnit = 3* 1000;
@@ -637,6 +645,10 @@ abstract class Pet {
             y = y + fontSize+buffer;
             Renderer.wrap_text(textCanvas.context2D,s.toString(),x,y,fontSize+buffer,275,"left");
         }
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Hatchmates: ${hatchmatesString}", x, y, fontSize + buffer, 275, "left");
+
 
 
         return textCanvas;

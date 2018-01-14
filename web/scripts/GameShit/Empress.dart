@@ -39,6 +39,8 @@ class Empress {
         _instance = this;
     }
 
+
+
     //in seconds
     int get timeBetweenFunding {
         int defaultAmount = 6 * 60 * 60; //6 hours;
@@ -255,8 +257,10 @@ class Empress {
         if(troll == null) return defaultAmount;
 
         if(troll.isLoyal) {
-            defaultAmount += (24 * troll.loyal.value/Stat.MEDIUM).round();
+            defaultAmount += (defaultAmount/6 * troll.loyal.value/Stat.MEDIUM).round();
         }
+
+        if(troll.isRealistic) defaultAmount += -100; //realistically, you can't let there be other heiresses.
         return defaultAmount;
     }
     int get priceMutant {
@@ -350,9 +354,6 @@ class Empress {
         }
 
         y = y + fontSize + buffer;
-        Renderer.wrap_text(textCanvas.context2D, "Childhood Friends: ${troll.castesRemembered}", x, y, fontSize + buffer, 275, "left");
-
-        y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "", x, y, fontSize + buffer, 275, "left");
 
 
@@ -414,6 +415,11 @@ class Empress {
 
         y = y + fontSize + buffer;
         Renderer.wrap_text(textCanvas.context2D, "Mutant Multiplier: ${priceMutant}", x, y, fontSize + buffer, 275, "left");
+
+        y = y + fontSize + buffer;
+        Renderer.wrap_text(textCanvas.context2D, "Hatchmates: ${troll.hatchmatesString}", x, y, fontSize + buffer, 275, "left");
+
+
 
         return textCanvas;
     }
