@@ -8,7 +8,7 @@ import '../GameShit/PlayPenLib.dart';
 import "navbar.dart";
 
 GameObject game;
-int frameRate = 100;
+int frameRate = 100; //300 looks so bad
 
 bool stop = false;
 

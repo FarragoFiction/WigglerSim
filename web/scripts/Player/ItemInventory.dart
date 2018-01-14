@@ -235,6 +235,8 @@ class ItemInventory {
     static List<AIItem> mutantItems;
 
     List<AIItem> _myItems = new List<AIItem>();
+    int get numItems =>_myItems.length;
+
 
     ItemInventory();
 
