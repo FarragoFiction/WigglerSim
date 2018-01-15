@@ -41,7 +41,7 @@ class PlayPen {
         Random rand = new Random();
         rand.nextInt(); //init
         for(Pet p in potentialGrubs) {
-            if(p is Grub && pets.length < 6) {
+            if(p is Grub && pets.length < 16) { //don't let infinite
                 p.lastPlayed = new DateTime.now();
                 print("$p last played with ${p.daysSincePlayed}");
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
