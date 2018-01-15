@@ -21,7 +21,8 @@ class GameObject {
             DivElement linkContainer = new DivElement();
             linkContainer.style.padding = "10px";
             AnchorElement saveLink = new AnchorElement();
-            String saveData = window.localStorage[Player.DOLLSAVEID];
+            String saveData = "";
+            if(window.localStorage.containsKey(Player.DOLLSAVEID)) saveData =  window.localStorage[Player.DOLLSAVEID];
             saveLink.href = new UriData.fromString(saveData, mimeType: "text/plain").toString();
             saveLink.target = "_blank";
             saveLink.download = "recoverFileWigglerSim.txt";
@@ -47,6 +48,7 @@ class GameObject {
                     window.location.href= "index.html";
                 });
             });
+
             window.alert("Shit. There's been an error.");
         });
 
