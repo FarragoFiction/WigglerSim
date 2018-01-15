@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import '../Player/Player.dart';
 import 'dart:async';
@@ -191,7 +192,7 @@ class GameObject {
         DivElement linkContainer = new DivElement();
         linkContainer.style.padding = "10px";
         AnchorElement saveLink = new AnchorElement();
-        saveLink.href = new UriData.fromString(saveData, mimeType: "text/plain").toString();
+        saveLink.href = new UriData.fromString(saveData, mimeType: "text/plain", encoding: new Utf8Codec()).toString();
         saveLink.target = "_blank";
         saveLink.download = "wigglerSimData.txt";
         saveLink.setInnerHtml("Download Save Backup?");
