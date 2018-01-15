@@ -22,7 +22,7 @@ import 'dart:math' as Math;
  */
 class Empress {
     static Empress _instance;
-    int textHeight = 975;
+    int textHeight = 1000;
     int textWidth = 420;
 
     //if there is no empress we use the default one.

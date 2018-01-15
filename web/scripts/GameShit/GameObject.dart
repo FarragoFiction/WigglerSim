@@ -17,9 +17,19 @@ class GameObject {
 
     GameObject(bool redirect) {
         window.onError.listen((e) {
+
+            DivElement linkContainer = new DivElement();
+            linkContainer.style.padding = "10px";
+            AnchorElement saveLink = new AnchorElement();
+            String saveData = window.localStorage[Player.DOLLSAVEID];
+            saveLink.href = new UriData.fromString(saveData, mimeType: "text/plain").toString();
+            saveLink.target = "_blank";
+            saveLink.download = "recoverFileWigglerSim.txt";
+            saveLink.setInnerHtml("Download Recovery File to Send to JR? (jadedresearcher on tumblr, gmail, and discord)");
+            linkContainer.append(saveLink);
+            querySelector("#output").append(linkContainer);
             window.alert("Shit. There's been an error.");
         });
-
 
         infoElement = new DivElement();
         instance = this;
