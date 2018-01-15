@@ -28,6 +28,25 @@ class GameObject {
             saveLink.setInnerHtml("Download Recovery File to Send to JR? (jadedresearcher on tumblr, gmail, and discord)");
             linkContainer.append(saveLink);
             querySelector("#output").append(linkContainer);
+
+            InputElement fileElement = new InputElement();
+            fileElement.type = "file";
+            fileElement.setInnerHtml("Restore from Save Backup?");
+            querySelector("#output").appendHtml("Upload Save Backup after JR fixes it here:");
+            querySelector("#output").append(fileElement);
+
+
+            fileElement.onChange.listen((e) {
+                List<File> loadFiles = fileElement.files;
+                File file = loadFiles.first;
+                FileReader reader = new FileReader();
+                reader.readAsText(file);
+                reader.onLoadEnd.listen((e) {
+                    String loadData = reader.result;
+                    print("load data is $loadData");
+                    parseLoadData(loadData);
+                });
+            });
             window.alert("Shit. There's been an error.");
         });
 
