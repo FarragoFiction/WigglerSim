@@ -44,9 +44,7 @@ class GameObject {
                 reader.onLoadEnd.listen((e) {
                     String loadData = reader.result;
                     window.localStorage[Player.DOLLSAVEID] = loadData;
-
-                    print("load data is $loadData");
-                    parseLoadData(loadData);
+                    window.location.href= "index.html";
                 });
             });
             window.alert("Shit. There's been an error.");
