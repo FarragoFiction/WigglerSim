@@ -43,6 +43,8 @@ class GameObject {
                 reader.readAsText(file);
                 reader.onLoadEnd.listen((e) {
                     String loadData = reader.result;
+                    window.localStorage[Player.DOLLSAVEID] = loadData;
+
                     print("load data is $loadData");
                     parseLoadData(loadData);
                 });
