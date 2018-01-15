@@ -159,9 +159,7 @@ class GameObject {
     }
 
     void drawSaveLink(Element container) {
-        String saveData =  player.toJson().toString();
         //print("save data is: $saveData");
-
         DivElement fileContainer = new DivElement();
         fileContainer.text = "Restore from Save Backup?";
         fileContainer.style.paddingTop = "10px";
@@ -183,7 +181,13 @@ class GameObject {
                 parseLoadData(loadData);
             });
         });
+        writeSaveBackup(container);
 
+
+    }
+
+    void writeSaveBackup(Element container) {
+        String saveData =  player.toJson().toString();
         DivElement linkContainer = new DivElement();
         linkContainer.style.padding = "10px";
         AnchorElement saveLink = new AnchorElement();

@@ -22,6 +22,7 @@ class MoneyHandler {
         makeMoneyFactsElement();
         makeAllowenceButton();
         makeCountdownElement();
+        GameObject.instance.writeSaveBackup(containerElement);
         //fire off the syncing, which will happen once every syncFrequency
         sync();
     }
