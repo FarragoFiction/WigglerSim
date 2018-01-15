@@ -32,7 +32,7 @@ class GameObject {
 
             InputElement fileElement = new InputElement();
             fileElement.type = "file";
-            fileElement.setInnerHtml("Restore from Save Backup?");
+            fileElement.setInnerHtml("Restore from JR's File?");
             querySelector("#output").appendHtml("Upload Save Backup after JR fixes it here:");
             querySelector("#output").append(fileElement);
 
