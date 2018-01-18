@@ -116,23 +116,31 @@ class AIPet extends AIObject {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
+        grub.canvas = null; //means it will make a new one, so old reference is free
+        int imgNum1 = 5;
+        int imgNum2 = 6;
+        if(!grub.isEnergetic) { //lazy grub
+            imgNum1 = 7;
+            imgNum2 = 8;
+        }
         if(rand.nextBool()) {
-            g.body.imgNumber = 5;
+            g.body.imgNumber = imgNum1;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
-            g.body.imgNumber = 6;
+            g.body.imgNumber = imgNum2;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }else { //so they don't all look the same
-            g.body.imgNumber = 6;
+            g.body.imgNumber = imgNum2;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
-            g.body.imgNumber = 5;
+            g.body.imgNumber = imgNum1;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }
+        grub.canvas = null; //means it will make a new one, so old reference is free
 
     }
 
@@ -150,6 +158,7 @@ class AIPet extends AIObject {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
+        grub.canvas = null; //means it will make a new one, so old reference is free
         if(rand.nextBool()) {
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.body.imgNumber = 3;
@@ -169,6 +178,7 @@ class AIPet extends AIObject {
             await grub.drawNoResize();
             walkAnimation.addAnimationFrame(grub.canvas);
         }
+        grub.canvas = null; //means it will make a new one, so old reference is free
     }
 
     //can set to null, too.
