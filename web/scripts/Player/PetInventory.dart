@@ -170,6 +170,9 @@ class PetInventory {
                     print("3,2,1, POOF! Hatching an egg!");
                     Pet tmp = new Grub(p.doll);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
+                    HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
+                    t.mutantEyes();
+                    GameObject.instance.save();
                 }else if(p is Grub) {
                     print("3,2,1, POOF! Spinning a cocoon!");
                     Pet tmp = new Cocoon(p.doll);
@@ -179,7 +182,7 @@ class PetInventory {
                     Pet tmp = new Troll(p.doll);
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
-                    window.location.href= "goodbye.html";
+                    //window.location.href= "goodbye.html";
                 }
             });
 
@@ -244,6 +247,13 @@ class PetInventory {
         p = tmp;
         drawPet(subContainer,tmp, canvas);
         hatchButton.style.display = "none";
+        if(p is Troll) {
+            HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
+            t.mutantWings();
+        }else if(p is Grub) {
+            HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
+            t.mutantEyes();
+        }
         GameObject.instance.save();
     }
 
