@@ -182,7 +182,7 @@ class PetInventory {
                     Pet tmp = new Troll(p.doll);
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
-                    //window.location.href= "goodbye.html";
+                    window.location.href= "goodbye.html";
                 }
             });
 
