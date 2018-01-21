@@ -497,15 +497,22 @@ class AIPet extends AIObject {
         int buffer = 300;
         //then, make an AI object on the opposite side
         if(imaginaryLeft == null) {
-            imaginaryLeft = new AIItem(0, <ItemAppearance>[new ItemAppearance("Imaginary Friend", "Smupet_Blu.png")]);
+            imaginaryLeft = new AIItem(0, <ItemAppearance>[new ItemAppearance("Imaginary Friend", "owo_bear_ghost.png")]);
             imaginaryLeft.x = -100; //right now grub wants to stop on right side of objects
-            imaginaryRight = new AIItem(0, <ItemAppearance>[new ItemAppearance("Imaginary Friend", "Smupet_Blu.png")]);
+            imaginaryRight = new AIItem(0, <ItemAppearance>[new ItemAppearance("Imaginary Friend", "owo_bear_ghost.png")]);
             imaginaryRight.x = assumedCanvasWidth-buffer;
+            imaginaryRight.imaginary = true;
+            imaginaryLeft.imaginary = true;
 
         }
+        int jiggle = 100;
+        Random rand = new Random();
         if(left) {
+            imaginaryRight.x +=  - rand.nextInt(jiggle);
             return imaginaryRight; //go right
         }else {
+            imaginaryLeft.x +=  rand.nextInt(jiggle);
+
             return imaginaryLeft;
         }
     }
@@ -544,6 +551,9 @@ class AIPet extends AIObject {
             setEmotion(Emotion.SURPRISENOODLE);
             //print("TARGET TEST: ${grub.name} is bored with current emotion ${currentEmotion} at value ${boredomOdds} with curious of ${curious.value} and external of ${external.value}, wants to explore.");
             target = makeImaginaryObject();
+            if(grub.isInternal || grub.isIdealistic) { //hope and heart can make imaginary friends manifest
+                GameObject.instance.playPen.imaginaryItems.add(target); //renders, but doesn't change stats
+            }
         }
 
     }
@@ -625,6 +635,7 @@ class AIPet extends AIObject {
     void giveItem(AIItem item) {
         judgeObject(item);
         //only get stats the first time it's placed in the world.
+        if(item.imaginary) GameObject.instance.playPen.imaginaryItems.remove(item);
     }
 
     void giveObjectStats(AIItem item) {

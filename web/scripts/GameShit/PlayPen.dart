@@ -24,6 +24,8 @@ so the playpen doesn't have a list of wigglers, but a list of AnimatedWigglers??
 class PlayPen {
     List<AIPet> pets = new List<AIPet>();
     List<AIItem> items = new List<AIItem>();
+    //can't interact with for reals, disappears when you get there
+    List<AIItem> imaginaryItems = new List<AIItem>();
 
     bool readyToAnimate = false;
 
@@ -98,11 +100,17 @@ class PlayPen {
         Renderer.clearCanvas(canvas);
        // print("drawing playpen");
 
+        for(AIItem item in imaginaryItems) {
+            await item.draw(canvas); //async
+        }
+
         //in testing, pressing button too much makes it crash from concurrent mod
         List<AIItem> copyItems = new List.from(items);
         for(AIItem item in copyItems) {
             await item.draw(canvas); //async
         }
+
+
 
         for(AIPet pet in pets) {
            await pet.draw(canvas); //async

@@ -40,7 +40,8 @@ class AIItem extends AIObject {
 
     String folder = "images/Items/"; //theoretically can be changed
     CanvasElement canvas;
-
+    //for bored grubs
+    bool imaginary = false;
 
     //so i know which version of the item this is.
     ImageElement imageElement;
