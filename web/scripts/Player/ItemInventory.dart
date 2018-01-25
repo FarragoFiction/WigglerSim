@@ -194,7 +194,7 @@ class ItemInventory {
         }
 
         if(colors.contains(HomestuckTrollDoll.OLIVE)) {
-            ret.add(new AIItem(10,<ItemAppearance>[new ItemAppearance("Olive Essence","olive.png")], external_value: externalABS));
+            ret.add(new AIItem(10,<ItemAppearance>[new ItemAppearance("Olive Essence","olive.png")], external_value: internalABS));
         }
 
         if(colors.contains(HomestuckTrollDoll.JADE)) {
@@ -202,7 +202,7 @@ class ItemInventory {
         }
 
         if(colors.contains(HomestuckTrollDoll.TEAL)) {
-            ret.add(new AIItem(12,<ItemAppearance>[new ItemAppearance("Teal Essence","teal.png")], external_value: internalABS));
+            ret.add(new AIItem(12,<ItemAppearance>[new ItemAppearance("Teal Essence","teal.png")], external_value: externalABS));
         }
 
         if(colors.contains(HomestuckTrollDoll.CERULEAN)) {
