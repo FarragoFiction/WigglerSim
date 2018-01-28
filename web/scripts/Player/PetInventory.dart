@@ -215,8 +215,14 @@ class PetInventory {
         subContainer2.style.textAlign = "right";
         SpanElement explanation = new SpanElement();
         subContainer2.text = "Number Alumni per Page: ";
-        subContainer.append(explanation);
-        
+        subContainer2.append(explanation);
+
+        DivElement subContainer3 = new DivElement();
+        subContainer3.style.textAlign = "right";
+        SpanElement explanation3 = new SpanElement();
+        subContainer3.text = "Page: ";
+        subContainer3.append(explanation3);
+
         for(int i = 0; i< 5; i++) {
             AnchorElement tmp = new AnchorElement();
             tmp.href = "#";
@@ -237,8 +243,30 @@ class PetInventory {
             });
         }
 
+
+        for(int i = 0; i< alumni.length/alumniPerPage; i++) {
+            AnchorElement tmp = new AnchorElement();
+            tmp.href = "#";
+            tmp.style.paddingLeft = "10px";
+            int baseNumPerPage = 6;
+            int myNumber = i;
+            if(myNumber == pageNumber) tmp.style.color = "white";
+
+            tmp.text = "${myNumber}";
+            subContainer3.append(tmp);
+
+            tmp.onClick.listen((e) {
+                for(Element e in container.children) {
+                    e.remove();
+                }
+                pageNumber = myNumber;
+                drawAlumni(container);
+            });
+        }
+
         container.append(subContainer);
         container.append(subContainer2);
+        container.append(subContainer3);
     }
 
 
@@ -247,7 +275,7 @@ class PetInventory {
 
 
         List<Troll> reversedAlumni = new List<Troll>.from(alumni.reversed);
-        for(int i = (pageNumber*alumniPerPage); i<((pageNumber*alumniPerPage) + alumniPerPage); i++) {
+        for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, alumni.length)); i++) {
             Troll p = reversedAlumni[i];
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
