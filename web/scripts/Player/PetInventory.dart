@@ -16,6 +16,9 @@ class PetInventory {
     static String ALUMNI = "alumni";
     static String EMPRESS = "empress";
 
+    int pageNumber = 0;
+    int alumniPerPage = 6;
+
 
     List<Pet> pets = new List<Pet>();
     //for now just for fun but later could be used for interesting things
@@ -200,25 +203,52 @@ class PetInventory {
         }
     }
 
+    void drawPaginationControls(Element container) {
+        DivElement subContainer = new DivElement();
 
-    Future<Null> drawAlumni(Element container) async{
+        SpanElement totalElement = new SpanElement();
+        totalElement.text = "Number Alumni: ${alumni.length}";
+        totalElement.style.textAlign = "left";
+        subContainer.append(totalElement);
 
-        if(rulingEmpress != null) {
-            SpanElement subContainer = new SpanElement();
-            subContainer.style.width = "${rulingEmpress.troll.width}px";
-            subContainer.classes.add("petInventorySlot");
+        DivElement subContainer2 = new DivElement();
+        subContainer2.style.textAlign = "right";
+        SpanElement explanation = new SpanElement();
+        subContainer2.text = "Number Alumni per Page: ";
+        subContainer.append(explanation);
+        
+        for(int i = 0; i< 5; i++) {
+            AnchorElement tmp = new AnchorElement();
+            tmp.href = "#";
+            tmp.style.paddingLeft = "10px";
+            int baseNumPerPage = 6;
+            int myNumber = baseNumPerPage * Math.pow(2,i);
+            if(myNumber == alumniPerPage) tmp.style.color = "white";
 
-            subContainer.append(rulingEmpress.troll.makeDollLoader());
-            Element title = new DivElement();
-            title.text = "Current Empress: ";
-            subContainer.append(title);
+            tmp.text = "${myNumber}";
+            subContainer2.append(tmp);
 
-            container.append(subContainer);
-
-            await drawPet(subContainer, rulingEmpress.troll);
+            tmp.onClick.listen((e) {
+                for(Element e in container.children) {
+                    e.remove();
+                }
+                alumniPerPage = myNumber;
+                drawAlumni(container);
+            });
         }
 
-        for(Pet p in alumni.reversed) {
+        container.append(subContainer);
+        container.append(subContainer2);
+    }
+
+
+    Future<Null> drawAlumni(Element container) async{
+        drawPaginationControls(container);
+
+
+        List<Troll> reversedAlumni = new List<Troll>.from(alumni.reversed);
+        for(int i = (pageNumber*alumniPerPage); i<((pageNumber*alumniPerPage) + alumniPerPage); i++) {
+            Troll p = reversedAlumni[i];
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");

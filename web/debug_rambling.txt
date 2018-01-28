@@ -977,5 +977,31 @@ Just make stop = false and see what htat breaks.
 if it breaks NOTHING and just looks bad,
 have it display "Loading" until it loads.
 
+~~~~~~~
+
+Alright, today I'm finally going to tackle pagination. Should be simple enough.
+
+The alumni screen is way too long.
+
+Want a section for "Total Alumni: 347" or whatever.
+Want to be able to pick 6, 12, 24, 48, or 96 alumni per page.
+
+Then, (stretch goal, maybe do after next page) want to be able search for text in the epilogue page
+and display up to that many results at a time.
+
+ALSO want to have a page listing the extended zodiac table, with it greyed out if you don't have it.
+If you click, shows all the alumni matching that sign you have.
+
+Same for diff page with aspect/moon.
+
+I remember I did Pagination for MonGirlTile so.... what was the basic algorithm? probably involves modulo.
+
+		for(int i = (page*cards_on_page); i<((page*cards_on_page) + cards_on_page); i++){
+
+oh that's p simple. Okay.
+
+For now just put this logic in a controller?
+
+
 
 
