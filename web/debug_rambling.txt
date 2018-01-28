@@ -1002,6 +1002,70 @@ oh that's p simple. Okay.
 
 For now just put this logic in a controller?
 
+~~~~~
+
+Alright, so what do I want for the sign page.
+
+First step is just to display ALL the signs, in the right order.
+
+Second step is to.... Hrrrm. Grey out the ones you don't have?
+
+Third step is to make clicking it take you to the alumni page, but with a modifier to only display
+trolls with that sign.
+
+Then i'm done?
+
+So. How do i get to that first step?
+
+I have all the signs, just uncolored. I....REALLY do not want to make 244 canvases on a screen, even if they are tiny?
+Wait, what am I talking about, that's just what I do for loras.
+Alright, this is easy.
+
+So how big should they be? How big are they on the extended zodiac page of what pumpkins?
+
+Looks like about 50 by 50.
+
+What are signs like right now in my system, like....the objects? Do they know how to render themselves?
+
+        new Sign(Sign.BURGUNDY, Sign.TIME, Sign.DERSE);
+and then they auto get assigned a sign number via:
+
+        imgNum = Sign.signNumber;
+
+So, I assume it will be organized different from the what pumpkin page. it will be all burgundy then all bronze.
+that will probalby be fine for now.
+
+What next?
+
+Well, i got the number, so I can just go into /Homestuck/CanonSymbols and draw it.
+
+How will I know what color to make it? probably something in HomestuckTrollDoll...
 
 
+Hrrrm.... maybe not. Doesn't seem like it has any functions for that.
+
+Alright then, I have a todo:
+
+1: Render the uncolored 244 troll signs in order, each row is a color.
+2: Make the signs the correct color (modify the doll code to have a funciton for this)
+3: See how long it takes to render.
+4: see if i can make each column a color instead
+5: color bgs black or grey based on whether or not i have at least one alumni with that sign
+6: click on canvas to go to alumni view of all trolls of that sign.
+7: click on row/column to go to alumni view of all trolls of that caste.
+8: epilogue search in alumni view
+
+~~~
+
+oh fuck
+i forgot the canon symbols are stored.
+with.
+it positioned for a doll.
+do i really trust the auto crop algorithm to both work, and be 244 fast?
+
+no.
+i have the cards somewhere, right? could work?
+
+
+yeah, just fucking do that, won't need to recolor anyways. just resize
 

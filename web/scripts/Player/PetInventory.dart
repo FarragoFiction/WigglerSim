@@ -291,6 +291,16 @@ class PetInventory {
         }
     }
 
+    Future<Null> drawSigns(Element container) async{
+        //first, get all signs
+        if(Sign.allSigns.isEmpty) Sign.initAllSigns();
+        DivElement subContainer = new DivElement();
+        for(Sign s in Sign.allSigns) {
+            await s.draw(subContainer);
+        }
+        container.append(subContainer);
+    }
+
     //gets first troll i find.  returns null if none.
     Troll getGraduatingTroll() {
         for(Pet p in pets) {

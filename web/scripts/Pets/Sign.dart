@@ -1,4 +1,7 @@
 import 'package:DollLibCorrect/DollRenderer.dart';
+import 'dart:html';
+import 'dart:async';
+import 'dart:math' as Math;
 
 class Sign {
 
@@ -29,6 +32,10 @@ class Sign {
     static String PURPLE = HomestuckTrollDoll.PURPLE;
     static String VIOLET = HomestuckTrollDoll.VIOLET;
     static String FUCHSIA = HomestuckTrollDoll.FUCHSIA;
+
+    String filePath = "images/Homestuck/ZodiacCards/";
+    int width = 80;
+    int height = 80;
 
     //convinience
     static int signNumber = 1;
@@ -351,6 +358,38 @@ class Sign {
         new Sign(Sign.FUCHSIA, Sign.BREATH, Sign.PROSPIT);
         new Sign(Sign.FUCHSIA, Sign.TIME, Sign.PROSPIT);
 
+    }
+
+    String addZeroes(int num, [int numDigits = 2])
+
+    {
+        String ret = "$num";
+        ret = ret.padLeft(numDigits,"0");
+        return ret;
+    }
+
+    @override
+    Future<Null> draw(Element container) async {
+        //padding: 0px;
+        //vertical-align: bottom;
+
+        int index = imgNum -1;
+        int firstNumInt = (index / 24).floor()+1;
+        int secondNumInt = (index % 24)+1;
+        String firstNum = addZeroes(firstNumInt);
+        String secondNum= addZeroes(secondNumInt);
+        String fileName = "sign_${firstNum}_${secondNum}.png";
+        print("$index: $fileName");
+        ImageElement imageElement = await Loader.getResource(("$filePath${fileName}"));
+        imageElement.style.padding = "0px";
+        imageElement.style.verticalAlign = "bottom";
+        imageElement.height = width;
+        imageElement.width = height;
+        Random rand = new Random();
+        rand.nextInt();
+
+        if(rand.nextBool()) imageElement.style.opacity = "0.3";
+        container.append(imageElement);
     }
 
 }

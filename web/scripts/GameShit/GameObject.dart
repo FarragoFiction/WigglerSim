@@ -132,6 +132,10 @@ class GameObject {
         player.petInventory.drawAlumni(container);
     }
 
+    void drawSigns(Element container) {
+        player.petInventory.drawSigns(container);
+    }
+
     void drawShop(Element container) {
         player.itemInventory.drawShop(container);
     }
