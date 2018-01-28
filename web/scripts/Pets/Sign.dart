@@ -393,14 +393,18 @@ class Sign {
         if(alumniWithSign.length == 0) {
             imageElement.style.opacity = "0.3";
         }else {
-            ImageElement imageElementBig = await Loader.getResource(("$filePath${fileName}"));
+            ImageElement imageElementBig = new ImageElement();
+            imageElementBig.src = imageElement.src;
 
             imageElement.onClick.listen((e) {
                 for (Element e in alumniContainer.children) {
                     e.remove();
                 }
+
                 alumniContainer.append(imageElementBig);
+
                 GameObject.instance.player.petInventory.drawAlumni(alumniContainer, alumniWithSign);
+               window.scrollTo(500,3500);
             });
         }
 

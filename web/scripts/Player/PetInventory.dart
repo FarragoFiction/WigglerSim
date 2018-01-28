@@ -287,6 +287,7 @@ class PetInventory {
     Future<Null> drawAlumni(Element container, [List<Troll> trolls]) async{
         drawPaginationControls(container);
         if(trolls == null) trolls = alumni;
+        print ("Alumni is of type ${trolls.runtimeType}");
 
         List<Troll> reversedAlumni = new List<Troll>.from(trolls.reversed);
         for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, trolls.length)); i++) {
