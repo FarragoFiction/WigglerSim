@@ -3,6 +3,7 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math' as Math;
 import "../GameShit/GameObject.dart";
+import "Troll.Dart";
 
 class Sign {
 
@@ -370,7 +371,7 @@ class Sign {
     }
 
     @override
-    Future<Null> draw(Element container) async {
+    Future<Null> draw(Element container, Element alumniContainer) async {
         //padding: 0px;
         //vertical-align: bottom;
 
@@ -388,10 +389,21 @@ class Sign {
         imageElement.width = height;
         Random rand = new Random();
         rand.nextInt();
-        int numWithSign = GameObject.instance.player.petInventory.alumniWithSign(imgNum).length;
-        if(numWithSign == 0) {
+        List<Object> alumniWithSign = GameObject.instance.player.petInventory.alumniWithSign(imgNum);
+        if(alumniWithSign.length == 0) {
             imageElement.style.opacity = "0.3";
+        }else {
+            ImageElement imageElementBig = await Loader.getResource(("$filePath${fileName}"));
+
+            imageElement.onClick.listen((e) {
+                for (Element e in alumniContainer.children) {
+                    e.remove();
+                }
+                alumniContainer.append(imageElementBig);
+                GameObject.instance.player.petInventory.drawAlumni(alumniContainer, alumniWithSign);
+            });
         }
+
         container.append(imageElement);
     }
 

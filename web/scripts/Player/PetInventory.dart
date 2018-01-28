@@ -283,12 +283,13 @@ class PetInventory {
     }
 
 
-    Future<Null> drawAlumni(Element container) async{
+    //pass in subset of alumni if that's what you want
+    Future<Null> drawAlumni(Element container, [List<Troll> trolls]) async{
         drawPaginationControls(container);
+        if(trolls == null) trolls = alumni;
 
-
-        List<Troll> reversedAlumni = new List<Troll>.from(alumni.reversed);
-        for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, alumni.length)); i++) {
+        List<Troll> reversedAlumni = new List<Troll>.from(trolls.reversed);
+        for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, trolls.length)); i++) {
             Troll p = reversedAlumni[i];
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
@@ -305,13 +306,19 @@ class PetInventory {
     }
 
     Future<Null> drawSigns(Element container) async{
+        DivElement d = new DivElement();
+        d.text = "Click obtained Signs to view Alumni with that Sign.";
+        container.append(d);
         //first, get all signs
         if(Sign.allSigns.isEmpty) Sign.initAllSigns();
         DivElement subContainer = new DivElement();
+        DivElement subContainerAlumni = new DivElement();
         for(Sign s in Sign.allSigns) {
-            await s.draw(subContainer);
+            await s.draw(subContainer,subContainerAlumni);
         }
         container.append(subContainer);
+        container.append(subContainerAlumni);
+
     }
 
     //gets first troll i find.  returns null if none.
