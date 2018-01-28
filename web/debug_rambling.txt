@@ -1067,5 +1067,23 @@ no.
 i have the cards somewhere, right? could work?
 
 
+
+
 yeah, just fucking do that, won't need to recolor anyways. just resize
+
+~~
+Okay how far along am I?
+
+5: color bgs black or grey based on whether or not i have at least one alumni with that sign
+6: click on canvas to go to alumni view of all trolls of that sign.
+7: click on row/column to go to alumni view of all trolls of that caste.
+8: epilogue search in alumni view
+
+
+so next step is being able to say "of all the alumni, how many are sign X".
+and then i need to make alumni controller take in a param to filter by that (get?)
+
+go find that "where" syntax
+
+
 

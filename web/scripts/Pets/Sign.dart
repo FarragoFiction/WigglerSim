@@ -2,6 +2,7 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';
 import 'dart:math' as Math;
+import "../GameShit/GameObject.dart";
 
 class Sign {
 
@@ -387,8 +388,10 @@ class Sign {
         imageElement.width = height;
         Random rand = new Random();
         rand.nextInt();
-
-        if(rand.nextBool()) imageElement.style.opacity = "0.3";
+        int numWithSign = GameObject.instance.player.petInventory.alumniWithSign(imgNum).length;
+        if(numWithSign == 0) {
+            imageElement.style.opacity = "0.3";
+        }
         container.append(imageElement);
     }
 
