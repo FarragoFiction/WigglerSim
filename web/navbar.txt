@@ -18,7 +18,7 @@
          <a href="viewAlumni.html">Alumni</a>
          <a href="viewSigns.html">Signs</a>
     </li>
-
+    <li class = "menuButtonPureCSS"><a href="currentEmpress.html">Empress</a></li>
 
     <li class = "menuButtonPureCSS"><a href="status.html">News</a></li>
 
