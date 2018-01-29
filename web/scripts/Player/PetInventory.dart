@@ -216,11 +216,11 @@ class PetInventory {
         }
     }
 
-    void drawPaginationControls(Element container) {
+    void drawPaginationControls(Element container, List<Troll> trolls) {
         DivElement subContainer = new DivElement();
 
         SpanElement totalElement = new SpanElement();
-        totalElement.text = "Number Alumni: ${alumni.length}";
+        totalElement.text = "Number Alumni: ${trolls.length}";
         totalElement.style.textAlign = "left";
         subContainer.append(totalElement);
 
@@ -252,12 +252,12 @@ class PetInventory {
                     e.remove();
                 }
                 alumniPerPage = myNumber;
-                drawAlumni(container);
+                drawAlumni(container,trolls);
             });
         }
 
 
-        for(int i = 0; i< alumni.length/alumniPerPage; i++) {
+        for(int i = 0; i< trolls.length/alumniPerPage; i++) {
             AnchorElement tmp = new AnchorElement();
             tmp.href = "#";
             tmp.style.paddingLeft = "10px";
@@ -273,7 +273,7 @@ class PetInventory {
                     e.remove();
                 }
                 pageNumber = myNumber;
-                drawAlumni(container);
+                drawAlumni(container,trolls);
             });
         }
 
@@ -285,9 +285,10 @@ class PetInventory {
 
     //pass in subset of alumni if that's what you want
     Future<Null> drawAlumni(Element container, [List<Troll> trolls]) async{
-        drawPaginationControls(container);
         if(trolls == null) trolls = alumni;
         print ("Alumni is of type ${trolls.runtimeType}");
+        drawPaginationControls(container, trolls);
+
 
         List<Troll> reversedAlumni = new List<Troll>.from(trolls.reversed);
         for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, trolls.length)); i++) {
