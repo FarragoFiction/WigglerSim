@@ -3,7 +3,7 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math' as Math;
 import "../GameShit/GameObject.dart";
-import "Troll.Dart";
+import "Troll.dart";
 
 class Sign {
 
