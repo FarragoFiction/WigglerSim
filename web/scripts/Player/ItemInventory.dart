@@ -62,7 +62,7 @@ class ItemInventory {
     }
 
     static get internalABS {
-        int value = Pet.averagePetEnergeticABS(last12)+1;
+        int value = Pet.averagePetExternalABS(last12)+1;
         return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
@@ -92,7 +92,7 @@ class ItemInventory {
     }
 
     static get externalABS {
-        int value = Pet.averagePetEnergeticABS(last12)+1;
+        int value = Pet.averagePetExternalABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
@@ -130,7 +130,7 @@ class ItemInventory {
     }
 
     static get external {
-        int value =  Pet.averagePetEnergetic(last12);
+        int value =  Pet.averagePetExternal(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
