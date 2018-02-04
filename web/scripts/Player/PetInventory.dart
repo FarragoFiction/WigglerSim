@@ -7,6 +7,7 @@ import "../GameShit/Empress.dart";
 import 'dart:math' as Math;
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
+import "../Controllers/navbar.dart";
 
 
 
@@ -187,7 +188,8 @@ class PetInventory {
                     Pet tmp = new Grub(p.doll);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
                     HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
-                    t.mutantEyes();
+                    bool force = true; // getParameterByName("eyes",null) == "mutant")
+                    t.mutantEyes(force);
                     GameObject.instance.save();
                 }else if(p is Grub) {
                     print("3,2,1, POOF! Spinning a cocoon!");
@@ -339,10 +341,13 @@ class PetInventory {
         hatchButton.style.display = "none";
         if(p is Troll) {
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
-            t.mutantWings();
+            bool force = true; // getParameterByName("wings",null) == "mutant")
+
+            t.mutantWings(force);
         }else if(p is Grub) {
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
-            t.mutantEyes();
+            bool force = true; // getParameterByName("eyes",null) == "mutant")
+            t.mutantEyes(force);
         }
         GameObject.instance.save();
     }

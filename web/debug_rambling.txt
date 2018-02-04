@@ -1085,5 +1085,31 @@ and then i need to make alumni controller take in a param to filter by that (get
 
 go find that "where" syntax
 
+~~~~~~~~
+
+bug: wiggler eyes keep going to yell......
+huh.
+
+am i saving wigglers before i am asking about mutant eyes?
+
+i'm not, am i.
+
+god damn.
+
+that was a fast fix.
+
+hrrrm. no. i am.
+
+so.
+
+a saved grub might load with wrong eyes anyways?
+time to hack my save data to test this hypothethis
+
+seems to be confirmed.
+
+i recall that i change the eyes to "yellow" when they are old enough? that might be it
+
+
+
 
 
