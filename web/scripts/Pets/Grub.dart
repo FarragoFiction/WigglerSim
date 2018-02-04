@@ -3,6 +3,8 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import "JSONObject.dart";
 import 'dart:async';
 import 'dart:html';
+import "../Controllers/navbar.dart";
+
 
 
 
@@ -20,8 +22,8 @@ class Grub extends Pet{
   void setEyes() {
     //at half way mark, eyes turn yellow like a trolls.
     if(percentToChange > 0.5) {
-      bool force = true; // getParameterByName("eyes",null) == "mutant")
-      (doll as HomestuckGrubDoll).mutantEyes(force);
+      bool force = getParameterByName("eyes",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
+      (doll as HomestuckGrubDoll).mutantEyes(force, true);
     }else {
       HomestuckPalette p = doll.palette as HomestuckPalette;
       p.add(HomestuckPalette.EYE_WHITE_LEFT, p.aspect_light,true);

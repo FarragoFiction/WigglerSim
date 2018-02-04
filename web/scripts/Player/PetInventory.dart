@@ -188,7 +188,7 @@ class PetInventory {
                     Pet tmp = new Grub(p.doll);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
                     HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
-                    bool force = true; // getParameterByName("eyes",null) == "mutant")
+                    bool force = getParameterByName("eyes",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
                     t.mutantEyes(force);
                     GameObject.instance.save();
                 }else if(p is Grub) {
@@ -341,12 +341,11 @@ class PetInventory {
         hatchButton.style.display = "none";
         if(p is Troll) {
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
-            bool force = true; // getParameterByName("wings",null) == "mutant")
-
+            bool force = getParameterByName("wings",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
             t.mutantWings(force);
         }else if(p is Grub) {
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
-            bool force = true; // getParameterByName("eyes",null) == "mutant")
+            bool force = getParameterByName("eyes",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
             t.mutantEyes(force);
         }
         GameObject.instance.save();
