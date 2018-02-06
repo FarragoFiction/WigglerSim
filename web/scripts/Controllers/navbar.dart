@@ -3,6 +3,7 @@ import "package:DollLibCorrect/DollRenderer.dart";
 
 String simulatedParamsGlobalVar = "";
 
+
 //just loads the navbar.text into the appropriate div.
 void loadNavbar() {
     HttpRequest.getString(PathUtils.adjusted("navbar.txt")).then(onNavbarLoaded);

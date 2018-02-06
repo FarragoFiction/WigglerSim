@@ -68,7 +68,7 @@ class GameObject {
         new MoneyHandler(querySelector("#output"));
         querySelector("#output").append(infoElement);
 
-        if(redirect && player.petInventory.pets.isEmpty) {
+        if(redirect && player.petInventory.pets.isEmpty && player.petInventory.alumni.isEmpty) {
             window.location.href= "petInventory.html";
         }
     }
