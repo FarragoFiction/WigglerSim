@@ -20,6 +20,8 @@ transformers:
 dependencies:
   DollLibCorrect:
     git: git@github.com:jadedResearcher/DollLibCorrect.git
+  RenderingLib:
+          git: git@github.com:jadedResearcher/RenderingLib.git
 
 # Uncomment the following in sdk 1.24+ to make pub serve
 # use dartdevc (webdev.dartlang.org/tools/dartdevc).

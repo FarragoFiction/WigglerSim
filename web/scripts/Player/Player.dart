@@ -177,7 +177,7 @@ class Player {
         if(canvas == null) canvas = new CanvasElement(width: width, height: height);
         canvas.context2D.clearRect(0,0,width,height);
         CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
-        await Renderer.drawDoll(dollCanvas, doll);
+        await DollRenderer.drawDoll(dollCanvas, doll);
 
         dollCanvas = Renderer.cropToVisible(dollCanvas);
 

@@ -639,8 +639,8 @@ abstract class Pet {
         textCanvas.context2D.font = "${fontSize}px Strife";
         int y = 330;
         int x = 10;
-        Renderer.wrap_text(textCanvas.context2D,name,x,y,fontSize,400,"center");
-
+        Renderer.wrapTextAndResizeIfNeeded(textCanvas.context2D,name,"Strife",x,y,fontSize,400,fontSize);
+        textCanvas.context2D.font = "${fontSize}px Strife";
         y = y + fontSize*2;
         fontSize = 12;
 
@@ -677,7 +677,7 @@ abstract class Pet {
             canvas = new CanvasElement(width: width, height: height);
             canvas.context2D.clearRect(0, 0, width, height);
             CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
-            await Renderer.drawDoll(dollCanvas, doll);
+            await DollRenderer.drawDoll(dollCanvas, doll);
 
             dollCanvas = Renderer.cropToVisible(dollCanvas);
 
@@ -691,7 +691,7 @@ abstract class Pet {
         if(canvas == null) {
             canvas = new CanvasElement(width: doll.width, height: doll.height);
             canvas.context2D.clearRect(0, 0, width, height);
-            await Renderer.drawDoll(canvas, doll);
+            await DollRenderer.drawDoll(canvas, doll);
         }
         return canvas;
     }
