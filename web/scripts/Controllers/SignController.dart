@@ -8,6 +8,9 @@ GameObject game;
 void main() {
   loadNavbar();
   game = new GameObject(true);
+  querySelector("#npc").onClick.listen((e){
+    window.location.href= "${window.location.href}?debug=signs";
+  });
   start();
 }
 

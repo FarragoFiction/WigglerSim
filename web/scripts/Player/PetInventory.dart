@@ -202,8 +202,8 @@ class PetInventory {
                     Pet tmp = new Troll(p.doll);
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
-                    print("HOLY FUCK TURN THIS BACK ON");
-                   // window.location.href= "goodbye.html";
+                   // print("HOLY FUCK TURN THIS BACK ON");
+                    window.location.href= "goodbye.html";
                 }
             });
 
@@ -384,6 +384,13 @@ class PetInventory {
             if(price <= GameObject.instance.player.caegers) {
                 button.onClick.listen((e) {
                     //add wiggler to inventory. save. refresh.
+                    if(getParameterByName("debug",null) == "eggs") {
+                        //not even with a cheat can you go over max
+                        for(int i = 0; i < ( Empress.instance.maxGrubs-pets.length); i++) {
+                            GameObject.instance.player.caegers += -1* price; //not free.
+                            pets.add(new Egg(new HomestuckGrubDoll((p.doll as HomestuckGrubDoll).canonSymbol.imgNumber)));
+                        }
+                    }
                     pets.add(p);
                     GameObject.instance.player.caegers += -1* price;
                     GameObject.instance.save();
