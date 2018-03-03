@@ -1110,6 +1110,62 @@ seems to be confirmed.
 i recall that i change the eyes to "yellow" when they are old enough? that might be it
 
 
+~~~~~~~~~~
+
+alright i've found an obvious sign bug.
+
+bronze prospit heart is ending up hope instead.  and the other troll with that sign is REALISITC and not ideaslistic.
+
+it's confusing.
+
+
+~~~~~~~~~
+
+Okay. I'm not making any progress and I feel like I'm just spinning in circles.
+
+Five minutes, on the clock:
+
+Define the problem:
+
+Sometimes wigglers pupate and the signs they get don't match their stats. If I ask them to
+recalculate their signs, it always matches their stats the second time.
+
+When I'm watching, when I have the alumni not auto send us to the goodbye page, it seems to always fit.
+
+Signs are created manually (someone helped me do it and past JR didn't write down who, which is bullshit,
+pastJR fucked up). I added a debug statement when i click a sign and so far it's claimed
+traits always match it's visible traits (caste, lunar sway, aspect).
+
+Signs are assigned via caste, aspect, and a random coin toss.
+
+If I ask a troll what' it's highest stat is to calculate it's aspect, it seems to always be right.
+
+Investigate: does the sign somehow change on the goodbye page?
+
+shit.
+
+My stats are [Patient: Low (17), Calm: Medium (26), Idealistic: Medium (32), Curious: Low (4), Loyal: Medium (37), Internal: Medium (29)] and i think my highest is [Loyal: Medium (37)]
+(program):1 My caste is Bronze, my aspect is BLOOD and my lunary sway is PROSPIT.  I picked sign 35
+
+I could have sworn that was an impatient troll. ............
+
+oh shit, i look at the troll page and i see:
+
+impatient 43, calm 13, idealistic 14, curios 11, loyal 23, external 39.
+
+What is going on.........
+
+fuck.
+
+am i.... calculating my sign before I'm getting my stats from my wiggler self?
+
+oh fuck.
+
+yup.
+
+change pet into other pet makes a new Troll...and THEN changes it's stats to match the current troll
+fucking HELL.
+
 
 
 

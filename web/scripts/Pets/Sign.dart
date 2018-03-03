@@ -373,6 +373,11 @@ class Sign {
     }
 
     @override
+    String toString() {
+        return "Sign: Caste: $caste, Aspect: $aspect, Moon: $lunarSway, img number: $imgNum";
+    }
+
+    @override
     Future<Null> draw(Element container, Element alumniContainer) async {
         //padding: 0px;
         //vertical-align: bottom;
@@ -383,7 +388,7 @@ class Sign {
         String firstNum = addZeroes(firstNumInt);
         String secondNum= addZeroes(secondNumInt);
         String fileName = "sign_${firstNum}_${secondNum}.png";
-        print("$index: $fileName");
+        //print("$index: $fileName");
         ImageElement imageElement = await Loader.getResource(("$filePath${fileName}"));
         imageElement.style.padding = "0px";
         imageElement.style.verticalAlign = "bottom";
@@ -407,6 +412,8 @@ class Sign {
 
                 GameObject.instance.player.petInventory.drawAlumni(alumniContainer, alumniWithSign);
                window.scrollTo(500,3500);
+                print("$this clicked.");
+
             });
         }
 

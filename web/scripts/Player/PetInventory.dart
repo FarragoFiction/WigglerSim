@@ -80,6 +80,8 @@ class PetInventory {
 
         int index = pets.indexOf(original);
         pets[index] = replacement;
+        //only assign sign AFTER transferring stats. omfg.
+        if(replacement is Troll) (replacement as Troll).assignSign();
     }
 
     void loadFromJSON(String json) {
@@ -200,8 +202,8 @@ class PetInventory {
                     Pet tmp = new Troll(p.doll);
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
-                    //print("HOLY FUCK TURN THIS BACK ON");
-                    window.location.href= "goodbye.html";
+                    print("HOLY FUCK TURN THIS BACK ON");
+                   // window.location.href= "goodbye.html";
                 }
             });
 

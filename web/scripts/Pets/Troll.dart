@@ -26,7 +26,9 @@ class Troll extends Pet{
     Troll(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
         //turns grub into troll., later will calc sign
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
-         assignSign();
+        //does doing it here give me the wrong sign? stats are wrong...
+         //assignSign();
+        //testSign();
     }
 
     Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
@@ -40,10 +42,10 @@ class Troll extends Pet{
     //troll signgs are based on stats (which are low key the aspects)
     //and lunar sway (which is random for now)
     //and, obviously, caste.
-    void assignSign() {
+    void assignSign([bool force = false]) {
 
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
-        if(t.canonSymbol.imgNumber != 0) return; //don't fucking re decide this.
+        if(!force && t.canonSymbol.imgNumber != 0) return; //don't fucking re decide this.
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         String colorWord = t.bloodColorToWord(p.aspect_light);
         String aspect = highestStatToAspectWord();
@@ -52,9 +54,8 @@ class Troll extends Pet{
         String lunarSway = rand.pickFrom(<String>[Sign.PROSPIT, Sign.DERSE]);
         t.canonSymbol.imgNumber = Sign.getSignByCriteria(colorWord, aspect, lunarSway);
         print("Assigning a sign of ${t.canonSymbol.imgNumber} to troll with ${colorWord}, ${aspect} and ${lunarSway}.  ");
-
-
     }
+
 
     String highestStatToAspectWord() {
         //don't prefer either early OR late stats that are equal, allow it to be random if you fucking must
@@ -68,7 +69,7 @@ class Troll extends Pet{
             }
         }
         Random rand = new Random();
-        print("My stats are $stats and i think my highest is ${validChoices}");
+        print("I am $this and my stats are $stats and i think my highest is ${validChoices}");
         return rand.pickFrom(validChoices).flavor.aspect;
     }
 
@@ -353,9 +354,18 @@ class Troll extends Pet{
         return json;
     }
 
+    void testSign() {
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        print("$this has a highest stat of ${highestStatToAspectWord()}, but my sign is ${t.canonSymbol.imgNumber} right now. Recalculating...");
+        assignSign(true);
+        print("$this has a highest stat of ${highestStatToAspectWord()},and after reassigning, my symbol is:  ${t.canonSymbol.imgNumber}");
+        GameObject.instance.save();
+    }
+
         @override
     Future<CanvasElement> drawStats() async {
         if(epilogue == null) createEpilogue();
+       // testSign();
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
         if(empress) {
