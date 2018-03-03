@@ -200,6 +200,7 @@ class PetInventory {
                     Pet tmp = new Troll(p.doll);
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
+                    //print("HOLY FUCK TURN THIS BACK ON");
                     window.location.href= "goodbye.html";
                 }
             });
@@ -317,11 +318,12 @@ class PetInventory {
         if(Sign.allSigns.isEmpty) Sign.initAllSigns();
         DivElement subContainer = new DivElement();
         DivElement subContainerAlumni = new DivElement();
+        container.append(subContainer);
+        container.append(subContainerAlumni);
         for(Sign s in Sign.allSigns) {
             await s.draw(subContainer,subContainerAlumni);
         }
-        container.append(subContainer);
-        container.append(subContainerAlumni);
+
 
     }
 

@@ -7,7 +7,7 @@ import "../GameShit/GameObject.dart";
 import "Stat.dart";
 import "Sign.dart";
 import "../GameShit/Empress.dart";
-
+import "../Controllers/navbar.dart";
 
 
 
@@ -68,6 +68,7 @@ class Troll extends Pet{
             }
         }
         Random rand = new Random();
+        print("My stats are $stats and i think my highest is ${validChoices}");
         return rand.pickFrom(validChoices).flavor.aspect;
     }
 
@@ -378,12 +379,25 @@ class Troll extends Pet{
         int x = 10;
         Renderer.wrap_text(textCanvas.context2D,name,x,y,fontSize,400,"center");
 
+
+
         y = y + fontSize*2;
         fontSize = 12;
 
         int buffer = 10;
         y = y + fontSize+buffer;
+
+        if(getParameterByName("debug",null) == "signs") {
+            for (Stat s in stats) {
+                y = y + fontSize + buffer;
+                Renderer.wrap_text(textCanvas.context2D, s.toString(), x, y, fontSize + buffer, 275, "left");
+            }
+            y = y + fontSize + buffer;
+        }
+
         Renderer.wrap_text(textCanvas.context2D,epilogue,x,y,fontSize+buffer,275,"left");
+
+
 
         return textCanvas;
     }
