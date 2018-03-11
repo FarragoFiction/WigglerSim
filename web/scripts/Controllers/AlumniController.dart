@@ -16,7 +16,7 @@ void main() {
 
   if(getParameterByName("mode",null) == "edna") {
     ButtonElement button = new ButtonElement();
-    button.text = ("Make Over Time!!!");
+    button.text = ("Hair Make Over Time!!!");
     button.onClick.listen((e)
     {
       game.makeOverAlumni();

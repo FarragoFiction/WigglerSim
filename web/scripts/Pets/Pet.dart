@@ -177,7 +177,14 @@ abstract class Pet {
         t.extendedHairTop.imgNumber = rand.nextInt(t.maxHair);
         t.extendedHairBack.imgNumber = t.extendedHairTop.imgNumber;
         print("${name} looks fabulous with their new hair style of ${t.extendedHairTop.imgNumber}. ${oldHair} was simply out of fashion.");
+    }
 
+    void clothesMakeOver() {
+        Random rand = new Random();
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        int oldBody = t.extendedBody.imgNumber;
+        t.extendedBody.imgNumber = rand.nextInt(t.maxBody);
+        print("${name} looks fabulous with their new hair style of ${t.extendedBody.imgNumber}. ${oldBody} was simply out of fashion.");
     }
 
     double percentHatchMatesWithCaste(String caste) {

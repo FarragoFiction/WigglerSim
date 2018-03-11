@@ -183,7 +183,10 @@ class PetInventory {
                 GameObject.instance.save();
                 drawPet(subContainer,p, canvas);
             });
+
             renderHairDressingButton(subContainer, p, canvas);
+            renderClothesStylistButton(subContainer, p, canvas);
+
 
             hatchButton.onClick.listen((e) {
                 if(p is Egg) {
@@ -308,7 +311,11 @@ class PetInventory {
             container.append(subContainer);
 
 
-            await drawPet(subContainer, p);
+            CanvasElement c = await drawPet(subContainer, p);
+            renderHairDressingButton(subContainer, p, c);
+            renderClothesStylistButton(subContainer, p, c);
+
+
 
         }
     }
@@ -466,13 +473,30 @@ class PetInventory {
     }
 
     void renderHairDressingButton(Element subcontainer,Pet p, CanvasElement canvas) {
+
     //remember that tiem every fucking pet got overridden to look like edna mode. yup.pepperridge farm remembers
-        if(getParameterByName("mode",null) == "edna" || Empress.instance.allowHairDressing()) {
+        if(getParameterByName("mode",null) == "edna" || Empress.instance.allowHairDressing() ) {
             ButtonElement hairCutButton = new ButtonElement();
             hairCutButton.text = "Royal Hair Makeover!!!";
             subcontainer.append(hairCutButton);
             hairCutButton.onClick.listen((Event e) {
                 p.makeOver();
+                GameObject.instance.save();
+                p.canvas = null;
+                drawPet(subcontainer, p, canvas);
+            });
+        }
+    }
+
+    //meenah decided how all of alternia was going to dress, so can you.
+    void renderClothesStylistButton(Element subcontainer,Pet p, CanvasElement canvas) {
+        //remember that tiem every fucking pet got overridden to look like edna mode. yup.pepperridge farm remembers
+        if((getParameterByName("mode",null) == "edna" || Empress.instance.allowClothesStyling()) && p is Troll) {
+            ButtonElement hairCutButton = new ButtonElement();
+            hairCutButton.text = "Royal Clothes Makeover!!!";
+            subcontainer.append(hairCutButton);
+            hairCutButton.onClick.listen((Event e) {
+                p.clothesMakeOver();
                 GameObject.instance.save();
                 p.canvas = null;
                 drawPet(subcontainer, p, canvas);

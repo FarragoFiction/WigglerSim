@@ -88,6 +88,14 @@ class Empress {
         return false;
     }
 
+    //meenah decided how all of alternia was going to dress, so can you.
+    bool allowClothesStyling() {
+        //wanting to have reason to have diff types of empresses
+        if(troll == null) return false;
+        if(troll.isInternal) return true;
+        return false;
+    }
+
 
 
     int get argumentsAgainstViolentDeath {
