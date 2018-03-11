@@ -13,6 +13,19 @@ void main() {
 
     window.location.href= "${window.location.href}?debug=signs";
   });
+
+  if(getParameterByName("mode",null) == "edna") {
+    ButtonElement button = new ButtonElement();
+    button.text = ("Make Over Time!!!");
+    button.onClick.listen((e)
+    {
+      game.makeOverAlumni();
+      game.save();
+      window.location.href = "${window.location.href}";
+    });
+    querySelector("#output").append(button);
+  }
+
   start();
 }
 

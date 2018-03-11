@@ -183,6 +183,7 @@ class PetInventory {
                 GameObject.instance.save();
                 drawPet(subContainer,p, canvas);
             });
+            renderHairDressingButton(subContainer, p, canvas);
 
             hatchButton.onClick.listen((e) {
                 if(p is Egg) {
@@ -309,6 +310,16 @@ class PetInventory {
 
             await drawPet(subContainer, p);
 
+        }
+    }
+
+    //pass in subset of alumni if that's what you want
+    void makeOverAlumni([List<Troll> trolls]){
+        if(trolls == null) trolls = alumni;
+        List<Troll> reversedAlumni = new List<Troll>.from(trolls.reversed);
+        for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, trolls.length)); i++) {
+            Troll p = reversedAlumni[i];
+            p.makeOver();
         }
     }
 
@@ -452,6 +463,21 @@ class PetInventory {
 
         //print("pet inventory json is: ${json} and pets are ${pets.length}");
         return json;
+    }
+
+    void renderHairDressingButton(Element subcontainer,Pet p, CanvasElement canvas) {
+    //remember that tiem every fucking pet got overridden to look like edna mode. yup.pepperridge farm remembers
+        if(getParameterByName("mode",null) == "edna" || Empress.instance.allowHairDressing()) {
+            ButtonElement hairCutButton = new ButtonElement();
+            hairCutButton.text = "Royal Hair Makeover!!!";
+            subcontainer.append(hairCutButton);
+            hairCutButton.onClick.listen((Event e) {
+                p.makeOver();
+                GameObject.instance.save();
+                p.canvas = null;
+                drawPet(subcontainer, p, canvas);
+            });
+        }
     }
 
     Future<CanvasElement> drawPet(Element container, Pet p, [CanvasElement canvas]) async {

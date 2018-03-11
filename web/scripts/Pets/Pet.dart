@@ -75,6 +75,8 @@ import 'Cocoon.dart';
 import 'Troll.dart';
 import "Stat.dart";
 import "../GameShit/Empress.dart";
+import "../Controllers/navbar.dart";
+
 
 
 
@@ -166,6 +168,16 @@ abstract class Pet {
         lastPlayed = new DateTime.now();
         name = randomAsFuckName();
         randomizeStats();
+    }
+
+    void makeOver() {
+        Random rand = new Random();
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        int oldHair = t.extendedHairTop.imgNumber;
+        t.extendedHairTop.imgNumber = rand.nextInt(t.maxHair);
+        t.extendedHairBack.imgNumber = t.extendedHairTop.imgNumber;
+        print("${name} looks fabulous with their new hair style of ${t.extendedHairTop.imgNumber}. ${oldHair} was simply out of fashion.");
+
     }
 
     double percentHatchMatesWithCaste(String caste) {
@@ -544,6 +556,8 @@ abstract class Pet {
         anchorContainer.append(a);
         return ret;
     }
+
+
 
     String daysSinceDate(DateTime date, String label) {
         DateTime now = new DateTime.now();

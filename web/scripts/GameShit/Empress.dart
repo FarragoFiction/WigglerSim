@@ -81,6 +81,15 @@ class Empress {
         return Math.min(6, defaultAmount);
     }
 
+    bool allowHairDressing() {
+        //wanting to have reason to have diff types of empresses
+        if(troll == null) return false;
+        if(troll.isCalm) return true;
+        return false;
+    }
+
+
+
     int get argumentsAgainstViolentDeath {
         int defaultAmount = 0;
         if(troll == null) return defaultAmount;
