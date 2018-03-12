@@ -124,19 +124,19 @@ class AIPet extends AIObject {
             imgNum2 = 8;
         }
         if(rand.nextBool()) {
-            g.body.imgNumber = imgNum1;
+            g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
-            g.body.imgNumber = imgNum2;
+            g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }else { //so they don't all look the same
-            g.body.imgNumber = imgNum2;
+            g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
             grub.canvas = null; //means it will make a new one, so old reference is free
-            g.body.imgNumber = imgNum1;
+            g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
             idleAnimation.addAnimationFrame(grub.canvas);
         }
@@ -149,7 +149,7 @@ class AIPet extends AIObject {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
-        g.body.imgNumber = rand.pickFrom(bodies);
+        g.extendedBody.imgNumber = rand.pickFrom(bodies);
     }
 
     //grub body 3 and grub body 4
