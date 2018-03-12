@@ -21,6 +21,7 @@ class Grub extends Pet{
 
   void setEyes() {
     //at half way mark, eyes turn yellow like a trolls.
+    print("setting eyes for $name");
     if(percentToChange > 0.5) {
       bool force = getParameterByName("eyes",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
       (doll as HomestuckGrubDoll).mutantEyes(force, true);

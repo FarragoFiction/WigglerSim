@@ -75,6 +75,7 @@ import 'Cocoon.dart';
 import 'Troll.dart';
 import "Stat.dart";
 import "../GameShit/Empress.dart";
+import "../GameShit/GameObject.dart";
 import "../Controllers/navbar.dart";
 
 
@@ -553,6 +554,26 @@ abstract class Pet {
             dollArea.select();
             document.execCommand('copy');
         });
+
+
+
+        if(getParameterByName("mode",null) == "edna") {
+            ButtonElement loadButton = new ButtonElement();
+            loadButton.text = "LOAD";
+            ret.append(loadButton);
+            loadButton.onClick.listen((Event e) {
+                //print("current doll is $doll");
+                Doll doll2 = Doll.loadSpecificDoll(dollArea.value);
+                if(doll2.renderingType == doll.renderingType) {
+                    doll = Doll.loadSpecificDoll(dollArea.value);
+                    //print("new doll is $doll");
+                    GameObject.instance.save();
+                    window.location.href = "${window.location.href}";
+                }else {
+                    window.alert("... No. This shit crashes if you try to shove the wrong doll in. Don't do it.");
+                }
+            });
+        }
 
         DivElement anchorContainer = new DivElement();
         ret.append(anchorContainer);
