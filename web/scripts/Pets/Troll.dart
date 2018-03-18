@@ -25,9 +25,9 @@ class Troll extends Pet{
     String type = Pet.TROLL;
     Troll(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
         //turns grub into troll., later will calc sign
-        print("making a new troll. before conversion, hair is ${(doll as HomestuckTrollDoll).extendedHairBack.imgNumber}");
+        //print("making a new troll. before conversion, my hair is ${(this.doll as HomestuckTrollDoll).extendedHairBack.imgNumber}");
         this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
-        print("making a new troll. aftr conversion, hair is ${(this.doll as HomestuckTrollDoll).extendedHairBack.imgNumber}");
+        //print("making a new troll. aftr conversion, hair is ${(this.doll as HomestuckTrollDoll).extendedHairBack.imgNumber}");
 
         //does doing it here give me the wrong sign? stats are wrong...
          //assignSign();
