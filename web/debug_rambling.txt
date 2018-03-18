@@ -1167,5 +1167,119 @@ change pet into other pet makes a new Troll...and THEN changes it's stats to mat
 fucking HELL.
 
 
+~~~~~~
+
+the edna bug has been defeated. it's now the next day, and i need to figure out the sign bug.
+
+basically, some grubs, when pupated, completely rerandomize, to the point of keeping
+their blood color but having a completely different sign.
+
+i tested convertOneDollToAnother in doll lib and it works as expected...though...the bodies are randomizing
+and i don't know why
+
+one weird thing, which might be nothing is:
+
+original:
+
+BodyOld: 53
+HairOld: 13
+HairOld: 13
+LeftEye: 22
+RightEye: 22
+Mouth: 13
+Symbol: 0
+Glasses: 0
+Glasses2: 0
+LeftHornOld: 24
+RightHornOld: 24
+Fin: 0
+Fin: 0
+Wings: 0
+CanonSymbol: 132
+FacePaint: 0
+Body: 53
+Hair: 13
+Hair: 13
+LeftHorn: 24
+
+
+grub:
+Body: 0
+HairOld: 13
+HairOld: 13
+LeftEye: 22
+RightEye: 22
+Mouth: 13
+Symbol: 0
+Glasses: 0
+Glasses2: 0
+LeftHornOld: 24
+RightHornOld: 24
+Fin: 0
+Fin: 0
+Wings: 0
+CanonSymbol: 132
+FacePaint: 0
+Body: 1
+Hair: 13
+Hair: 13
+LeftHorn: 24
+RightHorn: 24
+
+i.e. there's no 'body old', just two bodies and i don't know why
+
+i'm gonna fiddle with wigglers and see if i can reproduce things.
+
+so far no reproducition, but my cheat mode isn't given me the blood colors i expect and that's weird
+
+
+
+cheating to get multiple of this caste. template is 0 and I am 0.
+(program):1 sign is 0
+(program):1 cheating to get multiple of this caste. template is 0 and I am 0.
+
+it shouldn't be zero. it should be the right sign.
+
+I don't understand. The eggs are all drawn the right color. But they aren't the right invisible signs.
+
+What is going on?
+
+is this important?  i know before it worked. so.........
+
+hrm.
+
+something is printing out signs and they are all different. what gives? who is printing it out?
+doesn't seem to be me, so must be the doll lib
+
+yeah, it's the grub doll:
+
+if(sign != null) {
+            print("sign is $sign");
+            canonSymbol.imgNumber = sign;
+            //makes sure palette is sign appropriate
+            randomize(false);
+}
+
+so... hrm. what's going on after that? (i worry that i'm fixing A bug but not the bug i want,
+but this is definitely important and related to signs)
+
+
+used sign to set canon Symbol to 224
+VM841:1 choose blood #631db4
+VM841:1 after randomize, canon symbol is 0
+
+...
+...
+...
+
+Alright then. Seems pretty clear something is broken in randomize
+
+oh yup, false alarm. i'm manually settting the sign to zero so that
+the sign doesn't render. derp. alright. now what.
+
+that means the easter egg never worekd. time to fix.
+
+
+
 
 

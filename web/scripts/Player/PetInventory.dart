@@ -206,8 +206,12 @@ class PetInventory {
                     Pet tmp = new Troll(p.doll);
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
-                   // print("HOLY FUCK TURN THIS BACK ON");
-                    window.location.href= "goodbye.html";
+                    //print("HOLY FUCK TURN THIS BACK ON");
+                    if(getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") {
+
+                    }else {
+                         window.location.href= "goodbye.html";
+                    }
                 }
             });
 
@@ -389,12 +393,15 @@ class PetInventory {
         starters.add(new Egg(new HomestuckGrubDoll(HomestuckTrollDoll.randomPurpleSign)));
         starters.add(new Egg(new HomestuckGrubDoll(HomestuckTrollDoll.randomVioletSign)));
         starters.add(new Egg(new HomestuckGrubDoll(HomestuckTrollDoll.randomFuchsiaSign)));
+
+       // print("Am I confused? Random jade sign is ${HomestuckTrollDoll.randomJadeSign} and the sign i picked is ${(starters[5].doll as HomestuckGrubDoll).canonSymbol.imgNumber} ");
         for(Pet p in starters) {
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");
             container.append(subContainer);
             drawPet(subContainer, p);
+           // print("making button for egg with sign of ${(p.doll as HomestuckGrubDoll).canonSymbol.imgNumber}");
             ButtonElement button = new ButtonElement();
             int price = Empress.instance.priceOfTroll(p);
             button.text = "Choose ${price}";
@@ -406,7 +413,9 @@ class PetInventory {
                         //not even with a cheat can you go over max
                         for(int i = 0; i < ( Empress.instance.maxGrubs-pets.length); i++) {
                             GameObject.instance.player.caegers += -1* price; //not free.
-                            pets.add(new Egg(new HomestuckGrubDoll((p.doll as HomestuckGrubDoll).canonSymbol.imgNumber)));
+                            HomestuckGrubDoll newDoll = new HomestuckGrubDoll();
+                            newDoll.copyPalette(p.doll.palette);
+                            pets.add(new Egg(newDoll));
                         }
                     }
                     pets.add(p);
