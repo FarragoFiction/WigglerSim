@@ -1280,6 +1280,21 @@ the sign doesn't render. derp. alright. now what.
 that means the easter egg never worekd. time to fix.
 
 
+~~~~~~
+
+alright the current bug i'm trying to fix is that on pupation, the grubs body (which is locked to be 0 or 1)
+determines the trolls body. this is dumb as fuck.
+
+and also..... I'm not sure why it wasn't happening before. Because I convert a grub to a troll
+and all that does is copy over literally everything. This is conf....
+
+Oh. Huh.  The edna mode bug was because it was using the image path and not the layer name.
+
+that would have treated a grub body different from a troll body, and they wouldn't have overridden.
+
+fair enough, re randomize the body on pupation and call it a day.
+
+
 
 
 
