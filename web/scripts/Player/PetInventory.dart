@@ -204,12 +204,9 @@ class PetInventory {
                 }else if(p is Cocoon) {
                     print("3,2,1, POOF! Holy Fuck it's a Troll!");
                     Pet tmp = new Troll(p.doll);
-                    int newBody = new Random().nextInt((p.doll as HomestuckTrollDoll).extendedBody.maxImageNumber+1);
 
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
-                    //don't have the 'same' body you did as a grub
-                    (p.doll as HomestuckTrollDoll).extendedBody.imgNumber = newBody;
                     //print("HOLY FUCK TURN THIS BACK ON");
                     if(getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") {
 
@@ -370,9 +367,15 @@ class PetInventory {
         drawPet(subContainer,tmp, canvas);
         hatchButton.style.display = "none";
         if(p is Troll) {
+
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
+            int newBody = new Random().nextInt(t.extendedBody.maxImageNumber+1);
+            //if i don't do this grubs will be stuck with one of two bodies
+            t.extendedBody.imgNumber = newBody;
             bool force = getParameterByName("wings",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
             t.mutantWings(force);
+
+
         }else if(p is Grub) {
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
             bool force = getParameterByName("eyes",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
