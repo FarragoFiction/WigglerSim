@@ -204,8 +204,12 @@ class PetInventory {
                 }else if(p is Cocoon) {
                     print("3,2,1, POOF! Holy Fuck it's a Troll!");
                     Pet tmp = new Troll(p.doll);
+                    int newBody = new Random().nextInt((p.doll as HomestuckTrollDoll).extendedBody.maxImageNumber+1);
+
                     GameObject.instance.player.caegers += Empress.instance.priceOfTroll(p);
                     changePetIntoOtherPet(p, tmp, subContainer, canvas, hatchButton);
+                    //don't have the 'same' body you did as a grub
+                    (p.doll as HomestuckTrollDoll).extendedBody.imgNumber = newBody;
                     //print("HOLY FUCK TURN THIS BACK ON");
                     if(getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") {
 
