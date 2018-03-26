@@ -44,70 +44,70 @@ class ItemInventory {
     }
 
     //the abs have pos and negative because they force a sign.
-    static get calmABS {
+    static int get calmABS {
         // + 1 because it makes items with no stats if no alum
         int value = Pet.averagePetEnergeticABS(last12)+1;
-        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
+        return (statMultiplier*makeNegative(Math.min(value, Stat.VERYFUCKINGHIGH+1))).round();
     }
 
-    static get realisticABS {
+    static int get realisticABS {
         int value = Pet.averagePetIdealisticABS(last12)+1;
-        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
+        return (statMultiplier* makeNegative( Math.min(value, Stat.VERYFUCKINGHIGH+1))).round();
 
     }
 
-    static get acceptingABS {
+    static int get acceptingABS {
         int value = Pet.averagePetCuriousABS(last12)+1;
-        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
+        return (statMultiplier*makeNegative( Math.min(value, Stat.VERYFUCKINGHIGH+1))).round();
     }
 
-    static get internalABS {
+    static int get internalABS {
         int value = Pet.averagePetExternalABS(last12)+1;
-        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
+        return (statMultiplier*makeNegative(Math.min(value, Stat.VERYFUCKINGHIGH+1))).round();
     }
 
-    static get freeABS {
+    static int get freeABS {
         int value = Pet.averagePetLoyalABS(last12)+1;
-        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
+        return (statMultiplier*makeNegative( Math.min(value, Stat.VERYFUCKINGHIGH+1))).round();
     }
 
-    static get impatientABS {
+    static int get impatientABS {
         int value = Pet.averagePetPatienceABS(last12)+1;
-        return (statMultiplier*-1* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
+        return (statMultiplier *makeNegative( Math.min(value, Stat.VERYFUCKINGHIGH+1))).round();
     }
 
-    static get energeticABS {
+    static int get energeticABS {
         int value = Pet.averagePetEnergeticABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get idealisticABS {
+    static int get idealisticABS {
         int value = Pet.averagePetIdealisticABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get curiousABS {
+    static int get curiousABS {
         int value = Pet.averagePetCuriousABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get externalABS {
+    static int get externalABS {
         int value = Pet.averagePetExternalABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get loyalABS {
+    static int get loyalABS {
         int value = Pet.averagePetLoyalABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get patientABS {
+    static  int get patientABS {
         int value = Pet.averagePetPatienceABS(last12)+1;
         return (statMultiplier* Math.min(value, Stat.VERYFUCKINGHIGH+1)).round();
     }
 
     //non abs keep the sign, so don't need positive or negative.
-    static get energetic {
+    static int get energetic {
         int value = Pet.averagePetEnergetic(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
@@ -115,39 +115,45 @@ class ItemInventory {
 
     }
 
-    static get idealistic {
+    static int get idealistic {
         int value = Pet.averagePetIdealistic(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get curious {
+    static int get curious {
         int value =  Pet.averagePetCurious(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get external {
+    static int get external {
         int value =  Pet.averagePetExternal(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get loyal {
+    static int get loyal {
         int value =  Pet.averagePetLoyal(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
     }
 
-    static get patient {
+    static int get patient {
         int value =  Pet.averagePetPatience(last12);
         if(value == 0) return 1;
         int sign = (value/value.abs()).round();
         return (sign * statMultiplier* Math.min(value.abs(), Stat.VERYFUCKINGHIGH+1)).round();
+    }
+
+    //needed because i keep somehow getting -0.0 as a value.
+    static int makeNegative(int number) {
+        if(number == 0) number = 1;
+        return number * -1;
     }
 
 
@@ -170,10 +176,10 @@ class ItemInventory {
         ret.add(new AIItem(5,<ItemAppearance>[new ItemAppearance("Meow Beast","Mutie.png"),new ItemAppearance("Cuttle Creature","SmallFriend.png"),new ItemAppearance("Sea Hop Beast","frogcroak.png"),new ItemAppearance("Swim Beast","SmallerFriend.png")],loyal_value: freeABS, external_value: internalABS));
 
         ret.add(new AIItem(1005,<ItemAppearance>[new ItemAppearance("Tricky Book","wiseguy.png"),new ItemAppearance("FLARP Manuals","flarps.png"),new ItemAppearance("Dark Magycks","black_book.png"),new ItemAppearance("~ATH Book","athbook.png")],patience_value: patient, loyal_value: loyal, external_value: external, curious_value: curious, energetic_value: energetic, idealistic_value: idealistic));
-        ret.add(new AIItem(1006,<ItemAppearance>[new ItemAppearance("Tab","tabstack.png"),new ItemAppearance("Grain Teeth","CornCan.png"),new ItemAppearance("Nutrition Tall Circles","cans2.png")],patience_value: -1*patient, loyal_value: -1*loyal, external_value: -1*external, curious_value: -1*curious, energetic_value: -1*energetic, idealistic_value: -1*idealistic));
+        ret.add(new AIItem(1006,<ItemAppearance>[new ItemAppearance("Tab","tabstack.png"),new ItemAppearance("Grain Teeth","CornCan.png"),new ItemAppearance("Nutrition Tall Circles","cans2.png")],patience_value: makeNegative(patient), loyal_value: makeNegative(loyal), external_value: makeNegative(external), curious_value: makeNegative(curious), energetic_value: makeNegative(energetic), idealistic_value: makeNegative(idealistic)));
         ret.add(new AIItem(1007,<ItemAppearance>[new ItemAppearance("Loyal Partner","pyralspite_-_scalemate_single.png"),new ItemAppearance("Evidence","beetle_bag.png"),new ItemAppearance("Fiduspawn Cards","fiducards.png"),new ItemAppearance("4 Wheel Device","Sk8Board.png")], loyal_value: loyal, external_value: external,energetic_value: calmABS, patience_value: patientABS));
         ret.add(new AIItem(1007,<ItemAppearance>[new ItemAppearance("Soft Pile","scarf_pile.png"),new ItemAppearance("Friend Pile","stuffpile.png"),new ItemAppearance("Duttle","theduttle.png"),new ItemAppearance("Highblood Pillow","velvetpillow.png")], idealistic_value: idealistic, curious_value: curious,energetic_value: calmABS, patience_value: patientABS));
-        ret.add(new AIItem(1008,<ItemAppearance>[new ItemAppearance("Soft Victim","Smupet_red.png"),new ItemAppearance("Best Enemy","do_you_want_to_play_a_game.png"),new ItemAppearance("Accused Pile","TH34CCUS3D.png"),new ItemAppearance("Criminal Scum","scalemate.png")], idealistic_value: -1*idealistic, curious_value: -1*curious,energetic_value: energeticABS, patience_value: impatientABS));
+        ret.add(new AIItem(1008,<ItemAppearance>[new ItemAppearance("Soft Victim","Smupet_red.png"),new ItemAppearance("Best Enemy","do_you_want_to_play_a_game.png"),new ItemAppearance("Accused Pile","TH34CCUS3D.png"),new ItemAppearance("Criminal Scum","scalemate.png")], idealistic_value: makeNegative(idealistic), curious_value: makeNegative(curious),energetic_value: energeticABS, patience_value: impatientABS));
 
         List<String> colors = last12ColorWords;
 
