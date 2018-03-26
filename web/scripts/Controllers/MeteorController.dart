@@ -8,7 +8,6 @@ import "navbar.dart";
 GameObject game;
 void main() {
     loadNavbar();
-    game = new GameObject(false);
     start();
 }
 
