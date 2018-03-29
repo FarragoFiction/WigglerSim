@@ -9,6 +9,7 @@ GameObject game;
 void main() {
     loadNavbar();
     start();
+    GameObject.storeCard("N4Igzg9grgTgxgUxALhAdQJYHMsBsEwDKGAtgAQCyCALghDGCADQgB2AhiUqgOI1kBhKLnwATZiFoAPaihAAxemTgxSCMGXZZ2GVmGplqACwRkAoiQAOGGAiZkyEAO6sCCDlxhkMGuMLEAdBIARuxwANZYMNCsogBynNwgfNQ8MFDBwQiiAEIY1HBGAZasWBLUqjgEAkbsrIhyAAwBAKwSYIiuYAAqEACqrLgQEXIA2gC6ErZgwtRghNTsc2PAADpsievI6wAyAJLyZoQAgn0CZutM6wBu7LhQCFvrALQAjI3rAL6TLBXYWAQFkswDt1GACGMfpJKgCiIs5mkEEsIahRmsNlwniAcjtjoQAAoACTMFAA8gANACalxudweWIAbAAOL5Qv5VOHAswARygd0hIE+QA");
 }
 
 void start() {

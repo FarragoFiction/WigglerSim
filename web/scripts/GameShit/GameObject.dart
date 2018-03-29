@@ -101,7 +101,7 @@ class GameObject {
         player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
     }
 
-    void storeCard(String card) {
+    static void storeCard(String card) {
         String key = "LIFESIMFOUNDCARDS";
         if(window.localStorage.containsKey(key)) {
             String existing = window.localStorage[key];
