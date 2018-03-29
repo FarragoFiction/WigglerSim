@@ -101,6 +101,17 @@ class GameObject {
         player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
     }
 
+    void storeCard(String card) {
+        String key = "LIFESIMFOUNDCARDS";
+        if(window.localStorage.containsKey(key)) {
+            String existing = window.localStorage[key];
+            List<String> parts = existing.split(",");
+            if(!parts.contains(card)) window.localStorage[key] = "$existing,$card";
+        }else {
+            window.localStorage[key] = card;
+        }
+    }
+
 
     Future<Null> drawPlayer(Element container) async {
         CanvasElement canvas = await player.draw();
