@@ -58,7 +58,7 @@ class MoneyHandler {
     }
 
     void sync() {
-        moneyFactsElement.text = "Troll Caegers: ${GameObject.instance.player.caegers}";
+        moneyFactsElement.setInnerHtml("Troll Caegers: <img src = 'images/tinyMoney.png'> ${GameObject.instance.player.caegers}");
         DateTime now = new DateTime.now();
         if(GameObject.instance.player.lastGotAllowence != null) {
             timeTillAllowence = now.difference(GameObject.instance.player.lastGotAllowence);
