@@ -392,7 +392,7 @@ class Sign {
         for(String caste in HomestuckTrollDoll.castes) {
             if(isCasteComplete(caste, cache)) ret.add(caste);
         }
-        ret;
+        return ret;
     }
 
     static bool isCasteComplete(String caste, List<Sign> signs) {

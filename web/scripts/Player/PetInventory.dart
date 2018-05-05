@@ -80,16 +80,17 @@ class PetInventory {
 
     String get favoriteCaste {
         int amount = 0;
-        String caste = "None";
+        String fCaste = null;
 
         for(String caste in HomestuckTrollDoll.castes) {
             int casteAmount = alumniWithCaste(caste).length;
-            if(casteAmount > amount) {
+            print("casteAmount is $casteAmount");
+            if(casteAmount >= amount) {
                 amount = casteAmount;
-                caste = caste;
+                fCaste = caste;
             }
         }
-        return caste;
+        return fCaste;
     }
 
 

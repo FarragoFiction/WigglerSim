@@ -190,7 +190,7 @@ class Player {
         }else if (colorWord == HomestuckTrollDoll.PURPLE) {
             casteText = "This is the EXACT opposite of subjuggulation, though.";
         }
-        return " a JA-. Huh. You're NOT a Jade blood? Well. I GUESS there's no law saying a non Jade CAN'T raise grubs? $casteText";
+        return " a JA-. Huh. You're NOT a Jade blood? You're a ${colorWord}? Well. I GUESS there's no law saying a non Jade CAN'T raise grubs? $casteText";
     }
 
     String get nonTrollIntro {
@@ -210,6 +210,7 @@ class Player {
         if(favorite == HomestuckTrollDoll.CERULEAN || favorite == HomestuckTrollDoll.INDIGO) comment = "High bloods will come in handy keeping the lower bloods down.";
         if(favorite == HomestuckTrollDoll.PURPLE) comment = "Do you follow the Mirthful Messiahs?";
         if(favorite == HomestuckTrollDoll.VIOLET) comment = "Are you trying to start a civil war?";
+        if(favorite == null) return "You haven't raised enough grubs to have a favorite caste, yet.";
         return "You are especially skilled at raising $favorite bloods. $comment";
     }
 
