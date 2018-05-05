@@ -17,12 +17,17 @@ class Player {
     static String DOLLSAVEID = "WigglerCaretaker";
     static String PETINVENTORY = "PetInventory";
     static String ITEMINVENTORY = "ItemInventory";
+    static String NAMEKEY = "name";
+    static String UNIMPORTANT = "UNIMPORTANT";
+    static String INCREASINGLY_IMPORTANT = "INCREASINGLY IMPORTANT";
+
 
 
     Doll doll;
     CanvasElement canvas;
     int width = 400;
     int height = 300;
+    String name = UNIMPORTANT;
 
     PetInventory petInventory;
     ItemInventory itemInventory;
@@ -62,6 +67,9 @@ class Player {
 
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
+        if(jsonObj[NAMEKEY] != null) {
+            name = jsonObj[NAMEKEY];
+         }
         //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
         //petInventory = new PetInventory();
         petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
@@ -102,19 +110,23 @@ class Player {
 
 
     String get intro {
-        String text = "Your name is UNIMPORTANT. What IS important is that you are a JADE BLOOD assigned to the BROODING CAVERNS. You are new to your duties, but are SUDDENLY CERTAIN that you will be simply the best there is at RAISING WIGGLERS. ${daysSincePlayed}";
-        if(!(doll is HomestuckTrollDoll)) text = "Your name is UNIMPORTANT. What IS important is that you are a JA-. Huh. What ARE you, exactly? I guess they let aliens or whatever into the Caverns these days??? ${daysSincePlayed}";
+        String text = "Your name is $name. What IS important is that you are a JADE BLOOD assigned to the BROODING CAVERNS. You are new to your duties, but are SUDDENLY CERTAIN that you will be simply the best there is at RAISING WIGGLERS. ${daysSincePlayed}";
+        if(!(doll is HomestuckTrollDoll)) text = "Your name is $name. What IS important is that you are a JA-. Huh. What ARE you, exactly? I guess they let aliens or whatever into the Caverns these days??? ${daysSincePlayed}";
 
         if((doll is HomestuckTrollDoll)) {
             HomestuckTrollDoll t = doll as HomestuckTrollDoll;
             HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
             String colorWord = t.bloodColorToWord(p.aspect_light);
             if(colorWord != HomestuckTrollDoll.JADE) {
-                text = "Your name is UNIMPORTANT. What IS important is that you are a JA-. Huh. You're NOT a Jade blood? Well. I GUESS there's no law saying a non Jade CAN'T raise grubs? ${daysSincePlayed}";
+                text = "Your name is $name. What IS important is that you are a JA-. Huh. You're NOT a Jade blood? Well. I GUESS there's no law saying a non Jade CAN'T raise grubs? ${daysSincePlayed}";
             }
         }
-        if(petInventory.alumni.length > 1) text = "Your name is UNIMPORTANT. What IS important is that you are starting to get the hang of these BROODING CAVERNS.  ${daysSincePlayed}";
-        if(petInventory.alumni.length > 10) text = "Your name is INCREASINGLY IMPORTANT. Your skill as an AUXILIATRIX is getting you noticed by those in power. ${daysSincePlayed}";
+        if(petInventory.alumni.length > 1 && name == UNIMPORTANT) {
+            text = "Your name is $name. What IS important is that you are starting to get the hang of these BROODING CAVERNS.  ${daysSincePlayed}";
+        }else if(petInventory.alumni.length > 10) {
+            if(name == UNIMPORTANT) name = INCREASINGLY_IMPORTANT;
+            text = "Your name is $name. Your skill as an AUXILIATRIX is getting you noticed by those in power. ${daysSincePlayed}";
+        }
 
         return text;
 
@@ -124,13 +136,27 @@ class Player {
     void displayloadBoxAndText(Element div)
     {
         Element container = new DivElement();
-        String text = intro;
+
+        DivElement introElement = new DivElement();
+        introElement.text = intro;
         Element container2 = new DivElement();
         String text2 = "<br><Br>Or are you? Maybe you are someone else? ";
         AnchorElement link = new AnchorElement();
         link.href = "http://www.farragofiction.com/DollSim/index.html?type=2";
         link.text = " Anybody in mind?";
         link.style.padding = "padding:10px";
+
+        LabelElement labelElement = new LabelElement();
+        labelElement.text = "Actually, the Empress wants to know, what is your name?";
+        TextInputElement nameElement = new TextInputElement();
+        ButtonElement nameButton = new ButtonElement();
+        nameButton.text = "Say Your Name";
+        nameButton.onClick.listen((Event e) {
+            name = nameElement.value;
+            print("new name is $name, intro is $intro");
+            introElement.text = intro;
+            save();
+        });
 
         Element container3 = new DivElement();
         TextAreaElement dollLoader = new TextAreaElement();
@@ -153,8 +179,12 @@ class Player {
         container4.append(button);
 
 
-        container.appendHtml(text);
+        container.append(introElement);
         container2.appendHtml(text2);
+        container.append(labelElement);
+        container.append(nameElement);
+        container.append(nameButton);
+
         container2.append(link);
         div.append(container);
         div.append(container2);
@@ -189,6 +219,7 @@ class Player {
         lastPlayed = new DateTime.now();
         JSONObject json = new JSONObject();
         json[DATASTRING] = doll.toDataBytesX();
+        json[NAMEKEY] = name;
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
         json[PETINVENTORY] = petInventory.toJson().toString();
         json[ITEMINVENTORY] = itemInventory.toJson().toString();

@@ -82,6 +82,12 @@ class Empress {
         return Math.min(6, defaultAmount);
     }
 
+    bool allowRenaming() {
+        if(troll == null) return false;
+        if(troll.isCurious) return true;
+        return false;
+    }
+
     bool allowHairDressing() {
         //wanting to have reason to have diff types of empresses
         if(troll == null) return false;
