@@ -152,7 +152,7 @@ void finishGame() {
     GameObject.instance.save();
     MoneyHandler.instance.sync();
   }
-  MoneyHandler.instance.containerElement.appendText(result);
+  newGame.appendHtml(result);
   ButtonElement restartButton = new ButtonElement();
   restartButton.text = "New Deal?";
   newGame.append(restartButton);

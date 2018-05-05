@@ -14,6 +14,12 @@ void main() {
 
 Future<Null> start() async {
   await game.preloadManifest();
+  if(Empress.instance.allowsGambling()) {
+    AnchorElement a = new AnchorElement(href: "blackJack.html");
+    a.text = "Challenge the Empress to a Game For More Funds?";
+    querySelector('#output').append(a);
+
+  }
   Element container = new DivElement();
   querySelector('#output').append(container);
 
