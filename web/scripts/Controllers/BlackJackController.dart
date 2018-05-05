@@ -19,9 +19,14 @@ void main() {
   loadNavbar();
   game = new GameObject(false);
 
-  div = querySelector("#output");
-
-  drawBetButton();
+  div = new DivElement();
+  div.id = "GameDiv";
+  querySelector("#output").append(div);
+  if(Empress.instance.allowsGambling()) {
+    drawBetButton();
+  }else {
+    querySelector("#output").appendHtml("By order of the Empire, no Gambling allowed. All citizens should accept their lot in life.");
+  }
 }
 
 void clearDiv() {

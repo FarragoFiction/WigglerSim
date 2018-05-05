@@ -15,6 +15,7 @@ class MoneyHandler {
     Duration timeTillAllowence;
 
     MoneyHandler(Element container) {
+        print("making a money handler");
         instance = this;
         containerElement = new DivElement();
         container.append(containerElement);
