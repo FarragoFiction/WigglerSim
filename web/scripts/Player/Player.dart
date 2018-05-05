@@ -9,6 +9,7 @@ import "../Pets/JSONObject.dart";
 import 'dart:async';
 import 'dart:convert';
 import "../Pets/Sign.dart";
+import "../GameShit/Empress.dart";
 
 class Player {
     static String DATASTRING = "dataString";
@@ -276,9 +277,11 @@ class Player {
 
         container.append(introElement);
         container2.appendHtml(text2);
-        container.append(labelElement);
-        container.append(nameElement);
-        container.append(nameButton);
+        if(Empress.instance.allowsRenaming()) {
+            container.append(labelElement);
+            container.append(nameElement);
+            container.append(nameButton);
+        }
 
         container2.append(link);
         div.append(container);

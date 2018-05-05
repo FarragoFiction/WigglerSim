@@ -82,7 +82,7 @@ class Empress {
         return Math.min(6, defaultAmount);
     }
 
-    bool allowRenaming() {
+    bool allowsRenaming() {
         if(troll == null) return false;
         if(troll.isCurious) return true;
         return false;
