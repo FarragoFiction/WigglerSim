@@ -8,6 +8,7 @@ import 'dart:html';
 import "../Pets/JSONObject.dart";
 import 'dart:async';
 import 'dart:convert';
+import "../Pets/Sign.dart";
 
 class Player {
     static String DATASTRING = "dataString";
@@ -109,7 +110,7 @@ class Player {
     }
 
 
-    String get intro {
+    String get introOld {
         String text = "Your name is $name. What IS important is that you are a JADE BLOOD assigned to the BROODING CAVERNS. You are new to your duties, but are SUDDENLY CERTAIN that you will be simply the best there is at RAISING WIGGLERS. ${daysSincePlayed}";
         if(!(doll is HomestuckTrollDoll)) text = "Your name is $name. What IS important is that you are a JA-. Huh. What ARE you, exactly? I guess they let aliens or whatever into the Caverns these days??? ${daysSincePlayed}";
 
@@ -129,7 +130,100 @@ class Player {
         }
 
         return text;
+    }
 
+    String get intro {
+        return "$personalDetailsIntro $daysSincePlayed $favortiteCasteIntro $completedCastesIntro";
+    }
+
+    String get personalDetailsIntro {
+        String whatIsImportant = "";
+        if(name == UNIMPORTANT) whatIsImportant = "What IS important is that you are";
+        return "Your name is $name. $whatIsImportant $speciesIntro $experienceIntro";
+    }
+
+    String get experienceIntro {
+        if(petInventory.alumni.length == 0) {
+            return "You are new to your duties, but are SUDDENLY CERTAIN that you will be simply the best there is at RAISING WIGGLERS.";
+        }else if(petInventory.alumni.length <50) {
+            return "You are starting to get the hang of these BROODING CAVERNS.";
+        }else if(petInventory.alumni.length < 24*6) {
+            if(name == UNIMPORTANT) {
+                name = INCREASINGLY_IMPORTANT;
+                save();
+            }
+            return "Your skill as an AUXILIATRIX is getting you noticed by those in power.";
+        }else {
+            return "You are going down in history has one of the most prollific AUXILIATRIXES of all time.";
+        }
+    }
+
+    String get speciesIntro {
+        if(!(doll is HomestuckTrollDoll) && !(doll is HiveswapDoll)) return nonTrollIntro;
+
+        if((doll is HomestuckTrollDoll)) {
+            HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+            HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
+            String colorWord = t.bloodColorToWord(p.aspect_light);
+            if(colorWord != HomestuckTrollDoll.JADE) {
+                return nonJadeIntro;
+            }else {
+                return jadeIntro;
+            }
+        }
+
+    }
+
+    String get jadeIntro {
+       return "a JADE BLOOD assigned to the BROODING CAVERNS.";
+    }
+
+    String get nonJadeIntro {
+        String casteText = "";
+        HomestuckTrollDoll t = doll as HomestuckTrollDoll;
+        HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
+        String colorWord = t.bloodColorToWord(p.aspect_light);
+        if(colorWord == HomestuckTrollDoll.FUCHSIA) {
+            casteText = "I guess raising grubs is less stressful than ruling an Empire?";
+        }else if (colorWord == HomestuckTrollDoll.MUTANT) {
+            casteText = "I guess it makes sense to hide in the caverns rather than risk culling.";
+        }else if (colorWord == HomestuckTrollDoll.PURPLE) {
+            casteText = "This is the EXACT opposite of subjuggulation, though.";
+        }
+        return " a JA-. Huh. You're NOT a Jade blood? Well. I GUESS there's no law saying a non Jade CAN'T raise grubs? $casteText";
+    }
+
+    String get nonTrollIntro {
+        return "a JA-. Huh. What ARE you, exactly? I guess they let aliens or whatever into the Caverns these days???";
+    }
+
+    String get favortiteCasteIntro {
+        String favorite = petInventory.favoriteCaste;
+        String comment = "";
+        if(favorite == HomestuckTrollDoll.JADE) comment = "Need more help in the caverns?";
+        if(favorite == HomestuckTrollDoll.FUCHSIA) comment = "Trying to replace your boss?";
+        if(favorite == HomestuckTrollDoll.MUTANT) comment = "Uh. Huh. What is even the point of mutants?";
+        if(favorite == HomestuckTrollDoll.BURGUNDY ||favorite == HomestuckTrollDoll.BRONZE ) comment = "You're not a rebel, are you?";
+        if(favorite == HomestuckTrollDoll.GOLD) comment = "Banking on space travel picking up soon?";
+        if(favorite == HomestuckTrollDoll.OLIVE || favorite == HomestuckTrollDoll.TEAL) comment = "Middle managment types are always needed.";
+        if(favorite == HomestuckTrollDoll.LIME) comment = "Hrm...I feel like this might be a bad idea, but I don't know why.";
+        if(favorite == HomestuckTrollDoll.CERULEAN || favorite == HomestuckTrollDoll.INDIGO) comment = "High bloods will come in handy keeping the lower bloods down.";
+        if(favorite == HomestuckTrollDoll.PURPLE) comment = "Do you follow the Mirthful Messiahs?";
+        if(favorite == HomestuckTrollDoll.VIOLET) comment = "Are you trying to start a civil war?";
+        return "You are especially skilled at raising $favorite bloods. $comment";
+    }
+
+    String get completedCastesIntro {
+        List<String> completed = Sign.completedCastes;
+        if(completed.isEmpty) {
+            return "You haven't completed any single caste, yet.";
+        }else if(completed.length == 1) {
+            return "You've managed to complete one caste!";
+        }else if(completed.length == 12) {
+            return "You've managed to complete all the castes!";
+        }else {
+            return "You've managed to complete ${completed.length} caste!";
+        }
     }
 
 

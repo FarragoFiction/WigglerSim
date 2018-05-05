@@ -78,6 +78,20 @@ class PetInventory {
         return new List<Troll>.from(tmp);
     }
 
+    String get favoriteCaste {
+        int amount = 0;
+        String caste = "None";
+
+        for(String caste in HomestuckTrollDoll.castes) {
+            int casteAmount = alumniWithCaste(caste).length;
+            if(casteAmount > amount) {
+                amount = casteAmount;
+                caste = caste;
+            }
+        }
+        return caste;
+    }
+
 
     //for hatching eggs and shit
     void replacePet(Pet original, Pet replacement) {

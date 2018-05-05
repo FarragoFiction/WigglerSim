@@ -386,6 +386,15 @@ class Sign {
         return ret;
     }
 
+    static List<String> get completedCastes {
+        List<String> ret = new List<String>();
+        List<Sign> cache = completedSigns;
+        for(String caste in HomestuckTrollDoll.castes) {
+            if(isCasteComplete(caste, cache)) ret.add(caste);
+        }
+        ret;
+    }
+
     static bool isCasteComplete(String caste, List<Sign> signs) {
         int amount = 0;
         int goal = 24;
