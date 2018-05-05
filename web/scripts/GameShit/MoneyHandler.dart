@@ -52,6 +52,7 @@ class MoneyHandler {
     }
 
     void makeCountdownElement() {
+        print("making countdown");
         countdownElement = new SpanElement();
         countdownElement.classes.add("countdown");
         containerElement.append(countdownElement);

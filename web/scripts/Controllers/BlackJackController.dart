@@ -7,7 +7,8 @@ import "package:BlackJack/BlackJack.dart";
 import "../GameShit/Empress.dart";
 import "../GameShit/MoneyHandler.dart";
 import "dart:math" as Math;
-Game game;
+Game blackJackGame;
+GameObject game;
 Element div;
 int bet = 113;
 int minBet = 113;
@@ -16,6 +17,8 @@ CanvasElement meCanvas;
 Element newGame;
 void main() {
   loadNavbar();
+  game = new GameObject(false);
+
   div = querySelector("#output");
 
   drawBetButton();
@@ -48,7 +51,7 @@ void drawBetButton() {
   clearDiv();
 
   if(GameObject.instance.player.caegers < minBet) {
-    div.setInnerHtml("Sorry, but you can't afford to bet. Wait for ${Empress.instance.troll.name}'s next generous funding delivery.");
+    div.setInnerHtml("Sorry, but you can't afford to bet. Wait for Empress ${Empress.instance.troll.name}'s next generous funding delivery.");
     return;
   }
   ButtonElement betButton = new ButtonElement();
@@ -60,7 +63,7 @@ void drawBetButton() {
   value.max = "${max}";
 
   SpanElement valueMarker = new SpanElement();
-  valueMarker.text = "$bet";
+  valueMarker.setInnerHtml("<img src = 'images/tinyMoney.png'>$bet");
 
   value.type = "range";
   div.append(valueMarker);
@@ -89,18 +92,18 @@ Future<Null> start() async{
 
   await Loader.preloadManifest();
   await drawEmpress();
-  game = new Game(Card.getFreshDeck(),div, finishGame);
-  game.dealer.name = "Empress ${Empress.instance.troll.name}";
-  game.player.name = "${GameObject.instance.player.name}";
-  game.dealerLostQuips = <String>["Oh no! I lost?","How could you beat me!?","That's not fair!"];
-  game.dealerWonQuips = <String>["Oh! You nearly won! You should try again!","You were so close, too!","No refunds."];
-  game.start();
+  blackJackGame = new Game(Card.getFreshDeck(),div, finishGame);
+  blackJackGame.dealer.name = "Empress ${Empress.instance.troll.name}";
+  blackJackGame.player.name = "${GameObject.instance.player.name}";
+  blackJackGame.dealerLostQuips = <String>["Oh no! I lost?","How could you beat me!?","That's not fair!"];
+  blackJackGame.dealerWonQuips = <String>["Oh! You nearly won! You should try again!","You were so close, too!","No refunds."];
+  blackJackGame.start();
   drawMe();
 }
 
 void finishGame() {
   String result = " You lost, thems the breaks.";
-  if(!game.lost) {
+  if(!blackJackGame.lost) {
     int winnings = 2* bet;
     result = (" You won ${winnings} Life Bux!!!");
     GameObject.instance.player.caegers = GameObject.instance.player.caegers + winnings;
