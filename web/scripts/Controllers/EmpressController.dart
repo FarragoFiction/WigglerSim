@@ -16,7 +16,8 @@ Future<Null> start() async {
   await game.preloadManifest();
   if(Empress.instance.allowsGambling()) {
     AnchorElement a = new AnchorElement(href: "blackJack.html");
-    a.text = "Challenge the Empress to a Game For More Funds?";
+    a.setInnerHtml("<img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'>Challenge the Empress to a Game For More Funds?<img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'>");
+
     querySelector('#output').append(a);
 
   }
