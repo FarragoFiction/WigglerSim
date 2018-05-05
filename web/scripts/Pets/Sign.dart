@@ -377,6 +377,24 @@ class Sign {
         return "Sign: Caste: $caste, Aspect: $aspect, Moon: $lunarSway, img number: $imgNum";
     }
 
+    static List<Sign> get completedSigns {
+        List<Sign> ret = new List<Sign>();
+        for(Sign s in allSigns) {
+            List<Object> alumniWithSign = GameObject.instance.player.petInventory.alumniWithSign(s.imgNum);
+            if(alumniWithSign.isNotEmpty) ret.add(s);
+        }
+        return ret;
+    }
+
+    static bool isCasteComplete(String caste, List<Sign> signs) {
+        int amount = 0;
+        int goal = 24;
+        for(Sign s in signs) {
+            if(s.caste == caste) amount ++;
+        }
+        return amount == goal;
+    }
+
     @override
     Future<Null> draw(Element container, Element alumniContainer) async {
         //padding: 0px;

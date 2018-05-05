@@ -1295,6 +1295,52 @@ that would have treated a grub body different from a troll body, and they wouldn
 fair enough, re randomize the body on pupation and call it a day.
 
 
+~~~~~~~
+
+
+I want to be able to return facts about your save data for the caretaker rambling:
+
+   String get mostCommonCaste {
+
+    }
+
+    List<String> get completedCastes {
+
+    }
+
+
+
+So....I guess first thing I do is figure out how the signs page works.
+
+List<Troll> alumniWithSign(int signNumber) {
+       // static Iterable<SBURBClass> get canon => _classes.values.where((SBURBClass c) => c.isCanon);
+        Iterable<Troll> tmp = alumni.where((Troll t) {
+            //sign is stored in doll.
+            HomestuckTrollDoll d = t.doll as HomestuckTrollDoll;
+            return d.canonSymbol.imgNumber == signNumber;
+        });
+        return new List<Troll>.from(tmp);
+
+    }
+
+
+    I'm just doing it by numbers....hrrrm.
+
+    So how do i know about caste?
+
+    okay, alumniWithCaste lets me know what your favorite caste is....
+
+    but what about sign progress?
+
+        static List<Sign> get completedSigns {
+there we go
+
+    static bool isCasteComplete(String caste, List<Sign> signs) {
+
+
+that should be all i need.
+
+
 
 
 

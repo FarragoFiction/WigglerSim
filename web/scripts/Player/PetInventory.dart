@@ -38,6 +38,13 @@ class PetInventory {
         List<Troll> reversedAlumni = new List.from(alumni.reversed);
         int length = Math.min(reversedAlumni.length-1, 12);
         return reversedAlumni.sublist(0, length);
+    }
+
+    String get mostCommonCaste {
+
+    }
+
+    List<String> get completedCastes {
 
     }
 
@@ -59,6 +66,16 @@ class PetInventory {
         });
         return new List<Troll>.from(tmp);
 
+    }
+
+    List<Troll> alumniWithCaste(String caste) {
+        // static Iterable<SBURBClass> get canon => _classes.values.where((SBURBClass c) => c.isCanon);
+        Iterable<Troll> tmp = alumni.where((Troll t) {
+            //sign is stored in doll.
+            HomestuckTrollDoll d = t.doll as HomestuckTrollDoll;
+            return d.bloodColorToWord((d.palette as HomestuckPalette).aspect_light) == caste;
+        });
+        return new List<Troll>.from(tmp);
     }
 
 
