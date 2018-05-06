@@ -224,7 +224,7 @@ class Player {
         }else if(completed.length == 12) {
             return "You've managed to complete all the castes!";
         }else {
-            return "You've managed to complete ${completed.length} caste!";
+            return "You've managed to complete ${completed.length} castes!";
         }
     }
 

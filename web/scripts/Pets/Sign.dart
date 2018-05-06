@@ -379,9 +379,15 @@ class Sign {
 
     static List<Sign> get completedSigns {
         List<Sign> ret = new List<Sign>();
+        if(Sign.allSigns.isEmpty) Sign.initAllSigns();
+        print("getting completed signs, allSigns is ${allSigns.length}");
         for(Sign s in allSigns) {
+            print("is sign $s complete?");
             List<Object> alumniWithSign = GameObject.instance.player.petInventory.alumniWithSign(s.imgNum);
-            if(alumniWithSign.isNotEmpty) ret.add(s);
+            if(alumniWithSign.isNotEmpty) {
+                print("sign $s is complete");
+                ret.add(s);
+            }
         }
         return ret;
     }
@@ -389,7 +395,9 @@ class Sign {
     static List<String> get completedCastes {
         List<String> ret = new List<String>();
         List<Sign> cache = completedSigns;
+        print("all completed signs is $cache");
         for(String caste in HomestuckTrollDoll.castes) {
+            print("have i completed $caste?");
             if(isCasteComplete(caste, cache)) ret.add(caste);
         }
         return ret;
@@ -401,6 +409,7 @@ class Sign {
         for(Sign s in signs) {
             if(s.caste == caste) amount ++;
         }
+        print("the number of signs for $caste i have is $amount and completed signs was ${signs.length}");
         return amount == goal;
     }
 
