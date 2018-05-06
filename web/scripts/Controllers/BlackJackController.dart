@@ -147,7 +147,7 @@ void finishGame() {
   String result = " You lost, thems the breaks.";
   if(!blackJackGame.lost) {
     int winnings = 2* bet;
-    result = (" You won ${winnings} Life Bux!!!");
+    result = (" You won ${winnings} Caegers!!!");
     GameObject.instance.player.caegers = GameObject.instance.player.caegers + winnings;
     GameObject.instance.save();
     MoneyHandler.instance.sync();
