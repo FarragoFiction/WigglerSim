@@ -42,7 +42,7 @@ void start() {
             saveLink2.href = Url.createObjectUrl(blob).toString();
             saveLink2.target = "_blank";
             saveLink2.download = "recoverFileWigglerSimObjectURL.txt";
-            saveLink2.setInnerHtml("<br>(Experimental Alternative if First Link Doesn't Work");
+            saveLink2.setInnerHtml("<br>(Alternative data format if  First Link Doesn't Work");
             querySelector('#output').append(saveLink2);
         }catch(e) {
             DivElement error = new DivElement();
@@ -55,8 +55,8 @@ void start() {
         AnchorElement saveLink3 = new AnchorElement();
         saveLink3.href = new UriData.fromString(LZString.compressToEncodedURIComponent(window.localStorage[Player.DOLLSAVEID]), mimeType: "text/plain").toString();
         saveLink3.target = "_blank";
-        saveLink3.download = "recoverFileWigglerSimURILZ.txt";
-        saveLink3.setInnerHtml("<br>(Second Experimental Alternative if First Link Doesn't Work");
+        saveLink3.download = "recoverFileWigglerSimDefaultLZ.txt";
+        saveLink3.setInnerHtml("<br>Compressed Save Data (Roughly 70% smaller file)");
         querySelector('#output').append(saveLink3);
 
         AnchorElement saveLink4 = new AnchorElement();
@@ -67,7 +67,7 @@ void start() {
         saveLink4.href = (Url.createObjectUrl(blob).toString());
         saveLink4.target = "_blank";
         saveLink4.download = "recoverFileWigglerSimObjectUrlLZ.txt";
-        saveLink4.setInnerHtml("<br>(Third Experimental Alternative if First Link Doesn't Work");
+        saveLink4.setInnerHtml("<br>(Alternative data format if compressed link doesn't work.");
         querySelector('#output').append(saveLink4);
     }
 

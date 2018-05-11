@@ -6,6 +6,7 @@ import 'dart:html';
 import "../Pets/PetLib.dart";
 import "PlayPen.dart";
 import "MoneyHandler.dart";
+import '../lz-string.dart';
 
 //handles shit that my instincts want to put on a page controller.
 class GameObject {
@@ -50,7 +51,7 @@ class GameObject {
                 });
             });
 
-            window.alert("Shit. There's been an error.");
+            window.alert("Shit. There's been an error. $e");
         });
 
         infoElement = new DivElement();
@@ -173,7 +174,11 @@ class GameObject {
 
     void parseLoadData(String loadData) {
         //if it's not in the format I expect, error out. window.alert.
-        player.loadFromJSON(loadData);
+        try {
+            player.loadFromJSON(loadData);
+        }catch(e) {
+            player.loadFromJSON(LZString.decompressFromEncodedURIComponent(loadData));
+        }
         save();
         window.location.reload();
     }
@@ -215,7 +220,11 @@ class GameObject {
         saveLink.target = "_blank";
         saveLink.download = "wigglerSimData.txt";
         saveLink.setInnerHtml("Download Save Backup?");
+        DivElement suggestion = new DivElement();
+        suggestion.setInnerHtml( "(If anything goes wrong with save data try the <a href = 'meteors.html'>Meteor</a> page to get raw save data.");
         linkContainer.append(saveLink);
+        linkContainer.append(suggestion);
+
         container.append(linkContainer);
     }
 

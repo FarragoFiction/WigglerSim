@@ -4,6 +4,7 @@ import 'dart:async';
 import '../GameShit/GameObject.dart';
 import "navbar.dart";
 
+
 GameObject game;
 void main() {
   loadNavbar();
