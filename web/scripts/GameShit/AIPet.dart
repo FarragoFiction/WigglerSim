@@ -152,9 +152,65 @@ class AIPet extends AIObject {
         g.extendedBody.imgNumber = rand.pickFrom(bodies);
     }
 
-    //grub body 3 and grub body 4
     @override
-    Future<Null> setUpWalkAnimation() async {
+    Future<Null> setUpSeadwellerWalkAnimation1() async {
+        HomestuckGrubDoll g = grub.doll;
+        Random rand = new Random();
+        rand.nextInt(10); //init
+        grub.canvas = null; //means it will make a new one, so old reference is free
+        if(rand.nextBool()) {
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 21;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 22;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+        }else { //so they don't all look the same
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 21;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 22;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+        }
+        grub.canvas = null; //means it will make a new one, so old reference is free
+
+    }
+
+    @override
+    Future<Null> setUpSeadwellerWalkAnimation2() async {
+        HomestuckGrubDoll g = grub.doll;
+        Random rand = new Random();
+        rand.nextInt(10); //init
+        grub.canvas = null; //means it will make a new one, so old reference is free
+        if(rand.nextBool()) {
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 12;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 13;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+        }else { //so they don't all look the same
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 13;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = 12;
+            await grub.drawNoResize();
+            walkAnimation.addAnimationFrame(grub.canvas);
+        }
+        grub.canvas = null; //means it will make a new one, so old reference is free
+    }
+
+    @override
+    Future<Null> setUpLanddwellerWalkAnimation1() async {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
@@ -179,6 +235,23 @@ class AIPet extends AIObject {
             walkAnimation.addAnimationFrame(grub.canvas);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
+    }
+
+    //grub body 3 and grub body 4
+    @override
+    Future<Null> setUpWalkAnimation() async {
+        HomestuckGrubDoll grubDoll = grub.doll as HomestuckGrubDoll;
+        Random rand = new Random(grubDoll.extendedHairBack.imgNumber);
+        rand.nextInt(); //init
+        if(grubDoll.bloodColor == HomestuckTrollDoll.VIOLET || grubDoll.bloodColor == HomestuckTrollDoll.FUCHSIA) {
+            if(rand.nextBool()) {
+                await setUpSeadwellerWalkAnimation1();
+            }else {
+                await setUpSeadwellerWalkAnimation2();
+            }
+        }else{
+            await setUpLanddwellerWalkAnimation1();
+        }
     }
 
     //can set to null, too.
