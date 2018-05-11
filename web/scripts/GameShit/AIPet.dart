@@ -110,9 +110,24 @@ class AIPet extends AIObject {
         }
     }
 
+    Future<Null> setupIdleAnimation() async {
+        HomestuckGrubDoll grubDoll = grub.doll as HomestuckGrubDoll;
+        Random rand = new Random(grubDoll.extendedHairBack.imgNumber);
+        rand.nextInt(); //init
+        if(grubDoll.bloodColor == HomestuckTrollDoll.VIOLET || grubDoll.bloodColor == HomestuckTrollDoll.FUCHSIA) {
+            if(rand.nextBool()) {
+                await setUpSeadwellerIdleAnimation1();
+            }else {
+                await setUpSeadwellerIdleAnimation1();
+            }
+        }else{
+            await setUpLandIdleAnimation();
+        }
+    }
+
     //grub body 0 and grub body 1
     @override
-    Future<Null> setUpIdleAnimation() async {
+    Future<Null> setUpLandIdleAnimation() async {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
@@ -144,12 +159,74 @@ class AIPet extends AIObject {
 
     }
 
-    void restoreDefaultBody() {
-        List<int> bodies = <int>[0,1,2];
+    Future<Null> setUpSeadwellerIdleAnimation2() async {
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
-        g.extendedBody.imgNumber = rand.pickFrom(bodies);
+        grub.canvas = null; //means it will make a new one, so old reference is free
+        int imgNum1 = 14;
+        int imgNum2 = 15;
+        if(!grub.isEnergetic) { //lazy grub
+            imgNum1 = 16;
+            imgNum2 = 17;
+        }
+        if(rand.nextBool()) {
+            g.extendedBody.imgNumber = imgNum1;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = imgNum2;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+        }else { //so they don't all look the same
+            g.extendedBody.imgNumber = imgNum2;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = imgNum1;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+        }
+        grub.canvas = null; //means it will make a new one, so old reference is free
+
+    }
+
+    Future<Null> setUpSeadwellerIdleAnimation1() async {
+        HomestuckGrubDoll g = grub.doll;
+        Random rand = new Random();
+        rand.nextInt(10); //init
+        grub.canvas = null; //means it will make a new one, so old reference is free
+        int imgNum1 = 23;
+        int imgNum2 = 24;
+        if(!grub.isEnergetic) { //lazy grub
+            imgNum1 = 25;
+            imgNum2 = 26;
+        }
+        if(rand.nextBool()) {
+            g.extendedBody.imgNumber = imgNum1;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = imgNum2;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+        }else { //so they don't all look the same
+            g.extendedBody.imgNumber = imgNum2;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = imgNum1;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas);
+        }
+        grub.canvas = null; //means it will make a new one, so old reference is free
+
+    }
+
+    void restoreDefaultBody() {
+        List<int> bodies = <int>[0,1,2];
+        HomestuckGrubDoll g = grub.doll;
+        g.pickCasteAppropriateBody();
     }
 
     @override
