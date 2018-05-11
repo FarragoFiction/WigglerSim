@@ -110,7 +110,8 @@ class AIPet extends AIObject {
         }
     }
 
-    Future<Null> setupIdleAnimation() async {
+    @override
+    Future<Null> setUpIdleAnimation() async {
         HomestuckGrubDoll grubDoll = grub.doll as HomestuckGrubDoll;
         Random rand = new Random(grubDoll.extendedHairBack.imgNumber);
         rand.nextInt(); //init
@@ -118,11 +119,12 @@ class AIPet extends AIObject {
             if(rand.nextBool()) {
                 await setUpSeadwellerIdleAnimation1();
             }else {
-                await setUpSeadwellerIdleAnimation1();
+                await setUpSeadwellerIdleAnimation2();
             }
         }else{
             await setUpLandIdleAnimation();
         }
+        print("$grub idle animations is ${idleAnimation.animations}");
     }
 
     //grub body 0 and grub body 1
