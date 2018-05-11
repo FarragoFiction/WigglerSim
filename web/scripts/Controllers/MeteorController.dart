@@ -70,7 +70,7 @@ void start() {
         saveLink4.setInnerHtml("<br>(Alternative data format if compressed link doesn't work.");
         querySelector('#output').append(saveLink4);
 
-        DivElement lastShot = new DivElement()..setInnerHtml("Okay. If the links don't work at all, you can manually copy this and save it to a .txt file. Here's hoping.");
+        DivElement lastShot = new DivElement()..setInnerHtml("Okay. If the links don't work at all (likely in IE), you can manually copy this and save it to a .txt file. Here's hoping.");
         TextAreaElement saveAea = new TextAreaElement();
         saveAea.value = LZString.compressToEncodedURIComponent(window.localStorage[Player.DOLLSAVEID]);
         lastShot.append(saveAea);
