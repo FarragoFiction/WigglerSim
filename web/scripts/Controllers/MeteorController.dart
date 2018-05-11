@@ -4,6 +4,8 @@ import 'dart:async';
 import '../GameShit/GameObject.dart';
 import "../Player/Player.dart";
 import "navbar.dart";
+import '../lz-string.dart';
+
 
 GameObject game;
 void main() {
@@ -28,10 +30,48 @@ void start() {
         AnchorElement saveLink = new AnchorElement();
         saveLink.href = new UriData.fromString(window.localStorage[Player.DOLLSAVEID], mimeType: "text/plain").toString();
         saveLink.target = "_blank";
-        saveLink.download = "recoverFileWigglerSim.txt";
-        saveLink.setInnerHtml("Download Last Minute Backup/Recover file?");
+        saveLink.download = "recoverFileWigglerSimDefault.txt";
+        saveLink.setInnerHtml("<br>Download Last Minute Backup/Recover file?");
         querySelector('#output').append(saveLink);
+
+        try {
+            AnchorElement saveLink2 = new AnchorElement();
+            //saveLink2.href = new UriData.fromString(window.localStorage[Player.DOLLSAVEID], mimeType: "text/plain").toString();
+            String string = window.localStorage[Player.DOLLSAVEID];
+            Blob blob = new Blob([string]); //needs to take in a list o flists
+            saveLink2.href = Url.createObjectUrl(blob).toString();
+            saveLink2.target = "_blank";
+            saveLink2.download = "recoverFileWigglerSimObjectURL.txt";
+            saveLink2.setInnerHtml("<br>(Experimental Alternative if First Link Doesn't Work");
+            querySelector('#output').append(saveLink2);
+        }catch(e) {
+            DivElement error = new DivElement();
+            error.style.color = "red";
+            error.setInnerHtml("Error attempting to make Object URL for alternative back up url. $e");
+            querySelector('#output').append(error);
+        }
+
+        //stupidly
+        AnchorElement saveLink3 = new AnchorElement();
+        saveLink3.href = new UriData.fromString(LZString.compressToEncodedURIComponent(window.localStorage[Player.DOLLSAVEID]), mimeType: "text/plain").toString();
+        saveLink3.target = "_blank";
+        saveLink3.download = "recoverFileWigglerSimURILZ.txt";
+        saveLink3.setInnerHtml("<br>(Second Experimental Alternative if First Link Doesn't Work");
+        querySelector('#output').append(saveLink3);
+
+        AnchorElement saveLink4 = new AnchorElement();
+        //saveLink2.href = new UriData.fromString(window.localStorage[Player.DOLLSAVEID], mimeType: "text/plain").toString();
+        String string = LZString.compressToEncodedURIComponent(window.localStorage[Player.DOLLSAVEID]);
+        Blob blob = new Blob([string]); //needs to take in a list o flists
+        saveLink4.href = Url.createObjectUrl(blob).toString();
+        saveLink4.href = (Url.createObjectUrl(blob).toString());
+        saveLink4.target = "_blank";
+        saveLink4.download = "recoverFileWigglerSimObjectUrlLZ.txt";
+        saveLink4.setInnerHtml("<br>(Third Experimental Alternative if First Link Doesn't Work");
+        querySelector('#output').append(saveLink4);
     }
+
+
 
 
 }
