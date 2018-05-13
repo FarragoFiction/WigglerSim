@@ -45,7 +45,7 @@ class PlayPen {
         for(Pet p in potentialGrubs) {
             if(p is Grub && pets.length < 16) { //don't let infinite
                 p.lastPlayed = new DateTime.now();
-                print("$p last played with ${p.daysSincePlayed}");
+                //print("$p last played with ${p.daysSincePlayed}");
                 AIPet aip = new AIPet(p, x: x); //can't await it in the add
                 if(rand.nextBool()) aip.turnWays = true;
                 await aip.setUpIdleAnimation();
@@ -70,7 +70,7 @@ class PlayPen {
                 //print("want to investigate $item");
                 p.target = item; //they are interested in it.
             }else {
-               // print("fuck that $item, my curiosity is ${p.curious.value}");
+               // T("fuck that $item, my curiosity is ${p.curious.value}");
             }
         }
         items.add(item);
@@ -79,7 +79,7 @@ class PlayPen {
     //set the bg to the div so that the canvas can just clear itself instead of redrawing pixels
     Future<Null> setBackground(divForCanvas) async{
         ImageElement image = await Loader.getResource((backgroundImage));
-        print("background image is $backgroundImage");
+       // print("background image is $backgroundImage");
         divForCanvas.style.backgroundImage = "url(${image.src})";
 
     }

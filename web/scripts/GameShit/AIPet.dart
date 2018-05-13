@@ -686,7 +686,7 @@ class AIPet extends AIObject {
         Random rand = new Random();
 
         if(exploreTargets.isEmpty) {
-            if(copiedObjects.isNotEmpty) print("TARGET TEST: nobody close by to ${grub.name} but there are ${copiedObjects.length} items in the world");
+            //if(copiedObjects.isNotEmpty) print("TARGET TEST: nobody close by to ${grub.name} but there are ${copiedObjects.length} items in the world");
             //small chance of exploring anyways, so uncurious grubs don't just sit there
             if(rand.nextDouble() > 0.3) {
                 target = rand.pickFrom(copiedObjects);

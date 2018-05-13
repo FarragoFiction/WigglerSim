@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 import "GameObject.dart";
 import "Empress.dart";
+import "../Controllers/navbar.dart";
 
 class MoneyHandler {
     static MoneyHandler instance;
@@ -15,6 +16,11 @@ class MoneyHandler {
     Duration timeTillAllowence;
 
     MoneyHandler(Element container) {
+
+        if(getParameterByName("ca\$h",null) == "money") {
+            GameObject.instance.player.caegers += 383838; //38D says the empress
+            GameObject.instance.save();
+        }
         print("making a money handler");
         instance = this;
         containerElement = new DivElement();
