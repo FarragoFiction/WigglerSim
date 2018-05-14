@@ -7,7 +7,7 @@ import "package:BlackJack/BlackJack.dart";
 import "../GameShit/Empress.dart";
 import "../GameShit/MoneyHandler.dart";
 import "dart:math" as Math;
-Game blackJackGame;
+BlackJackGame blackJackGame;
 GameObject game;
 Element div;
 int bet = 113;
@@ -102,7 +102,7 @@ Future<Null> start() async{
 
   await Loader.preloadManifest();
   await drawEmpress();
-  blackJackGame = new Game(Card.getFreshDeck(),div, finishGame);
+  blackJackGame = new BlackJackGame(Card.getFreshDeck(),div, finishGame);
   blackJackGame.dealer.name = "Empress ${Empress.instance.troll.name}";
   blackJackGame.player.name = "${GameObject.instance.player.name}";
   blackJackGame.dealerLostQuips = empressLoseQuotes();
@@ -145,9 +145,15 @@ List<String> empressLoseQuotes() {
 
 void finishGame() {
   String result = " You lost, thems the breaks.";
-  if(!blackJackGame.lost) {
+  if(blackJackGame.result == BlackJackGame.WON) {
     int winnings = 2* bet;
     result = (" You won ${winnings} Caegers!!!");
+    GameObject.instance.player.caegers = GameObject.instance.player.caegers + winnings;
+    GameObject.instance.save();
+    MoneyHandler.instance.sync();
+  }else if (blackJackGame.result == BlackJackGame.TIED) {
+    int winnings =  bet;
+    result = (" You got back ${winnings} Caegers.");
     GameObject.instance.player.caegers = GameObject.instance.player.caegers + winnings;
     GameObject.instance.save();
     MoneyHandler.instance.sync();
