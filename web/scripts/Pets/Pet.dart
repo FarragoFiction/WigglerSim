@@ -195,7 +195,7 @@ abstract class Pet {
         int length = 0;
         //can't do a raw "contains" cuz might have spaces
         for(String s in castesRemembered) {
-            print ("Found a $caste  in memory");
+            //print ("Found a $caste  in memory");
             if(s.contains(caste)) count ++;
             if(s != null && s.isNotEmpty) length ++; //can have nulls in it.
         }

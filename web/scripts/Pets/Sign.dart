@@ -50,7 +50,7 @@ class Sign {
         if(caste == HomestuckTrollDoll.MUTANT) caste = HomestuckTrollDoll.LIME; //all mutants given a lime sign
         if(allSigns.isEmpty) Sign.initAllSigns();
         int ret =  allSigns.where((Sign c) => c.caste == caste).where((Sign c) => c.aspect == aspect).where((Sign c) => c.lunarSway == lunarSway).first.imgNum;
-        print("My caste is $caste, my aspect is $aspect and my lunary sway is $lunarSway.  I picked sign $ret");
+       // print("My caste is $caste, my aspect is $aspect and my lunary sway is $lunarSway.  I picked sign $ret");
         return ret;
     }
 
@@ -380,12 +380,12 @@ class Sign {
     static List<Sign> get completedSigns {
         List<Sign> ret = new List<Sign>();
         if(Sign.allSigns.isEmpty) Sign.initAllSigns();
-        print("getting completed signs, allSigns is ${allSigns.length}");
+        //print("getting completed signs, allSigns is ${allSigns.length}");
         for(Sign s in allSigns) {
-            print("is sign $s complete?");
+           // print("is sign $s complete?");
             List<Object> alumniWithSign = GameObject.instance.player.petInventory.alumniWithSign(s.imgNum);
             if(alumniWithSign.isNotEmpty) {
-                print("sign $s is complete");
+               // print("sign $s is complete");
                 ret.add(s);
             }
         }
@@ -395,9 +395,9 @@ class Sign {
     static List<String> get completedCastes {
         List<String> ret = new List<String>();
         List<Sign> cache = completedSigns;
-        print("all completed signs is $cache");
+        //print("all completed signs is $cache");
         for(String caste in HomestuckTrollDoll.castes) {
-            print("have i completed $caste?");
+            //print("have i completed $caste?");
             if(isCasteComplete(caste, cache)) ret.add(caste);
         }
         return ret;
@@ -409,7 +409,7 @@ class Sign {
         for(Sign s in signs) {
             if(s.caste == caste) amount ++;
         }
-        print("the number of signs for $caste i have is $amount and completed signs was ${signs.length}");
+        //print("the number of signs for $caste i have is $amount and completed signs was ${signs.length}");
         return amount == goal;
     }
 
