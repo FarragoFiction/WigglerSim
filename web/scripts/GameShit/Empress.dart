@@ -1,3 +1,4 @@
+import '../Controllers/navbar.dart';
 import "../Pets/PetLib.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "../GameShit/AIItem.dart";
@@ -80,6 +81,12 @@ class Empress {
             defaultAmount += ratio.abs();
         }
         return Math.min(6, defaultAmount);
+    }
+
+    bool allowsSpeculation() {
+        if(troll == null) return false;
+        if(troll.isIdealistic || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") return true;
+        return false;
     }
 
     bool allowsRenaming() {

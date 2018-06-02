@@ -328,6 +328,13 @@ class PetInventory {
         container.append(subContainer3);
     }
 
+    void drawLifeSimButton(Element container, Troll troll) {
+        ButtonElement button = new ButtonElement()..text = "I wonder what their life was like???";
+        container.append(button);
+        //TODO store this troll in a special data slot
+        window.localStorage["SELECTEDALUMNI"] = troll.toJson().toString();
+    }
+
 
     //pass in subset of alumni if that's what you want
     Future<Null> drawAlumni(Element container, [List<Troll> trolls]) async{
@@ -351,6 +358,7 @@ class PetInventory {
             CanvasElement c = await drawPet(subContainer, p);
             renderHairDressingButton(subContainer, p, c);
             renderClothesStylistButton(subContainer, p, c);
+            drawLifeSimButton(subContainer, p);
 
 
 
