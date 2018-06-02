@@ -719,6 +719,7 @@ abstract class Pet {
             canvas = new CanvasElement(width: width, height: height);
             canvas.context2D.clearRect(0, 0, width, height);
             CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
+            print("Drawing doll ${doll.toDataBytesX()}");
             await DollRenderer.drawDoll(dollCanvas, doll);
 
             dollCanvas = Renderer.cropToVisible(dollCanvas);

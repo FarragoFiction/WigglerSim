@@ -302,6 +302,7 @@ class Player {
 
     //TODO probably need to spend time thining of what needs to happen here. should i cache canvas?
     Future<CanvasElement> draw() async {
+        //print("going to draw doll with first part ${doll.renderingOrderLayers.first.imgLocation} and uses absolute path ${doll.absolutePathStart} ${doll.useAbsolutePath} and folder of ${doll.folder}");
         if(canvas == null) canvas = new CanvasElement(width: width, height: height);
         canvas.context2D.clearRect(0,0,width,height);
         CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
