@@ -332,7 +332,10 @@ class PetInventory {
         ButtonElement button = new ButtonElement()..text = "I wonder what their life was like???";
         container.append(button);
         //TODO store this troll in a special data slot
-        window.localStorage["SELECTEDALUMNI"] = troll.toJson().toString();
+        button.onClick.listen((Event e) {
+            window.localStorage["SELECTEDALUMNI"] = troll.toJson().toString();
+            window.location.href = "../LifeSim/alumniLife.html";
+        });
     }
 
 

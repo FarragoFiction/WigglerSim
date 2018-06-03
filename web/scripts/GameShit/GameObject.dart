@@ -122,6 +122,7 @@ class GameObject {
     void drawAGraduatingTroll(Element container) {
         Troll t = player.petInventory.getGraduatingTroll();
         if(t != null) {
+            print("graduating ${t.name} with doll of ${t.doll.toDataBytesX()}");
             player.petInventory.drawPet(container, t);
             player.petInventory.graduate(t);
             //ppl occasionally have glitches where it fails to graduate

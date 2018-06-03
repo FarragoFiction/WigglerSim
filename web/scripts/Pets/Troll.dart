@@ -54,9 +54,10 @@ class Troll extends Pet{
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         String colorWord = t.bloodColorToWord(p.aspect_light);
         String aspect = highestStatToAspectWord();
-        Random rand = new Random();
-        //TODO pick moon via some sane metric, not random
+        Random rand = new Random(doll.seed);
+        //its random, but based on what the doll looks like....so....is that enough?
         String lunarSway = rand.pickFrom(<String>[Sign.PROSPIT, Sign.DERSE]);
+
         t.canonSymbol.imgNumber = Sign.getSignByCriteria(colorWord, aspect, lunarSway);
         print("Assigning a sign of ${t.canonSymbol.imgNumber} to troll with ${colorWord}, ${aspect} and ${lunarSway}.  ");
 
