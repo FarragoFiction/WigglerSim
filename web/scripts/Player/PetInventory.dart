@@ -329,14 +329,17 @@ class PetInventory {
     }
 
     void drawLifeSimButton(Element container, Troll troll) {
-        ButtonElement button = new ButtonElement()..text = "I wonder what their life was like???";
-        container.append(button);
-        //TODO store this troll in a special data slot
-        button.onClick.listen((Event e) {
-            window.localStorage["SELECTEDALUMNI"] = troll.toJson().toString();
-            //window.location.href = "../LifeSim/alumniLife.html";
-            window.open("../LifeSim/alumniLife.html", "_blank");
-        });
+        if(Empress.instance.allowsSpeculation()) {
+            ButtonElement button = new ButtonElement()
+                ..text = "I wonder what their life was like???";
+            container.append(button);
+            //TODO store this troll in a special data slot
+            button.onClick.listen((Event e) {
+                window.localStorage["SELECTEDALUMNI"] = troll.toJson().toString();
+                //window.location.href = "../LifeSim/alumniLife.html";
+                window.open("../LifeSim/alumniLife.html", "_blank");
+            });
+        }
     }
 
 
