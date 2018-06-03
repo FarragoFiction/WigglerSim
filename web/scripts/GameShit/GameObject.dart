@@ -130,6 +130,8 @@ class GameObject {
             //so do all.
             if(player.petInventory.getGraduatingTroll() != null) {
                 drawAGraduatingTroll(container);
+            }else {
+                save();
             }
 
         }else {

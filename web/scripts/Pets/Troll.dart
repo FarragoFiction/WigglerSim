@@ -38,7 +38,11 @@ class Troll extends Pet{
 
     Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
         loadFromJSON(json, jsonObj);
-        this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
+
+        //only need to do this if it somehow was accidentally a grub or something
+        //also there was a bug in the converter that meant the max image layer would become zero when i did this
+        //meant that derse prospit fucsias (last canon symbol) were never able to be saved here.
+        if(!(doll is HomestuckTrollDoll)) this.doll = Doll.convertOneDollToAnother(doll, new HomestuckTrollDoll());
         assignSign();
         //print("doll for troll is $doll");
        // print ("loaded $name");
@@ -51,6 +55,7 @@ class Troll extends Pet{
 
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
         if(!force && t.canonSymbol.imgNumber != 0) return; //don't fucking re decide this.
+        print("i'm going to assign a sign to a troll with canon symbol of ${t.canonSymbol.imgNumber}");
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         String colorWord = t.bloodColorToWord(p.aspect_light);
         String aspect = highestStatToAspectWord();
@@ -60,7 +65,6 @@ class Troll extends Pet{
 
         t.canonSymbol.imgNumber = Sign.getSignByCriteria(colorWord, aspect, lunarSway);
         print("Assigning a sign of ${t.canonSymbol.imgNumber} to troll with ${colorWord}, ${aspect} and ${lunarSway}.  ");
-
     }
 
 
@@ -76,7 +80,7 @@ class Troll extends Pet{
             }
         }
         Random rand = new Random();
-        print("I am $this and my stats are $stats and i think my highest is ${validChoices}");
+        print("I am $this and my stats are $stats and i think my highest is ${validChoices} and my doll is ${doll.toDataBytesX()}");
         return rand.pickFrom(validChoices).flavor.aspect;
     }
 

@@ -17,7 +17,6 @@ Future<Null> start() async {
   Element container = new DivElement();
   container.style.display = "inline-block";
   querySelector('#output').append(container);
-  await game.drawAGraduatingTroll(container);
-
+  game.drawAGraduatingTroll(container);
 }
 
