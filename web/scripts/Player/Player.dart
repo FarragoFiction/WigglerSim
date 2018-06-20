@@ -249,6 +249,7 @@ class Player {
         nameButton.text = "Say Your Name";
         nameButton.onClick.listen((Event e) {
             name = nameElement.value;
+            doll.name = name;
             print("new name is $name, intro is $intro");
             introElement.text = intro;
             save();
