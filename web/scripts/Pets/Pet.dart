@@ -512,7 +512,7 @@ abstract class Pet {
 
 
     JSONObject toJson() {
-        doll.name = name; //handles it
+        doll.dollName = name; //handles it
         JSONObject json = new JSONObject();
         json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
         json[ISEMPRESS] = empress.toString();
