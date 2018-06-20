@@ -67,6 +67,7 @@ Future<Null> begin() async{
 }
 
 void drawConversionButton() {
+  div.setInnerHtml("");
   ButtonElement button = new ButtonElement()..text = "Begin Conversion Process";
   div.append(button);
   button.onClick.listen((Event e) {
