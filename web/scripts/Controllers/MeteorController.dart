@@ -4,7 +4,6 @@ import 'dart:async';
 import '../GameShit/GameObject.dart';
 import "../Player/Player.dart";
 import "navbar.dart";
-import '../lz-string.dart';
 
 
 GameObject game;
