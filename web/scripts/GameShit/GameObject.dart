@@ -18,9 +18,6 @@ class GameObject {
 
     GameObject(bool redirect) {
         window.onError.listen((e) {
-            if(player.name != player.doll.dollName) {
-                window.location.href= "conversion.html";
-            }
             DivElement linkContainer = new DivElement();
             linkContainer.style.padding = "10px";
             AnchorElement saveLink = new AnchorElement();
@@ -181,8 +178,10 @@ class GameObject {
     void parseLoadData(String loadData) {
         //if it's not in the format I expect, error out. window.alert.
         try {
+            print("trying to load from json");
             player.loadFromJSON(loadData);
         }catch(e) {
+            print("something went wrong with json, so trying to load from lzstring, $e");
             player.loadFromJSON(LZString.decompressFromEncodedURIComponent(loadData));
         }
         save();
