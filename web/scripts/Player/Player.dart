@@ -52,11 +52,12 @@ class Player {
 
 
      void loadFromJSON(String json) {
-        print("loading player from json $json");
+        //print("loading player from json $json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
         //print("json object is ${jsonObj}");
 
         String dataString = jsonObj[DATASTRING];
+       // print("dataString is $dataString");
         String lastPlayedString = jsonObj[LASTPLAYED];
         if(jsonObj[LASTALLOWENCE] != null) {
             String lastAllowenceString = jsonObj[LASTALLOWENCE];

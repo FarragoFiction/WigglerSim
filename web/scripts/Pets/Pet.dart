@@ -483,6 +483,7 @@ abstract class Pet {
     void loadFromJSON(String json, [JSONObject jsonObj]) {
         if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         String dataString = jsonObj[DOLLDATAURL];
+       // print("data string is $dataString");
         String lastPlayedString = jsonObj[LASTPLAYED];
         String hatchString = jsonObj[HATCHDATE];
         String fedString = jsonObj[LASTFED];
@@ -579,7 +580,7 @@ abstract class Pet {
         DivElement anchorContainer = new DivElement();
         ret.append(anchorContainer);
         AnchorElement a = new AnchorElement();
-        a.href = "http://farragofiction.com/DollSim/index.html?${doll.toDataBytesX()}";
+        a.href = "http://farragofiction.com/DollSim/index.html?${doll.toDataUrlPart()}";
         a.target = "_blank";
         a.text = "Edit Doll Link";
         anchorContainer.append(a);
