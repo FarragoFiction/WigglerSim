@@ -33,7 +33,6 @@ void saveButton() {
   saveLink2.target = "_blank";
   saveLink2.download = "recoverFileWigglerSimObjectURL.txt";
   saveLink2.setInnerHtml("Seriously, click this link to download a back up. I refuse to continue untill you do.");
-  drawConversionButton();
   saveLink2.onClick.listen((Event e) {
     drawConversionButton();
   });

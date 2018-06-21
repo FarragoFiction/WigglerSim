@@ -52,7 +52,7 @@ class Player {
 
 
      void loadFromJSON(String json) {
-        print("loading player from json");
+        print("loading player from json $json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
         //print("json object is ${jsonObj}");
 
@@ -249,7 +249,7 @@ class Player {
         nameButton.text = "Say Your Name";
         nameButton.onClick.listen((Event e) {
             name = nameElement.value;
-            doll.name = name;
+            //doll.dollName = name;
             print("new name is $name, intro is $intro");
             introElement.text = intro;
             save();
@@ -316,6 +316,7 @@ class Player {
     }
 
     JSONObject toJson() {
+        doll.dollName = name;
         lastPlayed = new DateTime.now();
         JSONObject json = new JSONObject();
         json[DATASTRING] = doll.toDataBytesX();

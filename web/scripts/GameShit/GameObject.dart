@@ -18,7 +18,9 @@ class GameObject {
 
     GameObject(bool redirect) {
         window.onError.listen((e) {
-
+            if(player.name != player.doll.dollName) {
+                window.location.href= "conversion.html";
+            }
             DivElement linkContainer = new DivElement();
             linkContainer.style.padding = "10px";
             AnchorElement saveLink = new AnchorElement();
@@ -68,7 +70,9 @@ class GameObject {
         new MoneyHandler(querySelector("#output"));
         querySelector("#output").append(infoElement);
 
-        if(redirect && player.petInventory.pets.isEmpty && player.petInventory.alumni.isEmpty) {
+        if(player.name != player.doll.dollName) {
+            window.location.href= "converstion.html";
+        }else if(redirect && player.petInventory.pets.isEmpty && player.petInventory.alumni.isEmpty) {
             window.location.href= "petInventory.html";
         }
     }
