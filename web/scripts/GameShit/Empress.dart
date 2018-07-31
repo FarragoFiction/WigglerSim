@@ -89,6 +89,20 @@ class Empress {
         return false;
     }
 
+    bool allowsFundingTrees() {
+        return true;
+        if(troll == null) return false;
+        if(troll.isPatient || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") return true;
+
+    }
+
+    bool allowsImportingMutants() {
+        return true;
+        if(troll == null) return false;
+        if(troll.isCalm || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") return true;
+
+    }
+
     bool allowsRenaming() {
         if(troll == null) return false;
         if(troll.isCurious) return true;
