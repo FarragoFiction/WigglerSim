@@ -1,3 +1,4 @@
+import '../GameShit/MoneyHandler.dart';
 import '../Pets/JSONObject.dart';
 import 'dart:convert';
 import 'dart:html';
@@ -116,7 +117,7 @@ void drawConversionRate() {
 
 void exportRate(DivElement element) {
   DivElement exportElement = new DivElement();
-  LabelElement label = new LabelElement()..text = "Amount to take from LOHAE: 0 Caegers";
+  LabelElement label = new LabelElement()..text = "Amount to take from WigglerSim: 0 Caegers";
   DivElement result2 = new DivElement()..text = "The Empress is willing to let you allocate 0 Caegers of your funding to your work in Horticulture.";
   result2.style.paddingTop = "15px";
   result2.style.width = "500px";
@@ -140,11 +141,19 @@ void exportRate(DivElement element) {
   {
     label.text = "Amount to take from WigglerSim: ${amountToExport.value} Caegers";
   });
+
+  button2.onClick.listen((Event e) {
+    GameObject.instance.player.caegers = GameObject.instance.player.caegers - int.parse(amountToExport.value);
+    GameObject.instance.save();
+    MoneyHandler.instance.sync();
+    sharedFunds += int.parse(amountToExport.value);
+    save();
+  });
 }
 
 InputElement importRate(DivElement element) {
    DivElement importElement = new DivElement()..style.padding = "10px";
-  LabelElement label = new LabelElement()..text = "Amount to Import from LOHAE: 0 Caegers";
+  LabelElement label = new LabelElement()..text = "Amount to Take from LOHAE: 0 Caegers";
   DivElement result = new DivElement()..text = "The Empress is willing to give you 0 Caegers for your work in Horticulture.";
   result.style.paddingTop = "15px";
 
@@ -166,7 +175,15 @@ InputElement importRate(DivElement element) {
 
    amountToImport.onChange.listen((Event e)
    {
-     label.text = "Amount to Import from LOHAE: ${amountToImport.value} Caegers";
+     label.text = "Amount to Take from LOHAE: ${amountToImport.value} Caegers";
+   });
+
+   button.onClick.listen((Event e) {
+     GameObject.instance.player.caegers = GameObject.instance.player.caegers + int.parse(amountToImport.value);
+     GameObject.instance.save();
+     MoneyHandler.instance.sync();
+     sharedFunds += -1* int.parse(amountToImport.value);
+     save();
    });
 
 
