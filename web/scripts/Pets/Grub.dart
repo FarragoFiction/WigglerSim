@@ -1,4 +1,5 @@
 import "Pet.dart";
+import 'Stat.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "JSONObject.dart";
 import 'dart:async';
@@ -38,6 +39,8 @@ class Grub extends Pet{
     //at half way mark, eyes turn yellow like a trolls.
     setEyes();
   }
+
+
 
 
   }

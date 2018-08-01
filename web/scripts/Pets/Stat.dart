@@ -284,3 +284,11 @@ class StatFlavor {
 
 
 }
+
+
+class StatWithDirection {
+    Stat stat;
+    int direction;
+
+    StatWithDirection(Stat this.stat, int this.direction);
+}

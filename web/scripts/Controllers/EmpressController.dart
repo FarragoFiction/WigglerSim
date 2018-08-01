@@ -1,4 +1,5 @@
 import '../GameShit/MoneyHandler.dart';
+import '../Pets/Grub.dart';
 import '../Pets/JSONObject.dart';
 import 'dart:convert';
 import 'dart:html';
@@ -44,9 +45,7 @@ void processTreeSim() {
     copySharedFromDataString(window.localStorage[SHAREDKEY]);
   }
 
-  if(Empress.instance.allowsImportingMutants()) {
-    drawPossibleAdopts();
-  }
+  drawPossibleAdopts();
 
   if(Empress.instance.allowsFundingTrees()) {
     drawConversionRate();
@@ -94,11 +93,43 @@ void save() {
 
 void drawPossibleAdopts() {
   DivElement element = new DivElement();
-  element.text = "There are ${secretsForCalm} Wigglers to adopt.";
+  secretsForCalm.add("Cerulean+Blooded+Grub%3A___HBTo6L8AQYIAIEEAQYIAYMMAIEEAQYIAQYIAQYIAAABLS0s6OjoREREAAAAREREzMzPExMQAQYIAIEEIgeAPAD6wf_MAlgEsBrA14A%3D%3D");
+  secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
+
+  element.text = "There are ${secretsForCalm.length} Wigglers to adopt from LOHAE.";
   AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/LOHAE")..target = "_blank"..text = "Play TreeSim to get Imports";
   a.style.display = "block";
   element.append(a);
   output.append(element);
+
+
+  for(String dataString in secretsForCalm) {
+    SpanElement subContainer = new SpanElement()..style.width = "420px"..style.display="inline-block";
+    element.append(subContainer);
+    Grub p = new Grub(Doll.loadSpecificDoll(dataString));
+    p.name = "Nidhogg's Child";
+    p.makeCorrupt();
+    game.player.petInventory.drawPet(subContainer, p);
+    if(Empress.instance.allowsImportingMutants()) {
+      ButtonElement button = new ButtonElement();
+      button.text = "Adopt the Corrupt Mutant?";
+      subContainer.append(button);
+
+      button.onClick.listen((Event e) {
+        subContainer.remove();
+        game.player.petInventory.pets.add(p);
+        secretsForCalm.remove(dataString);
+        save();
+        game.save();
+      });
+    }else {
+      DivElement divElement = new DivElement()..text = "By Imperial Degree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight.";
+      subContainer.append(divElement);
+    }
+
+  }
+
+
 
 }
 
@@ -106,7 +137,7 @@ void drawConversionRate() {
   DivElement element = new DivElement();
   AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/LOHAE")..target = "_blank"..text = "Play TreeSim to get Imports";
 
-  InputElement amountToImport = importRate(element);
+  importRate(element);
 
   exportRate(element);
   a.style.display = "block";
@@ -151,7 +182,7 @@ void exportRate(DivElement element) {
   });
 }
 
-InputElement importRate(DivElement element) {
+void importRate(DivElement element) {
    DivElement importElement = new DivElement()..style.padding = "10px";
   LabelElement label = new LabelElement()..text = "Amount to Take from LOHAE: 0 Caegers";
   DivElement result = new DivElement()..text = "The Empress is willing to give you 0 Caegers for your work in Horticulture.";
@@ -189,7 +220,6 @@ InputElement importRate(DivElement element) {
 
 
   element.append(importElement);
-  return amountToImport;
 }
 
 

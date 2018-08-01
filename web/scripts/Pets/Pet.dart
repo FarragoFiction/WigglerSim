@@ -83,11 +83,45 @@ import "../Controllers/navbar.dart";
 
 abstract class Pet {
 
+    bool corrupt = false;
+
     //all life stages should be centered around this.
     static int timeUnit = 30*60* 1000; //30 minutes
     //DEPRECATED, use the thing in the init instead /static int timeUnit = 3* 1000;
 
-
+    StatWithDirection get associatedStat {
+        if(doll is HomestuckGrubDoll) {
+            HomestuckGrubDoll grub = doll as HomestuckGrubDoll;
+            String bc = grub.bloodColor;
+            if(bc == HomestuckTrollDoll.BURGUNDY) {
+                return new StatWithDirection(patience,-1);
+            }else if(bc == HomestuckTrollDoll.BRONZE) {
+                return new StatWithDirection(loyal,-1);
+            }else if(bc == HomestuckTrollDoll.GOLD) {
+                return new StatWithDirection(energetic,-1);
+            }else if(bc == HomestuckTrollDoll.LIME) {
+                return new StatWithDirection(loyal,1);
+            }else if(bc == HomestuckTrollDoll.OLIVE) {
+                return new StatWithDirection(external,-1);
+            }else if(bc == HomestuckTrollDoll.JADE) {
+                return new StatWithDirection(patience,1);
+            }else if(bc == HomestuckTrollDoll.TEAL) {
+                return new StatWithDirection(external,1);
+            }else if(bc == HomestuckTrollDoll.CERULEAN) {
+                return new StatWithDirection(curious,1);
+            }else if(bc == HomestuckTrollDoll.INDIGO) {
+                return new StatWithDirection(curious,1);
+            }else if(bc == HomestuckTrollDoll.PURPLE) {
+                return new StatWithDirection(idealistic,-1);
+            }else if(bc == HomestuckTrollDoll.VIOLET) {
+                return new StatWithDirection(idealistic,1);
+            }else if(bc == HomestuckTrollDoll.FUCHSIA) {
+                return new StatWithDirection(energetic,1);
+            }
+        }
+        //when in doubt, lime it up they accept everyone
+        return new StatWithDirection(loyal,1);
+    }
     int millisecondsToChange = Pet.timeUnit;
 
     //TODO procedural description of personality based on stats.
@@ -501,8 +535,11 @@ abstract class Pet {
         namesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDNAMES]);
         castesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDCASTES]);
 
+        if(jsonObj["corrupt"] != null) {
+            corrupt = jsonObj["corrupt"] == true.toString();
+        }
 
-       // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
+        // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
         lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
@@ -524,6 +561,7 @@ abstract class Pet {
         json[NAMEJSON] =  "${name}";
         json[HEALTHJSON] =  "${health}";
         json[TYPE] = type;
+        json["corrupt"] = corrupt.toString();
         json[PATIENCE] = "${patience.value}";
         json[IDEALISTIC] = "${idealistic.value}";
         json[CURIOUS] = "${curious.value}";
@@ -586,6 +624,8 @@ abstract class Pet {
         anchorContainer.append(a);
         return ret;
     }
+
+
 
 
 
@@ -663,10 +703,16 @@ abstract class Pet {
     Future<CanvasElement> drawStats() async {
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
-        if(empress) {
+        if(corrupt) {
+            textCanvas.context2D.fillStyle = "#00ff00";
+            textCanvas.context2D.strokeStyle = "#00aa00";
+            if(empress) {
+                textCanvas.context2D.strokeStyle = "#2c002a";
+            }
+        }else if(empress) {
             textCanvas.context2D.fillStyle = "#d27cc9";
             textCanvas.context2D.strokeStyle = "#2c002a";
-        }else {
+        }else{
             textCanvas.context2D.fillStyle = "#d2ac7c";
             textCanvas.context2D.strokeStyle = "#2c1900";
         }
@@ -739,6 +785,12 @@ abstract class Pet {
             await DollRenderer.drawDoll(canvas, doll);
         }
         return canvas;
+    }
+
+    void makeCorrupt() {
+        corrupt = true;
+        StatWithDirection  as = associatedStat;
+        as.stat.value = 113* as.direction;
     }
 
 
