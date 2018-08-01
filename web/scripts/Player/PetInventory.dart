@@ -99,6 +99,7 @@ class PetInventory {
         if(!pets.contains(original)) return;
         //print("replacing ${original.name} with ${replacement.name}");
         if(!original.name.contains("Egg")) replacement.name = original.name;
+        replacement.corrupt = original.corrupt;
         replacement.external = original.external;
         replacement.curious = original.curious;
         replacement.loyal = original.loyal;
