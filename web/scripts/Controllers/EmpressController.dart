@@ -94,7 +94,7 @@ void save() {
 void drawPossibleAdopts() {
   DivElement element = new DivElement();
  // secretsForCalm.add("Cerulean+Blooded+Grub%3A___HBTo6L8AQYIAIEEAQYIAYMMAIEEAQYIAQYIAQYIAAABLS0s6OjoREREAAAAREREzMzPExMQAQYIAIEEIgeAPAD6wf_MAlgEsBrA14A%3D%3D");
-  //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
+  // secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
   element.text = "There are ${secretsForCalm.length} Wigglers to adopt from LOHAE.";
   AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/LOHAE")..target = "_blank"..text = "Play TreeSim to get Imports";
