@@ -31,6 +31,12 @@ class Grub extends Pet{
       p.add(HomestuckPalette.EYE_WHITE_LEFT, p.aspect_light,true);
       p.add(HomestuckPalette.EYE_WHITE_RIGHT, p.aspect_light,true);
     }
+
+    if(corrupt) {
+        HomestuckPalette p = doll.palette as HomestuckPalette;
+        p.add(HomestuckPalette.EYE_WHITE_LEFT, ReferenceColours.BLACK,true);
+        p.add(HomestuckPalette.EYE_WHITE_RIGHT, ReferenceColours.BLACK,true);
+    }
   }
 
   Grub.fromJSON(String json, [JSONObject jsonObj]) : super(null){
