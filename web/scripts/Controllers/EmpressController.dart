@@ -93,8 +93,8 @@ void save() {
 
 void drawPossibleAdopts() {
   DivElement element = new DivElement();
-  secretsForCalm.add("Cerulean+Blooded+Grub%3A___HBTo6L8AQYIAIEEAQYIAYMMAIEEAQYIAQYIAQYIAAABLS0s6OjoREREAAAAREREzMzPExMQAQYIAIEEIgeAPAD6wf_MAlgEsBrA14A%3D%3D");
-  secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
+ // secretsForCalm.add("Cerulean+Blooded+Grub%3A___HBTo6L8AQYIAIEEAQYIAYMMAIEEAQYIAQYIAQYIAAABLS0s6OjoREREAAAAREREzMzPExMQAQYIAIEEIgeAPAD6wf_MAlgEsBrA14A%3D%3D");
+  //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
   element.text = "There are ${secretsForCalm.length} Wigglers to adopt from LOHAE.";
   AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/LOHAE")..target = "_blank"..text = "Play TreeSim to get Imports";
@@ -149,21 +149,24 @@ void drawConversionRate() {
 void exportRate(DivElement element) {
   DivElement exportElement = new DivElement();
   LabelElement label = new LabelElement()..text = "Amount to take from WigglerSim: 0 Caegers";
-  DivElement result2 = new DivElement()..text = "The Empress is willing to let you allocate 0 Caegers of your funding to your work in Horticulture.";
+  DivElement result2 = new DivElement();
+  DivElement resultInner = new DivElement();
+  result2.append(resultInner);
   result2.style.paddingTop = "15px";
   result2.style.width = "500px";
   result2.style.border = "3px solid black";
   result2.style.marginLeft = "auto";
   result2.style.marginRight = "auto";
-  LabelElement labelBack2 = new LabelElement()..text = "${game.player.caegers}";
+  LabelElement labelBack = new LabelElement()..text = "${game.player.caegers}";
   InputElement amountToExport = new InputElement()..style.padding = "10px";;
   amountToExport.type = "range";
+  amountToExport.value = "0";
   amountToExport.min = "0";
   ButtonElement button2 = new ButtonElement()..text = "Accept";
-  amountToExport.max = "${game.player.caegers}}";
+  amountToExport.max = "${game.player.caegers}";
   exportElement.append(label);
   exportElement.append(amountToExport);
-  exportElement.append(labelBack2);
+  exportElement.append(labelBack);
   exportElement.append(result2);
   result2.append(button2);
   element.append(exportElement);
@@ -171,6 +174,7 @@ void exportRate(DivElement element) {
   amountToExport.onChange.listen((Event e)
   {
     label.text = "Amount to take from WigglerSim: ${amountToExport.value} Caegers";
+    resultInner.text = "The Empress is willing to let you allocate ${amountToExport.value} Caegers of your funding to your work in Horticulture.";
   });
 
   button2.onClick.listen((Event e) {
@@ -179,13 +183,16 @@ void exportRate(DivElement element) {
     MoneyHandler.instance.sync();
     sharedFunds += int.parse(amountToExport.value);
     save();
+    window.location.href = window.location.href;
   });
 }
 
 void importRate(DivElement element) {
    DivElement importElement = new DivElement()..style.padding = "10px";
   LabelElement label = new LabelElement()..text = "Amount to Take from LOHAE: 0 Caegers";
-  DivElement result = new DivElement()..text = "The Empress is willing to give you 0 Caegers for your work in Horticulture.";
+  DivElement result = new DivElement();
+  DivElement resultInner = new DivElement();
+  result.append(resultInner);
   result.style.paddingTop = "15px";
 
   InputElement amountToImport = new InputElement();
@@ -193,7 +200,9 @@ void importRate(DivElement element) {
   ButtonElement button = new ButtonElement()..text = "Accept";
   amountToImport.type = "range";
   amountToImport.min = "0";
-  amountToImport.max = "$sharedFunds";
+  amountToImport.value = "0";
+
+   amountToImport.max = "$sharedFunds";
   importElement.append(label);
   importElement.append(amountToImport);
   importElement.append(labelBack);
@@ -207,6 +216,8 @@ void importRate(DivElement element) {
    amountToImport.onChange.listen((Event e)
    {
      label.text = "Amount to Take from LOHAE: ${amountToImport.value} Caegers";
+     resultInner.text = "The Empress is willing to give you ${amountToImport.value} Caegers for your work in Horticulture.";
+
    });
 
    button.onClick.listen((Event e) {
@@ -215,6 +226,7 @@ void importRate(DivElement element) {
      MoneyHandler.instance.sync();
      sharedFunds += -1* int.parse(amountToImport.value);
      save();
+     window.location.href = window.location.href;
    });
 
 
