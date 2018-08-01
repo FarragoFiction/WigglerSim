@@ -92,7 +92,8 @@ class Troll extends Pet{
         epilogue = jsonObj[EPILOGUE];
     }
 
-        String getLusus() {
+    String getLusus() {
+        if(corrupt) return "Nidhogg Minion";
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
         HomestuckTrollPalette p = t.palette as HomestuckTrollPalette;
         Random rand = new Random();
@@ -107,6 +108,27 @@ class Troll extends Pet{
 
     String getCaregiverPhrase() {
         Random rand = new Random();
+        if(corrupt) {
+            List<String> corruptThing = <String>[
+                "plant trees",
+                "grow trees",
+                "tend trees",
+                "serve shogun",
+                "serve nidhogg",
+                "corrupt others"
+            ];
+            List<String> corruptPhrase = <String>[
+                "prepared them to",
+                "showed them how to",
+                "instructed them to",
+                "made them",
+                "trained them to",
+                "forced them to"
+            ];
+            return "${rand.pickFrom(corruptPhrase)} ${rand.pickFrom(corruptThing)}";
+        }
+
+
         List<String> badThing = <String>["threats","danger","enemies","predators","drones","other trolls","other lusii"];
         List<String> goodThing = <String>["vegetables","food","safety","water","shelter","meat","friends","self-esteem"];
         List<String> lifeSkill = <String>["fight","scavenge","hide","forage","collect food","hoard resources","share","cooperate","hunt"];
@@ -338,7 +360,7 @@ class Troll extends Pet{
             possibilities = s.getPossibleFlavors(possibilities, colorWord);
         }
         possibilities = Stat.defaultFlavor.addWeightedFlavor(possibilities, (averageStat/stats.length).round(), colorWord,true);
-        possibilities = Stat.corruptFlavor.addWeightedFlavor(possibilities, 4037, colorWord,false,true);
+        if(corrupt) possibilities = Stat.corruptFlavor.addWeightedFlavor(possibilities, 4037, colorWord,false,true);
 
         String first = rand.pickFrom(possibilities);
         possibilities.remove(first);
@@ -381,7 +403,13 @@ class Troll extends Pet{
        // testSign();
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
-        if(empress) {
+        if(corrupt) {
+            textCanvas.context2D.fillStyle = "#00ff00";
+            textCanvas.context2D.strokeStyle = "#00aa00";
+            if(empress) {
+                textCanvas.context2D.strokeStyle = "#2c002a";
+            }
+        } else if(empress) {
             textCanvas.context2D.fillStyle = "#d27cc9";
             textCanvas.context2D.strokeStyle = "#2c002a";
         }else {

@@ -57,10 +57,10 @@ class Stat {
             ..fuchsia = <String>["set up camps to corrupt other trolls","corrupted the Empress","corrupted all alien races"]
             ..purple = <String>[ "used religion as a vehical for corruption"]
             ..mutant = <String>["obtained ultimate power","killed","slaughtered"]
-            ..veryHigh = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "]
-            ..high = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "]
-            ..medium = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "]
-            ..low = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "];
+            ..veryHigh = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"]
+            ..high = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"]
+            ..medium = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"]
+            ..low = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"];
 
 
         //these only have the fields that would be interesting to have
@@ -260,7 +260,7 @@ class StatFlavor {
     WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false, isCorrupt = false]) {
         double multiplier = 1.0;
         if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
-        if(isCorrupt) multiplier = 4.037;
+        if(isCorrupt) multiplier = 40.37;
         output = processTier(output, value, Stat.LOW, low, LOWWEIGHT,multiplier);
         output = processTier(output, value, Stat.MEDIUM, medium, MEDIUMWEIGHT,multiplier);
         output = processTier(output, value, Stat.HIGH, high, HIGHWEIGHT,multiplier);
