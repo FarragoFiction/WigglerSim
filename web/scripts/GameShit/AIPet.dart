@@ -407,6 +407,7 @@ class AIPet extends AIObject {
 
     //happy, love, or cool vaguely related to stats
     Emotion getPositiveQuadrantEmotion() {
+        if(grub.corrupt) return Emotion.CORRUPT;
         int flushedPoints = 0;
         int palePoints = 0;
 
@@ -434,6 +435,7 @@ class AIPet extends AIObject {
 
     //happy, love, or cool vaguely related to stats
     Emotion getPositiveEmotion() {
+        if(grub.corrupt) return Emotion.CORRUPT;
         //cool is patient, calm, accepting, free spirited
         int coolPoints = 0;
         //love is idealistic, loyal, energetic, external
@@ -470,7 +472,7 @@ class AIPet extends AIObject {
     //angery, fear, sad,vaguely related to stats
     //some grubs get scared, others get angry
     Emotion getNegativeEmotion() {
-        //TODO
+        if(grub.corrupt) return Emotion.CORRUPT;
         //internal, loyal, curious,energetic
         int fearPoints = 0;
         //realisitc, free-spirited, impatient, external
@@ -514,6 +516,7 @@ class AIPet extends AIObject {
 
     //sleep, bored, or meh are more randomly distributed
     Emotion getNeutralEmotion() {
+        if(grub.corrupt) return Emotion.CORRUPT;
         //patient, energetic, idealistic, internal
         int sleepPoints = 0;
         //calm, realistic, accepting, freespirited
@@ -781,6 +784,7 @@ class AIPet extends AIObject {
 
     //hello new friend (don't need to recurse, if ou're close enough to see friend they can see you)
     void giveGrubFriend(AIPet friend) {
+        if(friend.grub.corrupt) corruptionBonus(friend);
         judgeGrub(friend);
     }
 
@@ -788,6 +792,21 @@ class AIPet extends AIObject {
         judgeObject(item);
         //only get stats the first time it's placed in the world.
         if(item.imaginary) GameObject.instance.playPen.imaginaryItems.remove(item);
+    }
+
+    void corruptionBonus(AIPet pet) {
+        grub.patience.value += pet.patience.value;
+        grub.curious.value += pet.curious.value;
+        grub.external.value += pet.external.value;
+        grub.idealistic.value += pet.idealistic.value;
+        grub.energetic.value += pet.energetic.value;
+        grub.loyal.value += pet.loyal.value;
+        if(new Random().nextDouble() > 0.08) {
+            print("the corruption is spreading into ${pet.grub.name} and ${grub.name}");
+            pet.grub.makeCorrupt();
+            grub.makeCorrupt();
+        }
+        GameObject.instance.save();
     }
 
     void giveObjectStats(AIItem item) {
@@ -905,6 +924,8 @@ class Emotion {
     static Emotion FEAR;
     static Emotion SAD;
 
+    static Emotion CORRUPT;
+
     static Emotion SLEEP;
     static Emotion BORED;
     static Emotion MEH;
@@ -958,6 +979,9 @@ class Emotion {
         FEAR = new Emotion(-1,"fear",<String>["i scare","go away","scawy","no","i hide", "*shivering*"]);
         SAD = new Emotion(-1,"sad",<String>["sad thing","sad","*cry*",'heck',"dang"]);
 
+        CORRUPT = new Emotion(-1,"corrupt",<String>["trees!!","good child!!","good nidhogg!!",'one of us!!',"grow trees!!","plants good!!","join us!!"]);
+
+
     }
 
     @override
@@ -989,7 +1013,12 @@ class Emotion {
             //textCanvas.width = txtWidth;
 
             //print ('going to display text $text');
-            textCanvas.context2D.fillStyle = "#ffffff";
+            if(grub.corrupt) {
+                textCanvas.context2D.fillStyle = "#00ff00";
+
+            }else {
+                textCanvas.context2D.fillStyle = "#ffffff";
+            }
             textCanvas.context2D.strokeStyle = "#000000";
             textCanvas.context2D.fillRect(0, 0, txtWidth, txtHeight);
             textCanvas.context2D.strokeRect(0, 0, txtWidth, txtHeight);
