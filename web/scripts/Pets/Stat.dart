@@ -52,15 +52,16 @@ class Stat {
             ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
 
         corruptFlavor = new StatFlavor(0,"NULL")
-            ..death = <String>["for the good of Sauce.","for the good of Nidhogg","for the good of the Shogun"]
+            ..death = <String>["for the good of Sauce.","for the good of Nidhogg","for the good of the [REDACTED]"]
             ..jade = <String>["corrupted the wigglers in the Caverns","grew wigglers via strange Trees.","discovered they could corrupt other trolls by drinking their blood, Rainbow Drinker style"]
             ..fuchsia = <String>["set up camps to corrupt other trolls","corrupted the Empress","corrupted all alien races"]
             ..purple = <String>[ "used religion as a vehical for corruption"]
             ..mutant = <String>["obtained ultimate power","killed","slaughtered"]
-            ..veryHigh = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"]
-            ..high = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"]
-            ..medium = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"]
-            ..low = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun"];
+            ..veryHigh = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
+            ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
+            ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
+            ..medium = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
+            ..low = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"];
 
 
         //these only have the fields that would be interesting to have

@@ -707,7 +707,7 @@ abstract class Pet {
             textCanvas.context2D.fillStyle = "#00ff00";
             textCanvas.context2D.strokeStyle = "#00aa00";
             if(empress) {
-                textCanvas.context2D.strokeStyle = "#2c002a";
+                textCanvas.context2D.fillStyle = "#d27cc9";
             }
         }else if(empress) {
             textCanvas.context2D.fillStyle = "#d27cc9";
@@ -724,6 +724,10 @@ abstract class Pet {
         textCanvas.context2D.strokeRect(0, 0, width, textHeight);
 
         textCanvas.context2D.fillStyle = "#2c1900";
+        if(corrupt && empress) {
+            textCanvas.context2D.fillStyle = "#00ff00";
+        }
+
 
         int fontSize = 20;
         textCanvas.context2D.font = "${fontSize}px Strife";

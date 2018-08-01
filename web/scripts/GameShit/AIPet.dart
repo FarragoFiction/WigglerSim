@@ -801,7 +801,7 @@ class AIPet extends AIObject {
         grub.idealistic.value += pet.idealistic.value;
         grub.energetic.value += pet.energetic.value;
         grub.loyal.value += pet.loyal.value;
-        if(new Random().nextDouble() > 0.08) {
+        if(new Random().nextDouble() > 0.9) {
             print("the corruption is spreading into ${pet.grub.name} and ${grub.name}");
             pet.grub.makeCorrupt();
             grub.makeCorrupt();
