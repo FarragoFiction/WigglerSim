@@ -175,7 +175,7 @@ class Troll extends Pet{
         int maxAgeOfChallenge = 100;
         int numberOfSweeps = rand.nextIntRange(5, maxAgeOfChallenge*2);
 
-        if(numberOfSweeps >= maxAgeOfChallenge) {
+        if(numberOfSweeps >= maxAgeOfChallenge || corrupt) {
             return heiressBecameEmpress(maxLife);
         }else {
             return heiressDiedChallenging(numberOfSweeps);
@@ -338,6 +338,7 @@ class Troll extends Pet{
             possibilities = s.getPossibleFlavors(possibilities, colorWord);
         }
         possibilities = Stat.defaultFlavor.addWeightedFlavor(possibilities, (averageStat/stats.length).round(), colorWord,true);
+        possibilities = Stat.corruptFlavor.addWeightedFlavor(possibilities, 4037, colorWord,false,true);
 
         String first = rand.pickFrom(possibilities);
         possibilities.remove(first);

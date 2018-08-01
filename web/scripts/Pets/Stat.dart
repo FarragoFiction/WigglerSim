@@ -16,6 +16,7 @@ class Stat {
 
     //all flavor arrays will have default so doesn't sum to zero
     static StatFlavor defaultFlavor;
+    static StatFlavor corruptFlavor;
     static StatFlavor patienceFlavor;
     static StatFlavor energeticFlavor;
     static StatFlavor idealisticFlavor;
@@ -49,6 +50,18 @@ class Stat {
             ..high = <String>["were a Archeradicator commander","pursued interesting cases as a Legislacerator","lead a team of Doctorerrorists","published breakthrough SCIENCE as a Researchafer"]
             ..medium = <String>["learned to be a flexgrappler","played arena stickball professionally","were a prestegious Ruffiannihilator","made a name for themselves as a Cavalreaper"]
             ..low = <String>["stayed under the radar","were unremarkable","lived a normal life"];
+
+        corruptFlavor = new StatFlavor(0,"NULL")
+            ..death = <String>["for the good of Sauce.","for the good of Nidhogg","for the good of the Shogun"]
+            ..jade = <String>["corrupted the wigglers in the Caverns","grew wigglers via strange Trees.","discovered they could corrupt other trolls by drinking their blood, Rainbow Drinker style"]
+            ..fuchsia = <String>["set up camps to corrupt other trolls","corrupted the Empress","corrupted all alien races"]
+            ..purple = <String>[ "used religion as a vehical for corruption"]
+            ..mutant = <String>["obtained ultimate power","killed","slaughtered"]
+            ..veryHigh = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "]
+            ..high = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "]
+            ..medium = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "]
+            ..low = <String>["grew trees","helped the Shogun","conquered in the name of the Shogun "];
+
 
         //these only have the fields that would be interesting to have
         patienceFlavor = new StatFlavor(-3, Sign.SPACE)
@@ -244,9 +257,10 @@ class StatFlavor {
         return output;
     }
 
-    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false]) {
+    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false, isCorrupt = false]) {
         double multiplier = 1.0;
         if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
+        if(isCorrupt) multiplier = 4.037;
         output = processTier(output, value, Stat.LOW, low, LOWWEIGHT,multiplier);
         output = processTier(output, value, Stat.MEDIUM, medium, MEDIUMWEIGHT,multiplier);
         output = processTier(output, value, Stat.HIGH, high, HIGHWEIGHT,multiplier);
@@ -255,6 +269,7 @@ class StatFlavor {
         output =  processColor(output, colorWord, HomestuckTrollDoll.JADE, jade, multiplier);
         output = processColor(output, colorWord, HomestuckTrollDoll.PURPLE, purple, multiplier);
         output = processColor(output, colorWord, HomestuckTrollDoll.FUCHSIA, fuchsia, multiplier);
+
         return output;
     }
 
