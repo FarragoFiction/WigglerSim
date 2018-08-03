@@ -97,7 +97,7 @@ class Empress {
 
     bool allowsImportingMutants() {
         if(troll == null) return false;
-        if(troll.isCalm || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") return true;
+        if(troll.isCalm || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose" || troll.corrupt) return true;
 
     }
 

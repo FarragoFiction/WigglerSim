@@ -96,7 +96,9 @@ void drawPossibleAdopts() {
  // secretsForCalm.add("Cerulean+Blooded+Grub%3A___HBTo6L8AQYIAIEEAQYIAYMMAIEEAQYIAQYIAQYIAAABLS0s6OjoREREAAAAREREzMzPExMQAQYIAIEEIgeAPAD6wf_MAlgEsBrA14A%3D%3D");
    //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
-  element.text = "There are ${secretsForCalm.length} Wigglers to adopt from LOHAE.";
+  String word = "Wigglers";
+  if(Empress.instance.troll.corrupt) word = "Siblings";
+  element.text = "There are ${secretsForCalm.length} $word to adopt from LOHAE.";
   AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/LOHAE")..target = "_blank"..text = "Play TreeSim to get Imports";
   a.style.display = "block";
   element.append(a);
@@ -123,7 +125,7 @@ void drawPossibleAdopts() {
         game.save();
       });
     }else {
-      DivElement divElement = new DivElement()..text = "By Imperial Degree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight.";
+      DivElement divElement = new DivElement()..text = "By Imperial Degree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight, for the good of all.";
       subContainer.append(divElement);
     }
 
