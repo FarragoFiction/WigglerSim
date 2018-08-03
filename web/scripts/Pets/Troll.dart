@@ -404,8 +404,8 @@ class Troll extends Pet{
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
         if(corrupt) {
-            textCanvas.context2D.fillStyle = "#00ff00";
-            textCanvas.context2D.strokeStyle = "#00aa00";
+            textCanvas.context2D.fillStyle = "#d2ac7c";
+            textCanvas.context2D.strokeStyle = "#00ff00";
             if(empress) {
                 textCanvas.context2D.strokeStyle = "#00ff00";
                 textCanvas.context2D.fillStyle = "#d27cc9";

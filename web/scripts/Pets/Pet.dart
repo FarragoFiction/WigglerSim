@@ -704,8 +704,8 @@ abstract class Pet {
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
         if(corrupt) {
-            textCanvas.context2D.fillStyle = "#00ff00";
-            textCanvas.context2D.strokeStyle = "#00aa00";
+            textCanvas.context2D.fillStyle = "#d2ac7c";
+            textCanvas.context2D.strokeStyle = "#00ff00";
             if(empress) {
                 textCanvas.context2D.fillStyle = "#d27cc9";
             }
@@ -794,7 +794,9 @@ abstract class Pet {
     void makeCorrupt() {
         corrupt = true;
         StatWithDirection  as = associatedStat;
-        as.stat.value = 113* as.direction;
+        as.stat.value = 113* -1*as.direction; //the opposite of what you'd think, so Empresses will be Doom.
+        //keeps their original caste but changes other things
+        doll.copyPalette(ReferenceColours.CORRUPT);
     }
 
 
