@@ -114,7 +114,7 @@ void drawPossibleAdopts() {
     game.player.petInventory.drawPet(subContainer, p);
     if(Empress.instance.allowsImportingMutants()) {
       ButtonElement button = new ButtonElement();
-      button.text = "Adopt the Corrupt Mutant?";
+      button.text = "Adopt the Corrupt ${(p.doll as HomestuckGrubDoll).bloodColor} Blood?";
       subContainer.append(button);
 
       button.onClick.listen((Event e) {
