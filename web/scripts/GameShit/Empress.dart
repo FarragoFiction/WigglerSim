@@ -390,7 +390,7 @@ class Empress {
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
         textCanvas.context2D.fillStyle = "#d27cc9";
         textCanvas.context2D.strokeStyle = "#2c002a";
-        if(troll.corrupt) {
+        if(troll != null && troll.corrupt) {
             textCanvas.context2D.strokeStyle = "#00ff00";
             textCanvas.context2D.fillStyle = "#d27cc9";
         }
@@ -402,7 +402,7 @@ class Empress {
         textCanvas.context2D.strokeRect(0, 0, textWidth, textHeight);
 
         textCanvas.context2D.fillStyle = "#2c1900";
-        if(troll.corrupt) {
+        if(troll != null && troll.corrupt) {
             textCanvas.context2D.fillStyle = "#00ff00";
         }
 

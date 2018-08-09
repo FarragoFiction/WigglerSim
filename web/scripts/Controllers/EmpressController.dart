@@ -44,7 +44,6 @@ void processTreeSim() {
   if(window.localStorage.containsKey(SHAREDKEY)) {
     copySharedFromDataString(window.localStorage[SHAREDKEY]);
   }
-
   drawPossibleAdopts();
 
   if(Empress.instance.allowsFundingTrees()) {
@@ -97,7 +96,7 @@ void drawPossibleAdopts() {
    //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
   String word = "Wigglers";
-  if(Empress.instance.troll.corrupt) word = "Siblings";
+  if(Empress.instance.troll != null && Empress.instance.troll.corrupt) word = "Siblings";
   element.text = "There are ${secretsForCalm.length} $word to adopt from LOHAE.";
   AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/LOHAE")..target = "_blank"..text = "Play TreeSim to get Imports";
   a.style.display = "block";
