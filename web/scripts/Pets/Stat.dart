@@ -1,3 +1,4 @@
+import '../GameShit/Empress.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "Sign.dart";
 import "package:CommonLib/Collection.dart";
@@ -55,7 +56,7 @@ class Stat {
             ..death = <String>["for the good of Sauce.","for the good of Nidhogg","for the good of the [REDACTED]"]
             ..jade = <String>["corrupted the wigglers in the Caverns","grew wigglers via strange Trees.","discovered they could corrupt other trolls by drinking their blood, Rainbow Drinker style"]
             ..fuchsia = <String>["set up camps to corrupt other trolls","corrupted the Empress","corrupted all alien races"]
-            ..purple = <String>[ "used religion as a vehical for corruption"]
+            ..purple = <String>[ "used religion as a vehical for corruption", "aspired to be a Bird", "dressed flamboyantly as a Bird"]
             ..mutant = <String>["obtained ultimate power","killed","slaughtered"]
             ..veryHigh = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
             ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
@@ -290,6 +291,17 @@ class StatFlavor {
         double weight = HIGHWEIGHT; //your blood color matters as much as any skills you have up to medium.
         if(colorWord == targetWord) {
             for (String s in results) {
+                if(Empress.instance != null) {
+                    //interesting
+                    if(Empress.instance.troll.corrupt) {
+                        s = s.replaceAll("Juggalo","Bird Watcher");
+                        s = s.replaceAll("jugg","avia");
+                        s = s.replaceAll("Wicked Noise","Harsh Screams");
+                        s = s.replaceAll("Laughsassin","Scaratrooper");
+                        s = s.replaceAll("Dark Carnival","Dark Aviary");
+                        s = s.replaceAll("Mirthful Messiahs","Pigeons of Prophecy");
+                    }
+                }
                 output.add(s, weight * multiplier);
             }
         }
