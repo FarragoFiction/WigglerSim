@@ -291,7 +291,7 @@ class StatFlavor {
         double weight = HIGHWEIGHT; //your blood color matters as much as any skills you have up to medium.
         if(colorWord == targetWord) {
             for (String s in results) {
-                if(Empress.instance != null) {
+                if(Empress.instance.troll != null) {
                     //interesting
                     if(Empress.instance.troll.corrupt) {
                         s = s.replaceAll("Juggalo","Bird Watcher");
