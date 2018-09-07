@@ -180,8 +180,8 @@ class GameObject {
         try {
             print("trying to load from json");
             player.loadFromJSON(loadData);
-        }catch(e) {
-            print("something went wrong with json, so trying to load from lzstring, $e");
+        }catch(e,trace) {
+            print("something went wrong with json, so trying to load from lzstring, $e, $trace");
             player.loadFromJSON(LZString.decompressFromEncodedURIComponent(loadData));
         }
         save();

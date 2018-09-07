@@ -253,14 +253,18 @@ class PetInventory {
 
             randomButton.onClick.listen((e) {
                 //add wiggler to inventory. save. refresh.
-                p.name = p.randomAsFuckName();
-                GameObject.instance.save();
-                drawPet(subContainer,p, canvas);
+                updateNameElement(subContainer, p, canvas);
                 //window.location.reload();
 
             });
 
         }
+    }
+
+    Future<Null> updateNameElement(Element subContainer, Pet p, CanvasElement canvas) async{
+        p.randomAsFuckName();
+        GameObject.instance.save();
+        drawPet(subContainer,p, canvas);
     }
 
     void drawPaginationControls(Element container, List<Troll> trolls) {
@@ -581,6 +585,9 @@ class PetInventory {
 
     Future<CanvasElement> drawPet(Element container, Pet p, [CanvasElement canvas]) async {
         //print("drawing pet $p");
+        if(p.doll != null && p.name == p.doll.name) { //still is the dfeault name
+           await  p.randomAsFuckName();
+        }
         DivElement canvasContainer = new DivElement();
         if(canvas == null) {
             canvas = new CanvasElement(width: p.textWidth, height: p.textHeight);

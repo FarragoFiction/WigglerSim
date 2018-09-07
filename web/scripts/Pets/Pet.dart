@@ -201,9 +201,10 @@ abstract class Pet {
         hatchDate = new DateTime.now();
         lastFed = new DateTime.now();
         lastPlayed = new DateTime.now();
-        name = randomAsFuckName();
+        if(doll != null) name = doll.name; //lame default till its time to randomize
         randomizeStats();
     }
+
 
     void makeOver() {
         Random rand = new Random();
@@ -517,7 +518,7 @@ abstract class Pet {
     void loadFromJSON(String json, [JSONObject jsonObj]) {
         if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         String dataString = jsonObj[DOLLDATAURL];
-       // print("data string is $dataString");
+        //print("data string is $dataString");
         String lastPlayedString = jsonObj[LASTPLAYED];
         String hatchString = jsonObj[HATCHDATE];
         String fedString = jsonObj[LASTFED];
@@ -662,7 +663,11 @@ abstract class Pet {
         return daysSinceDate(lastPlayed,"Played With");
     }
 
-    String randomAsFuckName() {
+    Future<Null> randomAsFuckName() async {
+        //works with text engine now
+
+        name= await doll.getNameFromEngine(new Random().nextInt());
+        /*
         Random rand = new Random();
         List<String> titles = <String>["Citizen", "Engineer", "Captain", "Commodore", "Private", "Sergeant", "Lieutenant", "Senior", "Senpai", "Psychicboi", "Hotboi", "Viceroy", "Lord", "Shogun", "Captain", "Baron","Prophesied", "Demon","Destroyer","Darling" "The Esteemed", "Mr.", "Mrs.", "Mdms.", "Count", "Countess", "Darth", "Clerk", "President", "Pounceler", "Counciler", "Minister", "Ambassador", "Admiral", "Rear Admiral", "Commander", "Dr.", "Sir", "Senator", "Contessa"];
         //these titles thanks to duckking
@@ -678,6 +683,7 @@ abstract class Pet {
 
         List<String> templates = <String>["${rand.pickFrom(titles)} ${rand.pickFrom(firstNames)}${rand.pickFrom(endings)}","${rand.pickFrom(titles)}${rand.pickFrom(endings)}","${rand.pickFrom(titles)} ${rand.pickFrom(firstNames)}","${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}${rand.pickFrom(endings)}","${rand.pickFrom(firstNames)} ${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}","${rand.pickFrom(firstNames)} ${rand.pickFrom(firstNames)}","${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}", "${rand.pickFrom(titles)} ${rand.pickFrom(firstNames)} ${rand.pickFrom(lastNames)}", "${rand.pickFrom(titles)} ${rand.pickFrom(lastNames)}"];
         return rand.pickFrom(templates);
+        */
     }
 
     void displayStats(Element container) {
@@ -771,7 +777,7 @@ abstract class Pet {
             canvas = new CanvasElement(width: width, height: height);
             canvas.context2D.clearRect(0, 0, width, height);
             CanvasElement dollCanvas = new CanvasElement(width: doll.width, height: doll.height);
-            print("Drawing doll ${doll.toDataBytesX()}");
+            //print("Drawing doll ${doll.toDataBytesX()}");
             await DollRenderer.drawDoll(dollCanvas, doll);
 
             dollCanvas = Renderer.cropToVisible(dollCanvas);
