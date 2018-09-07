@@ -411,12 +411,14 @@ class PetInventory {
         }
     }
 
-    void changePetIntoOtherPet(Pet p, Pet tmp, Element subContainer, CanvasElement canvas, ButtonElement hatchButton) {
+    Future<Null> changePetIntoOtherPet(Pet p, Pet tmp, Element subContainer, CanvasElement canvas, ButtonElement hatchButton) async{
         //replace egg with hatched grub
-        GameObject.instance.save();
         replacePet(p, tmp);
         p = tmp;
-        drawPet(subContainer,tmp, canvas);
+        await drawPet(subContainer,tmp, canvas);
+        //wait to save till after so that if the name gets set there it gets saved
+        GameObject.instance.save();
+
         hatchButton.style.display = "none";
         if(p is Troll) {
 
