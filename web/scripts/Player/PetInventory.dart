@@ -244,6 +244,7 @@ class PetInventory {
                     if(getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") {
 
                     }else {
+                        //window.alert("refresh again");
                          window.location.href= "goodbye.html";
                     }
                 }
@@ -415,9 +416,7 @@ class PetInventory {
         //replace egg with hatched grub
         replacePet(p, tmp);
         p = tmp;
-        await drawPet(subContainer,tmp, canvas);
-        //wait to save till after so that if the name gets set there it gets saved
-        GameObject.instance.save();
+
 
         hatchButton.style.display = "none";
         if(p is Troll) {
@@ -434,6 +433,7 @@ class PetInventory {
             }
             //if i don't do this grubs will be stuck with one of two bodies
             t.extendedBody.imgNumber = newBody;
+            print("new body is $newBody");
             t.body.imgNumber = newBody;
             bool force = getParameterByName("wings",null) == "mutant"; // getParameterByName("eyes",null) == "mutant")
             t.mutantWings(force);
@@ -445,6 +445,8 @@ class PetInventory {
             t.mutantEyes(force);
         }
         if(p.corrupt) tmp.corrupt;
+        await drawPet(subContainer,tmp, canvas);
+        //wait to save till after so that if the name gets set there it gets saved
         GameObject.instance.save();
     }
 
