@@ -156,6 +156,12 @@ class Stat {
         }
     }
 
+    int get roundedCappedStat {
+        int ret =  Math.min(value, Stat.VERYFUCKINGHIGH + 1).round();
+        ret = Math.max(ret, -1*(Stat.VERYFUCKINGHIGH+1));
+        return ret;
+    }
+
     StatFlavor get flavor {
         if(value >=0) {
             return positiveFlavor;
