@@ -192,12 +192,12 @@ class AIItem extends AIObject {
     JSONObject toJson() {
         JSONObject json = new JSONObject();
         json[ID] = "${id}";
-        json[PATIENCE] = "${patience.value}";
-        json[IDEALISTIC] = "${idealistic.value}";
-        json[CURIOUS] = "${curious.value}";
-        json[LOYAL] = "${loyal.value}";
-        json[ENERGETIC] = "${energetic.value}";
-        json[EXTERNAL] = "${external.value}";
+        json[PATIENCE] = "${patience.value.round()}";
+        json[IDEALISTIC] = "${idealistic.value.round()}";
+        json[CURIOUS] = "${curious.value.round()}";
+        json[LOYAL] = "${loyal.value.round()}";
+        json[ENERGETIC] = "${energetic.value.round()}";
+        json[EXTERNAL] = "${external.value.round()}";
 
         List<JSONObject> jsonArray = new List<JSONObject>();
         for(ItemAppearance p in itemTypes) {
