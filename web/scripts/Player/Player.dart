@@ -52,7 +52,7 @@ class Player {
 
 
      void loadFromJSON(String json) {
-        print("loading player from json $json");
+        //print("loading player from json $json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
         //print("json object is ${jsonObj}");
 
