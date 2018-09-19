@@ -112,7 +112,7 @@ abstract class Pet {
             }else if(bc == HomestuckTrollDoll.CERULEAN) {
                 return new StatWithDirection(curious,1);
             }else if(bc == HomestuckTrollDoll.INDIGO) {
-                return new StatWithDirection(curious,1);
+                return new StatWithDirection(curious,-1);
             }else if(bc == HomestuckTrollDoll.PURPLE) {
                 return new StatWithDirection(idealistic,-1);
             }else if(bc == HomestuckTrollDoll.VIOLET) {
@@ -813,6 +813,8 @@ abstract class Pet {
     }
 
     void makeCorrupt() {
+        //immune
+        if(purified) return;
         corrupt = true;
         StatWithDirection  as = associatedStat;
         as.stat.value = 113* -1*as.direction; //the opposite of what you'd think, so Empresses will be Doom.
