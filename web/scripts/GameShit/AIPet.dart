@@ -795,6 +795,7 @@ class AIPet extends AIObject {
     }
 
     void corruptionBonus(AIPet pet) {
+        if(grub.purified) return; //none of this
         grub.patience.value += pet.patience.value;
         grub.curious.value += pet.curious.value;
         grub.external.value += pet.external.value;

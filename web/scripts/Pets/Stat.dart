@@ -86,7 +86,7 @@ class Stat {
             ..high = <String>["became an expert in multiple fields","became a rock star known for flamboyant performances"]
             ..jade = <String>["was never too tired to spend time with the grubs","channeled their never ending energy towards grub care"]
             ..purple = <String>["subjuggulated the lower bloods","drove fear into the hearts of the low bloods with their Chucklevoodoos"]
-            ..high = <String>["manged to change the Empire through sheer force of personality","became the leading expert in dozens of different fields"]
+            ..high = <String>["managed to change the Empire through sheer force of personality","became the leading expert in dozens of different fields"]
             ..medium = <String>["never seemed to stop moving","brought a vibrant energy to everything they did","had ALL the goals"];
         idealisticFlavor = new StatFlavor(1,Sign.HOPE)
             ..death  = <String>["fighting for what they believed in","trying to change the world","trying to change the empire"]
