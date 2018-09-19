@@ -543,8 +543,8 @@ abstract class Pet {
         }
 
 
-        if(jsonObj["purrified"] != null) {
-            purified = jsonObj["purrified"] == true.toString();
+        if(jsonObj["purified"] != null) {
+            purified = jsonObj["purified"] == true.toString();
         }
 
         // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");

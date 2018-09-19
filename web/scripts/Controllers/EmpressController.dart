@@ -93,7 +93,7 @@ void save() {
 void drawPossibleAdopts() {
   DivElement element = new DivElement();
   secretsForCalm.add("Fred+Feelix%3A___HBS5TN0AIcsAEGX43FfRqTuthx7_qP__qP8AIcsAAAADUA4ANBrq6Oe_wsH_qP__W_-MytYAIcsAEGUIgcQOIFD_OATIAmQBSgClYA%3D%3D");
-   secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
+   //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
   String word = "Wigglers";
   if(Empress.instance.troll != null && Empress.instance.troll.corrupt) word = "Siblings";
@@ -113,7 +113,6 @@ void drawPossibleAdopts() {
 
     if(dollIsPurified(p.doll)){
       p.makePure();
-
       corrupt = "Purified";
     }else{
       p.makeCorrupt();
@@ -133,7 +132,7 @@ void drawPossibleAdopts() {
         game.save();
       });
     }else {
-      DivElement divElement = new DivElement()..text = "By Imperial Degree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight, for the good of all. (Yes, even those 'purified' trolls)";
+      DivElement divElement = new DivElement()..text = "By Imperial Decree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight, for the good of all. (Yes, even those 'purified' trolls)";
       subContainer.append(divElement);
     }
 
