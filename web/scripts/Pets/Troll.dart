@@ -135,7 +135,7 @@ class Troll extends Pet{
                 "tend trees",
                 "serve [REDACTED]",
                 "reflect on Nidhogg",
-                "respect others's autonomy"
+                "respect other's autonomy"
             ];
             List<String> corruptPhrase = <String>[
                 "prepared them to",
