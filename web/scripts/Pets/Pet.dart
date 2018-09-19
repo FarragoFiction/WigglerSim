@@ -84,6 +84,8 @@ import "../Controllers/navbar.dart";
 abstract class Pet {
 
     bool corrupt = false;
+    //sure why not you can be both things at once
+    bool purified = false;
 
     //all life stages should be centered around this.
     static int timeUnit = 30*60* 1000; //30 minutes
@@ -540,6 +542,11 @@ abstract class Pet {
             corrupt = jsonObj["corrupt"] == true.toString();
         }
 
+
+        if(jsonObj["purrified"] != null) {
+            purified = jsonObj["purrified"] == true.toString();
+        }
+
         // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
@@ -563,6 +570,8 @@ abstract class Pet {
         json[HEALTHJSON] =  "${health}";
         json[TYPE] = type;
         json["corrupt"] = corrupt.toString();
+        json["purified"] = purified.toString();
+
         json[PATIENCE] = "${patience.roundedCappedStat}";
         json[IDEALISTIC] = "${idealistic.roundedCappedStat}";
         json[CURIOUS] = "${curious.roundedCappedStat}";
