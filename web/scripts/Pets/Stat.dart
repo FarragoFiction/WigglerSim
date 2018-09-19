@@ -18,6 +18,7 @@ class Stat {
     //all flavor arrays will have default so doesn't sum to zero
     static StatFlavor defaultFlavor;
     static StatFlavor corruptFlavor;
+    static StatFlavor purifiedFlavor;
     static StatFlavor patienceFlavor;
     static StatFlavor energeticFlavor;
     static StatFlavor idealisticFlavor;
@@ -63,6 +64,16 @@ class Stat {
             ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
             ..medium = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
             ..low = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"];
+
+        purifiedFlavor = new StatFlavor(0,"NULL")
+            ..jade = <String>["did their best to grow healthy wigglers.","grew wigglers via strange Trees.","tried to co-exist with non plant based trolls."]
+            ..fuchsia = <String>["heavily favored plant based rather than meat based Trolls.","set firm policies in order to protect the rights of legged trolls.","made policies to reenfranchise trolls with legs"]
+            ..purple = <String>[ "meditated on what it meant to be FROM Nidhogg but not OF him", "aspired to be a Bird", "dressed flamboyantly as a Bird"]
+            ..mutant = <String>["lived a peaceful life","had no trouble with the color of their blood","rested"]
+            ..veryHigh = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"]
+            ..high = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"]
+            ..medium = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"]
+            ..low = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"];
 
 
         //these only have the fields that would be interesting to have
@@ -265,10 +276,12 @@ class StatFlavor {
         return output;
     }
 
-    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false, isCorrupt = false]) {
+    WeightedList<String> addWeightedFlavor(WeightedList<String> output, int value, String colorWord, [bool isDefault = false, isCorrupt = false, isPurified = false]) {
         double multiplier = 1.0;
         if(isDefault) multiplier = 0.01; //don't go for default if you have any better options
         if(isCorrupt) multiplier = 40.37;
+        if(isPurified) multiplier = 13.00;
+
         output = processTier(output, value, Stat.LOW, low, LOWWEIGHT,multiplier);
         output = processTier(output, value, Stat.MEDIUM, medium, MEDIUMWEIGHT,multiplier);
         output = processTier(output, value, Stat.HIGH, high, HIGHWEIGHT,multiplier);
@@ -299,7 +312,7 @@ class StatFlavor {
             for (String s in results) {
                 if(Empress.instance.troll != null) {
                     //interesting
-                    if(Empress.instance.troll.corrupt) {
+                    if(Empress.instance.troll.corrupt || Empress.instance.troll.purified) {
                         s = s.replaceAll("Juggalo","Bird Watcher");
                         s = s.replaceAll("jugg","avia");
                         s = s.replaceAll("Wicked Noise","Harsh Screams");

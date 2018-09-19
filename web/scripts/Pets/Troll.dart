@@ -361,6 +361,7 @@ class Troll extends Pet{
         }
         possibilities = Stat.defaultFlavor.addWeightedFlavor(possibilities, (averageStat/stats.length).round(), colorWord,true);
         if(corrupt) possibilities = Stat.corruptFlavor.addWeightedFlavor(possibilities, 4037, colorWord,false,true);
+        if(purified) possibilities = Stat.purifiedFlavor.addWeightedFlavor(possibilities, 113, colorWord,false,true);
 
         String first = rand.pickFrom(possibilities);
         possibilities.remove(first);

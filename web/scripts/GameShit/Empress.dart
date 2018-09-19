@@ -97,7 +97,7 @@ class Empress {
 
     bool allowsImportingMutants() {
         if(troll == null) return false;
-        if(troll.isCalm || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose" || troll.corrupt) return true;
+        if(troll.isCalm || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose" || (troll.corrupt || troll.purified)) return true;
 
     }
 
@@ -394,6 +394,10 @@ class Empress {
             textCanvas.context2D.strokeStyle = "#00ff00";
             textCanvas.context2D.fillStyle = "#d27cc9";
         }
+        if(troll != null && troll.purified) {
+            textCanvas.context2D.strokeStyle = "#8ccad6";
+            textCanvas.context2D.fillStyle = "#d27cc9";
+        }
 
         textCanvas.context2D.lineWidth = 3;
 
@@ -404,6 +408,10 @@ class Empress {
         textCanvas.context2D.fillStyle = "#2c1900";
         if(troll != null && troll.corrupt) {
             textCanvas.context2D.fillStyle = "#00ff00";
+        }
+
+        if(troll != null && troll.purified) {
+            textCanvas.context2D.fillStyle = "#d27cc9";
         }
 
         int fontSize = 20;

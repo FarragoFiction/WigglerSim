@@ -724,6 +724,12 @@ abstract class Pet {
             if(empress) {
                 textCanvas.context2D.fillStyle = "#d27cc9";
             }
+        }else if(purified) {
+            textCanvas.context2D.fillStyle = "#d2ac7c";
+            textCanvas.context2D.strokeStyle = "#8ccad6";
+            if(empress) {
+                textCanvas.context2D.fillStyle = "#d27cc9";
+            }
         }else if(empress) {
             textCanvas.context2D.fillStyle = "#d27cc9";
             textCanvas.context2D.strokeStyle = "#2c002a";
