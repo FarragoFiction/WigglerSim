@@ -820,6 +820,15 @@ abstract class Pet {
         doll.copyPalette(ReferenceColours.CORRUPT);
     }
 
+    void makePure() {
+        corrupt = false;
+        purified = true;
+        StatWithDirection  as = associatedStat;
+        as.stat.value = 113* as.direction;
+        //keeps their original caste but changes other things
+        doll.copyPalette(ReferenceColours.PURIFIED);
+    }
+
 
 
 }

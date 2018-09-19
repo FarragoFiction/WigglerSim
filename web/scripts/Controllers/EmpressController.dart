@@ -109,11 +109,19 @@ void drawPossibleAdopts() {
     element.append(subContainer);
     Grub p = new Grub(Doll.loadSpecificDoll(dataString));
     p.name = "Nidhogg's Child";
-    p.makeCorrupt();
+    String corrupt = "Corrupt";
+
+    if(dollIsPurified(p.doll)){
+      p.makePure();
+      corrupt = "Purified";
+    }else{
+      p.makeCorrupt();
+    }
     game.player.petInventory.drawPet(subContainer, p);
     if(Empress.instance.allowsImportingMutants()) {
       ButtonElement button = new ButtonElement();
-      button.text = "Adopt the Corrupt ${(p.doll as HomestuckGrubDoll).bloodColor} Blood?";
+
+      button.text = "Adopt the $corrupt ${(p.doll as HomestuckGrubDoll).bloodColor} Blood?";
       subContainer.append(button);
 
       button.onClick.listen((Event e) {
@@ -124,7 +132,7 @@ void drawPossibleAdopts() {
         game.save();
       });
     }else {
-      DivElement divElement = new DivElement()..text = "By Imperial Degree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight, for the good of all.";
+      DivElement divElement = new DivElement()..text = "By Imperial Degree severe mutants (defined as trolls with non standard, plant based, internal structures, colliqually known as 'corruption') are culled on sight, for the good of all. (Yes, even those 'purified' trolls)";
       subContainer.append(divElement);
     }
 
@@ -133,6 +141,13 @@ void drawPossibleAdopts() {
 
 
 }
+
+bool dollIsPurified(HomestuckGrubDoll doll) {
+  HomestuckPalette palette = doll.palette as HomestuckPalette;
+  if(palette.skin == ReferenceColours.PURIFIED.skin) return true;
+}
+
+
 
 void drawConversionRate() {
   DivElement element = new DivElement();
