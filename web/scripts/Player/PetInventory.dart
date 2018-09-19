@@ -424,12 +424,11 @@ class PetInventory {
             HomestuckTrollDoll t = p.doll as HomestuckTrollDoll;
             int newBody = new Random().nextInt(t.extendedBody.maxImageNumber+1);
             if(p.name.contains("Nidhogg")) {
-                List<int> landBodies = <int>[325,326,620,621];
-                List<int> seaBodies = <int>[327,328];
-                if(t.bloodColor == HomestuckTrollDoll.FUCHSIA || t.bloodColor == HomestuckTrollDoll.VIOLET) {
-                    landBodies.addAll(seaBodies);
-                }
-                newBody = new Random().pickFrom(landBodies);
+                //TODO make lamia
+                Doll.convertOneDollToAnother(p.doll, new HomestuckLamiaDoll());
+                t = p.doll as HomestuckLamiaDoll;
+                newBody = new Random().nextInt(t.extendedBody.maxImageNumber+1);
+
             }
             //if i don't do this grubs will be stuck with one of two bodies
             t.extendedBody.imgNumber = newBody;
