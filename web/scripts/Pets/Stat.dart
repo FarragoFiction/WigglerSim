@@ -59,21 +59,21 @@ class Stat {
             ..fuchsia = <String>["set up camps to corrupt other trolls","corrupted the Empress","corrupted all alien races"]
             ..purple = <String>[ "used religion as a vehical for corruption", "aspired to be a Bird", "dressed flamboyantly as a Bird"]
             ..mutant = <String>["obtained ultimate power","killed","slaughtered"]
-            ..veryHigh = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
-            ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
-            ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
-            ..medium = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"]
-            ..low = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]"];
+            ..veryHigh = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]", "became a Sphereradicator"]
+            ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]", "became a Sphereradicator"]
+            ..high = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]", "became a Sphereradicator"]
+            ..medium = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]", "became a Sphereradicator"]
+            ..low = <String>["grew trees","helped the [REDACTED]","conquered in the name of the [REDACTED]", "became a Sphereradicator"];
 
         purifiedFlavor = new StatFlavor(0,"NULL")
             ..jade = <String>["did their best to grow healthy wigglers.","grew wigglers via strange Trees.","tried to co-exist with non plant based trolls."]
             ..fuchsia = <String>["heavily favored plant based rather than meat based Trolls.","set firm policies in order to protect the rights of legged trolls.","made policies to reenfranchise trolls with legs"]
             ..purple = <String>[ "meditated on what it meant to be FROM Nidhogg but not OF him", "aspired to be a Bird", "dressed flamboyantly as a Bird"]
             ..mutant = <String>["lived a peaceful life","had no trouble with the color of their blood","rested"]
-            ..veryHigh = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"]
-            ..high = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"]
-            ..medium = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"]
-            ..low = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is"];
+            ..veryHigh = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is", "became a Sphereradicator"]
+            ..high = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is", "became a Sphereradicator"]
+            ..medium = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is", "became a Sphereradicator"]
+            ..low = <String>["grew trees","searched for meaning in the words of Purified Nidhogg","tried to stay focused on who they are, and not how Nidhogg is", "became a Sphereradicator"];
 
 
         //these only have the fields that would be interesting to have
