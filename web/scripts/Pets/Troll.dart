@@ -128,6 +128,25 @@ class Troll extends Pet{
             return "${rand.pickFrom(corruptPhrase)} ${rand.pickFrom(corruptThing)}";
         }
 
+        if(purified) {
+            List<String> corruptThing = <String>[
+                "plant trees",
+                "grow trees",
+                "tend trees",
+                "serve [REDACTED]",
+                "reflect on Nidhogg",
+                "respect others's autonomy"
+            ];
+            List<String> corruptPhrase = <String>[
+                "prepared them to",
+                "showed them how to",
+                "instructed them to",
+                "encouraged them to",
+                "trained them to",
+            ];
+            return "${rand.pickFrom(corruptPhrase)} ${rand.pickFrom(corruptThing)}";
+        }
+
 
         List<String> badThing = <String>["threats","danger","enemies","predators","drones","other trolls","other lusii"];
         List<String> goodThing = <String>["vegetables","food","safety","water","shelter","meat","friends","self-esteem"];
@@ -197,7 +216,7 @@ class Troll extends Pet{
         int maxAgeOfChallenge = 100;
         int numberOfSweeps = rand.nextIntRange(5, maxAgeOfChallenge*2);
 
-        if(numberOfSweeps >= maxAgeOfChallenge || corrupt) {
+        if(numberOfSweeps >= maxAgeOfChallenge || corrupt || purified) {
             return heiressBecameEmpress(maxLife);
         }else {
             return heiressDiedChallenging(numberOfSweeps);
@@ -409,6 +428,12 @@ class Troll extends Pet{
             textCanvas.context2D.strokeStyle = "#00ff00";
             if(empress) {
                 textCanvas.context2D.strokeStyle = "#00ff00";
+                textCanvas.context2D.fillStyle = "#d27cc9";
+            }
+        }else if(purified) {
+            textCanvas.context2D.fillStyle = "#d2ac7c";
+            textCanvas.context2D.strokeStyle = "#8ccad6";
+            if(empress) {
                 textCanvas.context2D.fillStyle = "#d27cc9";
             }
         } else if(empress) {

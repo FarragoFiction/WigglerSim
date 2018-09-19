@@ -100,6 +100,7 @@ class PetInventory {
         //print("replacing ${original.name} with ${replacement.name}");
         if(!original.name.contains("Egg")) replacement.name = original.name;
         replacement.corrupt = original.corrupt;
+        replacement.purified = original.purified;
         replacement.external = original.external;
         replacement.curious = original.curious;
         replacement.loyal = original.loyal;
@@ -425,8 +426,8 @@ class PetInventory {
             int newBody = new Random().nextInt(t.extendedBody.maxImageNumber+1);
             if(p.name.contains("Nidhogg")) {
                 //TODO make lamia
-                Doll.convertOneDollToAnother(p.doll, new HomestuckLamiaDoll());
-                t = p.doll as HomestuckLamiaDoll;
+                p.doll = Doll.convertOneDollToAnother(p.doll, new HomestuckLamiaDoll());
+                t = p.doll as HomestuckTrollDoll;
                 newBody = new Random().nextInt(t.extendedBody.maxImageNumber+1);
 
             }
