@@ -411,7 +411,7 @@ class Empress {
         }
 
         if(troll != null && troll.purified) {
-            textCanvas.context2D.fillStyle = "#d27cc9";
+            textCanvas.context2D.fillStyle = "#8ccad6";
         }
 
         int fontSize = 20;
