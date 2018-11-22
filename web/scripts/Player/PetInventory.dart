@@ -1,4 +1,5 @@
 //just a list of pets that i have. making it more than just a list in case i need it to.
+import '../Pets/CapsuleTIMEHOLE.dart';
 import "../Pets/PetLib.dart";
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
@@ -220,6 +221,7 @@ class PetInventory {
 
             renderHairDressingButton(subContainer, p, canvas);
             renderClothesStylistButton(subContainer, p, canvas);
+            renderTIMEHOLEButton(subContainer,p,canvas);
 
 
             hatchButton.onClick.listen((e) {
@@ -566,6 +568,20 @@ class PetInventory {
                 GameObject.instance.save();
                 p.canvas = null;
                 drawPet(subcontainer, p, canvas);
+            });
+        }
+    }
+
+    void renderTIMEHOLEButton(Element subcontainer,Pet p, CanvasElement canvas) {
+
+        //remember that tiem every fucking pet got overridden to look like edna mode. yup.pepperridge farm remembers
+        if(getParameterByName("trade",null) == "wonder" || Empress.instance.allowTIMEHOLE() ) {
+            ButtonElement hairCutButton = new ButtonElement();
+            hairCutButton.text = "Chuck into TIMEHOLE???";
+            subcontainer.append(hairCutButton);
+            hairCutButton.onClick.listen((Event e) {
+                window.localStorage["TIMEHOLE"] = new CapsuleTIMEHOLE(p, GameObject.instance.player.name).toJson().toString();
+                window.location.href = "TIMEHOLE.html";
             });
         }
     }
