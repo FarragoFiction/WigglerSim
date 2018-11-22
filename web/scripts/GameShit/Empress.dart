@@ -123,6 +123,7 @@ class Empress {
     }
 
     bool allowTIMEHOLE() {
+        return true;
         //wanting to have reason to have diff types of empresses
         if(troll == null) return false;
         if(troll.isCurious) return true;

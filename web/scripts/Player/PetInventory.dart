@@ -32,6 +32,10 @@ class PetInventory {
     Empress rulingEmpress;
     List<Troll> alumni = new List<Troll>();
 
+    void addPet(Pet pet) {
+        pets.add(pet);
+    }
+
 
 
     List<Troll> get last12Alumni {

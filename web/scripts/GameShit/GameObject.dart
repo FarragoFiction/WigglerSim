@@ -98,6 +98,10 @@ class GameObject {
         player.save();
     }
 
+    void addPet(Pet pet) {
+        player.addPet(pet);
+    }
+
     void load() {
         player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
     }

@@ -1,6 +1,7 @@
 //a player has an inventory.
 // a player has a doll.
 //a player has a graduatesList.
+import '../Pets/Pet.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "PetInventory.dart";
 import "ItemInventory.dart";
@@ -49,6 +50,9 @@ class Player {
         loadFromJSON(json);
     }
 
+    void addPet(Pet pet) {
+        petInventory.addPet(pet);
+    }
 
 
      void loadFromJSON(String json) {
