@@ -15,6 +15,8 @@ class GameObject {
 
     static GameObject instance;
     Element infoElement;
+    AudioElement bgMusic = new AudioElement();
+
 
     GameObject(bool redirect) {
         window.onError.listen((e) {
@@ -73,6 +75,19 @@ class GameObject {
             window.location.href= "petInventory.html";
         }
     }
+    void playMusic(String locationWithoutExtension) {
+        print("starting music $locationWithoutExtension");
+        bgMusic.loop  = true;
+        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.mp3";
+        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.ogg";
+        bgMusic.play();
+    }
+
+    void stopMusic() {
+        print("stopping music");
+        bgMusic.pause();
+    }
+
 
     void reset() {
         player = new Player(new HomestuckTrollDoll());
