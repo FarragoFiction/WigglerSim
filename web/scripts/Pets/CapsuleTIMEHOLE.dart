@@ -13,7 +13,9 @@ class CapsuleTIMEHOLE {
         Map<String,String> data = new Map<String,String>();
         data["wigglerJSON"] = toJson().toString();
         data["permanent"] = "false";
-        return data;
+        Map<String,String> ret = new Map<String,String>();
+        ret["time_hole"] = data.toString();
+        return ret;
     }
 
     JSONObject toJson() {
