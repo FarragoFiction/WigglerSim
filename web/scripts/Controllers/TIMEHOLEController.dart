@@ -36,9 +36,13 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     output.append(div);
     new LoadingAnimation("Chucking ${capsule.pet.name} into the TIMEHOLE...",canvas,div );
     GameObject.instance.playMusic("WTWJ1");
+    String url = "https://plaguedoctors.herokuapp.com/time_holes/TIMEHOLE";
+    if(true) {
+        url = "http://localhost:3000/time_holes/TIMEHOLE";
+    }
 
     try {
-        await HttpRequest.postFormData('https://plaguedoctors.herokuapp.com/time_holes/TIMEHOLE',capsule.makePostData())
+        await HttpRequest.postFormData(url,capsule.makePostData())
             .then(finishLoadingJSON);
     }catch(error, trace) {
         LoadingAnimation.instance.stop();
@@ -50,19 +54,16 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
 
 void finishLoadingJSON(HttpRequest request)  {
     window.alert("text is ${request.responseText}");
-    request.onReadyStateChange.listen((ProgressEvent response){
-        LoadingAnimation.instance.stop;
-        window.alert("state changed text is ${request.responseText}");
-        GameObject.instance.playMusic("WTJ2");
-        CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(request.responseText));
-        displayNewGrub(capsule);
-
-    });
-    //append to existing, don't replace
-   //
+    LoadingAnimation.instance.stop;
+    GameObject.instance.playMusic("WTJ2");
+    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(request.responseText));
+    displayNewGrub(capsule);
+    print("adding new pet ${capsule.pet}");
+    GameObject.instance.addPet(capsule.pet);
 }
 
 Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule) async {
+    print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
 }

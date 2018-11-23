@@ -13,9 +13,7 @@ class CapsuleTIMEHOLE {
         Map<String,String> data = new Map<String,String>();
         data["wigglerJSON"] = toJson().toString();
         data["permanent"] = "false";
-        Map<String,String> ret = new Map<String,String>();
-        ret["time_hole"] = data.toString();
-        return ret;
+        return data;
     }
 
     JSONObject toJson() {
@@ -26,7 +24,9 @@ class CapsuleTIMEHOLE {
     }
 
     CapsuleTIMEHOLE.fromJson(JSONObject json){
+        print("parsing json $json into a capsule");
         pet = Pet.loadPetFromJSON(json["pet"]);
+        print("pet is $pet");
         breederName = json['breeder'];
     }
 
