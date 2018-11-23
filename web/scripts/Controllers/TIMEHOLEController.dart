@@ -44,9 +44,9 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     new LoadingAnimation("Chucking ${capsule.pet.name} into the TIMEHOLE...",canvas,div );
     GameObject.instance.playMusic("WTWJ1");
     String url = "https://plaguedoctors.herokuapp.com/time_holes/TIMEHOLE";
-    if(true) {
+   /* if(true) {
         url = "http://localhost:3000/time_holes/TIMEHOLE";
-    }
+    }*/
 
     try {
         await HttpRequest.postFormData(url,capsule.makePostData())
