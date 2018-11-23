@@ -25,7 +25,7 @@ import 'dart:math' as Math;
 class Empress {
     static Empress _instance;
     int textHeight = 1000;
-    int textWidth = 420;
+    int textWidth = 800;
 
     //if there is no empress we use the default one.
     static Empress get  instance
@@ -123,10 +123,9 @@ class Empress {
     }
 
     bool allowTIMEHOLE() {
-        return true;
         //wanting to have reason to have diff types of empresses
         if(troll == null) return false;
-        if(troll.isCurious) return true;
+        if(troll.isCurious || troll.isPatient) return true;
         return false;
     }
 
@@ -395,6 +394,8 @@ class Empress {
 
     }
 
+
+
     Future<CanvasElement> drawStats() async {
         //never cache
         CanvasElement textCanvas = new CanvasElement(width: textWidth, height: textHeight);
@@ -512,7 +513,50 @@ class Empress {
         if(troll != null) hs = troll.hatchmatesString;
         Renderer.wrap_text(textCanvas.context2D, "Hatchmates: ${hs}", x, y, fontSize + buffer, 275, "left");
 
+        //allows
+        y = 365;
+        x = 400;
 
+        if(allowsGambling()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Gambling", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowsRenaming()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Renaming", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowTIMEHOLE()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows TIMEHOLE", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowClothesStyling()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Makeovers", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowsFundingTrees()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Tree Funding", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowsImportingMutants()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Severe Mutants", x, y, fontSize + buffer, 275, "left");
+        }
+
+
+        if(items.isNotEmpty) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Invents Things", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(troll != null) {
+            y = y + fontSize*3 + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "${troll.epilogue}", x, y, fontSize + buffer, 275, "left");
+        }
 
         return textCanvas;
     }
