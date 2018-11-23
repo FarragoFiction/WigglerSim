@@ -43,8 +43,12 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     output.append(div);
     new LoadingAnimation("Chucking ${capsule.pet.name} into the TIMEHOLE...",canvas,div );
     GameObject.instance.playMusic("WTWJ1");
+    //don't skip manics nice music thingy
+    await new Future.delayed(new Duration(seconds: 1));
+
     String url = "https://plaguedoctors.herokuapp.com/time_holes/TIMEHOLE";
-   /* if(true) {
+
+    /*if(true) {
         url = "http://localhost:3000/time_holes/TIMEHOLE";
     }*/
 
