@@ -547,6 +547,11 @@ class Empress {
             Renderer.wrap_text(textCanvas.context2D, "Allows Severe Mutants", x, y, fontSize + buffer, 275, "left");
         }
 
+        if(allowsSpeculation()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Speculating", x, y, fontSize + buffer, 275, "left");
+        }
+
 
         if(items.isNotEmpty) {
             y = y + fontSize + buffer;
