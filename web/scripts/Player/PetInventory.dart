@@ -36,8 +36,21 @@ class PetInventory {
         pets.add(pet);
     }
 
-    void removePet(Pet pet) {
-        pets.remove(pet);
+    //when i call this it will be a pet loaded from a capsule, not from the inventory
+    void removePetDiffObjects(Pet pet) {
+        Pet found;
+        for(Pet p in pets) {
+            if(p.name == pet.name) {
+                for(int i =0; i<pet.stats.length; i++) {
+                    if(pet.stats[i] != p.stats[i]) {
+                        break;
+                    }
+                }
+                found = p;
+                break;
+            }
+        }
+        pets.remove(found);
     }
 
 

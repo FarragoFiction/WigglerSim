@@ -55,7 +55,7 @@ class Player {
     }
 
     void removePet(Pet pet) {
-        petInventory.removePet(pet);
+        petInventory.removePetDiffObjects(pet);
     }
 
 

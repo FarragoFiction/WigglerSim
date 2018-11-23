@@ -122,6 +122,7 @@ class GameObject {
     }
 
     void removePet(Pet pet) {
+        print("trying to remove pet ${pet.name}");
         player.removePet(pet);
         save();
     }

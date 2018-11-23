@@ -15,7 +15,14 @@ void main() {
 }
 
 Future<Null> start() async {
-    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
+    CapsuleTIMEHOLE capsule;
+    try {
+        capsule = new CapsuleTIMEHOLE.fromJson(
+            new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
+    }catch(error) {
+        output.text = "Haha, nope, gotta pick a wiggler first, k? No wasting online stuff, yeah?";
+        return;
+    }
     //TODO send them flipping into the TIMEHOLE
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
