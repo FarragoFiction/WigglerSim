@@ -460,7 +460,7 @@ abstract class Pet {
 
     //it doesn't like treating the json object i got as a string for whatever reason.
     static Pet loadPetFromJSON(String json, [JSONObject jsonObj]) {
-        //print("jsonObj is ${jsonObj}");
+        //print("json  is ${json}");
         if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         //print("Loading abstract pet from json, obj is ${jsonObj}");
         if(jsonObj[TYPE] == GRUB) {

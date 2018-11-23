@@ -36,6 +36,10 @@ class PetInventory {
         pets.add(pet);
     }
 
+    void removePet(Pet pet) {
+        pets.remove(pet);
+    }
+
 
 
     List<Troll> get last12Alumni {

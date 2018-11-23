@@ -53,19 +53,25 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
 
 
 void finishLoadingJSON(HttpRequest request)  {
-    window.alert("text is ${request.responseText}");
-    LoadingAnimation.instance.stop;
-    GameObject.instance.playMusic("WTJ2");
-    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(request.responseText));
+    LoadingAnimation.instance.stop();
+    CapsuleTIMEHOLE originalCapsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
+    GameObject.instance.playMusicOnce("WTJ2");
+    JSONObject outerJSON =new JSONObject.fromJSONString(request.responseText);
+    JSONObject innerJSON = new JSONObject.fromJSONString(outerJSON["wigglerJSON"]);
+    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
     displayNewGrub(capsule);
     print("adding new pet ${capsule.pet}");
+    GameObject.instance.removePet(originalCapsule.pet);
     GameObject.instance.addPet(capsule.pet);
+    window.localStorage.remove("TIMEHOLE");
 }
 
 Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule) async {
     print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
+    DivElement div = new DivElement()..text = "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
+    output.append(div);
 }
 
 

@@ -83,6 +83,14 @@ class GameObject {
         bgMusic.play();
     }
 
+    void playMusicOnce(String locationWithoutExtension) {
+        print("starting music $locationWithoutExtension");
+        bgMusic.loop  = false;
+        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.mp3";
+        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.ogg";
+        bgMusic.play();
+    }
+
     void stopMusic() {
         print("stopping music");
         bgMusic.pause();
@@ -113,8 +121,14 @@ class GameObject {
         player.save();
     }
 
+    void removePet(Pet pet) {
+        player.removePet(pet);
+        save();
+    }
+
     void addPet(Pet pet) {
         player.addPet(pet);
+        save();
     }
 
     void load() {

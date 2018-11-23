@@ -54,6 +54,10 @@ class Player {
         petInventory.addPet(pet);
     }
 
+    void removePet(Pet pet) {
+        petInventory.removePet(pet);
+    }
+
 
      void loadFromJSON(String json) {
         //print("loading player from json $json");
