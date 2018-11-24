@@ -1,6 +1,7 @@
 import '../GameShit/GameObject.dart';
 import 'JSONObject.dart';
 import 'Pet.dart';
+import 'dart:convert';
 
 class CapsuleTIMEHOLE {
     Pet pet;
@@ -32,6 +33,26 @@ class CapsuleTIMEHOLE {
 
     void givePet() {
         GameObject.instance.addPet(pet);
+    }
+
+    static List<CapsuleTIMEHOLE> getAllFromJSON(String json) {
+        List<CapsuleTIMEHOLE> ret = new List<CapsuleTIMEHOLE>();
+        List<dynamic> what = JSON.decode(json);
+        //print("what json is $what");
+        for(dynamic d in what) {
+            try {
+                print("dynamic json thing is  $d");
+                JSONObject j = new JSONObject();
+                j.json = d;
+                JSONObject innerJSON = new JSONObject.fromJSONString(
+                    j["wigglerJSON"]);
+                ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON));
+            }catch(error) {
+                print("error parsing $d,  $error");
+            }
+        }
+        return ret;
+
     }
 
 

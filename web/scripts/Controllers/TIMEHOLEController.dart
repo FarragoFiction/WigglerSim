@@ -19,6 +19,11 @@ void main() {
 
 Future<Null> start() async {
     Empress e = Empress.instance;
+
+    if(getParameterByName("weaponofchoice",null) == "curiosity"){
+        viewTIMEHOLE();
+        return;
+    }
     if(!e.allowsAdoptingWigglersfromTIMEHOLE() && !e.allowsAbdicatingWigglersToTIMEHOLE() && !e.allowTIMEHOLE()) {
         output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE.";
         return;
@@ -99,6 +104,24 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     }
 }
 
+Future<Null> viewTIMEHOLE() async {
+    DivElement div = new DivElement();
+    output.append(div);
+    new LoadingAnimation("Peering into TIMEHOLE.",null,div );
+    GameObject.instance.playMusic("WTWJ1");
+    //don't skip manics nice music thingy
+    await new Future.delayed(new Duration(seconds: 1));
+
+    String url = "https://plaguedoctors.herokuapp.com/time_holes.json";
+    try {
+        await HttpRequest.getString(url)
+            .then(finishLoadingJSONGetAll);
+    }catch(error, trace) {
+        LoadingAnimation.instance.stop();
+        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+    }
+}
+
 Future<Null> adopt() async {
     DivElement div = new DivElement();
     output.append(div);
@@ -108,8 +131,6 @@ Future<Null> adopt() async {
     await new Future.delayed(new Duration(seconds: 3));
 
     String url = "https://plaguedoctors.herokuapp.com/time_holes/adoptTIMEHOLE";
-
-
     try {
         await HttpRequest.getString(url)
             .then(finishLoadingJSONGet);
@@ -135,7 +156,7 @@ void finishLoadingJSON(HttpRequest request)  {
         JSONObject innerJSON = new JSONObject.fromJSONString(
             outerJSON["wigglerJSON"]);
         CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
-        displayNewGrub(capsule);
+        displayNewGrub(capsule,false);
         print("adding new pet ${capsule.pet}");
         GameObject.instance.removePet(originalCapsule.pet);
         GameObject.instance.addPet(capsule.pet);
@@ -149,20 +170,48 @@ void finishLoadingJSONGet(String response)  {
     JSONObject outerJSON = new JSONObject.fromJSONString(response);
     JSONObject innerJSON = new JSONObject.fromJSONString(outerJSON["wigglerJSON"]);
     CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
-    displayNewGrub(capsule);
+    displayNewGrub(capsule,false);
     print("adding new pet ${capsule.pet}");
     GameObject.instance.addPet(capsule.pet);
     window.localStorage.remove("TIMEHOLE");
 }
 
-Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule) async {
+Future<Null> finishLoadingJSONGetAll(String response) async  {
+    LoadingAnimation.instance.stop();
+    GameObject.instance.playMusicOnce("WTJ2");
+    List<CapsuleTIMEHOLE> capsules = CapsuleTIMEHOLE.getAllFromJSON(response);
+    for(CapsuleTIMEHOLE c in capsules) {
+        await new Future.delayed(new Duration(milliseconds: 300));
+        displayNewGrubForViewer(c,true);
+    }
+}
+
+Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
     print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
     String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
     if(savior) text = "You selflessly adopted: ${capsule.pet.name} from ${capsule.breederName}!!!";
+    if(readOnly) text  = "${capsule.pet.name} from ${capsule.breederName}";
     DivElement div = new DivElement()..text = text;
     output.append(div);
+}
+
+Future<Null> displayNewGrubForViewer(CapsuleTIMEHOLE capsule, bool readOnly) async {
+    print("displaying new grub");
+    DivElement container = new DivElement();
+    output.append(container);
+    container.style.display ="inline-block";
+    CanvasElement buffer = await capsule.pet.draw();
+    CanvasElement canvas = new CanvasElement(width:100,height:100);
+    canvas.style.display="inline-block";
+    canvas.context2D.drawImageScaled(buffer,0,0,100,75);
+    container.append(canvas);
+    String text  = "${capsule.pet.name} from ${capsule.breederName}";
+    DivElement div = new DivElement()..text = text;
+    div.style.width ="200px";
+    div.style.overflow = "hidden";
+    container.append(div);
 }
 
 
