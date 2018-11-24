@@ -42,7 +42,7 @@ class Egg extends Pet{
 
     @override
     Future<CanvasElement> draw() async {
-        print ("trying to draw egg.");
+        //print ("trying to draw egg.");
         //caches by default. if you want it to redraw, set canvas to null.
         if(canvas == null) {
 

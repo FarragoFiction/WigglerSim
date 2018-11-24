@@ -5,6 +5,7 @@ import 'dart:html';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
 import "navbar.dart";
+import "dart:math" as Math;
 
 
 GameObject game;
@@ -14,6 +15,7 @@ bool savior = false;
 void main() {
     loadNavbar();
     game = new GameObject(true);
+
     start();
 }
 
@@ -23,6 +25,9 @@ Future<Null> start() async {
     if(getParameterByName("weaponofchoice",null) == "curiosity"){
         viewTIMEHOLE();
         return;
+    }else {
+        AnchorElement a = new AnchorElement(href: "TIMEHOLE.html?weaponofchoice=curiosity")..text ="Peer Into Time Hole Y/N?";
+        output.append(a);
     }
     if(!e.allowsAdoptingWigglersfromTIMEHOLE() && !e.allowsAbdicatingWigglersToTIMEHOLE() && !e.allowTIMEHOLE()) {
         output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE.";
@@ -180,14 +185,33 @@ Future<Null> finishLoadingJSONGetAll(String response) async  {
     LoadingAnimation.instance.stop();
     GameObject.instance.playMusicOnce("WTJ2");
     List<CapsuleTIMEHOLE> capsules = CapsuleTIMEHOLE.getAllFromJSON(response);
-    for(CapsuleTIMEHOLE c in capsules) {
-        await new Future.delayed(new Duration(milliseconds: 300));
-        displayNewGrubForViewer(c,true);
-    }
+    //getting them isn't that expensive, but rendering them is so cool it.
+    render13Wigglers(capsules);
 }
 
+Future<Null> render13Wigglers(List<CapsuleTIMEHOLE> capsules) async {
+    int amount = 33;
+    for(int i = 0; i <amount; i++) {
+        if(capsules.length > i) {
+            CapsuleTIMEHOLE c = capsules[i];
+            await new Future.delayed(new Duration(milliseconds: 150));
+            displayNewGrubForViewer(c, true);
+        }
+    }
+    ButtonElement button = new ButtonElement()..text = "Show $amount more?";
+    output.append(button);
+    button.onClick.listen((Event e) {
+        capsules.removeRange(0,Math.min(amount,capsules.length));
+        button.remove();
+        render13Wigglers(capsules);
+    });
+}
+
+
+
+
 Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
-    print("displaying new grub");
+    //print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
     String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
@@ -198,7 +222,7 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
 }
 
 Future<Null> displayNewGrubForViewer(CapsuleTIMEHOLE capsule, bool readOnly) async {
-    print("displaying new grub");
+  //  print("displaying new grub");
     DivElement container = new DivElement();
     output.append(container);
     container.style.display ="inline-block";
