@@ -598,11 +598,21 @@ class PetInventory {
         //remember that tiem every fucking pet got overridden to look like edna mode. yup.pepperridge farm remembers
         if(getParameterByName("trade",null) == "wonder" || Empress.instance.allowTIMEHOLE() ) {
             ButtonElement hairCutButton = new ButtonElement();
-            hairCutButton.text = "Chuck into TIMEHOLE???";
+            hairCutButton.text = "Trade with TIMEHOLE???";
             subcontainer.append(hairCutButton);
             hairCutButton.onClick.listen((Event e) {
                 window.localStorage["TIMEHOLE"] = new CapsuleTIMEHOLE(p, GameObject.instance.player.name).toJson().toString();
                 window.location.href = "TIMEHOLE.html";
+            });
+        }
+
+        if(getParameterByName("trade",null) == "wonder" || Empress.instance.allowsAbdicatingWigglersToTIMEHOLE() ) {
+            ButtonElement hairCutButton = new ButtonElement();
+            hairCutButton.text = "Abandon into TIMEHOLE???";
+            subcontainer.append(hairCutButton);
+            hairCutButton.onClick.listen((Event e) {
+                window.localStorage["TIMEHOLE"] = new CapsuleTIMEHOLE(p, GameObject.instance.player.name).toJson().toString();
+                window.location.href = "TIMEHOLE.html?abandon=youmonster";
             });
         }
     }

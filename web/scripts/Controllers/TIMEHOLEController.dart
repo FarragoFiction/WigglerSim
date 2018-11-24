@@ -1,3 +1,4 @@
+import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/JSONObject.dart';
 import 'dart:html';
@@ -8,6 +9,8 @@ import "navbar.dart";
 
 GameObject game;
 DivElement output = querySelector("#output");
+bool monster = false;
+bool savior = false;
 void main() {
     loadNavbar();
     game = new GameObject(true);
@@ -15,6 +18,25 @@ void main() {
 }
 
 Future<Null> start() async {
+    Empress e = Empress.instance;
+    if(!e.allowsAdoptingWigglersfromTIMEHOLE() && !e.allowsAbdicatingWigglersToTIMEHOLE() && !e.allowTIMEHOLE()) {
+        output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE.";
+        return;
+    }
+
+    if(getParameterByName("adopt",null) == "selflessly") {
+        savior = true;
+        if(!e.allowsAdoptingWigglersfromTIMEHOLE()) {
+            output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE TO ADOPT WIGGLERS.";
+            return;
+        }
+        if(game.player.petInventory.hasRoom) {
+            adopt();
+        }else {
+            output.text = "You don't have enough ENERGY to adopt more wigglers. Focus on your current brood first.";
+        }
+        return;
+    }
     CapsuleTIMEHOLE capsule;
     try {
         capsule = new CapsuleTIMEHOLE.fromJson(
@@ -27,7 +49,20 @@ Future<Null> start() async {
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
 
-    ButtonElement button = new ButtonElement()..text = "Chuck into TIMEHOLE Y/N???";
+    String text = "Chuck into TIMEHOLE Y/N???";
+    if(getParameterByName("abandon",null) == "youmonster") {
+        if(!e.allowsAbdicatingWigglersToTIMEHOLE()) {
+            output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE TO ABANDON WIGGLERS.";
+            return;
+        }
+        text = "$text You won't get anything back, you monster.";
+        monster = true;
+    }
+    if(!e.allowTIMEHOLE()) {
+        output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE TO TRADE WIGGLERS.";
+        return;
+    }
+    ButtonElement button = new ButtonElement()..text = "$text";
     output.append(button);
     button.style.display = "block";
     button.style.marginLeft = "auto";
@@ -47,6 +82,9 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     await new Future.delayed(new Duration(seconds: 1));
 
     String url = "https://plaguedoctors.herokuapp.com/time_holes/TIMEHOLE";
+    if(monster) {
+        url = "https://plaguedoctors.herokuapp.com/time_holes/abdicateTIMEHOLE";
+    }
 
     /*if(true) {
         url = "http://localhost:3000/time_holes/TIMEHOLE";
@@ -61,18 +99,58 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     }
 }
 
+Future<Null> adopt() async {
+    DivElement div = new DivElement();
+    output.append(div);
+    new LoadingAnimation("Looking for abandoned wigglers in need of a home...",null,div );
+    GameObject.instance.playMusic("WTWJ1");
+    //don't skip manics nice music thingy
+    await new Future.delayed(new Duration(seconds: 3));
+
+    String url = "https://plaguedoctors.herokuapp.com/time_holes/adoptTIMEHOLE";
+
+
+    try {
+        await HttpRequest.getString(url)
+            .then(finishLoadingJSONGet);
+    }catch(error, trace) {
+        LoadingAnimation.instance.stop();
+        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+    }
+}
+
 
 
 void finishLoadingJSON(HttpRequest request)  {
     LoadingAnimation.instance.stop();
-    CapsuleTIMEHOLE originalCapsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
     GameObject.instance.playMusicOnce("WTJ2");
-    JSONObject outerJSON =new JSONObject.fromJSONString(request.responseText);
+    CapsuleTIMEHOLE originalCapsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
+    if(monster) {
+        GameObject.instance.removePet(originalCapsule.pet);
+        output.appendHtml("You have one less wiggler to raise!!! You monster.");
+    }else {
+
+        JSONObject outerJSON = new JSONObject.fromJSONString(
+            request.responseText);
+        JSONObject innerJSON = new JSONObject.fromJSONString(
+            outerJSON["wigglerJSON"]);
+        CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
+        displayNewGrub(capsule);
+        print("adding new pet ${capsule.pet}");
+        GameObject.instance.removePet(originalCapsule.pet);
+        GameObject.instance.addPet(capsule.pet);
+        window.localStorage.remove("TIMEHOLE");
+    }
+}
+
+void finishLoadingJSONGet(String response)  {
+    LoadingAnimation.instance.stop();
+    GameObject.instance.playMusicOnce("WTJ2");
+    JSONObject outerJSON = new JSONObject.fromJSONString(response);
     JSONObject innerJSON = new JSONObject.fromJSONString(outerJSON["wigglerJSON"]);
     CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
     displayNewGrub(capsule);
     print("adding new pet ${capsule.pet}");
-    GameObject.instance.removePet(originalCapsule.pet);
     GameObject.instance.addPet(capsule.pet);
     window.localStorage.remove("TIMEHOLE");
 }
@@ -81,7 +159,9 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule) async {
     print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
-    DivElement div = new DivElement()..text = "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
+    String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
+    if(savior) text = "You selflessly adopted: ${capsule.pet.name} from ${capsule.breederName}!!!";
+    DivElement div = new DivElement()..text = text;
     output.append(div);
 }
 
@@ -105,7 +185,7 @@ class LoadingAnimation {
 
     void stop() {
         GameObject.instance.stopMusic();
-        petCanvas.remove();
+        if(petCanvas != null)petCanvas.remove();
         textElement.remove();
         stopPlz = true;
         return;

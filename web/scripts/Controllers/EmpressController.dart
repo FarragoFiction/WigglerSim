@@ -26,10 +26,18 @@ Future<Null> start() async {
   await game.preloadManifest();
   if(Empress.instance.allowsGambling()) {
     AnchorElement a = new AnchorElement(href: "blackJack.html");
+    a.style.display = "block";
     a.setInnerHtml("<img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'>Challenge the Empress to a Game For More Funds?<img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'>");
 
     querySelector('#output').append(a);
+  }
 
+  if(Empress.instance.allowsAdoptingWigglersfromTIMEHOLE() || getParameterByName("trade",null) == "wonder") {
+    AnchorElement a = new AnchorElement(href: "TIMEHOLE.html?adopt=selflessly");
+    a.style.display = "block";
+    a.setInnerHtml("Selflessly adopt an abandoned wiggler?");
+
+    querySelector('#output').append(a);
   }
   Element container = new DivElement();
   querySelector('#output').append(container);

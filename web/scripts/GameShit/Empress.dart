@@ -124,8 +124,25 @@ class Empress {
 
     bool allowTIMEHOLE() {
         //wanting to have reason to have diff types of empresses
+        if(getParameterByName("trade",null) == "wonder") return true;
         if(troll == null) return false;
         if(troll.isCurious || troll.isPatient) return true;
+        return false;
+    }
+
+    bool allowsAbdicatingWigglersToTIMEHOLE() {
+        //wanting to have reason to have diff types of empresses
+        if(getParameterByName("trade",null) == "wonder") return true;
+        if(troll == null) return false;
+        if(troll.isFreeSprited) return true;
+        return false;
+    }
+
+    bool allowsAdoptingWigglersfromTIMEHOLE() {
+        //wanting to have reason to have diff types of empresses
+        if(getParameterByName("trade",null) == "wonder") return true;
+        if(troll == null) return false;
+        if(troll.isLoyal) return true;
         return false;
     }
 
@@ -530,6 +547,16 @@ class Empress {
         if(allowTIMEHOLE()) {
             y = y + fontSize + buffer;
             Renderer.wrap_text(textCanvas.context2D, "Allows TIMEHOLE", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowsAbdicatingWigglersToTIMEHOLE()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows TIMEHOLE Abdicating", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowsAdoptingWigglersfromTIMEHOLE()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows TIMEHOLE Adopting", x, y, fontSize + buffer, 275, "left");
         }
 
         if(allowClothesStyling()) {
