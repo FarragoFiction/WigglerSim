@@ -546,7 +546,7 @@ class Empress {
 
         if(allowTIMEHOLE()) {
             y = y + fontSize + buffer;
-            Renderer.wrap_text(textCanvas.context2D, "Allows TIMEHOLE", x, y, fontSize + buffer, 275, "left");
+            Renderer.wrap_text(textCanvas.context2D, "Allows TIMEHOLE Trading", x, y, fontSize + buffer, 275, "left");
         }
 
         if(allowsAbdicatingWigglersToTIMEHOLE()) {
@@ -561,7 +561,12 @@ class Empress {
 
         if(allowClothesStyling()) {
             y = y + fontSize + buffer;
-            Renderer.wrap_text(textCanvas.context2D, "Allows Makeovers", x, y, fontSize + buffer, 275, "left");
+            Renderer.wrap_text(textCanvas.context2D, "Allows Clothes Styling", x, y, fontSize + buffer, 275, "left");
+        }
+
+        if(allowHairDressing()) {
+            y = y + fontSize + buffer;
+            Renderer.wrap_text(textCanvas.context2D, "Allows Hair Styling", x, y, fontSize + buffer, 275, "left");
         }
 
         if(allowsFundingTrees()) {
