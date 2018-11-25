@@ -25,7 +25,7 @@ class CapsuleTIMEHOLE {
     }
 
     CapsuleTIMEHOLE.fromJson(JSONObject json){
-        print("parsing json $json into a capsule");
+        //print("parsing json $json into a capsule");
         pet = Pet.loadPetFromJSON(json["pet"]);
         print("pet is $pet");
         breederName = json['breeder'];
@@ -41,7 +41,7 @@ class CapsuleTIMEHOLE {
         //print("what json is $what");
         for(dynamic d in what) {
             try {
-                print("dynamic json thing is  $d");
+                //print("dynamic json thing is  $d");
                 JSONObject j = new JSONObject();
                 j.json = d;
                 JSONObject innerJSON = new JSONObject.fromJSONString(

@@ -118,6 +118,8 @@ Future<Null> viewTIMEHOLE() async {
     await new Future.delayed(new Duration(seconds: 1));
 
     String url = "https://plaguedoctors.herokuapp.com/time_holes.json";
+    //String url = "http://localhost:3000/time_holes.json";
+
     try {
         await HttpRequest.getString(url)
             .then(finishLoadingJSONGetAll);
