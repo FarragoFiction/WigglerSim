@@ -1,26 +1,40 @@
 import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
+import '../Pets/Grub.dart';
 import '../Pets/JSONObject.dart';
+import '../Pets/Pet.dart';
 import 'dart:html';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
 import "navbar.dart";
 import "dart:math" as Math;
 
+import 'package:DollLibCorrect/src/Dolls/KidBased/HomestuckGrubDoll.dart';
+import 'package:DollLibCorrect/src/Rendering/ReferenceColors.dart';
+
 
 GameObject game;
 DivElement output = querySelector("#output");
 bool monster = false;
+int numHax = 0;
 bool savior = false;
 void main() {
     loadNavbar();
     game = new GameObject(true);
+    querySelector("#npc").onClick.listen((e){
+
+        window.location.href= "${window.location.href}?open=saysjr";
+    });
 
     start();
 }
 
 Future<Null> start() async {
     Empress e = Empress.instance;
+    if(window.location.href.contains("localhost")&& getParameterByName("open",null) == "saysjr") {
+        jrHax();
+        return;
+    }
 
     if(getParameterByName("weaponofchoice",null) == "curiosity"){
         viewTIMEHOLE();
@@ -81,6 +95,31 @@ Future<Null> start() async {
         button.remove();
         TIMEHOLE(capsule,canvas);
     });
+}
+
+Future<Null> jrHax() async {
+    String url = "https://plaguedoctors.herokuapp.com/time_holes/abdicateTIMEHOLE";
+    Pet pet = new Grub(new HomestuckGrubDoll());
+    pet.name = "Hacked ${pet.doll.name}";
+    //pet.doll.copyPalette(ReferenceColours.MIND);
+    CapsuleTIMEHOLE haxCapsule = new CapsuleTIMEHOLE(pet,"JR's Hax");
+    try {
+        await HttpRequest.postFormData(url,haxCapsule.makePostData())
+            .then(jrHaxNext);
+    }catch(error, trace) {
+        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+    }
+
+}
+
+void jrHaxNext(HttpRequest request)  {
+    numHax ++;
+    output.appendHtml("Hax $numHax complete.");
+    if(numHax < 13) {
+        jrHax();
+    }else {
+        output.appendHtml("All Hax Complete");
+    }
 }
 
 Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
