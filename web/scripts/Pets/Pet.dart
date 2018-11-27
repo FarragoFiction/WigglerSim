@@ -77,6 +77,7 @@ import "Stat.dart";
 import "../GameShit/Empress.dart";
 import "../GameShit/GameObject.dart";
 import "../Controllers/navbar.dart";
+import "dart:math" as Math;
 
 
 
@@ -558,7 +559,7 @@ abstract class Pet {
 
 
     JSONObject toJson() {
-        doll.dollName = name.substring(0,113);; //handles it
+        doll.dollName = name.substring(0,Math.max(0,Math.min(name.length-1,113))); //no bee movie
         JSONObject json = new JSONObject();
         json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
         json[ISEMPRESS] = empress.toString();
@@ -566,7 +567,7 @@ abstract class Pet {
         json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";
         json[DOLLDATAURL] = doll.toDataBytesX();
         json[BOREDOMEJSON] =  "${boredom}";
-        json[NAMEJSON] =  "${name.substring(0,113)}";
+        json[NAMEJSON] =  "${name.substring(0,Math.max(0,Math.min(name.length-1,113)))}";
         json[HEALTHJSON] =  "${health}";
         json[TYPE] = type;
         json["corrupt"] = corrupt.toString();

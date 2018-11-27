@@ -2,6 +2,7 @@ import '../GameShit/GameObject.dart';
 import 'JSONObject.dart';
 import 'Pet.dart';
 import 'dart:convert';
+import "dart:math" as Math;
 
 class CapsuleTIMEHOLE {
     Pet pet;
@@ -20,7 +21,7 @@ class CapsuleTIMEHOLE {
     JSONObject toJson() {
         JSONObject json = new JSONObject();
         json["pet"] = pet.toJson().toString();
-        json["breeder"] = breederName.substring(0,113);;
+        json["breeder"] = breederName.substring(0,Math.max(0,Math.min(breederName.length-1,113)));
         return json;
     }
 

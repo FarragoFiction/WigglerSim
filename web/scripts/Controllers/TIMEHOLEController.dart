@@ -160,14 +160,13 @@ Future<Null> getCost() async {
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 1));
 
-    //String url = "https://plaguedoctors.herokuapp.com/timeholesize.json";
-    String url = "http://localhost:3000/timeholesize.json";
+    String url = "https://plaguedoctors.herokuapp.com/time_holes/timeholesize.json";
+    //String url = "http://localhost:3000/time_holes/timeholesize.json";
 
     try {
         await HttpRequest.getString(url)
             .then(finishLoadingCount);
     }catch(error, trace) {
-        LoadingAnimation.instance.stop();
         output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
     }
 }
@@ -251,7 +250,7 @@ void finishLoadingJSONGet(String response)  {
 void finishLoadingCount(String response)  {
    int count = int.parse(response);
    //the more wigglers there are the cheaper the cost
-   int cost = 300-count;
+   int cost = 300-count*3;
    cost = Math.max(cost,13); //cost at least 13.
    if(game.player.caegers > cost) {
        ButtonElement button = new ButtonElement()..text = "Spend $cost caegers to selflessly adopt a wiggler from the TIMEHOLE?";
