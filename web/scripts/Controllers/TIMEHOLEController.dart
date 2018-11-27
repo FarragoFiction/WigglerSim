@@ -57,9 +57,10 @@ Future<Null> start() async {
         }
         if(game.player.petInventory.hasRoom) {
             if(game.player.caegers > 13) {
-                int cost = (game.player.caegers/10).round() +13;
+                int cost = (game.player.caegers/3).round() +13;
                 ButtonElement button = new ButtonElement()..text = "Spend $cost caegers to selflessly adopt a wiggler from the TIMEHOLE?";
                 output.append(button);
+                button.style.display = "block";
                 output.appendHtml("(WARNING: Fee applies even should the TIMEHOLE malfunction");
                 button.onClick.listen((Event e) {
                     game.player.caegers += -1* cost;
