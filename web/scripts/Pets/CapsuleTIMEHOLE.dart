@@ -20,7 +20,7 @@ class CapsuleTIMEHOLE {
     JSONObject toJson() {
         JSONObject json = new JSONObject();
         json["pet"] = pet.toJson().toString();
-        json["breeder"] = breederName;
+        json["breeder"] = breederName.substring(0,113);;
         return json;
     }
 

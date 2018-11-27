@@ -558,7 +558,7 @@ abstract class Pet {
 
 
     JSONObject toJson() {
-        doll.dollName = name; //handles it
+        doll.dollName = name.substring(0,113);; //handles it
         JSONObject json = new JSONObject();
         json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
         json[ISEMPRESS] = empress.toString();
@@ -566,7 +566,7 @@ abstract class Pet {
         json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";
         json[DOLLDATAURL] = doll.toDataBytesX();
         json[BOREDOMEJSON] =  "${boredom}";
-        json[NAMEJSON] =  "${name}";
+        json[NAMEJSON] =  "${name.substring(0,113)}";
         json[HEALTHJSON] =  "${health}";
         json[TYPE] = type;
         json["corrupt"] = corrupt.toString();

@@ -45,31 +45,18 @@ Future<Null> start() async {
         output.append(a);
     }
     if(!e.allowsAdoptingWigglersfromTIMEHOLE() && !e.allowsAbdicatingWigglersToTIMEHOLE() && !e.allowTIMEHOLE()) {
-        output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE.";
+        output.appendHtml( "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE.");
         return;
     }
 
     if(getParameterByName("adopt",null) == "selflessly") {
         savior = true;
         if(!e.allowsAdoptingWigglersfromTIMEHOLE()) {
-            output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE TO ADOPT WIGGLERS.";
+            output.appendHtml("By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE TO ADOPT WIGGLERS.");
             return;
         }
         if(game.player.petInventory.hasRoom) {
-            if(game.player.caegers > 13) {
-                int cost = (game.player.caegers/3).round() +13;
-                ButtonElement button = new ButtonElement()..text = "Spend $cost caegers to selflessly adopt a wiggler from the TIMEHOLE?";
-                output.append(button);
-                button.style.display = "block";
-                output.appendHtml("(WARNING: Fee applies even should the TIMEHOLE malfunction");
-                button.onClick.listen((Event e) {
-                    game.player.caegers += -1* cost;
-                    game.save();
-                    adopt();
-                });
-            }else {
-                output.text = "You can not afford the minimum TIMEHOLE FEE of 13 caegers.";
-            }
+            adoptPrelude();
         }else {
             output.text = "You don't have enough ENERGY to adopt more wigglers. Focus on your current brood first.";
         }
@@ -80,7 +67,7 @@ Future<Null> start() async {
         capsule = new CapsuleTIMEHOLE.fromJson(
             new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
     }catch(error) {
-        output.text = "Haha, nope, gotta pick a wiggler first, k? No wasting online stuff, yeah?";
+        output.appendHtml("Haha, nope, gotta pick a wiggler first, k? No wasting online stuff, yeah?");
         return;
     }
     //TODO send them flipping into the TIMEHOLE
@@ -111,15 +98,16 @@ Future<Null> start() async {
     });
 }
 
+void adoptPrelude() {
+    getCost();
+}
+
 Future<Null> jrHax() async {
     String url = "https://plaguedoctors.herokuapp.com/time_holes/abdicateTIMEHOLE";
     Pet pet = new Grub(new HomestuckGrubDoll());
     pet.name = "Hacked ${pet.doll.name}";
-    //pet.doll.copyPalette(ReferenceColours.MIND);
-    List<String> names = new List<String>.from(pet.doll.palette.names);
-    for(String name in names) {
-        pet.doll.palette.add(name, new Colour(13,13,13), true);
-    }
+    pet.doll.copyPalette(new Random().pickFrom(ReferenceColours.paletteList.values));
+
 
     CapsuleTIMEHOLE haxCapsule = new CapsuleTIMEHOLE(pet,"JR's Hax");
     try {
@@ -161,6 +149,23 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     try {
         await HttpRequest.postFormData(url,capsule.makePostData())
             .then(finishLoadingJSON);
+    }catch(error, trace) {
+        LoadingAnimation.instance.stop();
+        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+    }
+}
+
+Future<Null> getCost() async {
+
+    //don't skip manics nice music thingy
+    await new Future.delayed(new Duration(seconds: 1));
+
+    //String url = "https://plaguedoctors.herokuapp.com/timeholesize.json";
+    String url = "http://localhost:3000/timeholesize.json";
+
+    try {
+        await HttpRequest.getString(url)
+            .then(finishLoadingCount);
     }catch(error, trace) {
         LoadingAnimation.instance.stop();
         output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
@@ -240,6 +245,28 @@ void finishLoadingJSONGet(String response)  {
     print("adding new pet ${capsule.pet}");
     GameObject.instance.addPet(capsule.pet);
     window.localStorage.remove("TIMEHOLE");
+}
+
+
+void finishLoadingCount(String response)  {
+   int count = int.parse(response);
+   //the more wigglers there are the cheaper the cost
+   int cost = 300-count;
+   cost = Math.max(cost,13); //cost at least 13.
+   if(game.player.caegers > cost) {
+       ButtonElement button = new ButtonElement()..text = "Spend $cost caegers to selflessly adopt a wiggler from the TIMEHOLE?";
+       output.append(button);
+       button.style.display = "block";
+       output.appendHtml("(WARNING: Fee applies even should the TIMEHOLE malfunction");
+       button.onClick.listen((Event e) {
+           game.player.caegers += -1* cost;
+           game.save();
+           adopt();
+       });
+   }else {
+       output.text = "You can not afford the minimum TIMEHOLE FEE of 13 caegers.";
+   }
+
 }
 
 Future<Null> finishLoadingJSONGetAll(String response) async  {
