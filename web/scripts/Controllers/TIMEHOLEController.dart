@@ -11,6 +11,7 @@ import "dart:math" as Math;
 
 import 'package:DollLibCorrect/src/Dolls/KidBased/HomestuckGrubDoll.dart';
 import 'package:DollLibCorrect/src/Rendering/ReferenceColors.dart';
+import 'package:RenderingLib/RendereringLib.dart';
 
 
 GameObject game;
@@ -55,7 +56,19 @@ Future<Null> start() async {
             return;
         }
         if(game.player.petInventory.hasRoom) {
-            adopt();
+            if(game.player.caegers > 13) {
+                int cost = (game.player.caegers/10).round() +13;
+                ButtonElement button = new ButtonElement()..text = "Spend $cost caegers to selflessly adopt a wiggler from the TIMEHOLE?";
+                output.append(button);
+                output.appendHtml("(WARNING: Fee applies even should the TIMEHOLE malfunction");
+                button.onClick.listen((Event e) {
+                    game.player.caegers += -1* cost;
+                    game.save();
+                    adopt();
+                });
+            }else {
+                output.text = "You can not afford the minimum TIMEHOLE FEE of 13 caegers.";
+            }
         }else {
             output.text = "You don't have enough ENERGY to adopt more wigglers. Focus on your current brood first.";
         }
@@ -102,6 +115,11 @@ Future<Null> jrHax() async {
     Pet pet = new Grub(new HomestuckGrubDoll());
     pet.name = "Hacked ${pet.doll.name}";
     //pet.doll.copyPalette(ReferenceColours.MIND);
+    List<String> names = new List<String>.from(pet.doll.palette.names);
+    for(String name in names) {
+        pet.doll.palette.add(name, new Colour(13,13,13), true);
+    }
+
     CapsuleTIMEHOLE haxCapsule = new CapsuleTIMEHOLE(pet,"JR's Hax");
     try {
         await HttpRequest.postFormData(url,haxCapsule.makePostData())
@@ -171,6 +189,7 @@ Future<Null> viewTIMEHOLE() async {
 Future<Null> adopt() async {
     DivElement div = new DivElement();
     output.append(div);
+    ButtonElement button = new ButtonElement();
     new LoadingAnimation("Looking for abandoned wigglers in need of a home...",null,div );
     GameObject.instance.playMusic("WTWJ1");
     //don't skip manics nice music thingy
