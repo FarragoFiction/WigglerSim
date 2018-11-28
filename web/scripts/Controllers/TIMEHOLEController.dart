@@ -252,6 +252,7 @@ void finishLoadingCount(String response)  {
    //the more wigglers there are the cheaper the cost
    int cost = 300-count*3;
    cost = Math.max(cost,13); //cost at least 13.
+   if (count < 30) cost = (game.player.caegers/2).round();
    if(game.player.caegers > cost) {
        ButtonElement button = new ButtonElement()..text = "Spend $cost caegers to selflessly adopt a wiggler from the TIMEHOLE?";
        output.append(button);
