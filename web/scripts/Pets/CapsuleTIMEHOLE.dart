@@ -21,7 +21,8 @@ class CapsuleTIMEHOLE {
     JSONObject toJson() {
         JSONObject json = new JSONObject();
         json["pet"] = pet.toJson().toString();
-        json["breeder"] = breederName.substring(0,Math.max(0,Math.min(breederName.length-1,113)));
+        int nameLength = Math.max(0,Math.min(breederName.length-1,113));
+        json["breeder"] = breederName.substring(0,nameLength);
         return json;
     }
 
