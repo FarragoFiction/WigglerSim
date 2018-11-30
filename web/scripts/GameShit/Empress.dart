@@ -370,6 +370,13 @@ class Empress {
         //at max curiosity, ALL items.
         List<AIItem> defaultItems = new List<AIItem>();
         if(troll == null) return defaultItems;
+
+        //space is associated with creation, too
+        if(troll.isPatient) {
+            defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Goldblood Doll", "GoldbloodDoll.png")],loyal_value: troll.loyal.value, energetic_value: -1*troll.energetic.value.abs()));
+            defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Jadeblood Doll", "JadebloodDoll.png")],patience_value: troll.patience.value, energetic_value: -1*troll.energetic.value.abs()));
+
+        }
         if(troll.isCurious) {
             defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Glow Bug", "flyfulamber.png")], energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs()), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
             defaultItems.add(new AIItem(118, <ItemAppearance>[new ItemAppearance("${troll.name}'s Honorable Tyranny Blood", "better_than_bleach.png")],curious_value: troll.curious.value, external_value: troll.external.value.abs(),loyal_value: troll.loyal.value.abs()));

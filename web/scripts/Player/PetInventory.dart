@@ -199,14 +199,9 @@ class PetInventory {
 
             container.append(subContainer);
 
-            TextInputElement customName = new TextInputElement();
-            customName.value = p.name;
-            customName.size = 40;
-            subContainer.append(customName);
 
-            ButtonElement button = new ButtonElement();
-            button.text = "Rename";
-            subContainer.append(button);
+            SpanElement nameElement = new SpanElement();
+            subContainer.append(nameElement);
 
             ButtonElement randomButton = new ButtonElement();
             randomButton.text = "Random Name";
@@ -231,14 +226,7 @@ class PetInventory {
 
             CanvasElement canvas = await drawPet(subContainer, p);
             subContainer.append(p.makeDollLoader());
-
-
-
-            button.onClick.listen((e) {
-                p.name = customName.value;
-                GameObject.instance.save();
-                drawPet(subContainer,p, canvas);
-            });
+            renameButton(nameElement,canvas,p);
 
             renderHairDressingButton(subContainer, p, canvas);
             renderClothesStylistButton(subContainer, p, canvas);
@@ -284,6 +272,31 @@ class PetInventory {
             });
 
         }
+    }
+
+    void renameButton(SpanElement subContainer, CanvasElement canvas, Pet p) {
+
+
+      TextInputElement customName = new TextInputElement();
+      customName.value = p.name;
+      customName.size = 40;
+      subContainer.append(customName);
+
+      ButtonElement button = new ButtonElement();
+      String warning = "";
+      if(alumni.contains(p)) warning = "(Will not effect epitaph.)";
+      button.text = "Rename $warning";
+      subContainer.append(button);
+
+      button.onClick.listen((e) {
+          //otherwise they will get out of sync
+          if(Doll.removeLabelFromString(rulingEmpress.troll.doll.toDataBytesX()) == Doll.removeLabelFromString(p.doll.toDataBytesX())) {
+              rulingEmpress.troll.name = customName.value;
+          }
+          p.name = customName.value;
+          GameObject.instance.save();
+          drawPet(subContainer,p, canvas);
+      });
     }
 
     Future<Null> updateNameElement(Element subContainer, Pet p, CanvasElement canvas) async{
@@ -386,13 +399,16 @@ class PetInventory {
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
             subContainer.classes.add("petInventorySlot");
-
+            SpanElement nameElement = new SpanElement();
+            subContainer.append(nameElement);
             subContainer.append(p.makeDollLoader());
 
             container.append(subContainer);
 
 
             CanvasElement c = await drawPet(subContainer, p);
+            renameButton(nameElement,c,p);
+
             renderHairDressingButton(subContainer, p, c);
             renderClothesStylistButton(subContainer, p, c);
             drawLifeSimButton(subContainer, p);

@@ -559,8 +559,7 @@ abstract class Pet {
 
 
     JSONObject toJson() {
-        int nameLength = Math.max(0,Math.min(name.length-1,113));
-        window.alert("name should be ${nameLength} long");
+        int nameLength = Math.max(0,Math.min(name.length,113));
         doll.dollName = name.substring(0,nameLength); //no bee movie
         JSONObject json = new JSONObject();
         json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
