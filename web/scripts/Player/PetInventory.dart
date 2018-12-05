@@ -275,8 +275,6 @@ class PetInventory {
     }
 
     void renameButton(SpanElement subContainer, CanvasElement canvas, Pet p) {
-
-
       TextInputElement customName = new TextInputElement();
       customName.value = p.name;
       customName.size = 40;
@@ -290,8 +288,12 @@ class PetInventory {
 
       button.onClick.listen((e) {
           //otherwise they will get out of sync
-          if(Doll.removeLabelFromString(rulingEmpress.troll.doll.toDataBytesX()) == Doll.removeLabelFromString(p.doll.toDataBytesX())) {
-              rulingEmpress.troll.name = customName.value;
+          if(rulingEmpress != null && rulingEmpress.troll != null) {
+              if (Doll.removeLabelFromString(
+                  rulingEmpress.troll.doll.toDataBytesX()) ==
+                  Doll.removeLabelFromString(p.doll.toDataBytesX())) {
+                  rulingEmpress.troll.name = customName.value;
+              }
           }
           p.name = customName.value;
           GameObject.instance.save();
