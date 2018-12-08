@@ -14,7 +14,24 @@ void main() {
 }
 
 void start() {
-    ButtonElement button =  new ButtonElement();
+
+    DivElement hiddenShot  = new DivElement();
+    ButtonElement button = new ButtonElement();
+    button.text = "Click Here if None of those Links Work";
+    hiddenShot.append(button);
+    querySelector('#output').append(hiddenShot);
+
+
+    button.onClick.listen((e) {
+        DivElement lastShot = new DivElement()
+            ..setInnerHtml("Okay. If the links don't work at all (likely in IE), you can manually copy this and save it to a .txt file. Here's hoping.");
+        TextAreaElement saveAea = new TextAreaElement();
+        saveAea.value = LZString.compressToEncodedURIComponent(window.localStorage[Player.DOLLSAVEID]);
+        lastShot.append(saveAea);
+        querySelector('#output').append(lastShot);
+    });
+
+    button =  new ButtonElement();
     button.text = "destroy your save data?";
     querySelector('#output').append(button);
 
@@ -70,21 +87,7 @@ void start() {
         querySelector('#output').append(saveLink4);
 
 
-        DivElement hiddenShot  = new DivElement();
-        ButtonElement button = new ButtonElement();
-        button.text = "Click Here if None of those Links Work";
-        hiddenShot.append(button);
-        querySelector('#output').append(hiddenShot);
 
-
-        button.onClick.listen((e) {
-            DivElement lastShot = new DivElement()
-                ..setInnerHtml("Okay. If the links don't work at all (likely in IE), you can manually copy this and save it to a .txt file. Here's hoping.");
-            TextAreaElement saveAea = new TextAreaElement();
-            saveAea.value = LZString.compressToEncodedURIComponent(window.localStorage[Player.DOLLSAVEID]);
-            lastShot.append(saveAea);
-            querySelector('#output').append(lastShot);
-        });
     }
 
 
