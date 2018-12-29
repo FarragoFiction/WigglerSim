@@ -83,7 +83,8 @@ Future<Null> start() async {
         text = "$text You won't get anything back, you monster.";
         monster = true;
     }
-    if(!e.allowTIMEHOLE()) {
+    //if there are no params and it doesn't let normal trading i guess???
+    if(!e.allowTIMEHOLE() && getParameterByName("abandon",null) == null && getParameterByName("adopt",null) == null) {
         output.text = "By ROYAL DECREE, NO CARETAKER MAY INTERACT WITH THE TIMEHOLE TO TRADE WIGGLERS.";
         return;
     }
@@ -262,6 +263,9 @@ void finishLoadingCount(String response)  {
            game.player.caegers += -1* cost;
            game.save();
            adopt();
+           //can only adopt once per click, have to refresh.
+           button.disabled = true;
+           button.remove();
        });
    }else {
        output.text = "You can not afford the minimum TIMEHOLE FEE of $cost caegers.";
