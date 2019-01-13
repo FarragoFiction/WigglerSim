@@ -413,6 +413,9 @@ class Empress {
         if(troll != null) {
             CanvasElement grubCanvas = await troll.draw();
             canvas.context2D.drawImage(grubCanvas, 10, 10);
+        }else {
+            ImageElement placeHolder = await Loader.getResource("images/nameless_empress_CROP.png");
+            canvas.context2D.drawImage(placeHolder,10,10);
         }
         container.append(canvas);
 
