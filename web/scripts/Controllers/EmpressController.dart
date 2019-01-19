@@ -24,6 +24,7 @@ void main() {
 
 Future<Null> start() async {
   await game.preloadManifest();
+  await Doll.loadFileData();
   if(Empress.instance.allowsGambling()) {
     AnchorElement a = new AnchorElement(href: "blackJack.html");
     a.style.display = "block";

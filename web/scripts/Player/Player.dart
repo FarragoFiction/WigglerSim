@@ -2,6 +2,7 @@
 // a player has a doll.
 //a player has a graduatesList.
 import '../Pets/Pet.dart';
+import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "PetInventory.dart";
 import "ItemInventory.dart";
@@ -11,6 +12,7 @@ import 'dart:async';
 import 'dart:convert';
 import "../Pets/Sign.dart";
 import "../GameShit/Empress.dart";
+import 'package:RenderingLib/src/Rendering/Renderer.dart';
 
 class Player {
     static String DATASTRING = "dataString";

@@ -1,8 +1,10 @@
 import "Pet.dart";
+import 'package:CommonLib/Colours.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "JSONObject.dart";
 import 'dart:html';
 import 'dart:async';
+import 'package:RenderingLib/src/Rendering/Renderer.dart';
 
 /*
    Cocoons are basically eggs that turn into trolls, not grubs.

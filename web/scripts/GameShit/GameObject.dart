@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:CommonLib/Compression.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import '../Player/Player.dart';
 import 'dart:async';
@@ -6,6 +7,7 @@ import 'dart:html';
 import "../Pets/PetLib.dart";
 import "PlayPen.dart";
 import "MoneyHandler.dart";
+import 'package:LoaderLib/Loader.dart';
 
 //handles shit that my instincts want to put on a page controller.
 class GameObject {
@@ -110,7 +112,7 @@ class GameObject {
     }
 
     Future<Null> preloadManifest() async {
-        await Loader.preloadManifest();
+        await Loader.loadManifest();
         print ("loader returned");
         return;
     }

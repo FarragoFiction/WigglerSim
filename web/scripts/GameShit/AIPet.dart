@@ -21,11 +21,13 @@ import 'dart:async';
 import "../Pets/PetLib.dart";
 import 'dart:html';
 import 'dart:async';
+import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import "AIObject.dart";
 import "GameObject.dart";
 import "AIItem.dart";
 import 'dart:math' as Math;
+import 'package:RenderingLib/src/Rendering/Renderer.dart';
 
 
 
@@ -96,7 +98,7 @@ class AIPet extends AIObject {
     //should NOT be fully random or based on stats which can change.
     void setScaleBasedStableThing() {
         HomestuckTrollDoll d = grub.doll;
-        double bonus = d.hairBack.imgNumber/d.maxHair; //should be hair so lots of variety
+        double bonus = d.hairBack.imgNumber/d.extendedHairBack.maxImageNumber; //should be hair so lots of variety
         bonus = Math.min(0.1, bonus);
         int seed = d.hairBack.imgNumber;
         Random rand = new Random(seed);

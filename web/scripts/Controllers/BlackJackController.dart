@@ -17,8 +17,9 @@ CanvasElement meCanvas;
 Element newGame;
 
 Quirk quirk;
-void main() {
+Future<Null> main() async {
   loadNavbar();
+  await Doll.loadFileData();
 
   game = new GameObject(false);
 
@@ -100,7 +101,6 @@ Future<Null> start() async{
   GameObject.instance.save();
   MoneyHandler.instance.sync();
 
-  await Loader.preloadManifest();
   await drawEmpress();
   blackJackGame = new BlackJackGame(Card.getFreshDeck(),div, finishGame);
   blackJackGame.dealer.name = "Empress ${Empress.instance.troll.name}";

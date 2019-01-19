@@ -13,6 +13,7 @@ void main() {
 
 Future<Null> start() async {
   await game.preloadManifest();
+  await Doll.loadFileData();
   print("preload happened");
   Element container = new DivElement();
   container.style.display = "inline-block";

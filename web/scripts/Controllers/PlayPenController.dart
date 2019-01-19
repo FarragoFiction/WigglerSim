@@ -12,8 +12,9 @@ int frameRate = 200; //300 looks so bad, 100 is too fast
 
 bool stop = false;
 
-void main() {
+Future<Null> main() async {
     loadNavbar();
+    await Doll.loadFileData();
     game = new GameObject(true);
     ButtonElement b = new ButtonElement();
     b.text = "toggle animation";

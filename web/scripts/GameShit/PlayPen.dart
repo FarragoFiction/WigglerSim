@@ -4,9 +4,12 @@ import "AIItem.dart";
 
 import 'dart:html';
 import 'dart:async';
+import 'package:CommonLib/Random.dart';
 import "package:DollLibCorrect/DollRenderer.dart";
 import "../Pets/PetLib.dart";
 import "../GameShit/GameObject.dart";
+import 'package:LoaderLib/src/loader.dart';
+import 'package:RenderingLib/src/Rendering/Renderer.dart';
 
 /*
 TODO:

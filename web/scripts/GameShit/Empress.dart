@@ -6,6 +6,8 @@ import "../Player/ItemInventory.dart";
 import 'dart:html';
 import 'dart:async';
 import 'dart:math' as Math;
+import 'package:LoaderLib/Loader.dart';
+import 'package:RenderingLib/src/Rendering/Renderer.dart';
 
 
 

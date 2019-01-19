@@ -9,6 +9,8 @@ import '../GameShit/GameObject.dart';
 import "navbar.dart";
 import "dart:math" as Math;
 
+import 'package:CommonLib/Random.dart';
+import 'package:DollLibCorrect/src/Dolls/Doll.dart';
 import 'package:DollLibCorrect/src/Dolls/KidBased/HomestuckGrubDoll.dart';
 import 'package:DollLibCorrect/src/Rendering/ReferenceColors.dart';
 import 'package:RenderingLib/RendereringLib.dart';
@@ -19,7 +21,9 @@ DivElement output = querySelector("#output");
 bool monster = false;
 int numHax = 0;
 bool savior = false;
-void main() {
+Future<Null> main() async{
+    await Doll.loadFileData();
+
     loadNavbar();
     game = new GameObject(true);
     querySelector("#npc").onClick.listen((e){

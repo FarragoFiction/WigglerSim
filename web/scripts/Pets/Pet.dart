@@ -65,6 +65,7 @@
 
 
  */
+import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import "JSONObject.dart";
@@ -78,6 +79,7 @@ import "../GameShit/Empress.dart";
 import "../GameShit/GameObject.dart";
 import "../Controllers/navbar.dart";
 import "dart:math" as Math;
+import 'package:RenderingLib/src/Rendering/Renderer.dart';
 
 
 
@@ -213,7 +215,7 @@ abstract class Pet {
         Random rand = new Random();
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
         int oldHair = t.extendedHairTop.imgNumber;
-        t.extendedHairTop.imgNumber = rand.nextInt(t.maxHair);
+        t.extendedHairTop.imgNumber = rand.nextInt(t.extendedHairBack.maxImageNumber);
         t.extendedHairBack.imgNumber = t.extendedHairTop.imgNumber;
         print("${name} looks fabulous with their new hair style of ${t.extendedHairTop.imgNumber}. ${oldHair} was simply out of fashion.");
     }
@@ -222,7 +224,7 @@ abstract class Pet {
         Random rand = new Random();
         HomestuckTrollDoll t = doll as HomestuckTrollDoll;
         int oldBody = t.extendedBody.imgNumber;
-        t.extendedBody.imgNumber = rand.nextInt(t.maxBody);
+        t.extendedBody.imgNumber = rand.nextInt(t.extendedBody.maxImageNumber);
         print("${name} looks fabulous with their new hair style of ${t.extendedBody.imgNumber}. ${oldBody} was simply out of fashion.");
     }
 

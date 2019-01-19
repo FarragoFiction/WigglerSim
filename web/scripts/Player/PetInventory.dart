@@ -1,6 +1,7 @@
 //just a list of pets that i have. making it more than just a list in case i need it to.
 import '../Pets/CapsuleTIMEHOLE.dart';
 import "../Pets/PetLib.dart";
+import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:html';
 import 'dart:async';

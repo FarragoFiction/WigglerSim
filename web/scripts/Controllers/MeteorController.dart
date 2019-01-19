@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'package:CommonLib/Compression.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
