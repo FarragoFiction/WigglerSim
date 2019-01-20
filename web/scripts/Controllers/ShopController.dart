@@ -5,8 +5,9 @@ import '../GameShit/GameObject.dart';
 import "navbar.dart";
 GameObject game;
 
-void main() {
+Future<Null> main() async{
     loadNavbar();
+    await Doll.loadFileData();
 
     game = new GameObject(true);
     start();

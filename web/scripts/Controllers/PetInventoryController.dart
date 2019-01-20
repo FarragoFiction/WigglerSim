@@ -5,16 +5,17 @@ import '../GameShit/GameObject.dart';
 import 'navbar.dart';
 
 GameObject game;
-void main() {
+Future<Null> main() async {
   loadNavbar();
+  await Doll.loadFileData();
+  print("preload happened and file data is ${Doll.fileData}");
   game = new GameObject(false);
   start();
 }
 
 Future<Null> start() async {
   await game.preloadManifest();
-  await Doll.loadFileData();
-  print("preload happened");
+
   Element container = new DivElement();
   container.style.display = "inline-block";
   querySelector('#output').append(container);

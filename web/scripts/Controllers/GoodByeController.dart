@@ -6,14 +6,14 @@ import "navbar.dart";
 
 
 GameObject game;
-void main() {
+Future<Null> main() async {
   loadNavbar();
+  await game.preloadManifest();
   game = new GameObject(true);
   start();
 }
 
 Future<Null> start() async {
-  await game.preloadManifest();
   Element container = new DivElement();
   container.style.display = "inline-block";
   querySelector('#output').append(container);

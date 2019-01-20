@@ -16,15 +16,15 @@ int sharedFunds = 0;
 Element output = querySelector('#output');
 List<String> secretsForCalm = new List<String>();
 
-void main() {
+Future<Null> main() async {
   loadNavbar();
+  await game.preloadManifest();
   game = new GameObject(false);
   start();
 }
 
 Future<Null> start() async {
   await game.preloadManifest();
-  await Doll.loadFileData();
   if(Empress.instance.allowsGambling()) {
     AnchorElement a = new AnchorElement(href: "blackJack.html");
     a.style.display = "block";
