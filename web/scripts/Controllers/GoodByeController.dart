@@ -8,7 +8,7 @@ import "navbar.dart";
 GameObject game;
 Future<Null> main() async {
   loadNavbar();
-  await game.preloadManifest();
+  await Doll.loadFileData();
   game = new GameObject(true);
   start();
 }

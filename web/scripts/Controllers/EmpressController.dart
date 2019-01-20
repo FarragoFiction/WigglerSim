@@ -18,13 +18,12 @@ List<String> secretsForCalm = new List<String>();
 
 Future<Null> main() async {
   loadNavbar();
-  await game.preloadManifest();
+  await Doll.loadFileData();
   game = new GameObject(false);
   start();
 }
 
 Future<Null> start() async {
-  await game.preloadManifest();
   if(Empress.instance.allowsGambling()) {
     AnchorElement a = new AnchorElement(href: "blackJack.html");
     a.style.display = "block";
