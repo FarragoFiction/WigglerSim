@@ -111,12 +111,12 @@ class AIItem extends AIObject {
     void loadItemVersionsFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
 
-        List<dynamic> what = JSON.decode(idontevenKnow);
+        List<dynamic> what = jsonDecode(idontevenKnow);
         //print("what json is $what");
         for(dynamic d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
-            j.json = d;
+            j.jsonObject = d;
             itemTypes.add(new ItemAppearance.fromJSON(null,j));
         }
 

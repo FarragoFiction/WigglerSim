@@ -62,7 +62,7 @@ void processTreeSim() {
 
 void copySharedFromDataString(String dataString) {
   print("dataString is $dataString");
-  String rawJson = new String.fromCharCodes(BASE64URL.decode(dataString));
+  String rawJson = new String.fromCharCodes(base64Url.decode(dataString));
   print("rawJSON is $rawJson");
   JSONObject json = new JSONObject.fromJSONString(rawJson);
   print("json is $json");
@@ -86,7 +86,7 @@ String sharedToDataString() {
   try {
     String ret = sharedToJSON().toString();
     print("the json string for shared data was $ret");
-    return "${BASE64URL.encode(ret.codeUnits)}";
+    return "${base64Url.encode(ret.codeUnits)}";
   }catch(e) {
     print(e);
     print("Error Saving Data. Are there any special characters in there? ${sharedToJSON()} $e");

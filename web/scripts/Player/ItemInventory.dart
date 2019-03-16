@@ -282,12 +282,12 @@ class ItemInventory {
     void loadItemsFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
 
-        List<dynamic> what = JSON.decode(idontevenKnow);
+        List<String> what = jsonDecode(idontevenKnow);
         //print("what json is $what");
-        for(dynamic d in what) {
+        for(String d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
-            j.json = d;
+            j.jsonObject = d;
             _myItems.add(new AIItem.fromJSON(null,j));
         }
 

@@ -39,13 +39,13 @@ class CapsuleTIMEHOLE {
 
     static List<CapsuleTIMEHOLE> getAllFromJSON(String json) {
         List<CapsuleTIMEHOLE> ret = new List<CapsuleTIMEHOLE>();
-        List<dynamic> what = JSON.decode(json);
+        List<dynamic> what = jsonDecode(json);
         //print("what json is $what");
         for(dynamic d in what) {
             try {
                 //print("dynamic json thing is  $d");
                 JSONObject j = new JSONObject();
-                j.json = d;
+                j.jsonObject = d;
                 JSONObject innerJSON = new JSONObject.fromJSONString(
                     j["wigglerJSON"]);
                 ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON));
