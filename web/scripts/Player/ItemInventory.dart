@@ -282,9 +282,9 @@ class ItemInventory {
     void loadItemsFromJSON(String idontevenKnow) {
         if(idontevenKnow == null) return;
 
-        List<String> what = jsonDecode(idontevenKnow);
+        List<JSONObject> what = jsonDecode(idontevenKnow);
         //print("what json is $what");
-        for(String d in what) {
+        for(JSONObject d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
             j.jsonObject = d;
