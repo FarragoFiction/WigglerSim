@@ -10,6 +10,7 @@ import 'dart:math' as Math;
 import "../GameShit/GameObject.dart";
 import 'dart:convert';
 import "../Controllers/navbar.dart";
+import 'package:CommonLib/Utility.dart';
 
 
 
@@ -164,7 +165,7 @@ class PetInventory {
         for(dynamic d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
-            j.jsonObject = d;
+            j.json = d;
             pets.add(Pet.loadPetFromJSON(null,j));
         }
     }
@@ -182,7 +183,7 @@ class PetInventory {
         for(dynamic d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
-            j.jsonObject = d;
+            j.json = d;
             alumni.add(Pet.loadPetFromJSON(null,j) as Troll);
         }
     }

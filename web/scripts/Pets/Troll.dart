@@ -1,7 +1,8 @@
 import "Pet.dart";
 import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
-import "JSONObject.dart";
+import 'package:CommonLib/Utility.dart';
+
 import 'dart:async';
 import 'dart:html';
 import "../GameShit/GameObject.dart";

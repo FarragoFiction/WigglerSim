@@ -1,5 +1,6 @@
+import 'package:CommonLib/Utility.dart';
+
 import '../GameShit/GameObject.dart';
-import 'JSONObject.dart';
 import 'Pet.dart';
 import 'dart:convert';
 import "dart:math" as Math;
@@ -45,7 +46,7 @@ class CapsuleTIMEHOLE {
             try {
                 //print("dynamic json thing is  $d");
                 JSONObject j = new JSONObject();
-                j.jsonObject = d;
+                j.json = d;
                 JSONObject innerJSON = new JSONObject.fromJSONString(
                     j["wigglerJSON"]);
                 ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON));

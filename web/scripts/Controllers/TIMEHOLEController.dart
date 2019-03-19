@@ -1,7 +1,7 @@
 import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/Grub.dart';
-import '../Pets/JSONObject.dart';
+import 'package:CommonLib/Utility.dart';
 import '../Pets/Pet.dart';
 import 'dart:html';
 import 'dart:async';

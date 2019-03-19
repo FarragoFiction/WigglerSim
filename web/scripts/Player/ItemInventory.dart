@@ -7,6 +7,7 @@ import "../GameShit/GameObject.dart";
 import 'dart:convert';
 import 'dart:math' as Math;
 import "../GameShit/Empress.dart";
+import 'package:CommonLib/Utility.dart';
 
 
 /*
@@ -287,7 +288,7 @@ class ItemInventory {
         for(JSONObject d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
-            j.jsonObject = d;
+            j.json = d;
             _myItems.add(new AIItem.fromJSON(null,j));
         }
 

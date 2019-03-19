@@ -1,6 +1,6 @@
 import '../GameShit/MoneyHandler.dart';
 import '../Pets/Grub.dart';
-import '../Pets/JSONObject.dart';
+import 'package:CommonLib/Utility.dart';
 import 'dart:convert';
 import 'dart:html';
 import 'package:DollLibCorrect/DollRenderer.dart';

@@ -1,7 +1,7 @@
 import "AIObject.dart";
 import "../Pets/Stat.dart";
 import 'dart:async';
-import "../Pets/JSONObject.dart";
+import 'package:CommonLib/Utility.dart';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
 import "package:DollLibCorrect/DollRenderer.dart";
@@ -116,7 +116,7 @@ class AIItem extends AIObject {
         for(dynamic d in what) {
             //print("dynamic json thing is  $d");
             JSONObject j = new JSONObject();
-            j.jsonObject = d;
+            j.json = d;
             itemTypes.add(new ItemAppearance.fromJSON(null,j));
         }
 

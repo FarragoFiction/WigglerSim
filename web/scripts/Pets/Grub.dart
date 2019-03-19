@@ -1,7 +1,8 @@
 import "Pet.dart";
 import 'Stat.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
-import "JSONObject.dart";
+import 'package:CommonLib/Utility.dart';
+
 import 'dart:async';
 import 'dart:html';
 import "../Controllers/navbar.dart";
