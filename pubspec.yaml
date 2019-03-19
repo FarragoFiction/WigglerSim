@@ -1,28 +1,15 @@
 name: WigglerSim
 description: An absolute bare-bones web app.
-version: 0.0.1
-#homepage: https://www.example.com
-#author: jenny <email@example.com>
+version: 2.2.0
 
 environment:
   sdk: '>=2.2.0 <3.0.0'
 
-#dependencies:
-#  path: ^1.4.1
-
-dev_dependencies:
-  build_runner: ^1.0.0
-  build_test: ^0.10.2
-  build_web_compilers: ^0.4.0
-
-transformers:
-- dart_to_js_script_rewriter
-
 dependencies:
   DollLibCorrect:
-    git: git@github.com:FarragoFiction/DollLibCorrect.git
+    git: git://github.com/FarragoFiction/DollLibCorrect.git
   BlackJack:
-    git:  git@github.com:FarragoFiction/BlackJack.git
+    git:  git://github.com/FarragoFiction/BlackJack.git
   CommonLib:
     git: git://github.com/FarragoFiction/CommonLib.git
   TextEngine:
@@ -30,11 +17,11 @@ dependencies:
   RenderingLib:
     git: git://github.com/FarragoFiction/RenderingLib.git
 
+dev_dependencies:
+  build_runner: ^1.0.0
+  build_test: ^0.10.2
+  build_web_compilers: ^0.4.0
 
-
-
-# Uncomment the following in sdk 1.24+ to make pub serve
-# use dartdevc (webdev.dartlang.org/tools/dartdevc).
-#web:
-#  compiler:
-#    debug: dartdevc
+web:
+  compiler:
+    debug: dartdevc
