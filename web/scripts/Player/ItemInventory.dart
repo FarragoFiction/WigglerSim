@@ -280,16 +280,15 @@ class ItemInventory {
         loadItemsFromJSON(idontevenKnow);
     }
 
-    void loadItemsFromJSON(String idontevenKnow) {
-        if(idontevenKnow == null) return;
+    void loadItemsFromJSON(String input) {
+        if(input == null) return;
 
-        List<JSONObject> what = jsonDecode(idontevenKnow);
-        //print("what json is $what");
-        for(JSONObject d in what) {
-            //print("dynamic json thing is  $d");
-            JSONObject j = new JSONObject();
-            j.json = d;
-            _myItems.add(new AIItem.fromJSON(null,j));
+        List<dynamic> j = jsonDecode(input);
+
+        for(dynamic item in j) {
+            if (item is String) {
+                _myItems.add(new AIItem.fromJSON(item));
+            }
         }
 
     }

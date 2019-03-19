@@ -64,6 +64,7 @@ class Player {
      void loadFromJSON(String json) {
         //print("loading player from json $json");
         JSONObject jsonObj = new JSONObject.fromJSONString(json);
+        print(jsonObj);
         //print("json object is ${jsonObj}");
 
         String dataString = jsonObj[DATASTRING];
