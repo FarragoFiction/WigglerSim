@@ -308,3 +308,19 @@ z-index: 13;
 .itemStats{
 
 }
+
+
+.caretakerBox{
+    border: 3px solid #5d2c1c;
+    width: 400px;
+}
+
+.boiPoints{
+    padding: 10px;
+    text-align: left;
+}
+
+.caretakerName{
+    font-size: 18px;
+    padding-bottom: 10px;
+}

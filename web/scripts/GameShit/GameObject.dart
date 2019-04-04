@@ -71,9 +71,7 @@ class GameObject {
         new MoneyHandler(querySelector("#output"));
         querySelector("#output").append(infoElement);
 
-        if(player.name != player.doll.dollName) {
-            window.location.href= "converstion.html";
-        }else if(redirect && player.petInventory.pets.isEmpty && player.petInventory.alumni.isEmpty) {
+        if(redirect && player.petInventory.pets.isEmpty && player.petInventory.alumni.isEmpty) {
             window.location.href= "petInventory.html";
         }
     }
