@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:html';
 
+import 'package:http/http.dart';
+
 import '../GameShit/GameObject.dart';
 import 'dart:math' as Math;
 
@@ -132,12 +134,12 @@ class LoginInfo{
         //if i get a 200 back everything is good, just return 200
         //if i get anything else back return the error message
         LoginInfo yourInfo = LoginHandler.fetchLogin();
-        String url = "http://localhost:3000/caretakers/confirmedLogin?${yourInfo.toURL()}";
+        String url = "http://localhost:3000/caretakers/confirmedLogin";
         window.console.log("going to $url");
 
         try {
-            return await HttpRequest.getString(url);
-
+            Response resp =   await post(url, body: yourInfo.toURL());
+            return resp.body;
         }catch(error, trace) {
             return "ERROR: cannot access TIMEHOLE system. $error";
         }
