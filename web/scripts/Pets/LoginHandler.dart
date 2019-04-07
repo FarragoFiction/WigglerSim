@@ -90,10 +90,12 @@ class LoginInfo{
         password = tmp["password"];
     }
 
-    Future<bool> confirmedInfo()async {
+    Future<String> confirmedInfo()async {
         //TODO send my info to the server to confirm it.
         //its a get on caretakers/caretakeridbylogin and i pass login and password. i'll get a true/false back
-        return false;
+        //if i get a 200 back everything is good, just return 200
+        //if i get anything else back return the error message
+        return "JR HASN'T ACTUALLY HOOKED THIS UP YET.";
     }
 
 }
