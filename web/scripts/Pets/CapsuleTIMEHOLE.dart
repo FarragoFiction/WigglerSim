@@ -16,6 +16,7 @@ class CapsuleTIMEHOLE {
         Map<String,String> data = new Map<String,String>();
         data["wigglerJSON"] = toJson().toString();
         data["permanent"] = "false";
+        //TODO add login and password to this and hope rails can easily be cahnged to take it
         return data;
     }
 
@@ -60,3 +61,5 @@ class CapsuleTIMEHOLE {
 
 
 }
+
+
