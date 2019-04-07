@@ -6,7 +6,7 @@ abstract class LoginHandler {
 
 
     static bool hasLogin() {
-        window.localStorage.containsKey(LOGINLOCATION);
+        return window.localStorage.containsKey(LOGINLOCATION);
     }
 
     static void storeLogin(String login, String password) {
@@ -18,14 +18,44 @@ abstract class LoginHandler {
     static DivElement loginStatus() {
         DivElement ret = new DivElement();
         if(hasLogin()) {
+            //first i need to confirm my login info is valid
             ret.text = "TODO: DISPLAY LOGIN DETAILS AND A BUTTON TO LOG OUT";
+
         }else {
-            ret.text = "TODO: DISPLAY FORM TO LOGIN";
-            //when logged in should probably refresh the page.
+            return displayLogin();
 
         }
 
         return ret;
+    }
+
+    static DivElement displayLogin() {
+        DivElement ret = new DivElement()..text = "Login to Sweepbook (or create a login).";
+        DivElement first = new DivElement()..style.padding="10px";
+        ret.append(first);
+
+        LabelElement labelLogin = new LabelElement()..text = "Login:";
+        InputElement login = new InputElement();
+        first.append(labelLogin);
+        first.append(login);
+        LabelElement labelPW = new LabelElement()..text = "Password:";
+        InputElement pw = new PasswordInputElement();
+        first.append(labelPW);
+        first.append(pw);
+        ButtonElement button = new ButtonElement()..text = "Login to Sweepbook";
+        ret.append(button);
+        ret.append(new DivElement()..text = "(This is required to engage with the TIMEHOLE now, by Emperial decree.)");
+
+        button.onClick.listen((Event e)
+        {
+            storeLogin(login.value, pw.value);
+            //when logged in should probably refresh the page.
+            window.location.href = window.location.href;
+
+        });
+
+        return ret;
+
     }
 
     static LoginInfo fetchLogin() {
@@ -47,6 +77,10 @@ class LoginInfo{
         var tmp = jsonDecode(json);
         login = tmp["login"];
         password = tmp["password"];
+    }
+
+    Future<bool> confirmedInfo()async {
+        //TODO send my info to the server to confirm it.
     }
 
 }

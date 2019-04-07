@@ -33,7 +33,7 @@ Future<Null> main() async{
     });
 
 
-    LoginHandler.loginStatus();
+    output.append(LoginHandler.loginStatus());
 
     if(LoginHandler.hasLogin()) {
         start();
