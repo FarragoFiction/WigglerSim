@@ -34,9 +34,20 @@ Future<Null> main() async{
 
 
     output.append(LoginHandler.loginStatus());
-
     if(LoginHandler.hasLogin()) {
-        start();
+        LoginInfo yourInfo = LoginHandler.fetchLogin();
+        bool confirmed = await  yourInfo.confirmedInfo();
+        if(confirmed) {
+            start();
+        }else {
+            DivElement error = new DivElement()..text = "ERROR CONFIRMING YOUR LOGIN INFORMATION. DID YOU TYPO ANYTHING? OR WERE YOU TRYING TO CREATE A NEW ACCOUNT AND IT WAS ALREADY TAKEN? Login was: ${yourInfo.login} and PW was ${yourInfo.password}";
+            error.style.color = "red";
+            error.style.border = "3px solid red";
+            output.append(error);
+            LoginHandler.clearLogin();
+            output.append(LoginHandler.loginStatus());
+
+        }
     };
 }
 

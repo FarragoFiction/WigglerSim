@@ -13,19 +13,28 @@ abstract class LoginHandler {
         window.localStorage[LOGINLOCATION] = new LoginInfo(login, password).toJSON();
     }
 
+    static void clearLogin() {
+        window.localStorage.remove(LOGINLOCATION);
+    }
+
     //either who you are currently logged in as and an option to log out
     //or a form for logging in.
     static DivElement loginStatus() {
-        DivElement ret = new DivElement();
         if(hasLogin()) {
-            //first i need to confirm my login info is valid
-            ret.text = "TODO: DISPLAY LOGIN DETAILS AND A BUTTON TO LOG OUT";
-
+            return displayLoginDetails();
         }else {
             return displayLogin();
 
         }
+    }
 
+    //the controler itself will handle checking if the info is valid
+    static DivElement displayLoginDetails() {
+        LoginInfo yourInfo = LoginHandler.fetchLogin();
+        DivElement ret = new DivElement()..text = "Greetings, ${yourInfo.login}.";
+        ret.style.textAlign = "left";
+        ButtonElement button = new ButtonElement()..text = "Log Out";
+        ret.append(button);
         return ret;
     }
 
@@ -45,6 +54,7 @@ abstract class LoginHandler {
         ButtonElement button = new ButtonElement()..text = "Login to Sweepbook";
         ret.append(button);
         ret.append(new DivElement()..text = "(This is required to engage with the TIMEHOLE now, by Emperial decree.)");
+        ret.append(new DivElement()..text = "(WARNING: This is very simple, don't put passwords you use other places here.)");
 
         button.onClick.listen((Event e)
         {
@@ -66,6 +76,7 @@ abstract class LoginHandler {
 class LoginInfo{
     String login;
     String password;
+    int id;
     LoginInfo(String this.login, String this.password);
 
     @override
@@ -81,6 +92,8 @@ class LoginInfo{
 
     Future<bool> confirmedInfo()async {
         //TODO send my info to the server to confirm it.
+        //its a get on caretakers/caretakeridbylogin and i pass login and password. i'll get a true/false back
+        return false;
     }
 
 }
