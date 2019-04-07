@@ -5,21 +5,30 @@ abstract class LoginHandler {
     static String LOGINLOCATION = "WIGGLERSIMLOGIN";
 
 
-    bool hasLogin() {
+    static bool hasLogin() {
         window.localStorage.containsKey(LOGINLOCATION);
     }
 
-    void storeLogin(String login, String password) {
+    static void storeLogin(String login, String password) {
         window.localStorage[LOGINLOCATION] = new LoginInfo(login, password).toJSON();
     }
 
     //either who you are currently logged in as and an option to log out
     //or a form for logging in.
-    DivElement loginStatus() {
+    static DivElement loginStatus() {
+        DivElement ret = new DivElement();
+        if(hasLogin()) {
+            ret.text = "TODO: DISPLAY LOGIN DETAILS AND A BUTTON TO LOG OUT";
+        }else {
+            ret.text = "TODO: DISPLAY FORM TO LOGIN";
+            //when logged in should probably refresh the page.
 
+        }
+
+        return ret;
     }
 
-    LoginInfo fetchLogin() {
+    static LoginInfo fetchLogin() {
         return LoginInfo.fromJSON(window.localStorage[LOGINLOCATION]);
     }
 }

@@ -2,6 +2,7 @@ import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/Grub.dart';
 import 'package:CommonLib/Utility.dart';
+import '../Pets/LoginHandler.dart';
 import '../Pets/Pet.dart';
 import 'dart:html';
 import 'dart:async';
@@ -31,7 +32,12 @@ Future<Null> main() async{
         window.location.href= "${window.location.href}?open=saysjr";
     });
 
-    start();
+
+    LoginHandler.loginStatus();
+
+    if(LoginHandler.hasLogin()) {
+        start();
+    };
 }
 
 Future<Null> start() async {
