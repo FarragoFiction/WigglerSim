@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:html';
 
 import '../GameShit/GameObject.dart';
+import 'dart:math' as Math;
 
 abstract class LoginHandler {
     static String LOGINLOCATION = "WIGGLERSIMLOGIN";
@@ -12,6 +13,7 @@ abstract class LoginHandler {
     }
 
     static void storeLogin(String login, String password, String name, String desc, String doll ) {
+        print("desc is $desc");
         //    LoginInfo(String this.login, String this.password, String this.name, String this.desc, String this.doll);
         window.localStorage[LOGINLOCATION] = new LoginInfo(login, password, name, desc, doll).toJSON();
     }
@@ -59,10 +61,10 @@ abstract class LoginHandler {
         first.append(labelPW);
         first.append(pw);
 
-        LabelElement descLabel = new LabelElement()..text = "Description: (don't be a dick here, ppl can se it)";
-        InputElement desc = new PasswordInputElement();
-        first.append(descLabel);
-        first.append(desc);
+        LabelElement descLabel = new LabelElement()..text = "Description: (don't be a dick here, ppl can se it)"..style.display="block";
+        TextAreaElement desc = new TextAreaElement();
+        second.append(descLabel);
+        second.append(desc);
 
         GameObject game = GameObject.instance;
 
@@ -75,7 +77,7 @@ abstract class LoginHandler {
 
         button.onClick.listen((Event e)
         {
-            storeLogin(login.value, pw.value, desc.value, game.player.name, game.player.doll.toDataBytesX());
+            storeLogin(login.value, pw.value, game.player.name, desc.value, game.player.doll.toDataBytesX());
             //when logged in should probably refresh the page.
             window.location.href = window.location.href;
 
@@ -98,18 +100,30 @@ class LoginInfo{
     String doll;
     LoginInfo(String this.login, String this.password, String this.name, String this.desc, String this.doll);
 
+    Map<String,String> toURL() {
+        String breederName = name;
+        breederName ??= "UNIMPORTANT";
+        int nameLength = Math.max(0,Math.min(breederName.length,113));
+        breederName.substring(0,nameLength);
+        return {"login":login, "password":password, "desc": desc, "doll":doll, "name": breederName};
+    }
+
     @override
     String toJSON() {
-        return jsonEncode({"login":login, "password":password, "desc": desc, "doll":doll, name: "name"});
+
+        String ret = jsonEncode(toURL());
+        window.console.log("encoded $ret");
+        return ret;
     }
 
     LoginInfo.fromJSON(String json){
         var tmp = jsonDecode(json);
+        print("decoded is: $tmp");
         login = tmp["login"];
         password = tmp["password"];
-        password = tmp["desc"];
-        password = tmp["doll"];
-        password = tmp["name"];
+        desc = tmp["desc"];
+        doll = tmp["doll"];
+        name = tmp["name"];
     }
 
     Future<String> confirmedInfo()async {
@@ -118,11 +132,14 @@ class LoginInfo{
         //if i get a 200 back everything is good, just return 200
         //if i get anything else back return the error message
         LoginInfo yourInfo = LoginHandler.fetchLogin();
+        String url = "http://localhost:3000/caretakers/confirmedLogin?${yourInfo.toURL()}";
+        window.console.log("going to $url");
+
         try {
-            return await HttpRequest.getString("http://localhost:3000/caretakers/confirmedLogin?${yourInfo.toJSON()}");
+            return await HttpRequest.getString(url);
 
         }catch(error, trace) {
-            window.alert("ERROR: cannot access TIMEHOLE system.");
+            return "ERROR: cannot access TIMEHOLE system. $error";
         }
     }
 
