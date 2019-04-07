@@ -40,8 +40,12 @@ abstract class LoginHandler {
         LoginInfo yourInfo = LoginHandler.fetchLogin();
         DivElement ret = new DivElement()..text = "Greetings, ${yourInfo.login}.";
         ret.style.textAlign = "left";
-        ButtonElement button = new ButtonElement()..text = "Log Out";
+        ButtonElement button = new ButtonElement()..text = "Log Out (will lose desc)";
         ret.append(button);
+        button.onClick.listen((Event e) {
+            clearLogin();
+            window.location.href = "${window.location.href}";
+        });
         return ret;
     }
 

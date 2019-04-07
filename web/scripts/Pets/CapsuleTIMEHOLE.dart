@@ -1,6 +1,7 @@
 import 'package:CommonLib/Utility.dart';
 
 import '../GameShit/GameObject.dart';
+import 'LoginHandler.dart';
 import 'Pet.dart';
 import 'dart:convert';
 import "dart:math" as Math;
@@ -14,8 +15,11 @@ class CapsuleTIMEHOLE {
 
     Map<String,String> makePostData() {
         Map<String,String> data = new Map<String,String>();
+        LoginInfo info = LoginHandler.fetchLogin();
         data["wigglerJSON"] = toJson().toString();
         data["permanent"] = "false";
+        data["login"] = info.login;
+        data["password"] = info.password;
         //TODO add login and password to this and hope rails can easily be cahnged to take it
         return data;
     }
