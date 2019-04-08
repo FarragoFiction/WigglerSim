@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
+
 import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/Grub.dart';
 import 'package:CommonLib/Utility.dart';
+import '../Pets/LoginHandler.dart';
 import '../Pets/Pet.dart';
 import 'dart:html';
 import 'dart:async';
@@ -40,7 +43,13 @@ Future<void> start()async {
 }
 
 Future<void> test() async {
-    String caretakerJSON = await fetchCaretaker(2);
+    LoginInfo yourInfo = LoginHandler.fetchLogin();
+    String id = Uri.base.queryParameters["id"];
+    if(id == null) {
+        Response resp = await post("http://localhost:3000/caretakers/idFromLogin", body: yourInfo.toMiniURL());
+        id = resp.body;
+    }
+    String caretakerJSON = await fetchCaretaker(int.parse(id));
     print("caretakerjson is $caretakerJSON");
     var scores = jsonDecode(caretakerJSON);
     window.console.table(scores);
@@ -54,17 +63,27 @@ void displayCaretaker(var caretakerJSON) async {
     DivElement name = new DivElement()..classes.add("caretakerName")..text = caretakerJSON["name"];
     DivElement desc = new DivElement()..text = caretakerJSON["desc"];
 
+
+    int grubsAdopted = caretakerJSON["grubs_adopted"];
+    DivElement grubsAdoptedDiv = new DivElement()..classes.add("boiPoints")..text = "Grubs Adopted: ${grubsAdopted}";
+
+    int grubsDoanted = caretakerJSON["grubs_donated"];
+    DivElement grubsDonatedDiv = new DivElement()..classes.add("boiPoints")..text = "Grubs Donated: ${grubsDoanted}";
+
     int gbp = caretakerJSON["good_boi_points"];
     DivElement gb = new DivElement()..classes.add("boiPoints")..text = "Good Boi Points: ${gbp}";
     int bbp = caretakerJSON["bad_boi_points"];
     DivElement bb = new DivElement()..classes.add("boiPoints")..text = "Bad Boi Points: ${bbp}";
-    DivElement judgeDiv = new DivElement()..classes.add("boiPoints")..text = "Judgement ${judgement(gbp-bbp)}";
+    DivElement judgeDiv = new DivElement()..classes.add("boiPoints")..text = "Jibade Judgement: ${judgement(gbp-bbp)}";
 
     Doll doll = Doll.loadSpecificDoll(caretakerJSON["doll"]);
     CanvasElement dollCanvas = await doll.getNewCanvas();
     caretaker.append(dollCanvas);
     caretaker.append(name);
     caretaker.append(desc);
+    caretaker.append(grubsAdoptedDiv);
+    caretaker.append(grubsDonatedDiv);
+
     caretaker.append(gb);
     caretaker.append(bb);
     caretaker.append(judgeDiv);

@@ -79,7 +79,7 @@ abstract class LoginHandler {
         ButtonElement button = new ButtonElement()..text = "Login to Sweepbook";
         ret.append(button);
         ret.append(new DivElement()..text = "(This is required to engage with the TIMEHOLE now, by Emperial decree.)");
-        ret.append(new DivElement()..text = "(WARNING: This is very simple, don't put passwords you use other places here.)");
+        ret.append(new DivElement()..text = "(WARNING: This is very simple, don't put passwords you use other places here. Also, if you forget your password you're fucked and will have to make a new login.)");
 
         button.onClick.listen((Event e)
         {
@@ -112,6 +112,10 @@ class LoginInfo{
         int nameLength = Math.max(0,Math.min(breederName.length,113));
         breederName.substring(0,nameLength);
         return {"login":login, "password":password, "desc": desc, "doll":doll, "name": breederName};
+    }
+
+    Map<String,String> toMiniURL() {
+        return {"login":login, "password":password};
     }
 
     @override
