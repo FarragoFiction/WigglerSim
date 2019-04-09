@@ -33,14 +33,14 @@ class CapsuleTIMEHOLE {
         return json;
     }
 
-    CapsuleTIMEHOLE.fromJson(JSONObject json){
+    CapsuleTIMEHOLE.fromJson(JSONObject json, int cid){
         //print("parsing json $json into a capsule");
         pet = Pet.loadPetFromJSON(json["pet"]);
         print("pet is $pet");
         breederName = json['breeder'];
         print("json was $json");
-        if(json['caretaker_id'] != null) {
-            caretakerId = int.parse(json['caretaker_id']);
+        if(cid != null) {
+            caretakerId = cid;
         }
     }
 
@@ -59,7 +59,7 @@ class CapsuleTIMEHOLE {
                 j.json = d;
                 JSONObject innerJSON = new JSONObject.fromJSONString(
                     j["wigglerJSON"]);
-                ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON));
+                ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON, int.parse(j["caretaker_id"])));
             }catch(error) {
                 print("error parsing $d,  $error");
             }

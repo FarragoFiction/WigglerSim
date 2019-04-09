@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/Grub.dart';
@@ -21,7 +23,7 @@ GameObject game;
 DivElement output = querySelector("#output");
 bool monster = false;
 //String website = "https://plaguedoctors.herokuapp.com";
-String website = "https://localhost:3000";
+String website = "http://localhost:3000";
 int numHax = 0;
 
 bool savior = false;
@@ -89,7 +91,7 @@ Future<Null> start() async {
     CapsuleTIMEHOLE capsule;
     try {
         capsule = new CapsuleTIMEHOLE.fromJson(
-            new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
+            new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]),null);
     }catch(error) {
         output.appendHtml("Haha, nope, gotta pick a wiggler first, k? No wasting online stuff, yeah?");
         return;
@@ -139,7 +141,7 @@ Future<Null> jrHax() async {
         await HttpRequest.postFormData(url,haxCapsule.makePostData())
             .then(jrHaxNext);
     }catch(error, trace) {
-        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+        errorMessage(error,trace);
     }
 
 }
@@ -176,7 +178,7 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
             .then(finishLoadingJSON);
     }catch(error, trace) {
         LoadingAnimation.instance.stop();
-        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+        errorMessage(error,trace);
     }
 }
 
@@ -192,8 +194,13 @@ Future<Null> getCost() async {
         await HttpRequest.getString(url)
             .then(finishLoadingCount);
     }catch(error, trace) {
-        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+        errorMessage(error,trace);
     }
+}
+
+void errorMessage(error, trace) {
+  output.setInnerHtml("ERROR: cannot access TIMEHOLE system. $error $trace");
+  window.console.error([error, trace]);
 }
 
 Future<Null> viewTIMEHOLE() async {
@@ -212,7 +219,7 @@ Future<Null> viewTIMEHOLE() async {
             .then(finishLoadingJSONGetAll);
     }catch(error, trace) {
         LoadingAnimation.instance.stop();
-        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+        errorMessage(error,trace);
     }
 }
 
@@ -235,7 +242,7 @@ Future<Null> adopt() async {
             .then(finishLoadingJSONGet);
     }catch(error, trace) {
         LoadingAnimation.instance.stop();
-        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+        errorMessage(error,trace);
     }
 }
 
@@ -243,18 +250,26 @@ Future<Null> adopt() async {
 
 void finishLoadingJSON(HttpRequest request)  {
     LoadingAnimation.instance.stop();
+    print("i am finishing loading my json, request is $request");
     GameObject.instance.playMusicOnce("WTJ2");
-    CapsuleTIMEHOLE originalCapsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]));
+    CapsuleTIMEHOLE originalCapsule = new CapsuleTIMEHOLE.fromJson(new JSONObject.fromJSONString(window.localStorage["TIMEHOLE"]),null);
     if(monster) {
         GameObject.instance.removePet(originalCapsule.pet);
         output.appendHtml("You have one less wiggler to raise!!! You monster.");
     }else {
 
-        JSONObject outerJSON = new JSONObject.fromJSONString(
+        var outerJSON = jsonDecode(
             request.responseText);
+        print("id is ${outerJSON["caretaker_id"]}");
+
         JSONObject innerJSON = new JSONObject.fromJSONString(
             outerJSON["wigglerJSON"]);
-        CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
+        print("outer json is $outerJSON");
+
+        print("inner json is $innerJSON");
+        int cid = outerJSON["caretaker_id"];
+        CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON,cid);
+        print("about to display new grub");
         displayNewGrub(capsule,false);
         print("adding new pet ${capsule.pet}");
         GameObject.instance.removePet(originalCapsule.pet);
@@ -266,9 +281,9 @@ void finishLoadingJSON(HttpRequest request)  {
 void finishLoadingJSONGet(HttpRequest request)  {
     LoadingAnimation.instance.stop();
     GameObject.instance.playMusicOnce("WTJ2");
-    JSONObject outerJSON = new JSONObject.fromJSONString(request.responseText);
+    var outerJSON = jsonDecode(request.responseText);
     JSONObject innerJSON = new JSONObject.fromJSONString(outerJSON["wigglerJSON"]);
-    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
+    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON, outerJSON["caretaker_id"]);
     displayNewGrub(capsule,false);
     print("adding new pet ${capsule.pet}");
     GameObject.instance.addPet(capsule.pet);
@@ -334,8 +349,8 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
     //print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
-    String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
-    if(savior) text = "You selflessly adopted: ${capsule.pet.name} from ${capsule.breederName}!!!";
+    String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!! , with id ${capsule.caretakerId}";
+    if(savior) text = "You selflessly adopted: ${capsule.pet.name} from ${capsule.breederName}!!! , with id ${capsule.caretakerId}";
     if(readOnly) text  = "${capsule.pet.name} from ${capsule.breederName}, with id ${capsule.caretakerId}";
     DivElement div = new DivElement()..text = text;
     output.append(div);
@@ -377,7 +392,7 @@ class LoadingAnimation {
     }
 
     void stop() {
-        GameObject.instance.stopMusic();
+        //GameObject.instance.stopMusic();
         if(petCanvas != null)petCanvas.remove();
         textElement.remove();
         stopPlz = true;
