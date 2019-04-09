@@ -22,7 +22,7 @@ DivElement output = querySelector("#output");
 bool monster = false;
 //String website = "https://plaguedoctors.herokuapp.com";
 String website = "https://localhost:3000";
-
+int numHax = 0;
 
 bool savior = false;
 Future<Null> main() async{

@@ -9,6 +9,7 @@ import "dart:math" as Math;
 class CapsuleTIMEHOLE {
     Pet pet;
     String breederName = "UNIMPORTANT";
+    int caretakerId;
     CapsuleTIMEHOLE(Pet this.pet, String this.breederName){
 
     }
@@ -37,6 +38,10 @@ class CapsuleTIMEHOLE {
         pet = Pet.loadPetFromJSON(json["pet"]);
         print("pet is $pet");
         breederName = json['breeder'];
+        print("json was $json");
+        if(json['caretaker_id'] != null) {
+            caretakerId = int.parse(json['caretaker_id']);
+        }
     }
 
     void givePet() {
