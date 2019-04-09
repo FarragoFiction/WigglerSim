@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
+
 import '../GameShit/Empress.dart';
 import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/Grub.dart';
@@ -349,11 +351,37 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
     //print("displaying new grub");
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
+    String ratingText = "How do you feel about the caretaker who sent you this grub? And remember, this is for posterity, so be honest — how do you feel?";
     String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!! , with id ${capsule.caretakerId}";
     if(savior) text = "You selflessly adopted: ${capsule.pet.name} from ${capsule.breederName}!!! , with id ${capsule.caretakerId}";
     if(readOnly) text  = "${capsule.pet.name} from ${capsule.breederName}, with id ${capsule.caretakerId}";
     DivElement div = new DivElement()..text = text;
+
+    DivElement div2 = new DivElement()..text = ratingText;
+
+    DivElement ratings = new DivElement();
+    ImageElement love = new ImageElement(src: "images/Emoticons/heart.png");
+    ImageElement hate = new ImageElement(src: "images/Emoticons/spade.png");
+    ratings.append(love);
+    ratings.append(hate);
+    LoginInfo yourInfo = LoginHandler.fetchLogin();
+
+    love.onClick.listen((Event e) async{
+        String url = "$website/caretakers/${capsule.caretakerId}/upvote";
+        Response resp =   await put(url, body: yourInfo.toURL());
+        window.console.table(resp);
+    });
+
+    hate.onClick.listen((Event e) async {
+        String url = "$website/caretakers/${capsule.caretakerId}/downvote";
+        Response resp =   await put(url, body: yourInfo.toURL());
+        window.console.table(resp);
+    });
+
     output.append(div);
+    output.append(div2);
+    output.append(ratings);
+
 }
 
 Future<Null> displayNewGrubForViewer(CapsuleTIMEHOLE capsule, bool readOnly) async {
