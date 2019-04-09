@@ -223,8 +223,12 @@ Future<Null> adopt() async {
     await new Future.delayed(new Duration(seconds: 3));
 
     String url = "https://plaguedoctors.herokuapp.com/time_holes/adoptTIMEHOLE";
+
+    LoginInfo yourInfo = LoginHandler.fetchLogin();
+
+
     try {
-        await HttpRequest.getString(url)
+        await HttpRequest.postFormData(url,yourInfo.toURL() )
             .then(finishLoadingJSONGet);
     }catch(error, trace) {
         LoadingAnimation.instance.stop();
@@ -256,10 +260,10 @@ void finishLoadingJSON(HttpRequest request)  {
     }
 }
 
-void finishLoadingJSONGet(String response)  {
+void finishLoadingJSONGet(HttpRequest request)  {
     LoadingAnimation.instance.stop();
     GameObject.instance.playMusicOnce("WTJ2");
-    JSONObject outerJSON = new JSONObject.fromJSONString(response);
+    JSONObject outerJSON = new JSONObject.fromJSONString(request.responseText);
     JSONObject innerJSON = new JSONObject.fromJSONString(outerJSON["wigglerJSON"]);
     CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON);
     displayNewGrub(capsule,false);
