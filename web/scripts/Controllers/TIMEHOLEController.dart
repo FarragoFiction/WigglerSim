@@ -368,7 +368,7 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
 
     love.onClick.listen((Event e) async{
         String url = "$website/caretakers/${capsule.caretakerId}/upvote";
-        Response resp =   await put(url, body: yourInfo.toURL());
+        Response resp =   await post(url, body: yourInfo.toURL());
         window.console.table(resp);
         DivElement ret = new DivElement()..text = "Your overtures of friendship is registered.";
         AnchorElement view = new AnchorElement(href: "caretaker.html?id=${capsule.caretakerId}")..text = "I wonder what other people think of that caretaker???";
@@ -378,7 +378,7 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
 
     hate.onClick.listen((Event e) async {
         String url = "$website/caretakers/${capsule.caretakerId}/downvote";
-        Response resp =   await put(url, body: yourInfo.toURL());
+        Response resp =   await post(url, body: yourInfo.toURL());
         window.console.table(resp);
         DivElement ret = new DivElement()..text = "Your displeasure is registered.";
         AnchorElement view = new AnchorElement(href: "caretaker.html?id=${capsule.caretakerId}")..text = "I wonder what other people think of that caretaker???";
