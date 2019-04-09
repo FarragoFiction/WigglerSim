@@ -20,7 +20,10 @@ import 'package:RenderingLib/RendereringLib.dart';
 GameObject game;
 DivElement output = querySelector("#output");
 bool monster = false;
-int numHax = 0;
+//String website = "https://plaguedoctors.herokuapp.com";
+String website = "https://localhost:3000";
+
+
 bool savior = false;
 Future<Null> main() async{
     await Doll.loadFileData();
@@ -125,7 +128,7 @@ void adoptPrelude() {
 }
 
 Future<Null> jrHax() async {
-    String url = "https://plaguedoctors.herokuapp.com/time_holes/abdicateTIMEHOLE";
+    String url = "$website/time_holes/abdicateTIMEHOLE";
     Pet pet = new Grub(new HomestuckGrubDoll());
     pet.name = "Hacked ${pet.doll.name}";
     pet.doll.copyPalette(new Random().pickFrom(ReferenceColours.paletteList.values));
@@ -159,9 +162,9 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 1));
 
-    String url = "https://plaguedoctors.herokuapp.com/time_holes/TIMEHOLE";
+    String url = "$website/time_holes/TIMEHOLE";
     if(monster) {
-        url = "https://plaguedoctors.herokuapp.com/time_holes/abdicateTIMEHOLE";
+        url = "$website/time_holes/abdicateTIMEHOLE";
     }
 
     /*if(true) {
@@ -182,7 +185,7 @@ Future<Null> getCost() async {
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 1));
 
-    String url = "https://plaguedoctors.herokuapp.com/time_holes/timeholesize.json";
+    String url = "$website/time_holes/timeholesize.json";
     //String url = "http://localhost:3000/time_holes/timeholesize.json";
 
     try {
@@ -201,7 +204,7 @@ Future<Null> viewTIMEHOLE() async {
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 1));
 
-    String url = "https://plaguedoctors.herokuapp.com/time_holes.json";
+    String url = "$website/time_holes.json";
     //String url = "http://localhost:3000/time_holes.json";
 
     try {
@@ -222,7 +225,7 @@ Future<Null> adopt() async {
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 3));
 
-    String url = "https://plaguedoctors.herokuapp.com/time_holes/adoptTIMEHOLE";
+    String url = "$website/time_holes/adoptTIMEHOLE";
 
     LoginInfo yourInfo = LoginHandler.fetchLogin();
 
