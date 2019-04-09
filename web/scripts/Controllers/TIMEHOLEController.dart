@@ -336,7 +336,7 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
     output.append(canvas);
     String text =  "You got: ${capsule.pet.name} from ${capsule.breederName}!!!";
     if(savior) text = "You selflessly adopted: ${capsule.pet.name} from ${capsule.breederName}!!!";
-    if(readOnly) text  = "${capsule.pet.name} from ${capsule.breederName}";
+    if(readOnly) text  = "${capsule.pet.name} from ${capsule.breederName}, with id ${capsule.caretakerId}";
     DivElement div = new DivElement()..text = text;
     output.append(div);
 }
