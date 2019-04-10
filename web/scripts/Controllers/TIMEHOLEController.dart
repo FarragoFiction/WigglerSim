@@ -24,8 +24,8 @@ import 'package:RenderingLib/RendereringLib.dart';
 GameObject game;
 DivElement output = querySelector("#output");
 bool monster = false;
-//String website = "https://plaguedoctors.herokuapp.com";
-String website = "http://localhost:3000";
+String website = "https://plaguedoctors.herokuapp.com";
+//String website = "http://localhost:3000";
 int numHax = 0;
 
 bool savior = false;

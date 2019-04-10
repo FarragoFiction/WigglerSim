@@ -143,7 +143,7 @@ class LoginInfo{
         //if i get a 200 back everything is good, just return 200
         //if i get anything else back return the error message
         LoginInfo yourInfo = LoginHandler.fetchLogin();
-        String url = "http://localhost:3000/caretakers/confirmedLogin";
+        String url = "https://plaguedoctors.herokuapp.com/caretakers/confirmedLogin";
         window.console.log("going to $url");
 
         try {

@@ -63,7 +63,7 @@ Future<void> handleShit() async {
     LoginInfo yourInfo = LoginHandler.fetchLogin();
     String id = Uri.base.queryParameters["id"];
     if(id == null) {
-        Response resp = await post("http://localhost:3000/caretakers/idFromLogin", body: yourInfo.toMiniURL());
+        Response resp = await post("https://plaguedoctors.herokuapp.com/caretakers/idFromLogin", body: yourInfo.toMiniURL());
         id = resp.body;
     }
     String caretakerJSON = await fetchCaretaker(int.parse(id));
@@ -109,7 +109,7 @@ void displayCaretaker(var caretakerJSON) async {
 }
 
 Future<String> fetchCaretaker(int id) async {
-    String url = "http://localhost:3000/caretakers/$id.json";
+    String url = "https://plaguedoctors.herokuapp.com/caretakers/$id.json";
     try {
         String result = await HttpRequest.getString(url); //man why was i both awaiting AND doing a then? i had no clue what i was doing with the first TIMEHOLE
         GameObject.instance.stopMusic();
@@ -130,11 +130,23 @@ String judgement(int points) {
 }
 
 String goodBoi(int points) {
-    //todo have categories of bullshit going on here.
-    return "You ar3 an 3xc3113nt car3tak3r.";
+    List<String> feedbacks = <String>["You shou1dn't g3t comp1ac3nt.","1 wond3r what you'r3 do1ng r1ght?","Stat1st1ca11y, you'r3 abov3 av3rag3.","1 shou1d tak3 not3s on your progr3ss.","Th1s 1s r3markab13.","You ar3 an 3xc3113nt car3tak3r."];
+    int index = (points/13).floor();
+    if(index < feedbacks.length) {
+        return feedbacks[index];
+    }else {
+        return "... Wow. You ar3 an 3xc3pt1ona1 sp3c1m1n.";
+    }
 }
 
 String badBoi(int points) {
-    return "On3 wou1d th1nk you'd g3t th3 h1nt by now.";
+    points = points.abs();
+    List<String> feedbacks = <String>["Appar3nt1y your grubs hav3 b33n judg3d 1nsuff1c13nt.","1 wond3r what 1s annoy1ng th3 oth3r car3tak3rs?","You shou1d probab1y stop do1ng what3v3r 1t 1s you'r3 do1ng.","S3r1ous1y. Qu1t 1t.","On3 wou1d th1nk you'd g3t th3 h1nt by now."];
+    int index = (points/13).floor();
+    if(index < feedbacks.length) {
+        return feedbacks[index];
+    }else {
+        return "... Wow. You ar3 1ucky grubs ar3 so p13nt1fu1. Oth3rw1s3 th3 oth3rcar3tak3rs m1ght conv1nc3 m3 to f1r3 you.";
+    }
 
 }
