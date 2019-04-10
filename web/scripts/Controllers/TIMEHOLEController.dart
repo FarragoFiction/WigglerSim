@@ -428,7 +428,12 @@ class LoadingAnimation {
     }
 
     void stop() {
-        //GameObject.instance.stopMusic();
+        try {
+            GameObject.instance.stopMusic();
+        }catch(error, trace) {
+            //sometimes it tries to stop it at the same time it tries to play it and shit gets weird.
+            window.console.error(error);
+        }
         if(petCanvas != null)petCanvas.remove();
         textElement.remove();
         stopPlz = true;
