@@ -41,9 +41,16 @@ Future<Null> main() async{
 
 
     output.append(LoginHandler.loginStatus());
+
+
     if(LoginHandler.hasLogin()) {
+        DivElement loading = new DivElement();
+        output.append(loading);
+        LoadingAnimation la = new LoadingAnimation("Loading Sweepbook",null,loading );
         LoginInfo yourInfo = LoginHandler.fetchLogin();
         String confirmed = await  yourInfo.confirmedInfo();
+        la.stop();
+
         if(confirmed == "200") {
             start();
         }else {
@@ -56,6 +63,7 @@ Future<Null> main() async{
 
         }
     };
+
 }
 
 Future<Null> start() async {
@@ -410,43 +418,3 @@ Future<Null> displayNewGrubForViewer(CapsuleTIMEHOLE capsule, bool readOnly) asy
 }
 
 
-class LoadingAnimation {
-    CanvasElement petCanvas;
-    Element textElement;
-    String text;
-    bool stopPlz = false;
-    int index = 0;
-    static LoadingAnimation instance;
-    int frameRateInMillis = 100;
-    LoadingAnimation(String this.text, CanvasElement this.petCanvas, Element this.textElement) {
-        loop();
-        instance = this;
-    }
-
-    String getCurrentText() {
-        return text.substring(0,index);
-    }
-
-    void stop() {
-        try {
-            GameObject.instance.stopMusic();
-        }catch(error, trace) {
-            //sometimes it tries to stop it at the same time it tries to play it and shit gets weird.
-            window.console.error(error);
-        }
-        if(petCanvas != null)petCanvas.remove();
-        textElement.remove();
-        stopPlz = true;
-        return;
-    }
-
-    Future<Null> loop() async{
-        if(stopPlz){
-            return;
-        }
-        await window.animationFrame;
-        textElement.text = getCurrentText();
-        index = (index +1)%text.length;
-        new Timer(new Duration(milliseconds: frameRateInMillis), () => loop());
-    }
-}

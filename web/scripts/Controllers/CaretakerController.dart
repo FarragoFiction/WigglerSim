@@ -34,9 +34,16 @@ Future<Null> main() async{
 }
 Future<void> start()async {
     output.append(LoginHandler.loginStatus());
+
+
     if(LoginHandler.hasLogin()) {
         LoginInfo yourInfo = LoginHandler.fetchLogin();
+        DivElement loading = new DivElement();
+        output.append(loading);
+        LoadingAnimation la = new LoadingAnimation("Loading Sweepbook",null,loading );
         String confirmed = await  yourInfo.confirmedInfo();
+        la.stop();
+
         if(confirmed == "200") {
             handleShit();
         }else {
