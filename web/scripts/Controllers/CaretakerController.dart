@@ -33,16 +33,26 @@ Future<Null> main() async{
     start();
 }
 Future<void> start()async {
-    /*TODO:
-        use your login and password to get an id back, then fetch your caretaker from that
-        take a id from the query param and fetch that one too
-        actually display the caretaker right
-     */
-    test();
-
+    output.append(LoginHandler.loginStatus());
+    if(LoginHandler.hasLogin()) {
+        LoginInfo yourInfo = LoginHandler.fetchLogin();
+        String confirmed = await  yourInfo.confirmedInfo();
+        if(confirmed == "200") {
+            handleShit();
+        }else {
+            DivElement error = new DivElement()..text = "ERROR CONFIRMING YOUR LOGIN INFORMATION. '$confirmed' DID YOU TYPO ANYTHING? OR WERE YOU TRYING TO CREATE A NEW ACCOUNT AND IT WAS ALREADY TAKEN? Login was: ${yourInfo.login} and PW was ${yourInfo.password}";
+            error.style.color = "red";
+            error.style.border = "3px solid red";
+            output.append(error);
+            LoginHandler.clearLogin();
+            output.append(LoginHandler.loginStatus());
+        }
+    };
 }
 
-Future<void> test() async {
+
+
+Future<void> handleShit() async {
     LoginInfo yourInfo = LoginHandler.fetchLogin();
     String id = Uri.base.queryParameters["id"];
     if(id == null) {

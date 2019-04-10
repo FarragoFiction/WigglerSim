@@ -289,6 +289,8 @@ class Player {
 
 
         container.append(introElement);
+        AnchorElement a = new AnchorElement(href: "caretaker.html")..text = "View Sweepbook Profile?";
+        container.append(new DivElement()..append(a));
         container2.appendHtml(text2);
         if(Empress.instance.allowsRenaming()) {
             container.append(labelElement);
