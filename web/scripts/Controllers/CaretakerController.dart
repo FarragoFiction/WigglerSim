@@ -29,7 +29,12 @@ Future<Null> main() async{
 
     loadNavbar();
     game = new GameObject(true);
-    GameObject.instance.playMusic("WTWJ1"); //i wish i didn't have to wait for user input
+    window.onMouseMove.listen((Event e) {
+        if(!GameObject.instance.bgMusic.paused) {
+            GameObject.instance.playMusic(
+                "WTWJ1"); //i wish i didn't have to wait for user input
+        }
+    };
     start();
 }
 Future<void> start()async {
