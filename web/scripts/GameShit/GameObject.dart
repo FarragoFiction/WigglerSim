@@ -17,7 +17,7 @@ class GameObject {
 
     static GameObject instance;
     Element infoElement;
-    AudioElement bgMusic = new AudioElement();
+    AudioElement bgMusic = new AudioElement()..autoplay = false;
 
 
     GameObject(bool redirect) {
