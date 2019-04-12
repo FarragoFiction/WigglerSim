@@ -61,8 +61,8 @@ class GameObject {
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             //window.localStorage.remove(Player.DOLLSAVEID);
             player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
-            player.save();
-            print("loading player ${player} from local storage");
+            player.save(); //Currently panic debugging jr on 4/11/19 says: wtf why was i ever saving here?
+            print("loading player ${player} from local storage, their inventory is ${player.itemInventory.numItems}");
         }else {
             player = new Player(new HomestuckTrollDoll());
             player.save();
@@ -116,7 +116,7 @@ class GameObject {
     }
 
     void save() {
-        print("saving game");
+        print("saving game, inventory is ${player.itemInventory.numItems}");
         //TODO if this gets too big, compress with LZString or equivalent.
         player.save();
     }
@@ -134,6 +134,8 @@ class GameObject {
 
     void load() {
         player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
+        print("loading game, inventory is ${player.itemInventory.numItems}");
+
     }
 
     static void storeCard(String card) {

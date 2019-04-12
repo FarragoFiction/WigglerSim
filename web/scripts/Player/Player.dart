@@ -87,6 +87,7 @@ class Player {
         //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
         //petInventory = new PetInventory();
         petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
+        print("going to load inventory");
         itemInventory = new ItemInventory.fromJSON(jsonObj[ITEMINVENTORY]);
 
      }

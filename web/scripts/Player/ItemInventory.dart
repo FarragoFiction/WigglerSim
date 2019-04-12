@@ -286,9 +286,7 @@ class ItemInventory {
         List<dynamic> j = jsonDecode(input);
 
         for(dynamic item in j) {
-            if (item is String) {
-                _myItems.add(new AIItem.fromJSON(item));
-            }
+            _myItems.add(new AIItem.fromJSON(item));
         }
 
     }

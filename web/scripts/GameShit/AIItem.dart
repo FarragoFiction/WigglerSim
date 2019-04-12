@@ -82,8 +82,9 @@ class AIItem extends AIObject {
         makeExternal(external_value);
     }
 
-    AIItem.fromJSON(String json, [JSONObject jsonObj]){
+    AIItem.fromJSON(var json){
         //init
+        print("an ai item from json $json");
         makePatience(0);
         makeEnergetic(0);
         makeIdealistic(0);
@@ -91,20 +92,19 @@ class AIItem extends AIObject {
         makeLoyal(0);
         makeExternal(0);
         belongsToPlayer = true;
-        loadFromJSON(json, jsonObj);
+        loadFromJSON(json);
     }
 
-    void loadFromJSON(String json, [JSONObject jsonObj]) {
-        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
-        id = int.parse(jsonObj[ID]);
-        patience.value = int.parse(jsonObj[PATIENCE]);
-        idealistic.value = int.parse(jsonObj[IDEALISTIC]);
-        curious.value = int.parse(jsonObj[CURIOUS]);
-        loyal.value = int.parse(jsonObj[LOYAL]);
-        energetic.value = int.parse(jsonObj[ENERGETIC]);
-        external.value = int.parse(jsonObj[EXTERNAL]);
+    void loadFromJSON(var json) {
+        id = int.parse(json[ID]);
+        patience.value = int.parse(json[PATIENCE]);
+        idealistic.value = int.parse(json[IDEALISTIC]);
+        curious.value = int.parse(json[CURIOUS]);
+        loyal.value = int.parse(json[LOYAL]);
+        energetic.value = int.parse(json[ENERGETIC]);
+        external.value = int.parse(json[EXTERNAL]);
 
-        String idontevenKnow = jsonObj[ITEMAPPERANCES];
+        String idontevenKnow = json[ITEMAPPERANCES];
         loadItemVersionsFromJSON(idontevenKnow);
     }
 
