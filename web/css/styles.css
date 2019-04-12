@@ -309,6 +309,47 @@ z-index: 13;
 
 }
 
+.score_board_link{
+background-color: #421d11;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 13;
+	border: 3px solid 35150b
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.score_board_bar{
+    padding: 10px;
+    text-align: left;
+}
+
+.score_board_link a{
+    color: #935b49;
+    background-color: #421d11;
+    text-decoration: none;
+    border: 1px solid black;
+   padding: 10px
+
+}
+
+.score_board_link a:hover{
+    background-color: #31160e;
+}
+
+.scoreBoard{
+    text-align: left;
+    padding: 5px;
+    width: 100px;
+    border-bottom: 5px solid red;
+}
+
+.scoreEntry{
+    border-bottom: 1px solid black;
+
+}
 
 .caretakerBox{
     border: 3px solid #5d2c1c;

@@ -24,10 +24,13 @@ import 'package:RenderingLib/RendereringLib.dart';
 
 GameObject game;
 DivElement output = querySelector("#output");
+
+List<String> scoringOptions = <String>["total_points","good_boi_points","bad_boi_points","grubs_donated_lazy","grubs_adopted_lazy","created_at","updated_at"];
 Future<Null> main() async{
     await Doll.loadFileData();
 
     loadNavbar();
+    drawScoreBoardLinks();
     game = new GameObject(true);
     window.onMouseMove.listen((Event e) {
         if(!GameObject.instance.bgMusic.paused) {
@@ -35,9 +38,88 @@ Future<Null> main() async{
                 "WTWJ1"); //i wish i didn't have to wait for user input
         }
     });
-    start();
+    if(Uri.base.queryParameters["score"]=="board"){
+        scoreBoard();
+    }else {
+        fetchSpecificCaretaker();
+    }
 }
-Future<void> start()async {
+
+void drawScoreBoardLinks() {
+    DivElement links = new DivElement()..classes.add("score_board_bar");
+    output.append(links);
+    scoringOptions.forEach((String option) {
+        DivElement link = new DivElement()..classes.add("score_board_link");
+        links.append(link);
+        AnchorElement a = new AnchorElement(href: "caretaker.html?score=board&sort=$option")..text = "$option";
+        link.append(a);
+    });
+}
+
+Future scoreBoard() async {
+    String sort = Uri.base.queryParameters["sort"];
+    sort ??= "total_points";
+    String url = "https://plaguedoctors.herokuapp.com/caretakers.json?sort=$sort&limit=113";
+    try {
+        String result = await HttpRequest.getString(url); //man why was i both awaiting AND doing a then? i had no clue what i was doing with the first TIMEHOLE
+        GameObject.instance.stopMusic();
+        processScoreBoard(sort, result);
+    }catch(error, trace) {
+        GameObject.instance.stopMusic();
+        output.setInnerHtml("ERROR: cannot access TIMEHOLE system.");
+    }
+}
+
+void processScoreBoard(String sort, String result) {
+    TableElement div = new TableElement();
+    div.style.border = "1px solid black";
+    TableRowElement header = new TableRowElement();
+    Element sortBy = new Element.th()..text = "Top $sort";
+    header.append(sortBy);
+
+    Element blank = new Element.th()..text = "Rank";
+    header.append(blank);
+
+    Element value = new Element.th()..text = "Value";
+    header.append(value);
+
+    div.append(header);
+    output.append(div);
+    List<dynamic> what = jsonDecode(result);
+    int index = 0;
+    for(dynamic d in what) {
+        index ++;
+        try {
+            scoreboardentry(sort, div,d,index);
+        }catch(error, trace) {
+            window.console.error(error);
+            window.console.error(trace);
+            print("error parsing $d,  $error");
+        }
+    }
+}
+
+void scoreboardentry(String sort, Element div, dynamic j, int rank) {
+    TableRowElement tr = new TableRowElement()..classes.add("scoreBoard");
+    TableCellElement td1 = new TableCellElement()..classes.add("scoreEntry");
+    TableCellElement td2 = new TableCellElement()..classes.add("scoreEntry");
+    TableCellElement td3 = new TableCellElement()..classes.add("scoreEntry");
+
+    AnchorElement a = new AnchorElement(href: "caretaker.html?id=${j["id"]}")..text = j["name"];
+
+    DivElement rankElement = new DivElement()..text = "$rank";
+    DivElement valueElement = new DivElement()..text = "${j[sort]}";
+
+    td1.append(a);
+    td2.append(rankElement);
+    td3.append(valueElement);
+    tr.append(td1);
+    tr.append(td2);
+    tr.append(td3);
+    div.append(tr);
+}
+
+Future<void> fetchSpecificCaretaker()async {
     output.append(LoginHandler.loginStatus());
 
 
@@ -86,10 +168,10 @@ void displayCaretaker(var caretakerJSON) async {
     DivElement desc = new DivElement()..text = caretakerJSON["desc"];
 
 
-    int grubsAdopted = caretakerJSON["grubs_adopted"];
+    int grubsAdopted = caretakerJSON["grubs_adopted_lazy"];
     DivElement grubsAdoptedDiv = new DivElement()..classes.add("boiPoints")..text = "Grubs Adopted: ${grubsAdopted}";
 
-    int grubsDoanted = caretakerJSON["grubs_donated"];
+    int grubsDoanted = caretakerJSON["grubs_donated_lazy"];
     DivElement grubsDonatedDiv = new DivElement()..classes.add("boiPoints")..text = "Grubs Donated: ${grubsDoanted}";
 
     int gbp = caretakerJSON["good_boi_points"];

@@ -375,6 +375,8 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
     LoginInfo yourInfo = LoginHandler.fetchLogin();
 
     love.onClick.listen((Event e) async{
+        love.remove();
+        hate.remove();
         String url = "$website/caretakers/${capsule.caretakerId}/upvote";
         Response resp =   await post(url, body: yourInfo.toURL());
         window.console.table(resp);
@@ -385,6 +387,8 @@ Future<Null> displayNewGrub(CapsuleTIMEHOLE capsule, bool readOnly) async {
     });
 
     hate.onClick.listen((Event e) async {
+        love.remove();
+        hate.remove();
         String url = "$website/caretakers/${capsule.caretakerId}/downvote";
         Response resp =   await post(url, body: yourInfo.toURL());
         window.console.table(resp);
