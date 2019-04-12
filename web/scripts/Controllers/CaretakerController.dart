@@ -34,7 +34,7 @@ Future<Null> main() async{
             GameObject.instance.playMusic(
                 "WTWJ1"); //i wish i didn't have to wait for user input
         }
-    };
+    });
     start();
 }
 Future<void> start()async {

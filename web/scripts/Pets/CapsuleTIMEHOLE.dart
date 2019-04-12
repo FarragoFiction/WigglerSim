@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:CommonLib/Utility.dart';
 
 import '../GameShit/GameObject.dart';
@@ -59,8 +61,10 @@ class CapsuleTIMEHOLE {
                 j.json = d;
                 JSONObject innerJSON = new JSONObject.fromJSONString(
                     j["wigglerJSON"]);
-                ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON, int.parse(j["caretaker_id"])));
-            }catch(error) {
+                ret.add(new CapsuleTIMEHOLE.fromJson(innerJSON, null));
+            }catch(error, trace) {
+                window.console.error(error);
+                window.console.error(trace);
                 print("error parsing $d,  $error");
             }
         }
