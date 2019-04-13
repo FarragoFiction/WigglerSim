@@ -8,6 +8,7 @@ import '../GameShit/GameObject.dart';
 import 'dart:math' as Math;
 
 abstract class LoginHandler {
+
     static String LOGINLOCATION = "WIGGLERSIMLOGIN";
 
 
@@ -100,6 +101,8 @@ abstract class LoginHandler {
 }
 
 class LoginInfo{
+    //String website = "https://plaguedoctors.herokuapp.com";
+    String website = "http://localhost:3000";
     String login;
     String password;
     String desc;
@@ -143,7 +146,8 @@ class LoginInfo{
         //if i get a 200 back everything is good, just return 200
         //if i get anything else back return the error message
         LoginInfo yourInfo = LoginHandler.fetchLogin();
-        String url = "https://plaguedoctors.herokuapp.com/caretakers/confirmedLogin";
+        //String url = "https://plaguedoctors.herokuapp.com/caretakers/confirmedLogin";
+        String url = "$website/caretakers/confirmedLogin";
         window.console.log("going to $url");
 
         try {
