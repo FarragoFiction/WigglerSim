@@ -24,8 +24,8 @@ import 'package:RenderingLib/RendereringLib.dart';
 
 GameObject game;
 DivElement output = querySelector("#output");
-//String website = "https://plaguedoctors.herokuapp.com";
-String website = "http://localhost:3000";
+String website = "https://plaguedoctors.herokuapp.com";
+//String website = "http://localhost:3000";
 List<String> scoringOptions = <String>["total_points","good_boi_points","bad_boi_points","grubs_donated_lazy","grubs_adopted_lazy","created_at","updated_at"];
 Future<Null> main() async{
     await Doll.loadFileData();
@@ -121,12 +121,15 @@ void scoreboardentry(String sort, Element div, dynamic j, int rank) {
 }
 
 Future<void> fetchSpecificCaretaker()async {
-    output.append(LoginHandler.loginStatus());
     if(Uri.base.queryParameters["id"] != null) {
         //you don't gotta be logged in to view someone else
-        handleShit();
+        await handleShit();
+        output.append(LoginHandler.loginStatus());
+
         return;
     }
+    output.append(LoginHandler.loginStatus());
+
 
 
     if(LoginHandler.hasLogin()) {
@@ -153,9 +156,9 @@ Future<void> fetchSpecificCaretaker()async {
 
 
 Future<void> handleShit() async {
-    LoginInfo yourInfo = LoginHandler.fetchLogin();
     String id = Uri.base.queryParameters["id"];
     if(id == null) {
+        LoginInfo yourInfo = LoginHandler.fetchLogin();
         Response resp = await post("$website/caretakers/idFromLogin", body: yourInfo.toMiniURL());
         id = resp.body;
     }
@@ -203,6 +206,7 @@ void displayCaretaker(var caretakerJSON) async {
 
 Future<String> fetchCaretaker(int id) async {
     String url = "$website/caretakers/$id.json";
+    print('trying to fetch caretaker from $url');
     try {
         String result = await HttpRequest.getString(url); //man why was i both awaiting AND doing a then? i had no clue what i was doing with the first TIMEHOLE
         GameObject.instance.stopMusic();
