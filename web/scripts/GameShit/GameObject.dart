@@ -15,7 +15,13 @@ class GameObject {
     //will be null everywhere but the playpen screen.
     PlayPen playPen;
 
-    static GameObject instance;
+    static GameObject _instance;
+    static GameObject get instance {
+        if(_instance == null) {
+            _instance = new GameObject(false);
+        }
+        return _instance;
+    }
     Element infoElement;
     AudioElement bgMusic = new AudioElement()..autoplay = false;
 
@@ -57,7 +63,7 @@ class GameObject {
         });
 
         infoElement = new DivElement();
-        instance = this;
+        _instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             //window.localStorage.remove(Player.DOLLSAVEID);
             player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
