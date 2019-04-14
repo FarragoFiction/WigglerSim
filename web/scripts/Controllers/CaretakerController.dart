@@ -22,7 +22,6 @@ import 'package:DollLibCorrect/src/Rendering/ReferenceColors.dart';
 import 'package:RenderingLib/RendereringLib.dart';
 
 
-GameObject game;
 DivElement output = querySelector("#output");
 String website = "https://plaguedoctors.herokuapp.com";
 //String website = "http://localhost:3000";
@@ -32,7 +31,6 @@ Future<Null> main() async{
 
     loadNavbar();
     drawScoreBoardLinks();
-    game = new GameObject(true);
     window.onMouseMove.listen((Event e) {
         if(!GameObject.instance.bgMusic.paused) {
             GameObject.instance.playMusic(
