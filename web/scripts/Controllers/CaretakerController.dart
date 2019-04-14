@@ -121,6 +121,8 @@ void scoreboardentry(String sort, Element div, dynamic j, int rank) {
 Future<void> fetchSpecificCaretaker()async {
     if(Uri.base.queryParameters["id"] != null) {
         //you don't gotta be logged in to view someone else
+        DivElement loading = new DivElement();
+        output.append(loading);
         LoadingAnimation la = new LoadingAnimation("Loading Sweepbook",null,loading );
 
         await handleShit();
