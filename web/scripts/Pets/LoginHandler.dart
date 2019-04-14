@@ -101,8 +101,8 @@ abstract class LoginHandler {
 }
 
 class LoginInfo{
-    //String website = "https://plaguedoctors.herokuapp.com";
-    String website = "http://localhost:3000";
+    String website = "https://plaguedoctors.herokuapp.com";
+    //String website = "http://localhost:3000";
     String login;
     String password;
     String desc;
