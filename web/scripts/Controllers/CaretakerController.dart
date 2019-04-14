@@ -122,6 +122,11 @@ void scoreboardentry(String sort, Element div, dynamic j, int rank) {
 
 Future<void> fetchSpecificCaretaker()async {
     output.append(LoginHandler.loginStatus());
+    if(Uri.base.queryParameters["id"] != null) {
+        //you don't gotta be logged in to view someone else
+        handleShit();
+        return;
+    }
 
 
     if(LoginHandler.hasLogin()) {
