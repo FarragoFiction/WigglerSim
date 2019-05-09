@@ -1,3 +1,5 @@
+import 'package:ImageLib/EffectStack.dart';
+
 import "AIPet.dart";
 import "AIObject.dart";
 import "AIItem.dart";
@@ -33,6 +35,7 @@ class PlayPen {
     bool readyToAnimate = false;
 
     CanvasElement canvas = new CanvasElement(width: 1000, height: 400);
+
     String backgroundImage = "images/BroodingCaverns.png";
 
     PlayPen(Element divForCanvas, List<Pet> potentialGrubs) {

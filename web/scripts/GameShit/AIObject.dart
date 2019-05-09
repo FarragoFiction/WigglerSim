@@ -18,6 +18,8 @@
 
  */
 import 'dart:async';
+import 'package:ImageLib/EffectStack.dart';
+
 import "../Pets/PetLib.dart";
 import 'dart:html';
 import 'dart:math' as Math;
@@ -39,6 +41,7 @@ abstract class AIObject {
     Stat curious;
     Stat loyal;
     Stat external;
+    bool corrupt = false;
     List<Stat> get stats => <Stat>[patience, energetic, idealistic, curious, loyal, external ];
 
     AnimationObject idleAnimation = new AnimationObject();
@@ -135,8 +138,19 @@ class AnimationObject {
     List<CanvasElement> animations = new List<CanvasElement>();
     int index = 0;
 
-    void addAnimationFrame(CanvasElement canvas, [int index = -13]) {
+    void addAnimationFrame(CanvasElement canvas, AIObject obj, [int index = -13]) {
         //print("adding animation frame");
+        if(obj.curious.value < 0 && obj.corrupt) {
+            final EffectStack stack = new EffectStack(canvas);
+            int size = ((-1 * obj.curious.value + 1) / 8).floor();
+
+            stack
+                ..immediateEffect(
+                    new PixellateEffect(size))
+                ..immediateEffect(
+                    new ImpressionismEffect(size, alphaMultiplier: 0.5));
+            canvas = stack.canvas;
+        }
         if(index >= 0) {
             animations[index] = canvas;
         }else {

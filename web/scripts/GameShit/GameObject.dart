@@ -122,7 +122,7 @@ class GameObject {
     }
 
     void save() {
-        print("saving game, inventory is ${player.itemInventory.numItems}");
+        //print("saving game, inventory is ${player.itemInventory.numItems}");
         //TODO if this gets too big, compress with LZString or equivalent.
         player.save();
     }

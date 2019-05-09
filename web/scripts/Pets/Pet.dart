@@ -67,6 +67,7 @@
  */
 import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
+import 'package:ImageLib/EffectStack.dart';
 import 'dart:html';
 
 import 'dart:async';
@@ -803,6 +804,7 @@ abstract class Pet {
             dollCanvas = Renderer.cropToVisible(dollCanvas);
 
             Renderer.drawToFitCentered(canvas, dollCanvas);
+
         }
         return canvas;
     }
@@ -812,7 +814,9 @@ abstract class Pet {
         if(canvas == null) {
             canvas = new CanvasElement(width: doll.width, height: doll.height);
             canvas.context2D.clearRect(0, 0, width, height);
+
             await DollRenderer.drawDoll(canvas, doll);
+
         }
         return canvas;
     }

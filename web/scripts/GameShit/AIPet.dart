@@ -46,6 +46,8 @@ class AIPet extends AIObject {
     //how close to an object do you need to be to react to it.
     int giveRange = 100;
 
+    bool get corrupt => grub.corrupt;
+
 
 
     //what am i moving towards?
@@ -145,19 +147,19 @@ class AIPet extends AIObject {
         if(rand.nextBool()) {
             g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
         }else { //so they don't all look the same
             g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
 
@@ -177,19 +179,19 @@ class AIPet extends AIObject {
         if(rand.nextBool()) {
             g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
         }else { //so they don't all look the same
             g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
 
@@ -209,19 +211,19 @@ class AIPet extends AIObject {
         if(rand.nextBool()) {
             g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
         }else { //so they don't all look the same
             g.extendedBody.imgNumber = imgNum2;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = imgNum1;
             await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas);
+            idleAnimation.addAnimationFrame(grub.canvas,this);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
 
@@ -243,20 +245,20 @@ class AIPet extends AIObject {
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 21;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 22;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
         }else { //so they don't all look the same
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 21;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 22;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
 
@@ -272,20 +274,20 @@ class AIPet extends AIObject {
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 12;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 13;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
         }else { //so they don't all look the same
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 13;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 12;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
     }
@@ -300,20 +302,20 @@ class AIPet extends AIObject {
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 3;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 4;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
         }else { //so they don't all look the same
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 4;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
             grub.canvas = null; //means it will make a new one, so old reference is free
             g.extendedBody.imgNumber = 3;
             await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas);
+            walkAnimation.addAnimationFrame(grub.canvas,this);
         }
         grub.canvas = null; //means it will make a new one, so old reference is free
     }
