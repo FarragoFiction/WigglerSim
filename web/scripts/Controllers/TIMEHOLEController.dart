@@ -42,6 +42,11 @@ Future<Null> main() async{
 
     output.append(LoginHandler.loginStatus());
 
+    if(window.location.href.contains("localhost")&& getParameterByName("open",null) == "saysjr") {
+        jrHax();
+        return;
+    }
+
 
     if(LoginHandler.hasLogin()) {
         DivElement loading = new DivElement();
@@ -140,6 +145,7 @@ void adoptPrelude() {
 }
 
 Future<Null> jrHax() async {
+    window.console.log("trying to time hax");
     String url = "$website/time_holes/abdicateTIMEHOLE";
     Pet pet = new Grub(new HomestuckGrubDoll());
     pet.name = "Hacked ${pet.doll.name}";
@@ -148,7 +154,7 @@ Future<Null> jrHax() async {
 
     CapsuleTIMEHOLE haxCapsule = new CapsuleTIMEHOLE(pet,"JR's Hax");
     try {
-        await HttpRequest.postFormData(url,haxCapsule.makePostData())
+        await HttpRequest.postFormData(url,haxCapsule.makePostData(true))
             .then(jrHaxNext);
     }catch(error, trace) {
         errorMessage(error,trace);
@@ -159,10 +165,12 @@ Future<Null> jrHax() async {
 void jrHaxNext(HttpRequest request)  {
     numHax ++;
     output.appendHtml("Hax $numHax complete.");
+    window.console.log("Hax $numHax complete.");
     if(numHax < 13) {
         jrHax();
     }else {
         output.appendHtml("All Hax Complete");
+        window.alert("All Hax Complete");
     }
 }
 

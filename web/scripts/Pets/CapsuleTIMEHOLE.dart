@@ -16,14 +16,20 @@ class CapsuleTIMEHOLE {
 
     }
 
-    Map<String,String> makePostData() {
-        Map<String,String> data = new Map<String,String>();
-        LoginInfo info = LoginHandler.fetchLogin();
-        data["wigglerJSON"] = toJson().toString();
-        data["permanent"] = "false";
-        data["login"] = info.login;
-        data["password"] = info.password;
-        //TODO add login and password to this and hope rails can easily be cahnged to take it
+    Map<String,String> makePostData([bool haxMode]) {
+        Map<String, String> data = new Map<String, String>();
+        if (haxMode) {
+            data["wigglerJSON"] = toJson().toString();
+            data["permanent"] = "false";
+            data["login"] = "yggdrasilsYeoman";
+            data["password"] = "nidhoggsFavorite"; //be nice plz
+        } else{
+            LoginInfo info = LoginHandler.fetchLogin();
+            data["wigglerJSON"] = toJson().toString();
+            data["permanent"] = "false";
+            data["login"] = info.login;
+            data["password"] = info.password;
+        }
         return data;
     }
 
