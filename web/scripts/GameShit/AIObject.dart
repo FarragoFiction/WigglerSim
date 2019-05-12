@@ -18,6 +18,7 @@
 
  */
 import 'dart:async';
+import 'package:CommonLib/Random.dart';
 import 'package:ImageLib/EffectStack.dart';
 
 import "../Pets/PetLib.dart";
@@ -140,22 +141,65 @@ class AnimationObject {
 
     void addAnimationFrame(CanvasElement canvas, AIObject obj, [int index = -13]) {
         //print("adding animation frame");
-        if(obj.curious.value < 0 && obj.corrupt) {
-            final EffectStack stack = new EffectStack(canvas);
-            int size = ((-1 * obj.curious.value + 1) / 8).floor();
+        final EffectStack stack = new EffectStack(canvas);
+        if(obj.corrupt) {
 
-            stack
-                ..immediateEffect(
-                    new PixellateEffect(size))
-                ..immediateEffect(
-                    new ImpressionismEffect(size, alphaMultiplier: 0.5));
-            canvas = stack.canvas;
+            if(obj.loyal.value < 0) {
+                breathCorruptEffect(stack, obj);
+            }
+            if(obj.energetic.value < 0) {
+                doomCorruptEffect(stack, obj);
+            }
+
+            //make sure void is last
+            if(obj.curious.value < 0) {
+                voidCorruptEffect(stack, obj);
+            }else {
+                lightCorruptEffect(stack,obj);
+            }
         }
+
+
+
+        canvas = stack.canvas;
+
         if(index >= 0) {
             animations[index] = canvas;
         }else {
             animations.add(canvas);
         }
+    }
+
+    void breathCorruptEffect(EffectStack stack, AIObject obj) {
+        Random rand = new Random();
+        final Mask testMask = new RectMask(50+rand.nextIntRange(10,100), 50+rand.nextIntRange(10,100), 100+rand.nextIntRange(10,100), 100+rand.nextIntRange(10,100))..wrap=true;
+        //they are color blind, not loyal
+        stack.immediateEffect(new GreyscaleEffect()..addMask(testMask));
+    }
+
+    void voidCorruptEffect(EffectStack stack, AIObject obj) {
+        Random rand = new Random();
+        final Mask testMask = new RectMask(50+rand.nextIntRange(10,100), 50+rand.nextIntRange(10,100), 100+rand.nextIntRange(10,100), 100+rand.nextIntRange(10,100))..wrap=true;
+        stack.immediateEffect(
+              new OpacityEffect(0.3 + rand.nextDoubleRange(0.1, 0.7))..addMask(testMask));
+    }
+
+    void lightCorruptEffect(EffectStack stack, AIObject obj) {
+        Random rand = new Random();
+        final Mask testMask = new RectMask(50+rand.nextIntRange(10,100), 50+rand.nextIntRange(10,100), 100+rand.nextIntRange(10,100), 100+rand.nextIntRange(10,100))..wrap=true;
+        stack.immediateEffect(
+            new InvertEffect()..addMask(testMask));
+    }
+
+    void doomCorruptEffect(EffectStack stack, AIObject obj) {
+        Random rand = new Random();
+        int size = 10 + rand.nextIntRange(0,10);
+        stack
+            ..immediateEffect(
+                new PixellateEffect(size))
+
+            ..immediateEffect(
+                new ImpressionismEffect(size, alphaMultiplier: 0.5));
     }
 
     CanvasElement getNextFrame() {

@@ -626,7 +626,7 @@ class AIPet extends AIObject {
     }
 
     int get speed {
-        int unit = 10; //how much each 10 points in a stat should raise/lower it.
+        int unit = 5; //how much each 10 points in a stat should raise/lower it.
         int speed = 0;
         speed += (unit * 2 * energetic.value/10).round();
        // print ("after moding by energy of ${energetic.value}, range is $speed");
