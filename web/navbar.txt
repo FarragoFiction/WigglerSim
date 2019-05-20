@@ -24,11 +24,14 @@
             <a href="javascript:void(0)" class="dropbtn">Info</a>
                 <div class="dropdown-content">
                 <a href="status.html">News</a>
+                <a href="status.html">FAQ</a>
+
                 <a href="https://farrago-fiction.myshopify.com/collections/all/WigglerSim?sort_by=created-ascending#MainContent">Merch</a>
 
                 <a href="meteors.html">Meteor Your Data</a>
 
                 <a href="http://wigglersim.wikia.com/wiki/WigglerSim_Wiki">Wiki</a>
+                <a href = 'http://farragofiction.com/FridgeSim/?WigglerSim=true'>FanArt</a>
             </li>
   <li class = "menuButtonPureCSS"><a href="https://discord.gg/KPunMPc">DISCORD</a></li>
   <li class = "menuButtonPureCSS"><a href="http://www.patreon.com/FarragoFiction">SUPPORT</a></li>
