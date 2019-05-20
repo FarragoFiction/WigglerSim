@@ -6,10 +6,12 @@
 
 
   <li class = "menuButtonPureCSS"><a href="index.html">Data</a></li>
-  <li class = "menuButtonPureCSS"><a href="petInventory.html">Wigglers</a></li>
-    <li class = "menuButtonPureCSS"><a href="itemShop.html">Items</a></li>
+           <li class = "menuButtonPureCSS">       <a href="faq.html">FAQ</a></li>
 
-    <li class = "menuButtonPureCSS"><a href="playPen.html">Playpen</a></li>
+  <li class = "menuButtonPureCSS"><a href="petInventory.html">Grubs</a></li>
+    <li class = "menuButtonPureCSS"><a href="itemShop.html">Shop</a></li>
+
+    <li class = "menuButtonPureCSS"><a href="playPen.html">Play</a></li>
 
   <li class = "menuButtonPureCSS"><a href="wigglerShop.html">Adopts</a></li>
     <li class="dropdown menuButtonPureCSS">
@@ -24,7 +26,6 @@
             <a href="javascript:void(0)" class="dropbtn">Info</a>
                 <div class="dropdown-content">
                 <a href="status.html">News</a>
-                <a href="status.html">FAQ</a>
 
                 <a href="https://farrago-fiction.myshopify.com/collections/all/WigglerSim?sort_by=created-ascending#MainContent">Merch</a>
 

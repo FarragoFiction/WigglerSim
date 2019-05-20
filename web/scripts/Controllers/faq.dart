@@ -21,6 +21,8 @@ void start() {
     new FAQ(table, "What do I do with these eggs?", "Wait for them to hatch! It should take about a half hour for an egg to hatch.");
 
     new FAQ(table, "Why won't my egg/coccoon hatch? Its been hours!", "This one of those 'check back every so often' idle games. You're meant to leave and come back (or at least refresh the page) to get the 'hatch'/'pupate' buttons to show up." );
+    new FAQ(table, "Why did Items suddenly get so expensive???", "Items stats are based on the last few Wigglers you've pupated! And their prices are based on their stats!<br><br>The good news is this means if you want to get specific kinds of items (some are only low stat items, some are only high stat), you can control that via controlling your wiggler's stats. ");
+
     new FAQ(table, "Why can't I use the TIMEHOLE/Change WigglerHair/Import Grubs?", "You'll need to breed an Empress who allows it.");
     new FAQ(table, "What kind of Empress allows X?", "That's the puzzle, isn't it? You can also read the <a href ='http://wigglersim.wikia.com/wiki/WigglerSim_Wiki'>Wiki</a> if you want hints.");
     new FAQ(table, "My grubs vanished!", "Chances are you had multiple tabs open, and a tab from the past just saved over something you did in the future. WigglerSim is a one tab only game, sorry 'bout that.");
