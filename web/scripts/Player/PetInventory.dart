@@ -514,14 +514,16 @@ class PetInventory {
         for(Pet p in starters) {
             SpanElement subContainer = new SpanElement();
             subContainer.style.width = "${p.width}px";
+            subContainer.style.border = "solid black 1px";
             subContainer.classes.add("petInventorySlot");
             container.append(subContainer);
-            drawPet(subContainer, p);
            // print("making button for egg with sign of ${(p.doll as HomestuckGrubDoll).canonSymbol.imgNumber}");
             ButtonElement button = new ButtonElement();
             int price = Empress.instance.priceOfTroll(p);
-            button.text = "Choose ${price}";
+            button.text = "Choose ${p.name} ${price}";
             subContainer.append(button);
+            drawPet(subContainer, p);
+
             if(price <= GameObject.instance.player.caegers) {
                 button.onClick.listen((e) {
                     //add wiggler to inventory. save. refresh.
