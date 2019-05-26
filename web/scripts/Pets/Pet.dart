@@ -649,6 +649,7 @@ abstract class Pet {
         DateTime now = new DateTime.now();
         Duration diff = now.difference(date);
         //print("hatch date is $hatchDate and diff is $diff");
+        print("the hatch date is $hatchDate");
         String s = "";
         if(diff.inDays > 0) {
             if(diff.inDays >1) s = "s";
@@ -666,16 +667,16 @@ abstract class Pet {
             return "Just $label!";
         }else if(diff.inDays < 0) {
             if(diff.inDays >1) s = "s";
-            return "$label: ${diff.inDays} day$s from now.";
+            return "$label: ${diff.inDays.abs()} day$s from now.";
         }else if (diff.inHours < 0) {
             if(diff.inHours.abs() >1) s = "s";
-            return "$label: ${diff.inHours} hour$s from now.";
+            return "$label: ${diff.inHours.abs()} hour$s from now.";
         }else if (diff.inMinutes < 0) {
             if(diff.inMinutes.abs() >1) s = "s";
-            return "$label: ${diff.inMinutes} minute$s from now.";
+            return "$label: ${diff.inMinutes.abs()} minute$s from now.";
         }else if (diff.inSeconds < 0) {
             if(diff.inSeconds.abs() >1) s = "s";
-            return "$label: ${diff.inSeconds} second$s from now.";
+            return "$label: ${diff.inSeconds.abs()} second$s from now.";
         }
         print("I think something just hatched. its because diff in seconds is ${diff.inSeconds}. The hatch date is $hatchDate");
         return "Just $label!";

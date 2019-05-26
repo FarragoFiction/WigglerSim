@@ -21,6 +21,8 @@ void start() {
     new FAQ(table, "What do I do with these eggs?", "Wait for them to hatch! It should take about a half hour for an egg to hatch.");
 
     new FAQ(table, "Why won't my egg/coccoon hatch? Its been hours!", "This one of those 'check back every so often' idle games. You're meant to leave and come back (or at least refresh the page) to get the 'hatch'/'pupate' buttons to show up." );
+    new FAQ(table, "Why is my egg/grub/cocoon saying it's laid in the FUTURE?","The timehole is a mysterious thing. If you get your grub before its been born, it kind of stays in a weird stasis till its caught up till its 'present'. Just be patient, or chuck it back into the timehole and hope it comes out somewhere in its own future.");
+
     new FAQ(table, "Why did Items suddenly get so expensive???", "Items stats are based on the last few Wigglers you've pupated! And their prices are based on their stats!<br><br>The good news is this means if you want to get specific kinds of items (some are only low stat items, some are only high stat), you can control that via controlling your wiggler's stats. ");
 
     new FAQ(table, "Why can't I use the TIMEHOLE/Change WigglerHair/Import Grubs?", "You'll need to breed an Empress who allows it.");
