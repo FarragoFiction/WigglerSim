@@ -16,7 +16,7 @@ class CapsuleTIMEHOLE {
 
     }
 
-    Map<String,String> makePostData([bool haxMode]) {
+    Map<String,String> makePostData([bool haxMode = false]) {
         Map<String, String> data = new Map<String, String>();
         if (haxMode) {
             data["wigglerJSON"] = toJson().toString();
