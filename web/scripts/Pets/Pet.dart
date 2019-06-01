@@ -832,7 +832,6 @@ abstract class Pet {
             canvas.context2D.clearRect(0, 0, width, height);
 
             await DollRenderer.drawDoll(canvas, doll);
-
         }
         return canvas;
     }

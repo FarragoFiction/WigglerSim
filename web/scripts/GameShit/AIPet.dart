@@ -132,6 +132,7 @@ class AIPet extends AIObject {
         print("$grub idle animations is ${idleAnimation.animations}");
     }
 
+
     //grub body 0 and grub body 1
     @override
     Future<Null> setUpLandIdleAnimation() async {
@@ -837,8 +838,16 @@ class AIPet extends AIObject {
         lastSeen = null; //don't count this for last seen, stop grub raves. probably.
         _currentEmotion = null; //clear out before rendering, they can react later.
         if(item.name == ItemInventory.PURPLEARADIANAME) {
-            grub.doll.randomizeColors();
+            purpleAradia();
         }
+    }
+
+    Future<Null> purpleAradia() async {
+        grub.doll.randomizeColors();
+        //won't get rid of existing animations but WILL add to them. should
+        //have the effect of blinking between old and new colors
+        await setUpIdleAnimation();
+        setUpWalkAnimation();
     }
 
     @override
