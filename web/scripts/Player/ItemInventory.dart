@@ -157,6 +157,9 @@ class ItemInventory {
         return number * -1;
     }
 
+    static AIItem get purpleAradia => new AIItem(0,<ItemAppearance>[new ItemAppearance("Purple Aradia Doll","PurpleAradiaDoll.png")], energetic_value: -113, patience_value: -113);
+
+
 
     //even default items should have stat values influenced by value of last 12 grubs
     //should have enough items that all stats are possible
@@ -183,6 +186,7 @@ class ItemInventory {
         ret.add(new AIItem(1008,<ItemAppearance>[new ItemAppearance("Soft Victim","Smupet_red.png"),new ItemAppearance("Best Enemy","do_you_want_to_play_a_game.png"),new ItemAppearance("Accused Pile","TH34CCUS3D.png"),new ItemAppearance("Criminal Scum","scalemate.png")], idealistic_value: makeNegative(idealistic), curious_value: makeNegative(curious),energetic_value: energeticABS, patience_value: impatientABS));
 
         List<String> colors = last12ColorWords;
+        ret.add(purpleAradia);
 
         if(colors.contains(HomestuckTrollDoll.BURGUNDY)) {
             ret.add(new AIItem(6,<ItemAppearance>[new ItemAppearance("Burgundy Essence","burgundy.png")], patience_value: impatientABS));

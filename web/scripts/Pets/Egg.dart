@@ -56,8 +56,14 @@ class Egg extends Pet{
             HomestuckPalette p = doll.palette as HomestuckPalette;
             Colour c = new Colour.from(p.aspect_light);
             double percent = percentToChange;
-            if(percent <.05) percent = .05;
-            c.setHSV(p.aspect_light.hue, percent, p.aspect_light.value);
+            print("percent is $percent");
+
+            if(percent <.05 && percent > 0) percent = .05;
+            if(percent >0) {
+                c.setHSV(p.aspect_light.hue, percent, p.aspect_light.value);
+            }else {
+                c.setHSV(1-p.aspect_light.hue, percent, 1-p.aspect_light.value);
+            }
             Renderer.swapColors(dollCanvas, c);
 
 
