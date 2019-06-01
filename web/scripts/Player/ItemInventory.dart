@@ -157,7 +157,8 @@ class ItemInventory {
         return number * -1;
     }
 
-    static AIItem get purpleAradia => new AIItem(0,<ItemAppearance>[new ItemAppearance("Purple Aradia Doll","PurpleAradiaDoll.png")], energetic_value: -113, patience_value: -113);
+    static final String  PURPLEARADIANAME ="Purple Aradia Doll";
+    static AIItem get purpleAradia => new AIItem(0,<ItemAppearance>[new ItemAppearance(PURPLEARADIANAME,"PurpleAradiaDoll.png")], energetic_value: -113, patience_value: -113);
 
 
 

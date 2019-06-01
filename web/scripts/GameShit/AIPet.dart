@@ -23,6 +23,7 @@ import 'dart:html';
 import 'dart:async';
 import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
+import '../Player/ItemInventory.dart';
 import "AIObject.dart";
 import "GameObject.dart";
 import "AIItem.dart";
@@ -835,6 +836,9 @@ class AIPet extends AIObject {
         GameObject.instance.save();
         lastSeen = null; //don't count this for last seen, stop grub raves. probably.
         _currentEmotion = null; //clear out before rendering, they can react later.
+        if(item.name == ItemInventory.PURPLEARADIANAME) {
+            grub.doll.randomizeColors();
+        }
     }
 
     @override
