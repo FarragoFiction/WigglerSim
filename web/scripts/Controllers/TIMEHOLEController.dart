@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:DollLibCorrect/DollRenderer.dart';
 import 'package:http/http.dart';
 
 import '../GameShit/Empress.dart';
@@ -291,7 +292,7 @@ void finishLoadingJSON(HttpRequest request)  {
         displayNewGrub(capsule,false);
         print("adding new pet ${capsule.pet}");
         GameObject.instance.removePet(originalCapsule.pet);
-        GameObject.instance.addPet(capsule.pet);
+        addPet(capsule);
         window.localStorage.remove("TIMEHOLE");
     }
 }
@@ -304,8 +305,21 @@ void finishLoadingJSONGet(HttpRequest request)  {
     CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE.fromJson(innerJSON, outerJSON["caretaker_id"]);
     displayNewGrub(capsule,false);
     print("adding new pet ${capsule.pet}");
-    GameObject.instance.addPet(capsule.pet);
+    addPet(capsule);
     window.localStorage.remove("TIMEHOLE");
+}
+
+void addPet(CapsuleTIMEHOLE capsule) {
+    if(capsule.pet.colorWord == HomestuckTrollDoll.FUCHSIA) {
+        Element apologyDoll = new DivElement();
+        ImageElement aradia = new ImageElement(src: "images/Items/PurpleAradiaDoll.png");
+        apologyDoll.append(aradia);
+        DivElement text = new DivElement()..text = "Along with the potential rival for the throne, you recieve a Purple Aradia Doll. Attached is a note: 'SORRY TO CULL AND RUN. USE THIS IF YOU WANT TO KEEP HER FROM ASSASINATING YOUR EMPRESS.' It's signed ${capsule.breederName}'s autoresponder. ";
+        apologyDoll.append(text);
+        output.append(apologyDoll);
+    }
+    GameObject.instance.addPet(capsule.pet);
+
 }
 
 
