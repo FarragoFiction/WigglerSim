@@ -18,6 +18,8 @@
 
  */
 import 'dart:async';
+import 'package:CommonLib/Colours.dart';
+
 import "../Pets/PetLib.dart";
 import 'dart:html';
 import 'dart:async';
@@ -845,10 +847,16 @@ class AIPet extends AIObject {
 
     Future<Null> purpleAradia() async {
         String colorWord = grub.colorWord;
-        (grub.doll as HomestuckTrollDoll).chooseBlood(new Random());
+        grub.doll.randomizeColors();
         if(grub.colorWord == colorWord) {
-            (grub.doll as HomestuckTrollDoll).chooseBlood(new Random(),true); //if you'd not change, go mutant
+            String blood = (grub.doll as HomestuckTrollDoll).chooseBlood(new Random(),true); //if you'd not change, go mutant
+            grub.doll.palette.add("aspect1", new Colour.fromStyleString(blood), true);
+            HomestuckPalette h = grub.doll.palette;
+
+            grub.doll.palette.add("aspect2", new Colour(h.aspect_light.red, h.aspect_light.green, h.aspect_light.blue)..setHSV(h.aspect_light.hue, h.aspect_light.saturation, h.aspect_light.value/2), true);
+
         }
+
         //won't get rid of existing animations but WILL add to them. should
         //have the effect of blinking between old and new colors
         await setUpIdleAnimation();
