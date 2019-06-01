@@ -817,6 +817,9 @@ class AIPet extends AIObject {
     }
 
     void giveObjectStats(AIItem item) {
+        if(item.name == ItemInventory.PURPLEARADIANAME) {
+            purpleAradia();
+        }
         double multiplier = 1.0;
         judgeObject(item);
 
@@ -837,13 +840,15 @@ class AIPet extends AIObject {
         GameObject.instance.save();
         lastSeen = null; //don't count this for last seen, stop grub raves. probably.
         _currentEmotion = null; //clear out before rendering, they can react later.
-        if(item.name == ItemInventory.PURPLEARADIANAME) {
-            purpleAradia();
-        }
+
     }
 
     Future<Null> purpleAradia() async {
-        grub.doll.randomizeColors();
+        String colorWord = grub.colorWord;
+        (grub.doll as HomestuckTrollDoll).chooseBlood(new Random());
+        if(grub.colorWord == colorWord) {
+            (grub.doll as HomestuckTrollDoll).chooseBlood(new Random(),true); //if you'd not change, go mutant
+        }
         //won't get rid of existing animations but WILL add to them. should
         //have the effect of blinking between old and new colors
         await setUpIdleAnimation();
