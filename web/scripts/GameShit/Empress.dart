@@ -47,6 +47,8 @@ class Empress {
 
 
 
+
+
     //in seconds
     int get timeBetweenFunding {
         int defaultAmount = 6 * 60 * 60; //6 hours;
@@ -83,6 +85,14 @@ class Empress {
             defaultAmount += ratio.abs();
         }
         return Math.min(6, defaultAmount);
+    }
+
+    String moneyImageLocation() {
+        if(troll == null) return "images/tinyMoney.png";
+        if(troll.corrupt || troll.purified) {
+            return "images/segundianMark_Sm.png";
+        }
+        return "images/tinyMoney.png";
     }
 
     bool allowsSpeculation() {

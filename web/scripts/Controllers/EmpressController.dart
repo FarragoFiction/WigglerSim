@@ -27,7 +27,8 @@ Future<Null> start() async {
   if(Empress.instance.allowsGambling()) {
     AnchorElement a = new AnchorElement(href: "blackJack.html");
     a.style.display = "block";
-    a.setInnerHtml("<img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'>Challenge the Empress to a Game For More Funds?<img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'><img src = 'images/tinyMoney.png'>");
+    String money = Empress.instance.moneyImageLocation();
+    a.setInnerHtml("<img src = '${money}'><img src = '${money}'><img src = '${money}'>Challenge the Empress to a Game For More Funds?<img src = '${money}'><img src = '${money}'><img src = '${money}'>");
 
     querySelector('#output').append(a);
   }

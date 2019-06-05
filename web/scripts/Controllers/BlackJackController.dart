@@ -74,7 +74,7 @@ void drawBetButton() {
   value.max = "${max}";
 
   SpanElement valueMarker = new SpanElement();
-  valueMarker.setInnerHtml("<img src = 'images/tinyMoney.png'>$bet");
+  valueMarker.setInnerHtml("<img src = '${Empress.instance.moneyImageLocation()}'>$bet");
 
   value.type = "range";
   div.append(valueMarker);
