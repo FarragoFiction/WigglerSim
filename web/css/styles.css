@@ -83,6 +83,17 @@ button{
     text-align: center;
 }
 
+#output2 {
+    width:1000px;
+    vertical-align: top;
+ 	background-color: #935b49;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	padding: 10px;
+ 	font-family: 'strife', sans-serif;
+    text-align: center;
+}
+
 .centerethingy{
 width:1000px;
     vertical-align: top;

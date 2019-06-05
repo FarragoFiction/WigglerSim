@@ -90,7 +90,7 @@ class Empress {
     String moneyImageLocation() {
         if(troll == null) return "images/tinyMoney.png";
         if(troll.corrupt || troll.purified) {
-            return "images/segundianMark_Sm.png";
+            return "images/Segundian_Mark_Sm.png";
         }
         return "images/tinyMoney.png";
     }
@@ -104,12 +104,14 @@ class Empress {
     bool allowsFundingTrees() {
         if(troll == null) return false;
         if(troll.isPatient || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose") return true;
+        return false;
 
     }
 
     bool allowsImportingMutants() {
         if(troll == null) return false;
         if(troll.isCalm || getParameterByName("cheater",null) == "jrbutitsforareallygoodpurpose" || (troll.corrupt || troll.purified)) return true;
+        return false;
 
     }
 
