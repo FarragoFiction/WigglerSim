@@ -102,6 +102,9 @@ Future<Null> start() async{
   MoneyHandler.instance.sync();
 
   await drawEmpress();
+  if(Empress.instance.isCorruptOrPure()) {
+    Card.folder = "images/CorruptCards/";
+  }
   blackJackGame = new BlackJackGame(Card.getFreshDeck(),div, finishGame);
   blackJackGame.dealer.name = "Empress ${Empress.instance.troll.name}";
   blackJackGame.player.name = "${GameObject.instance.player.name}";

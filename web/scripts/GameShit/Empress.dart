@@ -87,9 +87,16 @@ class Empress {
         return Math.min(6, defaultAmount);
     }
 
-    String moneyImageLocation() {
-        if(troll == null) return "images/tinyMoney.png";
+    bool isCorruptOrPure() {
+        if(troll == null) return false;
         if(troll.corrupt || troll.purified) {
+            return true;
+        }
+        return false;
+    }
+
+    String moneyImageLocation() {
+        if(isCorruptOrPure()) {
             return "images/Segundian_Mark_Sm.png";
         }
         return "images/tinyMoney.png";
