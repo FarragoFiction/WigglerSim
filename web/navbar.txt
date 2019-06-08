@@ -1,4 +1,5 @@
-<div class = "banner">
+<div class = "banner" style = "position:relative;">
+<a target = "blank" style= "position:absolute; bottom:0px; left:200px;" href = 'http://farragnarok.com/lohaecoinraffle.html'><img src = 'images/coin_link.png'></a>
 
 </div>
 <ul class = "menuPureCSS">
