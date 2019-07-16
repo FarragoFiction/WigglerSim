@@ -99,6 +99,7 @@ void processScoreBoard(String sort, String result) {
 }
 
 void scoreboardentry(String sort, Element div, dynamic j, int rank) {
+    print("looking for key $sort in $j");
     TableRowElement tr = new TableRowElement()..classes.add("scoreBoard");
     TableCellElement td1 = new TableCellElement()..classes.add("scoreEntry");
     TableCellElement td2 = new TableCellElement()..classes.add("scoreEntry");

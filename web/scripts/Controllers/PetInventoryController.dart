@@ -2,6 +2,7 @@ import 'dart:html';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
+import '../Pets/Pet.dart';
 import 'navbar.dart';
 
 GameObject game;

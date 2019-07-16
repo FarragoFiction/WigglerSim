@@ -113,6 +113,11 @@ Future<Null> start() async {
         output.appendHtml("Haha, nope, gotta pick a wiggler first, k? No wasting online stuff, yeah?");
         return;
     }
+    //grubs and only grubs. no aliens. no adults. NOTHING.
+    if(!(capsule.pet.doll is HomestuckGrubDoll)) {
+        output.text = "By OMNIVERSAL DECREE, NO GROWN TROLLS OR ALIENS ARE ALLOWED TO BE CHUCKED INTO THE TIMEHOLE ANYMORE. THAT SHIT BREAKS PEOPLE'S SAVES.";
+        return;
+    }
     //TODO send them flipping into the TIMEHOLE
     CanvasElement canvas = await capsule.pet.draw();
     output.append(canvas);
@@ -219,7 +224,11 @@ Future<Null> getCost() async {
 }
 
 void errorMessage(error, trace) {
-  output.setInnerHtml("ERROR: cannot access TIMEHOLE system. $error $trace");
+    String errorText = error.toString();
+    if((error is ProgressEvent) && (error.target is HttpRequest)) {
+        errorText = (error.target as HttpRequest).responseText;
+    }
+  output.setInnerHtml("ERROR: cannot access TIMEHOLE system. (it might just temporarily be down. Try again in a few minutes) $errorText");
   window.console.error([error, trace]);
 }
 

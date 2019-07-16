@@ -2,6 +2,7 @@ import 'dart:html';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
+import '../Pets/Pet.dart';
 import "navbar.dart";
 GameObject game;
 
@@ -25,6 +26,7 @@ Future<Null> start() async {
     Element container = new DivElement();
     container.style.display = "inline-block";
     querySelector('#output').append(container);
+
     if(game.player.petInventory.hasRoom) {
         game.drawAdoptables(container);
     }else {
