@@ -39,6 +39,11 @@ class PlayPen {
     String backgroundImage = "images/BroodingCaverns.png";
 
     PlayPen(Element divForCanvas, List<Pet> potentialGrubs) {
+        window.onMouseMove.listen((Event e){
+            if(GameObject.instance.bgMusic.paused) {
+                GameObject.instance.playMusic("Wiggling_Time");
+            }
+        });
         setBackground(divForCanvas);
         divForCanvas.append(canvas);
         loadPets(potentialGrubs);
