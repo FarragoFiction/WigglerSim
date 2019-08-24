@@ -72,6 +72,7 @@ import 'dart:html';
 
 import 'dart:async';
 import 'Grub.dart';
+import 'TreeBab.dart';
 import 'Egg.dart';
 import 'Cocoon.dart';
 import 'Troll.dart';
@@ -146,6 +147,7 @@ abstract class Pet {
     static String NAMEJSON = "nameJSON";
     static String TYPE = "TYPE";
     static String GRUB = "GRUB";
+    static String TREEBAB = "TREEBAB";
     static String EGG = "EGG";
     static String COCOON = "COCOON";
     static String TROLL = "TROLL";
@@ -470,6 +472,8 @@ abstract class Pet {
         //print("Loading abstract pet from json, obj is ${jsonObj}");
         if(jsonObj[TYPE] == GRUB) {
             return new Grub.fromJSON(null,jsonObj);
+        }else if(jsonObj[TYPE] == TREEBAB) {
+            return new TreeBab.fromJSON(null,jsonObj);
         }else if(jsonObj[TYPE] == EGG) {
             return new Egg.fromJSON(null,jsonObj);
         }else if(jsonObj[TYPE] == COCOON) {
@@ -523,6 +527,7 @@ abstract class Pet {
     }
 
     void loadFromJSON(String json, [JSONObject jsonObj]) {
+        print("loading pet from json");
         if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
         String dataString = jsonObj[DOLLDATAURL];
         //print("data string is $dataString");

@@ -140,7 +140,7 @@ class AnimationObject {
     int index = 0;
 
     void addAnimationFrame(CanvasElement canvas, AIObject obj, [int index = -13]) {
-        //print("adding animation frame");
+        print("adding animation frame");
         final EffectStack stack = new EffectStack(canvas);
         if(obj.corrupt) {
 
@@ -158,8 +158,6 @@ class AnimationObject {
                 lightCorruptEffect(stack,obj);
             }
         }
-
-
 
         canvas = stack.canvas;
 
@@ -203,6 +201,7 @@ class AnimationObject {
     }
 
     CanvasElement getNextFrame() {
+        print("getting the next frame, animations are $animations");
         index ++;
         if(index >= animations.length) {
             index = 0;

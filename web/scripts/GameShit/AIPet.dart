@@ -25,6 +25,7 @@ import 'dart:html';
 import 'dart:async';
 import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
+import '../Pets/TreeBab.dart';
 import '../Player/ItemInventory.dart';
 import "AIObject.dart";
 import "GameObject.dart";
@@ -135,102 +136,112 @@ class AIPet extends AIObject {
     }
 
 
-    //grub body 0 and grub body 1
-    @override
-    Future<Null> setUpLandIdleAnimation() async {
+    Future<Null> setUpLandIdleAnimationTreeBab() async {
+        int imgNum1 = 2;
+        int imgNum2 = 3;
+        await renderTwoFrameIdleAnimation(imgNum1, imgNum2);
+    }
+
+    Future<Null> renderTwoFrameIdleAnimation(int imgNum1, int imgNum2) async {
+        print("rendering two frame animation between $imgNum1 , $imgNum2");
         HomestuckGrubDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
         grub.canvas = null; //means it will make a new one, so old reference is free
+        if(rand.nextBool()) {
+            g.extendedBody.imgNumber = imgNum1;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas,this);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = imgNum2;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas,this);
+        }else { //so they don't all look the same
+            g.extendedBody.imgNumber = imgNum2;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas,this);
+            grub.canvas = null; //means it will make a new one, so old reference is free
+            g.extendedBody.imgNumber = imgNum1;
+            await grub.drawNoResize();
+            idleAnimation.addAnimationFrame(grub.canvas,this);
+        }
+        grub.canvas = null; //means it will make a new one, so old reference is free
+    }
+
+    Future<Null> renderTwoFrameWalkAnimation(int imgNum1, int imgNum2) async {
+      print("rendering two frame animation between $imgNum1 , $imgNum2");
+      HomestuckGrubDoll g = grub.doll;
+      Random rand = new Random();
+      rand.nextInt(10); //init
+      grub.canvas = null; //means it will make a new one, so old reference is free
+      if(rand.nextBool()) {
+          g.extendedBody.imgNumber = imgNum1;
+          await grub.drawNoResize();
+          walkAnimation.addAnimationFrame(grub.canvas,this);
+          grub.canvas = null; //means it will make a new one, so old reference is free
+          g.extendedBody.imgNumber = imgNum2;
+          await grub.drawNoResize();
+          walkAnimation.addAnimationFrame(grub.canvas,this);
+      }else { //so they don't all look the same
+          g.extendedBody.imgNumber = imgNum2;
+          await grub.drawNoResize();
+          walkAnimation.addAnimationFrame(grub.canvas,this);
+          grub.canvas = null; //means it will make a new one, so old reference is free
+          g.extendedBody.imgNumber = imgNum1;
+          await grub.drawNoResize();
+          walkAnimation.addAnimationFrame(grub.canvas,this);
+      }
+      grub.canvas = null; //means it will make a new one, so old reference is free
+    }
+
+    Future<Null> setUpLandWalkAnimationTreeBab() async {
+        int imgNum1 = 0;
+        int imgNum2 = 1;
+        await renderTwoFrameWalkAnimation(imgNum1, imgNum2);
+    }
+
+    //grub body 0 and grub body 1
+    Future<Null> setUpLandIdleAnimation() async {
+        //cut the gordian knot
+        if(grub is TreeBab) {
+            return await setUpLandIdleAnimationTreeBab();
+        }
+
         int imgNum1 = 5;
         int imgNum2 = 6;
         if(!grub.isEnergetic) { //lazy grub
             imgNum1 = 7;
             imgNum2 = 8;
         }
-        if(rand.nextBool()) {
-            g.extendedBody.imgNumber = imgNum1;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = imgNum2;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-        }else { //so they don't all look the same
-            g.extendedBody.imgNumber = imgNum2;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = imgNum1;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-        }
-        grub.canvas = null; //means it will make a new one, so old reference is free
-
+        await renderTwoFrameIdleAnimation(imgNum1, imgNum2);
     }
 
     Future<Null> setUpSeadwellerIdleAnimation2() async {
-        HomestuckGrubDoll g = grub.doll;
-        Random rand = new Random();
-        rand.nextInt(10); //init
-        grub.canvas = null; //means it will make a new one, so old reference is free
+        //cut the gordian knot
+        if(grub is TreeBab) {
+            return await setUpLandIdleAnimationTreeBab();
+        }
         int imgNum1 = 14;
         int imgNum2 = 15;
         if(!grub.isEnergetic) { //lazy grub
             imgNum1 = 16;
             imgNum2 = 17;
         }
-        if(rand.nextBool()) {
-            g.extendedBody.imgNumber = imgNum1;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = imgNum2;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-        }else { //so they don't all look the same
-            g.extendedBody.imgNumber = imgNum2;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = imgNum1;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-        }
-        grub.canvas = null; //means it will make a new one, so old reference is free
-
+        await renderTwoFrameIdleAnimation(imgNum1, imgNum2);
     }
 
     Future<Null> setUpSeadwellerIdleAnimation1() async {
-        HomestuckGrubDoll g = grub.doll;
-        Random rand = new Random();
-        rand.nextInt(10); //init
-        grub.canvas = null; //means it will make a new one, so old reference is free
+        //cut the gordian knot
+        if(grub is TreeBab) {
+            return await setUpLandIdleAnimationTreeBab();
+        }
         int imgNum1 = 23;
         int imgNum2 = 24;
         if(!grub.isEnergetic) { //lazy grub
             imgNum1 = 25;
             imgNum2 = 26;
         }
-        if(rand.nextBool()) {
-            g.extendedBody.imgNumber = imgNum1;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = imgNum2;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-        }else { //so they don't all look the same
-            g.extendedBody.imgNumber = imgNum2;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = imgNum1;
-            await grub.drawNoResize();
-            idleAnimation.addAnimationFrame(grub.canvas,this);
-        }
-        grub.canvas = null; //means it will make a new one, so old reference is free
-
+        await renderTwoFrameIdleAnimation(imgNum1, imgNum2);
     }
 
     void restoreDefaultBody() {
@@ -239,89 +250,30 @@ class AIPet extends AIObject {
         g.pickCasteAppropriateBody();
     }
 
-    @override
     Future<Null> setUpSeadwellerWalkAnimation1() async {
-        HomestuckGrubDoll g = grub.doll;
-        Random rand = new Random();
-        rand.nextInt(10); //init
-        grub.canvas = null; //means it will make a new one, so old reference is free
-        if(rand.nextBool()) {
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 21;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 22;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-        }else { //so they don't all look the same
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 21;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 22;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
+        //cut the gordian knot
+        if(grub is TreeBab) {
+            return await setUpLandWalkAnimationTreeBab();
         }
-        grub.canvas = null; //means it will make a new one, so old reference is free
-
+        await renderTwoFrameWalkAnimation(21, 22);
     }
+
 
     @override
     Future<Null> setUpSeadwellerWalkAnimation2() async {
-        HomestuckGrubDoll g = grub.doll;
-        Random rand = new Random();
-        rand.nextInt(10); //init
-        grub.canvas = null; //means it will make a new one, so old reference is free
-        if(rand.nextBool()) {
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 12;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 13;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-        }else { //so they don't all look the same
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 13;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 12;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
+        //cut the gordian knot
+        if(grub is TreeBab) {
+            return await setUpLandWalkAnimationTreeBab();
         }
-        grub.canvas = null; //means it will make a new one, so old reference is free
+        await renderTwoFrameWalkAnimation(12, 13);
     }
 
-    @override
     Future<Null> setUpLanddwellerWalkAnimation1() async {
-        HomestuckGrubDoll g = grub.doll;
-        Random rand = new Random();
-        rand.nextInt(10); //init
-        grub.canvas = null; //means it will make a new one, so old reference is free
-        if(rand.nextBool()) {
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 3;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 4;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-        }else { //so they don't all look the same
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 4;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
-            grub.canvas = null; //means it will make a new one, so old reference is free
-            g.extendedBody.imgNumber = 3;
-            await grub.drawNoResize();
-            walkAnimation.addAnimationFrame(grub.canvas,this);
+        //cut the gordian knot
+        if(grub is TreeBab) {
+            return await setUpLandWalkAnimationTreeBab();
         }
-        grub.canvas = null; //means it will make a new one, so old reference is free
+        await renderTwoFrameWalkAnimation(3, 4);
     }
 
     //grub body 3 and grub body 4

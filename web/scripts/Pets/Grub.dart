@@ -18,7 +18,9 @@ class Grub extends Pet{
   @override
   String type = Pet.GRUB;
   Grub(Doll doll, {health: 100, boredom: 0}) : super(doll, health: health, boredom: boredom) {
-    setEyes();
+    if(doll != null) {
+      setEyes();
+    }
   }
 
   void setEyes() {
