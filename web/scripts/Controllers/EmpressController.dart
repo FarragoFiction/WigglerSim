@@ -7,6 +7,7 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
 import '../GameShit/Empress.dart';
+import '../Pets/TreeBab.dart';
 import "navbar.dart";
 
 GameObject game;
@@ -102,7 +103,7 @@ void save() {
 
 void drawPossibleAdopts() {
   DivElement element = new DivElement();
-  //secretsForCalm.add("Fred+Feelix%3A___HBS5TN0AIcsAEGX43FfRqTuthx7_qP__qP8AIcsAAAADUA4ANBrq6Oe_wsH_qP__W_-MytYAIcsAEGUIgcQOIFD_OATIAmQBSgClYA%3D%3D");
+  secretsForCalm.add("Fred+Feelix%3A___HBS5TN0AIcsAEGX43FfRqTuthx7_qP__qP8AIcsAAAADUA4ANBrq6Oe_wsH_qP__W_-MytYAIcsAEGUIgcQOIFD_OATIAmQBSgClYA%3D%3D");
    //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
   String word = "Wigglers";
@@ -117,7 +118,7 @@ void drawPossibleAdopts() {
   for(String dataString in secretsForCalm) {
     SpanElement subContainer = new SpanElement()..style.width = "420px"..style.display="inline-block";
     element.append(subContainer);
-    Grub p = new Grub(Doll.loadSpecificDoll(dataString));
+    TreeBab p = new TreeBab(Doll.loadSpecificDoll(dataString));
     p.name = "Nidhogg's Child";
     String corrupt = "Corrupt";
 
