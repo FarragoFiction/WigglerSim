@@ -26,8 +26,8 @@ class TreeBab extends Grub{
 
   void convertDoll() {
     doll = Doll.convertOneDollToAnother(doll, new HomestuckTreeBab());
-    (doll as HomestuckGrubDoll).extendedBody.imgNumber = 1;
-    (doll as HomestuckGrubDoll).body.imgNumber = 1;
+    (doll as HomestuckTreeBab).extendedBody.imgNumber = 1;
+    (doll as HomestuckTreeBab).body.imgNumber = 1;
   }
 
 
@@ -38,7 +38,6 @@ class TreeBab extends Grub{
     convertDoll();
     //print ("loaded $name");
     //at half way mark, eyes turn yellow like a trolls.
-    setEyes();
   }
 
 

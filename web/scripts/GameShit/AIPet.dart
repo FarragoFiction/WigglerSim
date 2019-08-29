@@ -120,7 +120,7 @@ class AIPet extends AIObject {
 
     @override
     Future<Null> setUpIdleAnimation() async {
-        HomestuckGrubDoll grubDoll = grub.doll as HomestuckGrubDoll;
+        HomestuckTrollDoll grubDoll = grub.doll as HomestuckTrollDoll;
         Random rand = new Random(grubDoll.extendedHairBack.imgNumber);
         rand.nextInt(); //init
         if(grubDoll.bloodColor == HomestuckTrollDoll.VIOLET || grubDoll.bloodColor == HomestuckTrollDoll.FUCHSIA) {
@@ -144,7 +144,7 @@ class AIPet extends AIObject {
 
     Future<Null> renderTwoFrameIdleAnimation(int imgNum1, int imgNum2) async {
         print("rendering two frame animation between $imgNum1 , $imgNum2");
-        HomestuckGrubDoll g = grub.doll;
+        HomestuckTrollDoll g = grub.doll;
         Random rand = new Random();
         rand.nextInt(10); //init
         grub.canvas = null; //means it will make a new one, so old reference is free
@@ -170,7 +170,7 @@ class AIPet extends AIObject {
 
     Future<Null> renderTwoFrameWalkAnimation(int imgNum1, int imgNum2) async {
       print("rendering two frame animation between $imgNum1 , $imgNum2");
-      HomestuckGrubDoll g = grub.doll;
+      HomestuckTrollDoll g = grub.doll;
       Random rand = new Random();
       rand.nextInt(10); //init
       grub.canvas = null; //means it will make a new one, so old reference is free
@@ -246,8 +246,10 @@ class AIPet extends AIObject {
 
     void restoreDefaultBody() {
         List<int> bodies = <int>[0,1,2];
-        HomestuckGrubDoll g = grub.doll;
-        g.pickCasteAppropriateBody();
+        HomestuckTrollDoll g = grub.doll;
+        if(!(g is HomestuckTreeBab)) {
+            (g as HomestuckGrubDoll).pickCasteAppropriateBody();
+        }
     }
 
     Future<Null> setUpSeadwellerWalkAnimation1() async {
@@ -279,7 +281,7 @@ class AIPet extends AIObject {
     //grub body 3 and grub body 4
     @override
     Future<Null> setUpWalkAnimation() async {
-        HomestuckGrubDoll grubDoll = grub.doll as HomestuckGrubDoll;
+        HomestuckTrollDoll grubDoll = grub.doll as HomestuckTrollDoll;
         Random rand = new Random(grubDoll.extendedHairBack.imgNumber);
         rand.nextInt(); //init
         if(grubDoll.bloodColor == HomestuckTrollDoll.VIOLET || grubDoll.bloodColor == HomestuckTrollDoll.FUCHSIA) {

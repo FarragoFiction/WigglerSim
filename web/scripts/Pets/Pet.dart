@@ -654,7 +654,7 @@ abstract class Pet {
         DateTime now = new DateTime.now();
         Duration diff = now.difference(date);
         //print("hatch date is $hatchDate and diff is $diff");
-        print("the hatch date is $hatchDate");
+        //print("the hatch date is $hatchDate");
         String s = "";
         if(diff.inDays > 0) {
             if(diff.inDays >1) s = "s";

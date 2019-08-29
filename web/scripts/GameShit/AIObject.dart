@@ -201,7 +201,7 @@ class AnimationObject {
     }
 
     CanvasElement getNextFrame() {
-        print("getting the next frame, animations are $animations");
+        //print("getting the next frame, animations are $animations");
         index ++;
         if(index >= animations.length) {
             index = 0;
