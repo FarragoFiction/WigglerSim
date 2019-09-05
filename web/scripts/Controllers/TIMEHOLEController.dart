@@ -114,7 +114,7 @@ Future<Null> start() async {
         return;
     }
     //grubs and only grubs. no aliens. no adults. NOTHING.
-    if(!(capsule.pet.doll is HomestuckGrubDoll)) {
+    if(!(capsule.pet.doll is HomestuckGrubDoll || capsule.pet.doll is HomestuckTreeBab)) {
         output.text = "By OMNIVERSAL DECREE, NO GROWN TROLLS OR ALIENS ARE ALLOWED TO BE CHUCKED INTO THE TIMEHOLE ANYMORE. THAT SHIT BREAKS PEOPLE'S SAVES.";
         return;
     }
@@ -186,6 +186,7 @@ Future<Null> TIMEHOLE(CapsuleTIMEHOLE capsule, CanvasElement canvas) async {
     output.append(div);
     new LoadingAnimation("Chucking ${capsule.pet.name} into the TIMEHOLE...",canvas,div );
     GameObject.instance.playMusic("WTWJ1");
+
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 1));
 
@@ -236,7 +237,11 @@ Future<Null> viewTIMEHOLE() async {
     DivElement div = new DivElement();
     output.append(div);
     new LoadingAnimation("Peering into TIMEHOLE.",null,div );
-    GameObject.instance.playMusic("WTWJ1");
+    window.onMouseMove.listen((Event e){
+        if(GameObject.instance.bgMusic.paused) {
+            GameObject.instance.playMusic("WTWJ1");
+        }
+    });
     //don't skip manics nice music thingy
     await new Future.delayed(new Duration(seconds: 1));
 

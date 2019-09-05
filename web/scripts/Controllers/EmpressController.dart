@@ -1,4 +1,5 @@
 import '../GameShit/MoneyHandler.dart';
+import '../Pets/CapsuleTIMEHOLE.dart';
 import '../Pets/Grub.dart';
 import 'package:CommonLib/Utility.dart';
 import 'dart:convert';
@@ -7,6 +8,8 @@ import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
 import '../GameShit/Empress.dart';
+import '../Pets/Pet.dart';
+import '../Pets/Stat.dart';
 import '../Pets/TreeBab.dart';
 import "navbar.dart";
 
@@ -100,10 +103,103 @@ void save() {
   window.localStorage[SHAREDKEY] = sharedToDataString().toString();
 }
 
+void drawCanon() async {
+  DivElement element = new DivElement();
+  output.append(element);
+  List<Pet> canon = new List<Pet>();
+
+  canon.add(makeOthala());
+  canon.add(makeEirikr());
+  canon.add(makeDespap());
+  canon.add(makePeewee());
+  canon.add(makeZawhei());
+  canon.add(makeHagala());
+
+  for(Pet p in canon) {
+    p.makeCorrupt();
+    await game.player.petInventory.drawPet(output, p);
+    CapsuleTIMEHOLE capsule = new CapsuleTIMEHOLE(p, "yggdrasilsYeoman");
+    output.appendHtml(capsule.toJson().toString());
+  }
+  Doll doll = Doll.loadSpecificDoll("Despap Citato:___ArBhlggBlggBDYACFr_94nuZzk9BlggBlggAA_wAAAABAUwBQaABlggATExMAAAApHVMgFUYA_wAA_wBJSUlpuMgHhEYDQiMIgSwJYDtgLQBpeAp0AxgGMAqAFRg");
+  output.append(await doll.getNewCanvas());
+  /*
+  String website = "https://plaguedoctors.herokuapp.com";
+  String url = "$website/time_holes/abdicateTIMEHOLE";
+  await HttpRequest.postFormData(url,capsule.makePostData(true));
+  print("despap is $despap");
+  */
+}
+
+Pet makeHagala() {
+  final Pet hagala = new TreeBab(Doll.loadSpecificDoll("Hagala Folnir:___ArBhhdPvZxu1AAICFr_94nuZzk9AAAAAAAAAA_wAAAADZxu2QhJ5gWGkTExMAAAApHVMgFUYA_wAA_wBJSUlpuMiFr_9zk9AI_A8YYgIVAMcBjgRAImA"));
+
+  hagala.name = "Hagala Folnir";
+  for(Stat stat in hagala.stats) {
+    stat.value = 0;
+  }
+  hagala.patience.value = 113;
+  return hagala;
+}
+
+Pet makeOthala() {
+  final Pet pet = new TreeBab(Doll.loadSpecificDoll("Othala Grigor:___ArBiZAE3y4Onju8-Fr_94nuZzk9AAAAAAAAAA_wAAAADy4OnyyN3ykMETExMAAAApHVMgFUYA_wAA_wBJSUlpuMgzMzMREREIgE_AJ-AUrANWl0AbcA24BowDR4="));
+
+  pet.name = "Othala Grigor";
+  for(Stat stat in pet.stats) {
+    stat.value = 0;
+  }
+  pet.loyal.value = 113;
+  return pet;
+}
+
+Pet makeEirikr() {
+  final Pet pet = new TreeBab(Doll.loadSpecificDoll("Eirikr Kharun:___ArBjS0clCAAAvAACFr_94nuZzk9AAAAAAAAAA_wAAAABCAACEAABCAAATExMAAAApHVMgFUYA_wAA_wBJSUlpuMihAABQAAAIgPQB6AO7AmeBXQSCQDUAamA"));
+
+  pet.name = "Eirikr Kharun";
+  for(Stat stat in pet.stats) {
+    stat.value = 0;
+  }
+  pet.curious.value = -113;
+  return pet;
+}
+
+Pet makeDespap() {
+  final Pet pet = new TreeBab(Doll.loadSpecificDoll("Despap Citato:___ArBhlggBlggBDYACFr_94nuZzk9AAAAAAAAAA_wAAAABAUwBQaABlggATExMAAAApHVMgFUYA_wAA_wBJSUlpuMgHhEYDQiMIgSwJYDtgLQBpeAp0AxgGMAqAFRg"));
+  pet.name = "Despap Citato";
+  for(Stat stat in pet.stats) {
+    stat.value = 0;
+  }
+  pet.idealistic.value = -113;
+  return pet;
+}
+
+Pet makePeewee() {
+  final Pet pet = new TreeBab(Doll.loadSpecificDoll("Peewee 'The Man' Cassan:___ArBihoQBfXwCAgACFr_94nuZzk9AAAAAAAAAA_wAAAACIiABfXwCIiAATExMAAAApHVMgFUYA_wAA_wBJSUlpuMhlggAyQQAIgOgB0Ab4HwBMfQPgfAOYBzY"));
+
+  pet.name = "Peewee `The Man` Cassan";
+  for(Stat stat in pet.stats) {
+    stat.value = 0;
+  }
+  pet.energetic.value = -113;
+  return pet;
+}
+
+Pet makeZawhei() {
+  final Pet pet = new TreeBab(Doll.loadSpecificDoll("Zawhei Bacama:___ArBgHhEZJpHcFYiT________AwMAAAAAAAAAA_wAAAAAFYiQHhEYFYiQTExMAAAApHVMgFUYA_wAA_wBJSUlpuMgAQYIAIEEIgJoBNAEEgIz9ALwBeAEhAJDgA=="));
+      pet.name = "Zawhei Bacama";
+  for(Stat stat in pet.stats) {
+    stat.value = 0;
+  }
+  pet.energetic.value = 113;
+  return pet;
+}
+
 
 void drawPossibleAdopts() {
+  //drawCanon();
   DivElement element = new DivElement();
-  //secretsForCalm.add("Fred+Feelix%3A___HBS5TN0AIcsAEGX43FfRqTuthx7_qP__qP8AIcsAAAADUA4ANBrq6Oe_wsH_qP__W_-MytYAIcsAEGUIgcQOIFD_OATIAmQBSgClYA%3D%3D");
+  secretsForCalm.add("Fred+Feelix%3A___HBS5TN0AIcsAEGX43FfRqTuthx7_qP__qP8AIcsAAAADUA4ANBrq6Oe_wsH_qP__W_-MytYAIcsAEGUIgcQOIFD_OATIAmQBSgClYA%3D%3D");
    //secretsForCalm.add("Fuchsia+Blooded+Grub%3A___HBTMw7GZAE1MACaZAE3jAHFMACaZAE2ZAE2ZAE0AAABLS0s6OjoREREAAAAREREzMzPExMSZAE1MACYIgJwBOALCDsIJcUCcE4CxAWOA");
 
   String word = "Wigglers";
@@ -132,7 +228,7 @@ void drawPossibleAdopts() {
     if(Empress.instance.allowsImportingMutants()) {
       ButtonElement button = new ButtonElement();
 
-      button.text = "Adopt the $corrupt ${(p.doll as HomestuckGrubDoll).bloodColor} Blood?";
+      button.text = "Adopt the $corrupt ${(p.doll as HomestuckTreeBab).bloodColor} Blood?";
       subContainer.append(button);
 
       button.onClick.listen((Event e) {
@@ -153,7 +249,7 @@ void drawPossibleAdopts() {
 
 }
 
-bool dollIsPurified(HomestuckGrubDoll doll) {
+bool dollIsPurified(HomestuckTreeBab doll) {
   HomestuckPalette palette = doll.palette as HomestuckPalette;
   if(palette.skin == ReferenceColours.PURIFIED.skin) return true;
 }

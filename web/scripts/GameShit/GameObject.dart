@@ -83,18 +83,42 @@ class GameObject {
     }
     void playMusic(String locationWithoutExtension) {
         print("starting music $locationWithoutExtension");
-        bgMusic.loop  = true;
-        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.mp3";
-        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.ogg";
-        bgMusic.play();
+        try {
+            bgMusic.loop = true;
+            if (bgMusic
+                .canPlayType("audio/mpeg")
+                .isNotEmpty)
+                bgMusic.src = "music/${locationWithoutExtension}.mp3";
+            if (bgMusic
+                .canPlayType("audio/ogg")
+                .isNotEmpty)
+                bgMusic.src = "music/${locationWithoutExtension}.ogg";
+            bgMusic.play().catchError((Error error) {
+                window.console.error("error playing $locationWithoutExtension but ignoring");
+            });
+        }catch(e) {
+            window.console.error("error playing $locationWithoutExtension but ignoring $e");
+        }
     }
 
-    void playMusicOnce(String locationWithoutExtension) {
+    void playMusicOnce(String locationWithoutExtension)  {
         print("starting music $locationWithoutExtension");
-        bgMusic.loop  = false;
-        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.mp3";
-        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "music/${locationWithoutExtension}.ogg";
-        bgMusic.play();
+        try {
+            bgMusic.loop = false;
+            if (bgMusic
+                .canPlayType("audio/mpeg")
+                .isNotEmpty)
+                bgMusic.src = "music/${locationWithoutExtension}.mp3";
+            if (bgMusic
+                .canPlayType("audio/ogg")
+                .isNotEmpty)
+                bgMusic.src = "music/${locationWithoutExtension}.ogg";
+            bgMusic.play().catchError((Error error) {
+                window.console.error("error playing $locationWithoutExtension but ignoring ");
+            });
+        }catch(e) {
+            window.console.error("error playing $locationWithoutExtension but ignoring $e");
+        }
     }
 
     void stopMusic() {
