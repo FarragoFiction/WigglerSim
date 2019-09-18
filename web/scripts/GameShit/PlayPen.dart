@@ -36,7 +36,7 @@ class PlayPen {
 
     CanvasElement canvas = new CanvasElement(width: 1000, height: 400);
 
-    String backgroundImage = "images/BroodingCaverns.png";
+    String backgroundImage = "images/PlaypenBackground.png";
 
     PlayPen(Element divForCanvas, List<Pet> potentialGrubs) {
         window.onMouseMove.listen((Event e){
