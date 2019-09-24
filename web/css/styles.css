@@ -19,6 +19,7 @@ button{
     margin: 10px;
     padding: 10px;
     background-color: #5d2c1c;
+    border-radius: 13px;
     color: #935b49;
     border: 1px solid #935b49;
     font-family: 'strife', sans-serif;

@@ -276,6 +276,18 @@ class PetInventory {
         }
     }
 
+    void fuckButton(Element container) {
+        ButtonElement button = new ButtonElement();
+        ImageElement bucket = new ImageElement(src: "images/buckit.png");
+        ImageElement turtle = new ImageElement(src: "images/turtle.png");
+        ImageElement tree = new ImageElement(src: "images/tree.png");
+        button.append(bucket);
+        button.append(turtle);
+        button.append(tree);
+
+        container.append(button);
+    }
+
     void renameButton(SpanElement subContainer, CanvasElement canvas, Pet p) {
       TextInputElement customName = new TextInputElement();
       customName.value = p.name;
@@ -396,7 +408,6 @@ class PetInventory {
         print ("Alumni is of type ${trolls.runtimeType}");
         drawPaginationControls(container, trolls);
 
-
         List<Troll> reversedAlumni = new List<Troll>.from(trolls.reversed);
         for(int i = (pageNumber*alumniPerPage); i<(Math.min((pageNumber*alumniPerPage) + alumniPerPage, trolls.length)); i++) {
             Troll p = reversedAlumni[i];
@@ -412,6 +423,7 @@ class PetInventory {
 
             CanvasElement c = await drawPet(subContainer, p);
             renameButton(nameElement,c,p);
+            fuckButton(nameElement);
 
             renderHairDressingButton(subContainer, p, c);
             renderClothesStylistButton(subContainer, p, c);

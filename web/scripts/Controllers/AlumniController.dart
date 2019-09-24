@@ -28,7 +28,19 @@ Future<Null> main() async {
     querySelector("#output").append(button);
   }
 
-  start();
+  if(getParameterByName("talking",null) == "turtle") {
+    showBreeding();
+  }else {
+    start();
+  }
+}
+
+Future<Null> showBreeding() async {
+  Element container = new DivElement();
+  querySelector('#output').append(container);
+  String fuckPile =window.localStorage["TIMEHOLE"];
+  container.appendText(fuckPile);
+
 }
 
 Future<Null> start() async {
