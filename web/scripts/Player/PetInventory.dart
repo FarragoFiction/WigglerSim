@@ -17,6 +17,7 @@ import 'package:CommonLib/Utility.dart';
 //TODO have a "from JSON" constructor
 class PetInventory {
     static String PETSLIST = "petsList";
+    static String FUCKPILE = "FUCKPILE";
     static String ALUMNI = "alumni";
     static String EMPRESS = "empress";
 
@@ -277,7 +278,7 @@ class PetInventory {
     }
 
     void fuckButton(Element container, Troll p) {
-        if(window.localStorage.containsKey("FUCKPILE") && window.localStorage["FUCKPILE"].contains("${p.toJson()}")) {
+        if(window.localStorage.containsKey(FUCKPILE) && window.localStorage[FUCKPILE].contains("${p.toJson()}")) {
             return;
         }
         ButtonElement button = new ButtonElement();
@@ -290,8 +291,8 @@ class PetInventory {
 
         button.onClick.listen((Event e) {
             List<JSONObject> jsonArray = new List<JSONObject>();
-            if(window.localStorage.containsKey("FUCKPILE")) {
-                String idontevenKnow = window.localStorage["FUCKPILE"];
+            if(window.localStorage.containsKey(FUCKPILE)) {
+                String idontevenKnow = window.localStorage[FUCKPILE];
                 List<dynamic> what = jsonDecode(idontevenKnow);
                 //print("what json is $what");
                 for (dynamic d in what) {
@@ -302,7 +303,7 @@ class PetInventory {
                 }
             }
             jsonArray.add(p.toJson());
-            window.localStorage["FUCKPILE"] = jsonArray.toString();
+            window.localStorage[FUCKPILE] = jsonArray.toString();
             window.location.href = "/viewAlumni.html?talking=turtle";
         });
 

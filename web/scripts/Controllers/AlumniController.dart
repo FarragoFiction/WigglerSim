@@ -42,10 +42,17 @@ Future<Null> main() async {
 
 Future<Null> showBreeding() async {
   Element container = new DivElement();
+  //window.localStorage.remove(PetInventory.FUCKPILE);
   querySelector('#output').append(container);
-  String fuckPile =window.localStorage["FUCKPILE"];
-  String idontevenKnow = window.localStorage["FUCKPILE"];
+  if(!window.localStorage.containsKey(PetInventory.FUCKPILE)) {
+        container.text = "You have selected no alumni to create a new generation!";
+        return;
+  }
+  String fuckPile =window.localStorage[PetInventory.FUCKPILE];
+  print("fuckpile is $fuckPile");
+  String idontevenKnow = window.localStorage[PetInventory.FUCKPILE];
   List<Troll> realFuckPile = new List<Troll>();
+  // for testing realFuckPile.addAll(GameObject.instance.player.petInventory.alumni);
   List<dynamic> what = jsonDecode(idontevenKnow);
   //print("what json is $what");
   bool lamiaMode = true;
@@ -73,7 +80,7 @@ Future<Null> showBreeding() async {
   if(realFuckPile.length < min) {
       instructions.text = "${instructions.text} You only have ${realFuckPile.length} selected. You need ${min -realFuckPile.length } more.";
   }else if(realFuckPile.length > max) {
-      instructions.text = "${instructions.text} You  have ${realFuckPile.length} selected, which is too many. You need to get rid of ${realFuckPile.length - max}.";
+      instructions.text = "${instructions.text} You  have ${realFuckPile.length} selected, which is too many. You need to get rid of ${realFuckPile.length - max}. Click an Alumni to remove them.";
 
   }
 
@@ -82,14 +89,34 @@ Future<Null> showBreeding() async {
 
 
   realFuckPile.forEach((Troll t) async {
-      DivElement me = new DivElement()..style.display='inline-block';
-      CanvasElement c = await GameObject.instance.player.petInventory.drawPet(new DivElement(), t);
-      CanvasElement tiny = new CanvasElement(height: (t.textHeight/2).ceil(), width: (t.textWidth/2).ceil());
-      tiny.context2D.drawImageScaled(c,0,0, t.textWidth/2, t.textHeight/2);
-      me.append(tiny);
-      container.append(me);
+      displayBreeder(realFuckPile, t, container);
   });
 
+}
+
+void displayBreeder(List<Troll> realFuckPile, Troll t, Element container)  {
+  DivElement me = new DivElement()..style.display='inline-block'..style.height="100px";
+  container.append(me);
+
+  me.onClick.listen((Event e) {
+      removeFromFuckPile(realFuckPile, t);
+  });
+  asyncRender(t, me);
+}
+
+Future asyncRender(Troll t, DivElement me) async {
+  CanvasElement c = await GameObject.instance.player.petInventory.drawPet(new DivElement(), t);
+  CanvasElement tiny = new CanvasElement(height: (t.textHeight/2).ceil(), width: (t.textWidth/2).ceil());
+  tiny.context2D.drawImageScaled(c,0,0, t.textWidth/2, t.textHeight/2);
+  me.append(tiny);
+}
+
+void removeFromFuckPile(List<Troll> realFuckPile, Troll t) {
+  realFuckPile.remove(t);
+  List<JSONObject> jsonArray = new List<JSONObject>();
+  realFuckPile.forEach((Troll t) =>jsonArray.add(t.toJson()));
+  window.localStorage[PetInventory.FUCKPILE] = jsonArray.toString();
+  window.location.href = window.location.href;
 }
 
 Future<Null> start() async {
