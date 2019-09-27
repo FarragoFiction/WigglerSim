@@ -1,7 +1,12 @@
+import 'dart:convert';
 import 'dart:html';
+import 'package:CommonLib/Utility.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
+import '../Pets/Pet.dart';
+import '../Pets/Troll.dart';
+import '../Player/PetInventory.dart';
 import "navbar.dart";
 
 GameObject game;
@@ -38,8 +43,47 @@ Future<Null> main() async {
 Future<Null> showBreeding() async {
   Element container = new DivElement();
   querySelector('#output').append(container);
-  String fuckPile =window.localStorage["TIMEHOLE"];
-  container.appendText(fuckPile);
+  String fuckPile =window.localStorage["FUCKPILE"];
+  String idontevenKnow = window.localStorage["FUCKPILE"];
+  List<Troll> realFuckPile = new List<Troll>();
+  List<dynamic> what = jsonDecode(idontevenKnow);
+  //print("what json is $what");
+  bool lamiaMode = true;
+  for(dynamic d in what) {
+      //print("dynamic json thing is  $d");
+      JSONObject j = new JSONObject();
+      j.json = d;
+      Troll troll = Pet.loadPetFromJSON("", j);
+      //if tehre is even one non lamia, its not lamia
+      if(!(troll.doll is HomestuckLamiaDoll)) lamiaMode =false;
+      realFuckPile.add(troll);
+  }
+
+  int min = 4;
+  int max = 12;
+  if(lamiaMode) min = 2;
+
+  DivElement instructions = new DivElement()..style.paddingTop="50px";
+  if(lamiaMode) {
+      instructions.text = "Pure Lamia breeding allows between $min and $max Lamia at a time.";
+  }else {
+      instructions.text = "Troll style breeding allows between $min and $max Trolls at a time.";
+  }
+
+  if(realFuckPile.length < min) {
+      instructions.text = "${instructions.text} You only have ${realFuckPile.length} selected. You need ${min -realFuckPile.length } more.";
+  }else if(realFuckPile.length > max) {
+      instructions.text = "${instructions.text} You  have ${realFuckPile.length} selected, which is too many.";
+
+  }
+
+
+  container.append(instructions);
+
+
+  realFuckPile.forEach((Troll t) async {
+      CanvasElement c = await GameObject.instance.player.petInventory.drawPet(container, t);
+  });
 
 }
 

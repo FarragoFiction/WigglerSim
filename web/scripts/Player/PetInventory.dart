@@ -276,7 +276,10 @@ class PetInventory {
         }
     }
 
-    void fuckButton(Element container) {
+    void fuckButton(Element container, Troll p) {
+        if(window.localStorage.containsKey("FUCKPILE") && window.localStorage["FUCKPILE"].contains("${p.toJson()}")) {
+            return;
+        }
         ButtonElement button = new ButtonElement();
         ImageElement bucket = new ImageElement(src: "images/buckit.png");
         ImageElement turtle = new ImageElement(src: "images/turtle.png");
@@ -284,6 +287,24 @@ class PetInventory {
         button.append(bucket);
         button.append(turtle);
         button.append(tree);
+
+        button.onClick.listen((Event e) {
+            List<JSONObject> jsonArray = new List<JSONObject>();
+            if(window.localStorage.containsKey("FUCKPILE")) {
+                String idontevenKnow = window.localStorage["FUCKPILE"];
+                List<dynamic> what = jsonDecode(idontevenKnow);
+                //print("what json is $what");
+                for (dynamic d in what) {
+                    //print("dynamic json thing is  $d");
+                    JSONObject j = new JSONObject();
+                    j.json = d;
+                    jsonArray.add(j);
+                }
+            }
+            jsonArray.add(p.toJson());
+            window.localStorage["FUCKPILE"] = jsonArray.toString();
+            window.location.href = "/viewAlumni.html?talking=turtle";
+        });
 
         container.append(button);
     }
@@ -423,7 +444,7 @@ class PetInventory {
 
             CanvasElement c = await drawPet(subContainer, p);
             renameButton(nameElement,c,p);
-            fuckButton(nameElement);
+            fuckButton(nameElement,p);
 
             renderHairDressingButton(subContainer, p, c);
             renderClothesStylistButton(subContainer, p, c);
