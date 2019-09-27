@@ -73,7 +73,7 @@ Future<Null> showBreeding() async {
   if(realFuckPile.length < min) {
       instructions.text = "${instructions.text} You only have ${realFuckPile.length} selected. You need ${min -realFuckPile.length } more.";
   }else if(realFuckPile.length > max) {
-      instructions.text = "${instructions.text} You  have ${realFuckPile.length} selected, which is too many.";
+      instructions.text = "${instructions.text} You  have ${realFuckPile.length} selected, which is too many. You need to get rid of ${realFuckPile.length - max}.";
 
   }
 
@@ -82,7 +82,12 @@ Future<Null> showBreeding() async {
 
 
   realFuckPile.forEach((Troll t) async {
-      CanvasElement c = await GameObject.instance.player.petInventory.drawPet(container, t);
+      DivElement me = new DivElement()..style.display='inline-block';
+      CanvasElement c = await GameObject.instance.player.petInventory.drawPet(new DivElement(), t);
+      CanvasElement tiny = new CanvasElement(height: (t.textHeight/2).ceil(), width: (t.textWidth/2).ceil());
+      tiny.context2D.drawImageScaled(c,0,0, t.textWidth/2, t.textHeight/2);
+      me.append(tiny);
+      container.append(me);
   });
 
 }
