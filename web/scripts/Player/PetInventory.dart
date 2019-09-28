@@ -305,7 +305,7 @@ class PetInventory {
                 }
                 jsonArray.add(p.toJson());
                 window.localStorage[FUCKPILE] = jsonArray.toString();
-                window.location.href = "/viewAlumni.html?talking=turtle";
+                window.location.href = "viewAlumni.html?talking=turtle";
             });
         }else {
             button.classes.add("disabledButton");
