@@ -15,8 +15,8 @@ html, body {
 }
 
 .popup{
-    border: 3px solid #00164f;
-    background-color: #033476;
+    border: 3px solid #935b49;
+    background-color: #5d2c1c;
     padding: 25px;
     font-size: 18px;
     font-family: 'cabin', sans-serif;
@@ -24,7 +24,7 @@ html, body {
     box-shadow: 0px 3px 13px #000000;
     width: 400px;
     top: 75px;
-    color: #ccc4b5;
+    color: #935b49;
     left: 33%;
     top: 33%;
     border-radius: 13px;

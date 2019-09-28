@@ -9,6 +9,7 @@ import '../GameShit/GameObject.dart';
 import '../Pets/Egg.dart';
 import '../Pets/Pet.dart';
 import '../Pets/Stat.dart';
+import '../Pets/TreeBab.dart';
 import '../Pets/Troll.dart';
 import '../Player/ItemInventory.dart';
 import '../Player/PetInventory.dart';
@@ -96,7 +97,7 @@ Future<Null> showBreeding() async {
   container.append(instructions);
 
   if(realFuckPile.length >= min && realFuckPile.length <= max) {
-      ButtonElement fuck = new ButtonElement();
+      ButtonElement fuck = new ButtonElement()..style.display="block"..style.marginLeft="auto"..style.marginRight="auto";
       ImageElement bucket = new ImageElement(src: "images/buckit.png");
       ImageElement turtle = new ImageElement(src: "images/turtle.png");
       ImageElement tree = new ImageElement(src: "images/tree.png");
@@ -105,7 +106,7 @@ Future<Null> showBreeding() async {
       fuck.append(tree);
       container.append(fuck);
       fuck.onClick.listen((Event e) {
-          popEgg(realFuckPile);
+          popEgg(realFuckPile,lamiaMode);
           //window.location.href = "petInventory.html";
       });
   }
@@ -118,22 +119,34 @@ Future<Null> showBreeding() async {
 
 }
 
-void popEgg(List<Troll> realFuckPile) async {
+void popEgg(List<Troll> realFuckPile, bool lamiaMode) async {
    List<Doll> parents = new List<Doll>.from(realFuckPile.map((Troll t) => t.doll));
-  Doll doll = Doll.breedDolls(parents);
-  Egg egg = new Egg(doll);
-  egg.name = "Descendant Egg";
+  Doll adult = Doll.breedDolls(parents);
+  Doll grub;
+  Pet pet;
+  if(lamiaMode) {
+      grub = Doll.convertOneDollToAnother(adult, new HomestuckTreeBab());
+      pet = new TreeBab(grub);
+      pet.name = "Descendant Egg";
+  }else {
+      grub = Doll.convertOneDollToAnother(adult, new HomestuckGrubDoll());
+      pet = new Egg(grub);
+      pet.name = "Descendant Fruit";
+  }
   List<AIItem> items = new List<AIItem>();
   realFuckPile.forEach((Troll t) => items.addAll(ancestralItems(t)));
   AIItem item = new Random().pickFrom(items);
+  await item.pickVersion();
 
   GameObject.instance.player.itemInventory.addItem(item);
-  GameObject.instance.player.addPet(egg);
+  GameObject.instance.player.addPet(pet);
   GameObject.instance.save();
   DivElement popup = new DivElement()..classes.add("popup");
-  popup.text = "Egg and Ancestral Item Obtained!!!";
-  CanvasElement eggCanvas =  await egg.draw();
+  popup.text = "Descendant and Ancestral Item Obtained!!!";
+  CanvasElement eggCanvas =  await pet.draw();
   popup.append(eggCanvas);
+  DivElement label = new DivElement()..text = item.name;
+  popup.append(label);
   popup.append(item.imageElement);
   querySelector("#output").append(popup);
   //window.location.href = "petInventory.html";
