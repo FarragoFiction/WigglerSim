@@ -333,7 +333,7 @@ void addPet(CapsuleTIMEHOLE capsule) {
         DivElement text = new DivElement()..text = "Along with the potential rival for the throne, you recieve a Purple Aradia Doll. Attached is a note: 'SORRY TO CULL AND RUN. USE THIS IF YOU WANT TO KEEP HER FROM ASSASINATING YOUR EMPRESS. BE CAREFUL, IT WORKS ON ALL THE GRUBS YOU EXPOSE IT TO AT ONCE. IT WON'T KILL THEM BUT...' It's signed ${capsule.breederName}'s autoresponder. ";
         apologyDoll.append(text);
         output.append(apologyDoll);
-        GameObject.instance.player.itemInventory.addItem(ItemInventory.purpleAradia);
+        GameObject.instance.player.itemInventory.addItem(ItemInventory.purpleAradia,true);
     }
     GameObject.instance.addPet(capsule.pet);
 

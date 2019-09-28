@@ -257,9 +257,11 @@ class ItemInventory {
         if(json != null && json.isNotEmpty) loadFromJSON(json);
     }
 
-    void addItem(AIItem item) {
+    void addItem(AIItem item, bool free) {
         _myItems.add(item.copyItemForInventory());
-        GameObject.instance.player.caegers += -1 * item.cost;
+        if(!free) {
+            GameObject.instance.player.caegers += -1 * item.cost;
+        }
         GameObject.instance.save();
     }
 

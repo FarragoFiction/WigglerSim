@@ -289,7 +289,7 @@ class AIItem extends AIObject {
                             GameObject.instance.infoElement.text = "Too many items. Use some before getting any more.";
                             return;
                         }
-                        GameObject.instance.player.itemInventory.addItem(this);
+                        GameObject.instance.player.itemInventory.addItem(this,false);
                         GameObject.instance.infoElement.text = "Bought $name! Own: ${GameObject.instance.player.itemInventory.numberOf(this)}";
                     }else {
                         button.disabled;

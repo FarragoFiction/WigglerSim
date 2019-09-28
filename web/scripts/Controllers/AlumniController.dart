@@ -142,7 +142,7 @@ void popEgg(List<Troll> realFuckPile, bool lamiaMode) async {
   AIItem item = new Random().pickFrom(items);
   await item.pickVersion();
 
-  GameObject.instance.player.itemInventory.addItem(item);
+  GameObject.instance.player.itemInventory.addItem(item,true);
   GameObject.instance.player.addPet(pet);
   GameObject.instance.save();
   DivElement popup = new DivElement()..classes.add("popup");
