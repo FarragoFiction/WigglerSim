@@ -94,10 +94,13 @@ Future<Null> showBreeding() async {
 
   }
 
+  if(!GameObject.instance.player.petInventory.hasRoom) {
+      instructions.text = "By Emperial Decree: You have no more room for wigglers! Let the ones you have already grow up first! ${instructions.text}";
+  }
 
   container.append(instructions);
 
-  if(realFuckPile.length >= min && realFuckPile.length <= max) {
+  if(realFuckPile.length >= min && realFuckPile.length <= max && GameObject.instance.player.petInventory.hasRoom) {
       ButtonElement fuck = new ButtonElement()..style.display="block"..style.marginLeft="auto"..style.marginRight="auto";
       ImageElement bucket = new ImageElement(src: "images/buckit.png");
       ImageElement turtle = new ImageElement(src: "images/turtle.png");
