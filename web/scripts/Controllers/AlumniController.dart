@@ -134,7 +134,11 @@ void popEgg(List<Troll> realFuckPile, bool lamiaMode) async {
       pet.name = "Descendant Fruit";
   }
   List<AIItem> items = new List<AIItem>();
-  realFuckPile.forEach((Troll t) => items.addAll(ancestralItems(t)));
+  if(lamiaMode) {
+      realFuckPile.forEach((Troll t) => items.addAll(fruitItems(t)));
+  }else {
+      realFuckPile.forEach((Troll t) => items.addAll(ancestralItems(t)));
+  }
   AIItem item = new Random().pickFrom(items);
   await item.pickVersion();
 
@@ -149,7 +153,20 @@ void popEgg(List<Troll> realFuckPile, bool lamiaMode) async {
   popup.append(label);
   popup.append(item.imageElement);
   querySelector("#output").append(popup);
-  //window.location.href = "petInventory.html";
+  window.onClick.listen((Event e) {
+      window.location.href = "petInventory.html";
+   });
+
+}
+
+List<AIItem> fruitItems(Troll troll) {
+    List<AIItem> defaultItems = new List<AIItem>();
+    defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Fruit", "bigpumpkin.png")], energetic_value: 85));
+    defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Fruit", "LilPumpkin.png")], energetic_value: 85));
+    defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Plant", "pot_of_green.png")], energetic_value: 85));
+    defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Plant", "carrot.png")], energetic_value: 85));
+    defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Plant", "cabbage.png")], energetic_value: 85));
+    return defaultItems;
 }
 
 List<AIItem> ancestralItems(Troll troll) {
@@ -162,6 +179,7 @@ List<AIItem> ancestralItems(Troll troll) {
     }
     if(troll.isCurious) {
         defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Trophy", "HornTrophy.png")], energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs()), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
+        defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Trophy", "OscarTrophy.png")], energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs()), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
 
         defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Glow Bug", "flyfulamber.png")], energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs()), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
         defaultItems.add(new AIItem(118, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Honorable Tyranny Blood", "better_than_bleach.png")],curious_value: troll.curious.value, external_value: troll.external.value.abs(),loyal_value: troll.loyal.value.abs()));
