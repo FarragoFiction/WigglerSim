@@ -138,11 +138,11 @@ void popEgg(List<Troll> realFuckPile, bool lamiaMode) async {
   if(lamiaMode) {
       grub = Doll.convertOneDollToAnother(adult, new HomestuckTreeBab());
       pet = new TreeBab(grub);
-      pet.name = "Descendant Egg";
+      pet.name = "Descendant Fruit";
   }else {
       grub = Doll.convertOneDollToAnother(adult, new HomestuckGrubDoll());
       pet = new Egg(grub);
-      pet.name = "Descendant Fruit";
+      pet.name = "Descendant Egg";
   }
   List<AIItem> items = new List<AIItem>();
   if(lamiaMode) {
