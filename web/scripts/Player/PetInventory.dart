@@ -278,8 +278,9 @@ class PetInventory {
     }
 
     void fuckButton(Element container, Troll p) {
+        bool disabled = false;
         if(window.localStorage.containsKey(FUCKPILE) && window.localStorage[FUCKPILE].contains("${p.toJson()}")) {
-            return;
+            disabled = true;
         }
         ButtonElement button = new ButtonElement();
         ImageElement bucket = new ImageElement(src: "images/buckit.png");
@@ -288,24 +289,28 @@ class PetInventory {
         button.append(bucket);
         button.append(turtle);
         button.append(tree);
-
-        button.onClick.listen((Event e) {
-            List<JSONObject> jsonArray = new List<JSONObject>();
-            if(window.localStorage.containsKey(FUCKPILE)) {
-                String idontevenKnow = window.localStorage[FUCKPILE];
-                List<dynamic> what = jsonDecode(idontevenKnow);
-                //print("what json is $what");
-                for (dynamic d in what) {
-                    //print("dynamic json thing is  $d");
-                    JSONObject j = new JSONObject();
-                    j.json = d;
-                    jsonArray.add(j);
+        if(!disabled) {
+            button.onClick.listen((Event e) {
+                List<JSONObject> jsonArray = new List<JSONObject>();
+                if (window.localStorage.containsKey(FUCKPILE)) {
+                    String idontevenKnow = window.localStorage[FUCKPILE];
+                    List<dynamic> what = jsonDecode(idontevenKnow);
+                    //print("what json is $what");
+                    for (dynamic d in what) {
+                        //print("dynamic json thing is  $d");
+                        JSONObject j = new JSONObject();
+                        j.json = d;
+                        jsonArray.add(j);
+                    }
                 }
-            }
-            jsonArray.add(p.toJson());
-            window.localStorage[FUCKPILE] = jsonArray.toString();
-            window.location.href = "/viewAlumni.html?talking=turtle";
-        });
+                jsonArray.add(p.toJson());
+                window.localStorage[FUCKPILE] = jsonArray.toString();
+                window.location.href = "/viewAlumni.html?talking=turtle";
+            });
+        }else {
+            button.classes.add("disabledButton");
+        }
+
 
         container.append(button);
     }

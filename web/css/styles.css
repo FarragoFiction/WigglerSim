@@ -41,6 +41,18 @@ button{
     font-family: 'strife', sans-serif;
 }
 
+.disabledButton{
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);
+
+}
+
+button:active:hover{
+   filter: brightness(150%);
+ }
+
+
+
 .moneyFacts{
     padding: 10px;
 }
