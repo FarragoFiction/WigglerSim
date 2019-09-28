@@ -5,6 +5,7 @@ import 'package:CommonLib/Utility.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/AIItem.dart';
+import '../GameShit/Empress.dart';
 import '../GameShit/GameObject.dart';
 import '../Pets/Egg.dart';
 import '../Pets/Pet.dart';
@@ -101,11 +102,18 @@ Future<Null> showBreeding() async {
       ImageElement bucket = new ImageElement(src: "images/buckit.png");
       ImageElement turtle = new ImageElement(src: "images/turtle.png");
       ImageElement tree = new ImageElement(src: "images/tree.png");
+      int price = 0;
+      realFuckPile.forEach((Troll t) => price+= Empress.instance.priceOfTroll(t));
+      price = realFuckPile.isEmpty ? 0:(price/realFuckPile.length).ceil();
+      price = price.abs();
+      DivElement priceText = new DivElement()..text = "Cost $price";
       fuck.append(bucket);
       fuck.append(turtle);
       fuck.append(tree);
+      fuck.append(priceText);
       container.append(fuck);
       fuck.onClick.listen((Event e) {
+          GameObject.instance.player.caegers += -1 * price;
           popEgg(realFuckPile,lamiaMode);
           //window.location.href = "petInventory.html";
       });
