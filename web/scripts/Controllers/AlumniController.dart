@@ -1,11 +1,16 @@
 import 'dart:convert';
 import 'dart:html';
+import 'package:CommonLib/Random.dart';
 import 'package:CommonLib/Utility.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
+import '../GameShit/AIItem.dart';
 import '../GameShit/GameObject.dart';
+import '../Pets/Egg.dart';
 import '../Pets/Pet.dart';
+import '../Pets/Stat.dart';
 import '../Pets/Troll.dart';
+import '../Player/ItemInventory.dart';
 import '../Player/PetInventory.dart';
 import "navbar.dart";
 
@@ -42,6 +47,8 @@ Future<Null> main() async {
 
 Future<Null> showBreeding() async {
   Element container = new DivElement();
+  Element status = new DivElement();
+  container.append(status);
   //window.localStorage.remove(PetInventory.FUCKPILE);
   querySelector('#output').append(container);
   if(!window.localStorage.containsKey(PetInventory.FUCKPILE)) {
@@ -61,6 +68,7 @@ Future<Null> showBreeding() async {
       JSONObject j = new JSONObject();
       j.json = d;
       Troll troll = Pet.loadPetFromJSON("", j);
+      status.text = "loading: ${troll.name}";
       //if tehre is even one non lamia, its not lamia
       if(!(troll.doll is HomestuckLamiaDoll)) lamiaMode =false;
       realFuckPile.add(troll);
@@ -87,28 +95,101 @@ Future<Null> showBreeding() async {
 
   container.append(instructions);
 
+  if(realFuckPile.length >= min && realFuckPile.length <= max) {
+      ButtonElement fuck = new ButtonElement();
+      ImageElement bucket = new ImageElement(src: "images/buckit.png");
+      ImageElement turtle = new ImageElement(src: "images/turtle.png");
+      ImageElement tree = new ImageElement(src: "images/tree.png");
+      fuck.append(bucket);
+      fuck.append(turtle);
+      fuck.append(tree);
+      container.append(fuck);
+      fuck.onClick.listen((Event e) {
+          popEgg(realFuckPile);
+          //window.location.href = "petInventory.html";
+      });
+  }
+
 
   realFuckPile.forEach((Troll t) async {
-      displayBreeder(realFuckPile, t, container);
+      status.text = "displaying: ${t.name}";
+      displayBreeder(status, realFuckPile, t, container);
   });
 
 }
 
-void displayBreeder(List<Troll> realFuckPile, Troll t, Element container)  {
+void popEgg(List<Troll> realFuckPile) async {
+   List<Doll> parents = new List<Doll>.from(realFuckPile.map((Troll t) => t.doll));
+  Doll doll = Doll.breedDolls(parents);
+  Egg egg = new Egg(doll);
+  egg.name = "Descendant Egg";
+  List<AIItem> items = new List<AIItem>();
+  realFuckPile.forEach((Troll t) => items.addAll(ancestralItems(t)));
+  AIItem item = new Random().pickFrom(items);
+
+  GameObject.instance.player.itemInventory.addItem(item);
+  GameObject.instance.player.addPet(egg);
+  GameObject.instance.save();
+  DivElement popup = new DivElement()..classes.add("popup");
+  popup.text = "Egg and Ancestral Item Obtained!!!";
+  CanvasElement eggCanvas =  await egg.draw();
+  popup.append(eggCanvas);
+  popup.append(item.imageElement);
+  querySelector("#output").append(popup);
+  //window.location.href = "petInventory.html";
+}
+
+List<AIItem> ancestralItems(Troll troll) {
+    List<AIItem> defaultItems = new List<AIItem>();
+
+    if(troll.isPatient) {
+        defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Goldblood Doll", "GoldbloodDoll.png")],loyal_value: troll.loyal.value, energetic_value: -1*troll.energetic.value.abs()));
+        defaultItems.add(new AIItem(413, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Jadeblood Doll", "JadebloodDoll.png")],patience_value: troll.patience.value, energetic_value: -1*troll.energetic.value.abs()));
+
+    }
+    if(troll.isCurious) {
+        defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Trophy", "HornTrophy.png")], energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs()), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
+
+        defaultItems.add(new AIItem(114, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Glow Bug", "flyfulamber.png")], energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs()), loyal_value: troll.loyal.value, curious_value: troll.curious.value.abs()));
+        defaultItems.add(new AIItem(118, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Honorable Tyranny Blood", "better_than_bleach.png")],curious_value: troll.curious.value, external_value: troll.external.value.abs(),loyal_value: troll.loyal.value.abs()));
+
+        if(troll.curious.value > Stat.VERYFUCKINGHIGH) {
+            defaultItems.add(new AIItem(121, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Cosbytop", "Cosbytop.png")], curious_value: troll.curious.value,external_value: troll.external.value.abs()));
+            defaultItems.add(new AIItem(120, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral SCIENCE 3-DENT", "wiredent.png")],curious_value: troll.curious.value, idealistic_value: ItemInventory.makeNegative(troll.idealistic.value.abs())));
+            defaultItems.add(new AIItem(113, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Alien Specimen", "MisterTFetus.png")],curious_value: troll.curious.value, idealistic_value: ItemInventory.makeNegative(troll.idealistic.value.abs())));
+        }
+        if(troll.curious.value > Stat.HIGH) {
+            defaultItems.add(new AIItem(115, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral PCHOOOES", "pchoooes.png")], curious_value: troll.curious.value, patience_value:ItemInventory.makeNegative(troll.patience.value.abs()), energetic_value: troll.energetic.value.abs()));
+            defaultItems.add(new AIItem(119, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Husktop", "skaiatop.png")],curious_value: troll.curious.value, external_value: ItemInventory.makeNegative(troll.external.value.abs())));
+
+        }
+        if(troll.curious.value > Stat.MEDIUM) {
+            defaultItems.add(new AIItem(116, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Picture Box", "jpgcamera.png")],curious_value: troll.curious.value, patience_value: troll.patience.value, external_value: troll.external.value.abs()));
+            defaultItems.add(new AIItem(117, <ItemAppearance>[new ItemAppearance("${troll.name}'s Ancestral Zap Cube", "skaianbattery.png")],curious_value: troll.curious.value, energetic_value: ItemInventory.makeNegative(troll.energetic.value.abs())));
+        }
+    }
+    return defaultItems;
+}
+
+void displayBreeder(Element status, List<Troll> realFuckPile, Troll t, Element container)  {
   DivElement me = new DivElement()..style.display='inline-block'..style.height="100px";
   container.append(me);
 
   me.onClick.listen((Event e) {
       removeFromFuckPile(realFuckPile, t);
   });
-  asyncRender(t, me);
+  status.text = "rendering: ${t.name}";
+  CanvasElement tiny = new CanvasElement(height: (t.textHeight/2).ceil(), width: (t.textWidth/2).ceil());
+  me.append(tiny);
+
+  asyncRender(status, t, tiny);
 }
 
-Future asyncRender(Troll t, DivElement me) async {
+Future asyncRender(Element status , Troll t, CanvasElement me) async {
   CanvasElement c = await GameObject.instance.player.petInventory.drawPet(new DivElement(), t);
-  CanvasElement tiny = new CanvasElement(height: (t.textHeight/2).ceil(), width: (t.textWidth/2).ceil());
-  tiny.context2D.drawImageScaled(c,0,0, t.textWidth/2, t.textHeight/2);
-  me.append(tiny);
+  me.context2D.drawImageScaled(c,0,0, t.textWidth/2, t.textHeight/2);
+  status.text = "drawing: ${t.name}";
+
 }
 
 void removeFromFuckPile(List<Troll> realFuckPile, Troll t) {
