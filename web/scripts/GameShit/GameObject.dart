@@ -25,7 +25,7 @@ class GameObject {
     Element infoElement;
     AudioElement bgMusic = new AudioElement()..autoplay = false;
 
-    int chosenBGIndex = 4;
+    int chosenBGIndex = 0;
     String get chosenBG => "images/Backgrounds/${indexToBG(chosenBGIndex)}";
     String indexToBG(int index) => "${potentialBGs[index]}";
 
