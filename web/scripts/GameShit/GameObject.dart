@@ -25,10 +25,12 @@ class GameObject {
     Element infoElement;
     AudioElement bgMusic = new AudioElement()..autoplay = false;
 
-    int chosenBGIndex = 0;
-    String get chosenBG => "images/Backgrounds/${potentialBGs[chosenBGIndex]}";
+    int chosenBGIndex = 4;
+    String get chosenBG => "images/Backgrounds/${indexToBG(chosenBGIndex)}";
+    String indexToBG(int index) => "${potentialBGs[index]}";
 
-    List<String> potentialBGs = <String>["BroodingCaverns.png","PlaypenBackground.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png"];
+
+    List<String> potentialBGs = <String>["BroodingCaverns.png","BirdBG.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png"];
 
     List<int> get unlockedBGIndices {
         List<int> ret = <int>[0,1,2];

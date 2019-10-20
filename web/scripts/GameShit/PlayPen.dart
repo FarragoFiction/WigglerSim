@@ -43,6 +43,7 @@ class PlayPen {
                 GameObject.instance.playMusic("Wiggling_Time");
             }
         });
+        backgroundChooser(divForCanvas);
         setBackground(divForCanvas);
         divForCanvas.append(canvas);
         loadPets(potentialGrubs);
@@ -87,12 +88,28 @@ class PlayPen {
     }
 
     //set the bg to the div so that the canvas can just clear itself instead of redrawing pixels
-    Future<Null> setBackground(divForCanvas) async{
+    Future<Null> setBackground(Element divForCanvas) async{
         String backgroundImage = GameObject.instance.chosenBG;
         ImageElement image = await Loader.getResource((backgroundImage));
        // print("background image is $backgroundImage");
         divForCanvas.style.backgroundImage = "url(${image.src})";
+    }
 
+    void backgroundChooser(Element divForCanvas) {
+        SelectElement select = new SelectElement();
+        List<int> bgs = GameObject.instance.unlockedBGIndices;
+        for(int index in bgs) {
+            OptionElement option = new OptionElement(value: "$index")..text = GameObject.instance.indexToBG(index);
+            select.append(option);
+            if(GameObject.instance.chosenBGIndex == index) option.selected = true;
+        }
+        select.onChange.listen((Event e) {
+            GameObject.instance.chosenBGIndex = int.parse(select.selectedOptions[0].value);
+            GameObject.instance.save();
+            setBackground(divForCanvas);
+        });
+
+        divForCanvas.parent.append(select);
     }
 
     //passes the current state of the world to every pet in it so they can make decisions

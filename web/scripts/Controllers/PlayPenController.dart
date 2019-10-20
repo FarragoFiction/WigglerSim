@@ -38,9 +38,10 @@ Future<Null> start() async {
     await game.preloadManifest();
     DivElement container = new DivElement();
     querySelector("#output").append(container);
+
+    game.playPen = new PlayPen(container, game.player.petInventory.pets);
     DivElement shop = new DivElement();
     querySelector("#output").append(shop);
-    game.playPen = new PlayPen(container, game.player.petInventory.pets);
     game.drawItemInventory(shop);
     drawLoop();
 }

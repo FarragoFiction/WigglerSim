@@ -1,6 +1,7 @@
 //a player has an inventory.
 // a player has a doll.
 //a player has a graduatesList.
+import '../GameShit/GameObject.dart';
 import '../Pets/Pet.dart';
 import 'package:CommonLib/Random.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
@@ -17,6 +18,7 @@ import 'package:RenderingLib/src/Rendering/Renderer.dart';
 class Player {
     static String DATASTRING = "dataString";
     static String LASTPLAYED = "lastPlayed";
+    static String BGINDEX = "bgIndex";
     static String LASTALLOWENCE = "lastAllowence";
     static String MONEYJSON = "caegers";
     static String DOLLSAVEID = "WigglerCaretaker";
@@ -73,6 +75,11 @@ class Player {
         if(jsonObj[LASTALLOWENCE] != null) {
             String lastAllowenceString = jsonObj[LASTALLOWENCE];
             lastGotAllowence = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastAllowenceString));
+        }
+
+        if(jsonObj[BGINDEX] != null) {
+            String bgIndexString = jsonObj[BGINDEX];
+            GameObject.instance.chosenBGIndex = int.parse(bgIndexString);
         }
 
         if(jsonObj[MONEYJSON] != null) {
@@ -336,6 +343,7 @@ class Player {
         JSONObject json = new JSONObject();
         json[DATASTRING] = doll.toDataBytesX();
         json[NAMEKEY] = name;
+        json[BGINDEX] = "${GameObject.instance.chosenBGIndex}";
         json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
         json[PETINVENTORY] = petInventory.toJson().toString();
         json[ITEMINVENTORY] = itemInventory.toJson().toString();
