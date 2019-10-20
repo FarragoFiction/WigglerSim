@@ -30,13 +30,15 @@ class GameObject {
     String indexToBG(int index) => "${potentialBGs[index]}";
 
 
-    List<String> potentialBGs = <String>["BroodingCaverns.png","BirdBG.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png"];
+    List<String> potentialBGs = <String>["BroodingCaverns.png","BirdBG.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png","BronzePlaypen.png"];
 
     List<int> get unlockedBGIndices {
         List<int> ret = <int>[0,1,2];
         List<String> completedCastes = Sign.completedCastes;
         if(completedCastes.contains(HomestuckTrollDoll.BURGUNDY)) ret.add(3);
         if(completedCastes.contains(HomestuckTrollDoll.VIOLET)) ret.add(4);
+        if(completedCastes.contains(HomestuckTrollDoll.VIOLET)) ret.add(5);
+
         return ret;
     }
 
