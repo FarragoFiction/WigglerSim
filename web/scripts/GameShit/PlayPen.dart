@@ -36,7 +36,6 @@ class PlayPen {
 
     CanvasElement canvas = new CanvasElement(width: 1000, height: 400);
 
-    String backgroundImage = "images/PlaypenBackground.png";
 
     PlayPen(Element divForCanvas, List<Pet> potentialGrubs) {
         window.onMouseMove.listen((Event e){
@@ -89,6 +88,7 @@ class PlayPen {
 
     //set the bg to the div so that the canvas can just clear itself instead of redrawing pixels
     Future<Null> setBackground(divForCanvas) async{
+        String backgroundImage = GameObject.instance.chosenBG;
         ImageElement image = await Loader.getResource((backgroundImage));
        // print("background image is $backgroundImage");
         divForCanvas.style.backgroundImage = "url(${image.src})";

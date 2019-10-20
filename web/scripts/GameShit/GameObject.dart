@@ -25,6 +25,18 @@ class GameObject {
     Element infoElement;
     AudioElement bgMusic = new AudioElement()..autoplay = false;
 
+    int chosenBGIndex = 0;
+    String get chosenBG => "images/Backgrounds/${potentialBGs[chosenBGIndex]}";
+
+    List<String> potentialBGs = <String>["BroodingCaverns.png","PlaypenBackground.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png"];
+
+    List<int> get unlockedBGIndices {
+        List<int> ret = <int>[0,1,2];
+        List<String> completedCastes = Sign.completedCastes;
+        if(completedCastes.contains(HomestuckTrollDoll.BURGUNDY)) ret.add(3);
+        if(completedCastes.contains(HomestuckTrollDoll.VIOLET)) ret.add(4);
+        return ret;
+    }
 
     GameObject(bool redirect) {
         window.onError.listen((e) {
