@@ -37,7 +37,7 @@ class GameObject {
         List<String> completedCastes = Sign.completedCastes;
         if(completedCastes.contains(HomestuckTrollDoll.BURGUNDY)) ret.add(3);
         if(completedCastes.contains(HomestuckTrollDoll.VIOLET)) ret.add(4);
-        if(completedCastes.contains(HomestuckTrollDoll.VIOLET)) ret.add(5);
+        if(completedCastes.contains(HomestuckTrollDoll.BRONZE)) ret.add(5);
 
         return ret;
     }
