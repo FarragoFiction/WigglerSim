@@ -1,5 +1,5 @@
 <div class = "banner" style = "position:relative;">
-<div style='color:white'>10/8/19: 20 recently uploaded alumni bodies from DollSim have been replaced, as they were uploaded by someone who did not own them.</div>
+<div style='color:white'>12/5/19:  <img src = "images/corrupt.png">Nidhogg cherishes those who spread corruption.</div>
 <a target = "blank" style= "position:absolute; bottom:0px; left:200px;" href = 'http://farragnarok.com/lohaecoinraffle.html'><img src = 'images/coin_link.png'></a>
 
 </div>
@@ -37,7 +37,7 @@
                 <a href = 'http://farragofiction.com/FridgeSim/?WigglerSim=true'>FanArt</a>
             </li>
   <li class = "menuButtonPureCSS"><a href="https://discord.gg/KPunMPc">DISCORD</a></li>
-  <li class = "menuButtonPureCSS"><a href="http://www.patreon.com/FarragoFiction">SUPPORT</a></li>
+  <li class = "menuButtonPureCSS"><a href="http://www.patreon.com/FarragoFiction">DONATE</a></li>
 
   </span>
 </ul>
