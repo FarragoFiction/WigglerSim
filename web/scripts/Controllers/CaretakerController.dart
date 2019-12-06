@@ -106,11 +106,11 @@ void scoreboardentry(String sort, Element div, dynamic j, int rank) {
     TableCellElement td3 = new TableCellElement()..classes.add("scoreEntry");
     String name = j["name"];
     print("j is ${j} so corruption source is ${j["corruption_source"]}");
-    if(j["corruption_source"] == true) {
-        name = "👁️‍🗨️$name";
-    }
-    AnchorElement a = new AnchorElement(href: "caretaker.html?id=${j["id"]}")..text = name;
 
+    AnchorElement a = new AnchorElement(href: "caretaker.html?id=${j["id"]}")..text = name;
+    if(j["corruption_source"] == true) {
+        td1.append(new ImageElement(src: "images/corrupt.png"));
+    }
     DivElement rankElement = new DivElement()..text = "$rank";
     DivElement valueElement = new DivElement()..text = "${j[sort]}";
 
@@ -198,9 +198,9 @@ void displayCaretaker(var caretakerJSON) async {
     String corruption = "";
 
     if(caretakerJSON["corruption_source"] == true) {
-        corruption = "👁️‍🗨️ 1 don't th1nk you thought that through v3ry w311. Corrupt grubs are NOT c13ared to br3ak quarant1n3. 1 don't car3 1f 1ts 't3chn1ca11y 13ga1'. 1ts just a bad 1d3a.";
+        corruption = "<img src = 'images/corrupt.png'> 1 don't th1nk you thought that through v3ry w311. Corrupt grubs are NOT c13ared to br3ak quarant1n3. 1 don't car3 1f 1ts 't3chn1ca11y 13ga1'. 1ts just a bad 1d3a.";
     }
-    DivElement judgeDiv = new DivElement()..classes.add("boiPoints")..text = "Jibade Judgement: ${judgement(gbp-bbp)} $corruption";
+    DivElement judgeDiv = new DivElement()..classes.add("boiPoints")..setInnerHtml("Jibade Judgement: ${judgement(gbp-bbp)} $corruption");
 
     Doll doll = Doll.loadSpecificDoll(caretakerJSON["doll"]);
     CanvasElement dollCanvas = await doll.getNewCanvas();
