@@ -21,7 +21,7 @@ import 'package:DollLibCorrect/src/Dolls/KidBased/HomestuckGrubDoll.dart';
 import 'package:DollLibCorrect/src/Rendering/ReferenceColors.dart';
 import 'package:RenderingLib/RendereringLib.dart';
 
-
+//👁️‍🗨️
 DivElement output = querySelector("#output");
 String website = "https://plaguedoctors.herokuapp.com";
 //String website = "http://localhost:3000";
@@ -104,8 +104,12 @@ void scoreboardentry(String sort, Element div, dynamic j, int rank) {
     TableCellElement td1 = new TableCellElement()..classes.add("scoreEntry");
     TableCellElement td2 = new TableCellElement()..classes.add("scoreEntry");
     TableCellElement td3 = new TableCellElement()..classes.add("scoreEntry");
-
-    AnchorElement a = new AnchorElement(href: "caretaker.html?id=${j["id"]}")..text = j["name"];
+    String name = j["name"];
+    print("j is ${j} so corruption source is ${j["corruption_source"]}");
+    if(j["corruption_source"] == true) {
+        name = "👁️‍🗨️$name";
+    }
+    AnchorElement a = new AnchorElement(href: "caretaker.html?id=${j["id"]}")..text = name;
 
     DivElement rankElement = new DivElement()..text = "$rank";
     DivElement valueElement = new DivElement()..text = "${j[sort]}";
@@ -191,7 +195,12 @@ void displayCaretaker(var caretakerJSON) async {
     DivElement gb = new DivElement()..classes.add("boiPoints")..text = "Good Boi Points: ${gbp}";
     int bbp = caretakerJSON["bad_boi_points"];
     DivElement bb = new DivElement()..classes.add("boiPoints")..text = "Bad Boi Points: ${bbp}";
-    DivElement judgeDiv = new DivElement()..classes.add("boiPoints")..text = "Jibade Judgement: ${judgement(gbp-bbp)}";
+    String corruption = "";
+
+    if(caretakerJSON["corruption_source"] == true) {
+        corruption = "👁️‍🗨️ 1 don't th1nk you thought that through v3ry w311. Corrupt grubs are NOT c13ared to br3ak quarant1n3. 1 don't car3 1f 1ts 't3chn1ca11y 13ga1'. 1ts just a bad 1d3a.";
+    }
+    DivElement judgeDiv = new DivElement()..classes.add("boiPoints")..text = "Jibade Judgement: ${judgement(gbp-bbp)} $corruption";
 
     Doll doll = Doll.loadSpecificDoll(caretakerJSON["doll"]);
     CanvasElement dollCanvas = await doll.getNewCanvas();
