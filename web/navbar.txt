@@ -36,7 +36,7 @@
                 <a href="http://wigglersim.wikia.com/wiki/WigglerSim_Wiki">Wiki</a>
                 <a href = 'http://farragofiction.com/FridgeSim/?WigglerSim=true'>FanArt</a>
             </li>
-  <li class = "menuButtonPureCSS"><a href="https://discord.gg/KPunMPc">DISCORD</a></li>
+  <li class = "menuButtonPureCSS"><a href="https://discord.gg/N5WEdC8">DISCORD</a></li>
   <li class = "menuButtonPureCSS"><a href="http://www.patreon.com/FarragoFiction">DONATE</a></li>
 
   </span>
