@@ -16,7 +16,8 @@ void main() {
     GameObject.storeCard("N4Igzg9grgTgxgUxALhAdQJYHMsBsEwDKGAtgAQCyCALghDGCADQgB2AhiUqgOI1kBhKLnwATZiFoAPaihAAxemTgxSCMGXZZ2GVmGplqACwRkAoiQAOGGAiZkyEAO6sCCDlxhkMGuMLEAdBIARuxwANZYMNCsogBynNwgfNQ8MFDBwQiiAEIY1HBGAZasWBLUqjgEAkbsrIhyAAwBAKwSYIiuYAAqEACqrLgQEXIA2gC6ErZgwtRghNTsc2PAADpsievI6wAyAJLyZoQAgn0CZutM6wBu7LhQCFvrALQAjI3rAL6TLBXYWAQFkswDt1GACGMfpJKgCiIs5mkEEsIahRmsNlwniAcjtjoQAAoACTMFAA8gANACalxudweWIAbAAOL5Qv5VOHAswARygd0hIE+QA");
 }
 
-void testWrite() {
+Future<void> testWrite() async {
+    await Doll.loadFileData();
     print("hey, i'm going to test writing to json");
     Doll doll = new HomestuckGrubDoll(HomestuckTrollDoll.randomBurgundySign);
     print("hey, i made a doll");

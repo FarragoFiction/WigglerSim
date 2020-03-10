@@ -567,7 +567,7 @@ abstract class Pet {
 
 
     Map<String, dynamic> toJSON(){
-        Map<String, dynamic> json = new Map<dynamic, dynamic>();
+        Map<String, dynamic> json = new Map<String, dynamic>();
         int nameLength = Math.max(0,Math.min(name.length,113));
         doll.dollName = name.substring(0,nameLength); //no bee movie
         json[LASTPLAYED] =  lastPlayed.millisecondsSinceEpoch;
