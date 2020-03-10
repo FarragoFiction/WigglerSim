@@ -158,7 +158,7 @@ class GameObject {
     }
 
     Future<Null> preloadManifest() async {
-        await Loader.loadManifest();
+        // pl changed this await Loader.loadManifest();
         print ("loader returned");
         return;
     }
