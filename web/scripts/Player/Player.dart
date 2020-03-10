@@ -14,7 +14,6 @@ import 'dart:convert';
 import "../Pets/Sign.dart";
 import "../GameShit/Empress.dart";
 import 'package:RenderingLib/src/Rendering/Renderer.dart';
-
 class Player {
     static String DATASTRING = "dataString";
     static String LASTPLAYED = "lastPlayed";
@@ -317,7 +316,7 @@ class Player {
 
     //TODO convert self to json (including pet inventory) to save in this localStorage
     void save() {
-        String json = toJson().toString();
+        String json = toJSON().toString();
         //print("saving player ${json}. Pet inventory has ${petInventory.pets.length} in it.");
         window.localStorage[DOLLSAVEID] = json;
     }
@@ -337,18 +336,18 @@ class Player {
         return canvas;
     }
 
-    JSONObject toJson() {
+    Map<String, dynamic> toJSON(){
+        print("player to json");
+        Map<String, dynamic> ret = new Map<String, dynamic>();
         doll.dollName = name;
-        lastPlayed = new DateTime.now();
-        JSONObject json = new JSONObject();
-        json[DATASTRING] = doll.toDataBytesX();
-        json[NAMEKEY] = name;
-        json[BGINDEX] = "${GameObject.instance.chosenBGIndex}";
-        json[LASTPLAYED] = "${lastPlayed.millisecondsSinceEpoch}";
-        json[PETINVENTORY] = petInventory.toJson().toString();
-        json[ITEMINVENTORY] = itemInventory.toJson().toString();
-        json[MONEYJSON] = "$caegers";
-        if(lastGotAllowence != null) json[LASTALLOWENCE] = "${lastGotAllowence.millisecondsSinceEpoch}";
-        return json;
+        ret[DATASTRING] = doll.toDataBytesX();
+        ret[NAMEKEY] = name;
+        ret[BGINDEX] = GameObject.instance.chosenBGIndex;
+        ret[LASTPLAYED] = lastPlayed.millisecondsSinceEpoch;
+        ret[PETINVENTORY] = petInventory.toJSON();
+        ret[ITEMINVENTORY] = itemInventory.toJSON();
+        ret[MONEYJSON] = "$caegers";
+        if(lastGotAllowence != null) ret[LASTALLOWENCE] = {lastGotAllowence.millisecondsSinceEpoch};
+        return ret;
     }
 }

@@ -191,22 +191,22 @@ class AIItem extends AIObject {
         imageElement = imageElement.clone(false);
     }
 
-    JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json[ID] = "${id}";
-        json[PATIENCE] = "${patience.roundedCappedStat}";
-        json[IDEALISTIC] = "${idealistic.roundedCappedStat}";
-        json[CURIOUS] = "${curious.roundedCappedStat}";
-        json[LOYAL] = "${loyal.roundedCappedStat}";
-        json[ENERGETIC] = "${energetic.roundedCappedStat}";
-        json[EXTERNAL] = "${external.roundedCappedStat}";
+    Map<String, dynamic> toJSON() {
+        Map<String, dynamic> json = new  Map<String, dynamic>();
+        json[ID] = id;
+        json[PATIENCE] = patience.roundedCappedStat;
+        json[IDEALISTIC] = idealistic.roundedCappedStat;
+        json[CURIOUS] = curious.roundedCappedStat;
+        json[LOYAL] = loyal.roundedCappedStat;
+        json[ENERGETIC] = energetic.roundedCappedStat;
+        json[EXTERNAL] = external.roundedCappedStat;
 
         List<JSONObject> jsonArray = new List<JSONObject>();
         for(ItemAppearance p in itemTypes) {
             // print("Saving ${p.name}");
-            jsonArray.add(p.toJson());
+            jsonArray.add(p.toJSON());
         }
-        json[ITEMAPPERANCES] = jsonArray.toString(); //will this work?
+        json[ITEMAPPERANCES] = jsonArray;
 
 
         return json;
@@ -367,10 +367,10 @@ class ItemAppearance {
         imageLocation = jsonObj[IMAGELOCJSON];
     }
 
-    JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json[IMAGELOCJSON] = "${imageLocation}";
-        json[NAMEJSON] = "${name}";
+    Map<String, dynamic> toJSON() {
+        Map<String, dynamic> json = new  Map<String, dynamic>();
+        json[IMAGELOCJSON] = imageLocation;
+        json[NAMEJSON] = name;
         return json;
     }
 }

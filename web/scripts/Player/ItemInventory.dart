@@ -297,14 +297,14 @@ class ItemInventory {
 
     }
 
-    JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        List<JSONObject> jsonArray = new List<JSONObject>();
+    Map<String, dynamic> toJSON() {
+        Map<String, dynamic> json = new  Map<String, dynamic>();
+        List< Map<String, dynamic>> jsonArray = new List< Map<String, dynamic>>();
         for(AIItem p in _myItems) {
             // print("Saving ${p.name}");
-            jsonArray.add(p.toJson());
+            jsonArray.add(p.toJSON());
         }
-        json[ITEMLIST] = jsonArray.toString(); //will this work?
+        json[ITEMLIST] = jsonArray;
        // print("item inventory json is: ${json} and items are ${_myItems.length}");
         return json;
     }

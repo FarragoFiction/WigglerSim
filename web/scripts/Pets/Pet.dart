@@ -566,35 +566,31 @@ abstract class Pet {
     }
 
 
-    JSONObject toJson() {
+    Map<String, dynamic> toJSON(){
+        Map<String, dynamic> json = new Map<dynamic, dynamic>();
         int nameLength = Math.max(0,Math.min(name.length,113));
         doll.dollName = name.substring(0,nameLength); //no bee movie
-        JSONObject json = new JSONObject();
-        json[LASTPLAYED] =  "${lastPlayed.millisecondsSinceEpoch}";
-        json[ISEMPRESS] = empress.toString();
-        json[HATCHDATE] =  "${hatchDate.millisecondsSinceEpoch}";
-        json[LASTFED] =  "${lastFed.millisecondsSinceEpoch}";
+        json[LASTPLAYED] =  lastPlayed.millisecondsSinceEpoch;
+        json[ISEMPRESS] = empress;
+        json[HATCHDATE] =  hatchDate.millisecondsSinceEpoch;
+        json[LASTFED] =  lastFed.millisecondsSinceEpoch;
         json[DOLLDATAURL] = doll.toDataBytesX();
-        json[BOREDOMEJSON] =  "${boredom}";
-        json[NAMEJSON] =  "${name.substring(0,nameLength)}";
-        json[HEALTHJSON] =  "${health}";
+        json[BOREDOMEJSON] = boredom;
+        json[NAMEJSON] =  name.substring(0,nameLength);
+        json[HEALTHJSON] =  health;
         json[TYPE] = type;
-        json["corrupt"] = corrupt.toString();
-        json["purified"] = purified.toString();
+        json["corrupt"] = corrupt;
+        json["purified"] = purified;
 
-        json[PATIENCE] = "${patience.roundedCappedStat}";
-        json[IDEALISTIC] = "${idealistic.roundedCappedStat}";
-        json[CURIOUS] = "${curious.roundedCappedStat}";
-        json[LOYAL] = "${loyal.roundedCappedStat}";
-        json[ENERGETIC] = "${energetic.roundedCappedStat}";
-        json[EXTERNAL] = "${external.roundedCappedStat}";
-        json[REMEMBEREDITEMS] = itemsRemembered.toString();
-        json[REMEMBEREDNAMES] = namesRemembered.toString();
-        json[REMEMBEREDCASTES] = castesRemembered.toString();
-
-        // if(itemsRemembered.isNotEmpty) print(" saving $name, items remembered is $itemsRemembered and json is ${json[REMEMBEREDITEMS]} ");
-
-
+        json[PATIENCE] = patience.roundedCappedStat;
+        json[IDEALISTIC] = idealistic.roundedCappedStat;
+        json[CURIOUS] = curious.roundedCappedStat;
+        json[LOYAL] = loyal.roundedCappedStat;
+        json[ENERGETIC] = energetic.roundedCappedStat;
+        json[EXTERNAL] = external.roundedCappedStat;
+        json[REMEMBEREDITEMS] = itemsRemembered;
+        json[REMEMBEREDNAMES] = namesRemembered;
+        json[REMEMBEREDCASTES] = castesRemembered;
         return json;
     }
 
