@@ -3,6 +3,7 @@ import 'package:CommonLib/Compression.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
 import 'dart:async';
 import '../GameShit/GameObject.dart';
+import '../Pets/Egg.dart';
 import "../Player/Player.dart";
 import "navbar.dart";
 
@@ -17,6 +18,12 @@ void main() {
 
 void testWrite() {
     print("hey, i'm going to test writing to json");
+    Doll doll = new HomestuckGrubDoll(HomestuckTrollDoll.randomBurgundySign);
+    print("hey, i made a doll");
+    Egg egg = new Egg(doll);
+    print ("hey i made and egg");
+    print(egg.toJSON());
+
     print(GameObject.instance.player.toJSON());
 }
 
