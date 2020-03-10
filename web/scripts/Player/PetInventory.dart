@@ -279,7 +279,7 @@ class PetInventory {
 
     void fuckButton(Element container, Troll p) {
         bool disabled = false;
-        if(window.localStorage.containsKey(FUCKPILE) && window.localStorage[FUCKPILE].contains("${p.toJSON()}")) {
+        if(window.localStorage.containsKey(FUCKPILE) && window.localStorage[FUCKPILE].contains("${p.toJson()}")) {
             disabled = true;
         }
         ButtonElement button = new ButtonElement();
@@ -291,7 +291,7 @@ class PetInventory {
         button.append(tree);
         if(!disabled) {
             button.onClick.listen((Event e) {
-                List<Map<String, dynamic>> jsonArray = new List<Map<String, dynamic>>();
+                List<JSONObject> jsonArray = new List<JSONObject>();
                 if (window.localStorage.containsKey(FUCKPILE)) {
                     String idontevenKnow = window.localStorage[FUCKPILE];
                     List<dynamic> what = jsonDecode(idontevenKnow);
@@ -303,7 +303,7 @@ class PetInventory {
                         jsonArray.add(j);
                     }
                 }
-                jsonArray.add(p.toJSON());
+                jsonArray.add(p.toJson());
                 window.localStorage[FUCKPILE] = jsonArray.toString();
                 window.location.href = "viewAlumni.html?talking=turtle";
             });
@@ -421,7 +421,7 @@ class PetInventory {
             container.append(button);
             //TODO store this troll in a special data slot
             button.onClick.listen((Event e) {
-                window.localStorage["SELECTEDALUMNI"] = troll.toJSON().toString();
+                window.localStorage["SELECTEDALUMNI"] = troll.toJson().toString();
                 //window.location.href = "../LifeSim/alumniLife.html";
                 window.open("../LifeSim/alumniLife.html", "_blank");
             });
@@ -617,21 +617,26 @@ class PetInventory {
 
     }
 
-    Map<String, dynamic> toJSON() {
-        Map<String, dynamic> ret = new Map<String, dynamic>();
-        if(rulingEmpress != null) ret[EMPRESS] = rulingEmpress.troll.toJSON();
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        List<JSONObject> jsonArray = new List<JSONObject>();
+        for(Pet p in pets) {
+           // print("Saving ${p.name}");
+            jsonArray.add(p.toJson());
+        }
+        json[PETSLIST] = jsonArray.toString(); //will this work?
+        if(rulingEmpress != null) json[EMPRESS] = rulingEmpress.troll.toJson().toString();
 
-        List<Map<String, dynamic>> alumniJSON = new List<Map<String,dynamic>>();
-        alumni.forEach((Troll troll)=> alumniJSON.add(troll.toJSON()));
-        ret[ALUMNI] = alumniJSON;
+        jsonArray = new List<JSONObject>();
+        for(Troll p in alumni) {
+            //print("Saving ${p.name}");
+            jsonArray.add(p.toJson());
+        }
+        json[ALUMNI] = jsonArray.toString(); //will this work?
 
-        List<Map<String, dynamic>> petJSON = new List<Map<String,dynamic>>();
-        pets.forEach((Pet pet)=> petJSON.add(pet.toJSON()));
-        print("hey pet json is $petJSON");
-        ret[PETSLIST] = petJSON;
-        return ret;
+        //print("pet inventory json is: ${json} and pets are ${pets.length}");
+        return json;
     }
-
 
     void renderHairDressingButton(Element subcontainer,Pet p, CanvasElement canvas) {
 

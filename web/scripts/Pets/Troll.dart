@@ -406,8 +406,8 @@ class Troll extends Pet{
     }
 
     @override
-    Map<String, dynamic> toJSON(){
-        Map<String, dynamic>json  = super.toJSON();
+    JSONObject toJson() {
+        JSONObject json = super.toJson();
         json[EPILOGUE] = epilogue;
         return json;
     }

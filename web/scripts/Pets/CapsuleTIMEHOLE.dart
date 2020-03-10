@@ -33,9 +33,9 @@ class CapsuleTIMEHOLE {
         return data;
     }
 
-    Map<String, dynamic>  toJson() {
-        Map<String, dynamic>  json = new Map<String, dynamic> ();
-        json["pet"] = pet.toJSON();
+    JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json["pet"] = pet.toJson().toString();
         int nameLength = Math.max(0,Math.min(breederName.length,113));
         json["breeder"] = breederName.substring(0,nameLength);
         return json;

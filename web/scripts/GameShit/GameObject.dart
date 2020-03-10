@@ -301,7 +301,7 @@ class GameObject {
     }
 
     void writeSaveBackup(Element container) {
-        String saveData =  player.toJSON().toString();
+        String saveData =  player.toJson().toString();
         DivElement linkContainer = new DivElement();
         linkContainer.style.padding = "10px";
         AnchorElement saveLink = new AnchorElement();

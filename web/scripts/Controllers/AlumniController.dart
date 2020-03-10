@@ -237,7 +237,7 @@ Future asyncRender(Element status , Troll t, CanvasElement me) async {
 void removeFromFuckPile(List<Troll> realFuckPile, Troll t) {
   realFuckPile.remove(t);
   List<JSONObject> jsonArray = new List<JSONObject>();
-  realFuckPile.forEach((Troll t) =>jsonArray.add(t.toJSON()));
+  realFuckPile.forEach((Troll t) =>jsonArray.add(t.toJson()));
   window.localStorage[PetInventory.FUCKPILE] = jsonArray.toString();
   window.location.href = window.location.href;
 }
