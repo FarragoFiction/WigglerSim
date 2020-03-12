@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 import 'package:CommonLib/Compression.dart';
 import 'package:DollLibCorrect/DollRenderer.dart';
@@ -22,10 +23,15 @@ Future<void> testWrite() async {
     Doll doll = new HomestuckGrubDoll(HomestuckTrollDoll.randomBurgundySign);
     print("hey, i made a doll");
     Egg egg = new Egg(doll);
-    print ("hey i made and egg");
-    String json = egg.toJSON().toString();
-    //TODO try to load an egg from json
-
+    print ("hey i made and egg ${egg.toJSON()}");
+    print(egg.toJSON());
+    String json = jsonEncode(egg.toJSON());
+    print("the json to string was $json");
+    print("decoded, its ${jsonDecode(json)}");
+    Egg eggLoad = Egg.fromJSON(jsonDecode(json));
+    print("hey i loaded that egg ${eggLoad.toJSON()}");
+    //TODO uh, if json decode fails for save data, then use the old systems which i accidentally destroyed. cool.
+    //todo will need to readd them.
     print(GameObject.instance.player.toJSON());
 }
 

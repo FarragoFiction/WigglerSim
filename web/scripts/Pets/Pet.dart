@@ -541,9 +541,9 @@ abstract class Pet {
         }
         name = json[NAMEJSON];
         loadStatsFromJSON(json);
-        itemsRemembered = JSONObject.jsonStringToIntSet(json[REMEMBEREDITEMS]);
-        namesRemembered = JSONObject.jsonStringToStringSet(json[REMEMBEREDNAMES]);
-        castesRemembered = JSONObject.jsonStringToStringSet(json[REMEMBEREDCASTES]);
+        itemsRemembered = new Set.from(json[REMEMBEREDITEMS]);
+        namesRemembered = new Set.from(json[REMEMBEREDNAMES]);
+        castesRemembered = new Set.from(json[REMEMBEREDCASTES]);
 
         if(json["corrupt"] != null) {
             corrupt = json["corrupt"];
@@ -586,9 +586,9 @@ abstract class Pet {
         json[LOYAL] = loyal.roundedCappedStat;
         json[ENERGETIC] = energetic.roundedCappedStat;
         json[EXTERNAL] = external.roundedCappedStat;
-        json[REMEMBEREDITEMS] = itemsRemembered;
-        json[REMEMBEREDNAMES] = namesRemembered;
-        json[REMEMBEREDCASTES] = castesRemembered;
+        json[REMEMBEREDITEMS] = itemsRemembered.toList();
+        json[REMEMBEREDNAMES] = namesRemembered.toList();
+        json[REMEMBEREDCASTES] = castesRemembered.toList();
         return json;
     }
 
