@@ -156,11 +156,10 @@ class PetInventory {
 
     }
 
-    void loadPetsFromJSON(String idontevenKnow) {
-        if(idontevenKnow == null) return;
-        List<dynamic> what = jsonDecode(idontevenKnow);
+    void loadPetsFromJSON(List<dynamic> json) {
+        if(json == null) return;
         //print("what json is $what");
-        for(dynamic d in what) {
+        for(dynamic d in json) {
             pets.add(Pet.loadPetFromJSON(d));
         }
     }
@@ -171,7 +170,7 @@ class PetInventory {
         GameObject.instance.save();
     }
 
-    void loadAlumniFromJSON(List<Map<String,dynamic>> json) {
+    void loadAlumniFromJSON(List<dynamic> json) {
         if(json == null) return;
         //print("what json is $what");
         for(dynamic d in json) {

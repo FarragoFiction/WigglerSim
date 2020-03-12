@@ -252,7 +252,7 @@ class ItemInventory {
     ItemInventory();
 
 
-    ItemInventory.fromJSON(String json){
+    ItemInventory.fromJSON(Map<String,dynamic> json){
         //print("loading pet inventory with json $json");
         if(json != null && json.isNotEmpty) loadFromJSON(json);
     }
@@ -279,19 +279,14 @@ class ItemInventory {
     }
 
 
-    void loadFromJSON(String json) {
+    void loadFromJSON(Map<String,dynamic> json) {
         // print("In item inventory, json is $json");
-        JSONObject jsonObj = new JSONObject.fromJSONString(json);
-        String idontevenKnow = jsonObj[ITEMLIST];
-        loadItemsFromJSON(idontevenKnow);
+        loadItemsFromJSON(json[ITEMLIST]);
     }
 
-    void loadItemsFromJSON(String input) {
-        if(input == null) return;
-
-        List<dynamic> j = jsonDecode(input);
-
-        for(dynamic item in j) {
+    void loadItemsFromJSON(List<dynamic> json) {
+        if(json == null) return;
+        for(dynamic item in json) {
             _myItems.add(new AIItem.fromJSON(item));
         }
 

@@ -68,15 +68,14 @@ class Player {
 
         String dataString = json[DATASTRING];
        // print("dataString is $dataString");
-        String lastPlayedString = json[LASTPLAYED];
+        int lastPlayedInt = json[LASTPLAYED];
         if(json[LASTALLOWENCE] != null) {
-            String lastAllowenceString = json[LASTALLOWENCE];
-            lastGotAllowence = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastAllowenceString));
+            int lastAllowenceInt = json[LASTALLOWENCE];
+            lastGotAllowence = new DateTime.fromMillisecondsSinceEpoch(lastAllowenceInt);
         }
 
         if(json[BGINDEX] != null) {
-            String bgIndexString = json[BGINDEX];
-            GameObject.instance.chosenBGIndex = int.parse(bgIndexString);
+            GameObject.instance.chosenBGIndex = json[BGINDEX];
         }
 
         if(json[MONEYJSON] != null) {
@@ -84,7 +83,7 @@ class Player {
         }
 
         doll = Doll.loadSpecificDoll(dataString);
-        oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
+        oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(lastPlayedInt);
         if(json[NAMEKEY] != null) {
             name = json[NAMEKEY];
          }
@@ -314,7 +313,7 @@ class Player {
 
     //TODO convert self to json (including pet inventory) to save in this localStorage
     void save() {
-        String json = toJSON().toString();
+        String json = jsonEncode(toJSON());
         //print("saving player ${json}. Pet inventory has ${petInventory.pets.length} in it.");
         window.localStorage[DOLLSAVEID] = json;
     }
@@ -341,10 +340,10 @@ class Player {
         ret[DATASTRING] = doll.toDataBytesX();
         ret[NAMEKEY] = name;
         ret[BGINDEX] = GameObject.instance.chosenBGIndex;
-        ret[LASTPLAYED] = lastPlayed.millisecondsSinceEpoch;
+        ret[LASTPLAYED] = lastPlayed != null? lastPlayed.millisecondsSinceEpoch:new DateTime.now().millisecondsSinceEpoch;
         ret[PETINVENTORY] = petInventory.toJSON();
         ret[ITEMINVENTORY] = itemInventory.toJSON();
-        ret[MONEYJSON] = "$caegers";
+        ret[MONEYJSON] = caegers;
         if(lastGotAllowence != null) ret[LASTALLOWENCE] = {lastGotAllowence.millisecondsSinceEpoch};
         return ret;
     }

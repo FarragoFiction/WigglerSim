@@ -84,6 +84,7 @@ class GameObject {
         _instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             //window.localStorage.remove(Player.DOLLSAVEID);
+            print("local storage has ${window.localStorage[Player.DOLLSAVEID]}");
             player = new Player.fromJSON(jsonDecode(window.localStorage[Player.DOLLSAVEID]));
             player.save(); //Currently panic debugging jr on 4/11/19 says: wtf why was i ever saving here?
             print("loading player ${player} from local storage, their inventory is ${player.itemInventory.numItems}");
