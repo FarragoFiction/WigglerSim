@@ -75,7 +75,7 @@ class PetInventory {
 
     PetInventory();
 
-    PetInventory.fromJSON(String json){
+    PetInventory.fromJSON(Map<String,dynamic> json){
         //print("loading pet inventory with json $json");
         loadFromJSON(json);
     }
@@ -143,16 +143,13 @@ class PetInventory {
         if(replacement is Troll) (replacement as Troll).assignSign();
     }
 
-    void loadFromJSON(String json) {
+    void loadFromJSON(Map<String,dynamic> json) {
        // print("In pet inventory, json is $json");
-        JSONObject jsonObj = new JSONObject.fromJSONString(json);
-        String idontevenKnow = jsonObj[PETSLIST];
-        loadPetsFromJSON(idontevenKnow);
-        idontevenKnow = jsonObj[ALUMNI];
-        loadAlumniFromJSON(idontevenKnow);
-        String empressJson = jsonObj[EMPRESS];
+        loadPetsFromJSON(json[PETSLIST]);
+        loadAlumniFromJSON(json[ALUMNI]);
+        Map<String,dynamic> empressJson = json[EMPRESS];
         if(empressJson != null) {
-            Pet p = Pet.loadPetFromJSON(null, new JSONObject.fromJSONString(empressJson));
+            Pet p = Pet.loadPetFromJSON(empressJson);
             print("Empress loaded, ${p.name} with hatchmates ${p.hatchmatesString}.");
             rulingEmpress = new Empress(p);
         }
@@ -164,10 +161,7 @@ class PetInventory {
         List<dynamic> what = jsonDecode(idontevenKnow);
         //print("what json is $what");
         for(dynamic d in what) {
-            //print("dynamic json thing is  $d");
-            JSONObject j = new JSONObject();
-            j.json = d;
-            pets.add(Pet.loadPetFromJSON(null,j));
+            pets.add(Pet.loadPetFromJSON(d));
         }
     }
 
@@ -177,15 +171,11 @@ class PetInventory {
         GameObject.instance.save();
     }
 
-    void loadAlumniFromJSON(String idontevenKnow) {
-        if(idontevenKnow == null) return;
-        List<dynamic> what = jsonDecode(idontevenKnow);
+    void loadAlumniFromJSON(List<Map<String,dynamic>> json) {
+        if(json == null) return;
         //print("what json is $what");
-        for(dynamic d in what) {
-            //print("dynamic json thing is  $d");
-            JSONObject j = new JSONObject();
-            j.json = d;
-            alumni.add(Pet.loadPetFromJSON(null,j) as Troll);
+        for(dynamic d in json) {
+            alumni.add(Pet.loadPetFromJSON(d) as Troll);
         }
     }
 

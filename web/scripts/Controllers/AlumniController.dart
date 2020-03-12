@@ -59,17 +59,13 @@ Future<Null> showBreeding() async {
   }
   String fuckPile =window.localStorage[PetInventory.FUCKPILE];
   print("fuckpile is $fuckPile");
-  String idontevenKnow = window.localStorage[PetInventory.FUCKPILE];
+  List<Map<String,dynamic>> json = jsonDecode(window.localStorage[PetInventory.FUCKPILE]);
   List<Troll> realFuckPile = new List<Troll>();
   // for testing realFuckPile.addAll(GameObject.instance.player.petInventory.alumni);
-  List<dynamic> what = jsonDecode(idontevenKnow);
   //print("what json is $what");
   bool lamiaMode = true;
-  for(dynamic d in what) {
-      //print("dynamic json thing is  $d");
-      JSONObject j = new JSONObject();
-      j.json = d;
-      Troll troll = Pet.loadPetFromJSON("", j);
+  for(Map<String,dynamic> d in json) {
+      Troll troll = Pet.loadPetFromJSON(d);
       status.text = "loading: ${troll.name}";
       //if tehre is even one non lamia, its not lamia
       if(!(troll.doll is HomestuckLamiaDoll)) lamiaMode =false;

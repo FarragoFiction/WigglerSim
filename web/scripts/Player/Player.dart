@@ -49,7 +49,7 @@ class Player {
 
 
 
-    Player.fromJSON(String json){
+    Player.fromJSON(Map<String,dynamic> json){
         loadFromJSON(json);
     }
 
@@ -62,39 +62,37 @@ class Player {
     }
 
 
-     void loadFromJSON(String json) {
+     void loadFromJSON(Map<String,dynamic> json) {
         //print("loading player from json $json");
-        JSONObject jsonObj = new JSONObject.fromJSONString(json);
-        print(jsonObj);
         //print("json object is ${jsonObj}");
 
-        String dataString = jsonObj[DATASTRING];
+        String dataString = json[DATASTRING];
        // print("dataString is $dataString");
-        String lastPlayedString = jsonObj[LASTPLAYED];
-        if(jsonObj[LASTALLOWENCE] != null) {
-            String lastAllowenceString = jsonObj[LASTALLOWENCE];
+        String lastPlayedString = json[LASTPLAYED];
+        if(json[LASTALLOWENCE] != null) {
+            String lastAllowenceString = json[LASTALLOWENCE];
             lastGotAllowence = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastAllowenceString));
         }
 
-        if(jsonObj[BGINDEX] != null) {
-            String bgIndexString = jsonObj[BGINDEX];
+        if(json[BGINDEX] != null) {
+            String bgIndexString = json[BGINDEX];
             GameObject.instance.chosenBGIndex = int.parse(bgIndexString);
         }
 
-        if(jsonObj[MONEYJSON] != null) {
-            caegers = int.parse(jsonObj[MONEYJSON]);
+        if(json[MONEYJSON] != null) {
+            caegers = json[MONEYJSON];
         }
 
         doll = Doll.loadSpecificDoll(dataString);
         oldLastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
-        if(jsonObj[NAMEKEY] != null) {
-            name = jsonObj[NAMEKEY];
+        if(json[NAMEKEY] != null) {
+            name = json[NAMEKEY];
          }
         //print("not loading pet inventory json, but if i did it would be ${jsonObj[PETINVENTORY]}");
         //petInventory = new PetInventory();
-        petInventory = new PetInventory.fromJSON(jsonObj[PETINVENTORY]);
+        petInventory = new PetInventory.fromJSON(json[PETINVENTORY]);
         print("going to load inventory");
-        itemInventory = new ItemInventory.fromJSON(jsonObj[ITEMINVENTORY]);
+        itemInventory = new ItemInventory.fromJSON(json[ITEMINVENTORY]);
 
      }
 

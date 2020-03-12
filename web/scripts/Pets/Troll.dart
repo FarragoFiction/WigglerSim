@@ -40,8 +40,8 @@ class Troll extends Pet{
         //testSign();
     }
 
-    Troll.fromJSON(String json, [JSONObject jsonObj]) : super(null){
-        loadFromJSON(json, jsonObj);
+    Troll.fromJSON(Map<String, dynamic> json) : super(null){
+        loadFromJSON(json);
 
         //only need to do this if it somehow was accidentally a grub or something
         //also there was a bug in the converter that meant the max image layer would become zero when i did this
@@ -89,10 +89,9 @@ class Troll extends Pet{
     }
 
     @override
-    void loadFromJSON(String json, [JSONObject jsonObj]) {
-        super.loadFromJSON(json, jsonObj);
-        if(jsonObj == null)  jsonObj = new JSONObject.fromJSONString(json);
-        epilogue = jsonObj[EPILOGUE];
+    void loadFromJSON(Map<String,dynamic> json) {
+        super.loadFromJSON(json);
+        epilogue = json[EPILOGUE];
     }
 
     String getLusus() {

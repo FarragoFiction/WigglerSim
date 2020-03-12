@@ -84,7 +84,7 @@ class GameObject {
         _instance = this;
         if(window.localStorage.containsKey(Player.DOLLSAVEID)) {
             //window.localStorage.remove(Player.DOLLSAVEID);
-            player = new Player.fromJSON(window.localStorage[Player.DOLLSAVEID]);
+            player = new Player.fromJSON(jsonDecode(window.localStorage[Player.DOLLSAVEID]));
             player.save(); //Currently panic debugging jr on 4/11/19 says: wtf why was i ever saving here?
             print("loading player ${player} from local storage, their inventory is ${player.itemInventory.numItems}");
         }else {
@@ -181,7 +181,7 @@ class GameObject {
     }
 
     void load() {
-        player.loadFromJSON(window.localStorage[Player.DOLLSAVEID]);
+        player.loadFromJSON(jsonDecode(window.localStorage[Player.DOLLSAVEID]));
         print("loading game, inventory is ${player.itemInventory.numItems}");
 
     }
@@ -263,10 +263,10 @@ class GameObject {
         //if it's not in the format I expect, error out. window.alert.
         try {
             print("trying to load from json");
-            player.loadFromJSON(loadData);
+            player.loadFromJSON(jsonDecode(loadData));
         }catch(e,trace) {
             print("something went wrong with json, so trying to load from lzstring, $e, $trace");
-            player.loadFromJSON(LZString.decompressFromEncodedURIComponent(loadData));
+            player.loadFromJSON(jsonDecode(LZString.decompressFromEncodedURIComponent(loadData)));
         }
         save();
         window.location.reload();

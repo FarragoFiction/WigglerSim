@@ -36,8 +36,8 @@ class Egg extends Pet{
         name = " ${g.bloodColorToWord(p.aspect_light)} Egg";
     }
 
-    Egg.fromJSON(String json, [JSONObject jsonObj]) : super(null){
-        loadFromJSON(json, jsonObj);
+    Egg.fromJSON(Map<String,dynamic> json) : super(null){
+        loadFromJSON(json);
         //print ("loaded $name");
     }
 

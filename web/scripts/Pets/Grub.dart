@@ -48,8 +48,8 @@ class Grub extends Pet{
     }
   }
 
-  Grub.fromJSON(String json, [JSONObject jsonObj]) : super(null){
-    loadFromJSON(json, jsonObj);
+  Grub.fromJSON(Map<String,dynamic> json) : super(null){
+    loadFromJSON(json);
     //print ("loaded $name");
     //at half way mark, eyes turn yellow like a trolls.
     setEyes();

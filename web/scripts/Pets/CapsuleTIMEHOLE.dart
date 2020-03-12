@@ -41,7 +41,7 @@ class CapsuleTIMEHOLE {
         return json;
     }
 
-    CapsuleTIMEHOLE.fromJson(JSONObject json, int cid){
+    CapsuleTIMEHOLE.fromJson(Map<String,dynamic> json, int cid){
         //print("parsing json $json into a capsule");
         pet = Pet.loadPetFromJSON(json["pet"]);
         print("pet is $pet");

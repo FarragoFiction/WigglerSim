@@ -461,27 +461,26 @@ abstract class Pet {
         return ret;
     }
 
-    Pet.fromJSON(String json){
+    Pet.fromJSON(Map<String,dynamic> json){
         loadFromJSON(json);
     }
 
     //it doesn't like treating the json object i got as a string for whatever reason.
-    static Pet loadPetFromJSON(String json, [JSONObject jsonObj]) {
-        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
+    static Pet loadPetFromJSON(Map<String,dynamic> json) {
         //print("Loading abstract pet from json, obj is ${jsonObj}");
-        if(jsonObj[TYPE] == GRUB) {
-            return new Grub.fromJSON(null,jsonObj);
-        }else if(jsonObj[TYPE] == TREEBAB) {
-            return new TreeBab.fromJSON(null,jsonObj);
-        }else if(jsonObj[TYPE] == EGG) {
-            return new Egg.fromJSON(null,jsonObj);
-        }else if(jsonObj[TYPE] == COCOON) {
-            return new Cocoon.fromJSON(null,jsonObj);
-        }else if(jsonObj[TYPE] == TROLL) {
-            return new Troll.fromJSON(null,jsonObj);
+        if(json[TYPE] == GRUB) {
+            return new Grub.fromJSON(json);
+        }else if(json[TYPE] == TREEBAB) {
+            return new TreeBab.fromJSON(json);
+        }else if(json[TYPE] == EGG) {
+            return new Egg.fromJSON(json);
+        }else if(json[TYPE] == COCOON) {
+            return new Cocoon.fromJSON(json);
+        }else if(json[TYPE] == TROLL) {
+            return new Troll.fromJSON(json);
         }
-        print("UNKNOWN PET TYPE ${jsonObj[TYPE]}");
-        throw "UNKNOWN PET TYPE ${jsonObj[TYPE]}";
+        print("UNKNOWN PET TYPE ${json[TYPE]}");
+        throw "UNKNOWN PET TYPE ${json[TYPE]}";
     }
 
     //individual pet types don't have to
@@ -525,15 +524,14 @@ abstract class Pet {
         makeExternal(ext);
     }
 
-    void loadFromJSON(String json, [JSONObject jsonObj]) {
+    void loadFromJSON(Map<String, dynamic>json) {
         print("loading pet from json");
-        if(jsonObj == null) jsonObj = new JSONObject.fromJSONString(json);
-        String dataString = jsonObj[DOLLDATAURL];
+        String dataString = json[DOLLDATAURL];
         //print("data string is $dataString");
-        String lastPlayedString = jsonObj[LASTPLAYED];
-        String hatchString = jsonObj[HATCHDATE];
-        String fedString = jsonObj[LASTFED];
-        String empressString = jsonObj[ISEMPRESS];
+        String lastPlayedString = json[LASTPLAYED];
+        String hatchString = json[HATCHDATE];
+        String fedString = json[LASTFED];
+        String empressString = json[ISEMPRESS];
         if(empressString != null) {
             if(empressString == "true") {
                 empress = true;
@@ -541,26 +539,26 @@ abstract class Pet {
                 empress = false;
             }
         }
-        name = jsonObj[NAMEJSON];
-        loadStatsFromJSON(jsonObj);
-        itemsRemembered = JSONObject.jsonStringToIntSet(jsonObj[REMEMBEREDITEMS]);
-        namesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDNAMES]);
-        castesRemembered = JSONObject.jsonStringToStringSet(jsonObj[REMEMBEREDCASTES]);
+        name = json[NAMEJSON];
+        loadStatsFromJSON(json);
+        itemsRemembered = JSONObject.jsonStringToIntSet(json[REMEMBEREDITEMS]);
+        namesRemembered = JSONObject.jsonStringToStringSet(json[REMEMBEREDNAMES]);
+        castesRemembered = JSONObject.jsonStringToStringSet(json[REMEMBEREDCASTES]);
 
-        if(jsonObj["corrupt"] != null) {
-            corrupt = jsonObj["corrupt"] == true.toString();
+        if(json["corrupt"] != null) {
+            corrupt = json["corrupt"];
         }
 
 
-        if(jsonObj["purified"] != null) {
-            purified = jsonObj["purified"] == true.toString();
+        if(json["purified"] != null) {
+            purified = json["purified"];
         }
 
         // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
         lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
         hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
         lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
-        boredom = int.parse(jsonObj[BOREDOMEJSON]);
+        boredom = int.parse(json[BOREDOMEJSON]);
 
         doll = Doll.loadSpecificDoll(dataString);
     }

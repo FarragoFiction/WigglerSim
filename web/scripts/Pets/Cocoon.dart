@@ -28,8 +28,8 @@ class Cocoon extends Pet{
 
     }
 
-    Cocoon.fromJSON(String json, [JSONObject jsonObj]) : super(null){
-        loadFromJSON(json, jsonObj);
+    Cocoon.fromJSON(Map<String,dynamic> json) : super(null){
+        loadFromJSON(json);
        // print ("loaded $name");
     }
 

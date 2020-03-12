@@ -23,7 +23,8 @@ Future<void> testWrite() async {
     print("hey, i made a doll");
     Egg egg = new Egg(doll);
     print ("hey i made and egg");
-    print(egg.toJSON());
+    String json = egg.toJSON().toString();
+    //TODO try to load an egg from json
 
     print(GameObject.instance.player.toJSON());
 }

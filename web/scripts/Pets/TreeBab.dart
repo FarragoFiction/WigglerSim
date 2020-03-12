@@ -32,9 +32,9 @@ class TreeBab extends Grub{
 
 
   @override
-  TreeBab.fromJSON(String json, [JSONObject jsonObj]) : super(null){
+  TreeBab.fromJSON(Map<String,dynamic> json) : super(null){
     print("loading tree bab from json");
-    loadFromJSON(json, jsonObj);
+    loadFromJSON(json);
     convertDoll();
     //print ("loaded $name");
     //at half way mark, eyes turn yellow like a trolls.
