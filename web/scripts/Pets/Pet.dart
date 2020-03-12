@@ -484,38 +484,13 @@ abstract class Pet {
     }
 
     //individual pet types don't have to
-    void loadStatsFromJSON(JSONObject jsonObj) {
-        int p = null;
-        int cur = null;
-        int lo = null;
-        int ener = null;
-        int idea = null;
-        int ext = null;
-
-        if(jsonObj.containsKey(PATIENCE)){
-            p = int.parse(jsonObj[PATIENCE]);
-        }
-
-        if(jsonObj.containsKey(CURIOUS)){
-            cur = int.parse(jsonObj[CURIOUS]);
-        }
-
-        if(jsonObj.containsKey(LOYAL)){
-            lo = int.parse(jsonObj[LOYAL]);
-        }
-
-        if(jsonObj.containsKey(EXTERNAL)){
-            ext = int.parse(jsonObj[EXTERNAL]);
-        }
-
-        if(jsonObj.containsKey(ENERGETIC)){
-            ener = int.parse(jsonObj[ENERGETIC]);
-        }
-
-        if(jsonObj.containsKey(IDEALISTIC)){
-            idea = int.parse(jsonObj[IDEALISTIC]);
-        }
-
+    void loadStatsFromJSON(Map<String,dynamic> json) {
+        int p = json[PATIENCE];
+        int cur = json[CURIOUS];
+        int lo = json[LOYAL];
+        int ener = json[EXTERNAL];
+        int idea = json[ENERGETIC];
+        int ext = json[IDEALISTIC];
         makePatience(p);
         makeCurious(cur);
         makeLoyal(lo);
@@ -528,17 +503,10 @@ abstract class Pet {
         print("loading pet from json");
         String dataString = json[DOLLDATAURL];
         //print("data string is $dataString");
-        String lastPlayedString = json[LASTPLAYED];
-        String hatchString = json[HATCHDATE];
-        String fedString = json[LASTFED];
-        String empressString = json[ISEMPRESS];
-        if(empressString != null) {
-            if(empressString == "true") {
-                empress = true;
-            }else {
-                empress = false;
-            }
-        }
+        int lastPlayedInt = json[LASTPLAYED];
+        int hatchInt = json[HATCHDATE];
+        int fedInt = json[LASTFED];
+        empress = json[ISEMPRESS];
         name = json[NAMEJSON];
         loadStatsFromJSON(json);
         itemsRemembered = new Set.from(json[REMEMBEREDITEMS]);
@@ -555,10 +523,10 @@ abstract class Pet {
         }
 
         // print("${name} names remembered is $namesRemembered and castes remembered is ${castesRemembered}");
-        lastPlayed = new DateTime.fromMillisecondsSinceEpoch(int.parse(lastPlayedString));
-        hatchDate = new DateTime.fromMillisecondsSinceEpoch(int.parse(hatchString));
-        lastFed = new DateTime.fromMillisecondsSinceEpoch(int.parse(fedString));
-        boredom = int.parse(json[BOREDOMEJSON]);
+        lastPlayed = new DateTime.fromMillisecondsSinceEpoch(lastPlayedInt);
+        hatchDate = new DateTime.fromMillisecondsSinceEpoch(hatchInt);
+        lastFed = new DateTime.fromMillisecondsSinceEpoch(fedInt);
+        boredom = json[BOREDOMEJSON];
 
         doll = Doll.loadSpecificDoll(dataString);
     }
