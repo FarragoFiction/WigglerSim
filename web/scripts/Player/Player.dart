@@ -70,7 +70,7 @@ class Player {
        // print("dataString is $dataString");
         int lastPlayedInt = json[LASTPLAYED];
         if(json[LASTALLOWENCE] != null) {
-            int lastAllowenceInt = json[LASTALLOWENCE];
+            int lastAllowenceInt = int.parse(json[LASTALLOWENCE]);
             lastGotAllowence = new DateTime.fromMillisecondsSinceEpoch(lastAllowenceInt);
         }
 
