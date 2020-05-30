@@ -16,7 +16,6 @@ void main() {
 }
 
 Future<Null> start() async {
-  await game.preloadManifest();
   ImageElement ab = new ImageElement(src: "images/NPCs/ab.png");
   div.append(ab);
   printToScreen("Hello. It seems you wish to initiate the Conversion Procedure. There is a 98.12314% chance that you will unlock new features upon completion. Please wait.");

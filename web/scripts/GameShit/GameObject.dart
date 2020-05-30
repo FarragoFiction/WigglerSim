@@ -157,11 +157,6 @@ class GameObject {
 
     }
 
-    Future<Null> preloadManifest() async {
-        await Loader.loadManifest();
-        print ("loader returned");
-        return;
-    }
 
     void save() {
         //print("saving game, inventory is ${player.itemInventory.numItems}");
