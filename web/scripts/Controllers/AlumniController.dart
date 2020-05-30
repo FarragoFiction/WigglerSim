@@ -243,7 +243,6 @@ void removeFromFuckPile(List<Troll> realFuckPile, Troll t) {
 }
 
 Future<Null> start() async {
-  await game.preloadManifest();
   Element container = new DivElement();
   container.style.display = "inline-block";
   querySelector('#output').append(container);
