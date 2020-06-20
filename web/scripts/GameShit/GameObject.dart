@@ -30,7 +30,7 @@ class GameObject {
     String indexToBG(int index) => "${potentialBGs[index]}";
 
 
-    List<String> potentialBGs = <String>["BroodingCaverns.png","BirdBG.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png","BronzePlaypen.png","GoldPlaypen.png","LimeBackground.png"];
+    List<String> potentialBGs = <String>["BroodingCaverns.png","BirdBG.png","HalloweenPlaypen.png","GhostPlaypen.png","BeachPen.png","BronzePlaypen.png","GoldPlaypen.png","LimeBackground.png","PrideBackground.png"];
 
     List<int> get unlockedBGIndices {
         List<int> ret = <int>[0,1,2];
